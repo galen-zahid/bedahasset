@@ -152,8 +152,12 @@ def _process(path: Path, out_root: Path, models, cfg) -> dict:
                                   res["base_rgb"], res["base_a"]))
             stripe_layers.append((f"stripe_{k:02d}_grunge", f"04_stripe_{k:02d}_grunge.png",
                                   res["grunge_rgb"], res["grunge_a"]))
+            if res["shade_a"].max() > 0:
+                stripe_layers.append((f"stripe_{k:02d}_shade", f"04_stripe_{k:02d}_shade.png",
+                                      res["shade_rgb"], res["shade_a"]))
             shapes.append({"id": k, "layer_file": f"04_stripe_{k:02d}_base.png",
                            "overlay_file": f"04_stripe_{k:02d}_grunge.png",
+                           "shade_file": f"04_stripe_{k:02d}_shade.png" if res["shade_a"].max() > 0 else "",
                            **stripe.canva_geometry(s_, res["color"], res["opacity"])})
         else:
             rgb, a_, col = stripe.build_layer(img, plate, s_, v, occl, models, cfg)
@@ -179,7 +183,7 @@ def _process(path: Path, out_root: Path, models, cfg) -> dict:
         z += 1
     for lname, fname, rgb, a in stripe_layers:
         layers.append({"layer": lname, "file": fname,
-                       "type": "overlay" if lname.endswith("grunge") else "shape",
+                       "type": "overlay" if lname.endswith(("grunge", "shade")) else "shape",
                        "rgb": rgb, "alpha": a, "z_order": z})
         z += 1
     layers.append({"layer": "subject", "file": "02_subject.png", "type": "subject",

@@ -126,10 +126,13 @@ glow:
 # ----------------------------------------------------------------- stripe
 stripe:                 # strip/pita warna aksen yang lewat DI BELAKANG subject
   enabled: true
-  # layered = 2 layer yang bila ditumpuk 1:1 dengan referensi:
-  #   04_stripe_NN_base.png   persegi panjang 1 warna, 1 opacity (bisa dibuat native, lihat shapes.csv)
-  #   04_stripe_NN_grunge.png overlay bercak/tekstur di atasnya
-  # single  = 1 PNG: warna rata + grunge di alpha (lebih bersih saat digeser, tidak 1:1)
+  # layered = 3 layer, blend NORMAL + opacity saja (jalan di semua akun Canva), ditumpuk = 1:1:
+  #   04_stripe_NN_base.png   persegi panjang 1 warna, opacity dasar (bisa dibuat native, shapes.csv)
+  #   04_stripe_NN_grunge.png warna yang SAMA, cuma bercak (opacity per-pixel), tanpa foto
+  #   04_stripe_NN_shade.png  "depth" OPSIONAL: semua sisa yang bikin tumpukan 1:1 (tiang yang tembus,
+  #                           terang jendela). Matikan kalau strip digeser -> semua tetap bersih
+  #   01_background di bawah strip = bersih (tanpa strip)
+  # single  = 1 PNG: warna rata + grunge di alpha
   mode: layered
   hue_tol_deg: 20       # jarak hue ke warna aksen
   min_saturation: 0.45
@@ -142,6 +145,13 @@ stripe:                 # strip/pita warna aksen yang lewat DI BELAKANG subject
   close_px: 7           # tutup bintik grunge gelap di dalam strip (tetap ikut layer strip)
   max_hole_px: 4000
   dilate_px: 4          # mask strip di-dilate sebelum dihapus dari background
+  coverage_sigma: 30    # variasi opacity strip dihaluskan (px): beda antar segmen tertangkap,
+                        # tiang/jendela (detail foto) tidak masuk ke layer strip
+  shade_min_diff: 0.01  # layer shade hanya di pixel yang selisihnya > ini (sisanya dibulatkan)
+  base_percentile: 15   # opacity base = persentil ke-15 coverage strip. Grunge menambah bercak oranye
+                        # di atasnya; bagian yang lebih gelap dari base jadi bercak gelap di grunge
+  min_alpha: 0.15       # batas coverage strip (bawah/atas). Atas < 1 supaya background di bawah
+  max_alpha: 0.92       # strip bisa dihitung balik tanpa "meledak"
   texture_sigma: 6     # alpha strip = opacity dasar + grunge halus (< ~6px). Bentuk besar (tiang,
                         # jendela yang tembus) dibuang karena sudah ada di background. 0 = apa adanya
   subject_clearance_px: 12 # pixel strip sedekat ini ke subject (tercemar helai rambut/tepi) tidak

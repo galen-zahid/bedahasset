@@ -214,41 +214,52 @@ def _synth_along_band(src: np.ndarray, rect: np.ndarray, known: np.ndarray, thet
     return np.where(known[..., None], src, back).astype(np.float32)
 
 
+def _blur_along_band(arr: np.ndarray, weight: np.ndarray, theta: float, sigma: float) -> np.ndarray:
+    """Normalized 1-D Gaussian blur along the band direction (across-band detail is kept)."""
+    H, W = arr.shape
+    M = cv2.getRotationMatrix2D((W / 2, H / 2), theta, 1.0)
+    cos, sin = abs(M[0, 0]), abs(M[0, 1])
+    nW, nH = int(H * sin + W * cos) + 2, int(H * cos + W * sin) + 2
+    M[0, 2] += nW / 2 - W / 2
+    M[1, 2] += nH / 2 - H / 2
+    ra = cv2.warpAffine((arr * weight).astype(np.float32), M, (nW, nH))
+    rw = cv2.warpAffine(weight.astype(np.float32), M, (nW, nH))
+    k = int(sigma * 3) * 2 + 1
+    ra = cv2.GaussianBlur(ra, (k, 1), sigma)
+    rw = cv2.GaussianBlur(rw, (k, 1), sigma)
+    Minv = cv2.invertAffineTransform(M)
+    num = cv2.warpAffine(ra, Minv, (W, H))
+    den = cv2.warpAffine(rw, Minv, (W, H))
+    return num / np.maximum(den, 1e-4)
+
+
 def build_layered(img: np.ndarray, plate: np.ndarray, stripe, vis: np.ndarray,
                   matte: np.ndarray, models, cfg, top_rgb=None, top_a=None):
-    """Two stacked layers that reproduce the reference 1:1:
+    """Stripe as 3 stacked NORMAL-blend layers (any Canva plan), reproducing the reference:
 
-      1. base    = solid rectangle, ONE colour G at ONE opacity o (rebuildable natively)
-      2. grunge  = overlay (E, e) = minimal colour-to-alpha of the reference C against
-                   "background + base", i.e.  C = (1 - e) * X1 + e * E  exactly.
+      base    solid rectangle, colour G, constant opacity o              (..._base.png)
+      grunge  SAME colour G, per-pixel opacity = the orange specks       (..._grunge.png)
+      shade   thin dark/light "depth" layer for what a normal-blend stripe cannot explain,
+              e.g. rack posts that stay dark *through* the stripe        (..._shade.png)
 
-    Where the stripe is hidden by the subject the reference is synthesized along the band
-    first, so the stack stays complete when the subject is moved."""
+    Stripe coverage a(x) = smooth variation ALONG the band (segments can be more or less
+    transparent) + fine grunge. Anything crossing the band (posts, window) is not in a(x);
+    it goes, together with any other residual, into the optional shade layer, so that
+    clean background + base + grunge + shade == reference.
+    """
     from .glow import color_to_alpha
 
+    c = cfg.stripe
     rect = stripe["rect"]
-    vis_core = vis & ~matting.dilate(matte, int(cfg.stripe.subject_clearance_px))
+    vis_core = vis & ~matting.dilate(matte, int(c.subject_clearance_px))
     if vis_core.sum() < 50:
         return None
     pix = img[vis_core]
     lum = pix @ np.array([0.299, 0.587, 0.114], np.float32)
     G = np.median(pix[lum >= np.percentile(lum, 70)], axis=0).astype(np.float32)
-    # base opacity: typical coverage of the band over the clean background
-    d = G[None, None] - plate
-    a_ls = ((img - plate) * d).sum(-1) / np.maximum((d * d).sum(-1), 1e-4)
-    o = float(np.clip(np.median(a_ls[vis_core]), 0.2, 1.0))
-    # quantize to what Canva's transparency slider / an 8-bit PNG can represent
-    o = round(o * 100) / 100
+    G = np.round(G * 255) / 255
 
-    shape = matting.feather(rect.astype(np.float32), 0.6)
-    shape[matting.erode(rect, 1)] = 1.0
-    base_a = (shape * o).astype(np.float32)
-    base_a = np.round(base_a * 255) / 255  # what will actually be stored in the PNG
-    X1 = plate * (1 - base_a[..., None]) + G * base_a[..., None]
-
-    # target under the subject stack: the reference itself where nothing covers it; behind a
-    # semi-transparent edge the exact un-mixed value U = (C - a*F) / (1 - a); behind solid
-    # subject (nothing visible) synthesized along the band
+    # target under everything that sits above the stripe (subject / fg)
     target = img.copy()
     solid = rect & matte
     if top_a is not None:
@@ -257,30 +268,62 @@ def build_layered(img: np.ndarray, plate: np.ndarray, stripe, vis: np.ndarray,
         semi = rect & (top_a > 1.0 / 255) & (top_a < 0.9)
         target = np.where(semi[..., None], np.clip(U, 0, 1), target)
         solid = rect & (top_a >= 0.9)
-    if solid.any():
-        target = _synth_along_band(target, rect, ~solid, stripe["theta"], G, models)
-    C = target
-    e, E = color_to_alpha(C, X1)
-    inside = matting.dilate(rect, 1)
-    e = (e * inside).astype(np.float32)
-    # re-solve E against the 8-bit quantized alpha so the stack stays exact after saving
-    eq = np.round(e * 255) / 255
-    E = np.where(eq[..., None] > 1e-3,
-                 X1 + (C - X1) / np.maximum(eq, 1e-3)[..., None], X1)
-    E = np.clip(E, 0, 1).astype(np.float32)
-    stack = X1 * (1 - eq[..., None]) + E * eq[..., None]
+    known = rect & ~solid
+
+    # measured coverage vs the stripe-free plate -> smooth along band + fine grunge
+    d = G[None, None] - plate
+    a_ls = np.clip(((target - plate) * d).sum(-1) / np.maximum((d * d).sum(-1), 1e-4), 0, 1)
+    w = vis_core.astype(np.float32)  # clean stripe pixels only
+    sig_c = c.coverage_sigma
+    a_along = cv2.GaussianBlur(a_ls * w, (0, 0), sig_c) / np.maximum(
+        cv2.GaussianBlur(w, (0, 0), sig_c), 1e-4)
+    # far from any visible stripe pixel (behind the body) fall back to the band median
+    cover = cv2.GaussianBlur(w, (0, 0), sig_c)
+    med = float(np.median(a_ls[vis_core]))
+    t_ = np.clip(cover / 0.05, 0, 1)
+    a_along = a_along * t_ + med * (1 - t_)
+    lo = cv2.GaussianBlur(a_ls * w, (0, 0), c.texture_sigma) / np.maximum(
+        cv2.GaussianBlur(w, (0, 0), c.texture_sigma), 1e-4)
+    grunge = np.where(vis_core, a_ls - lo, 0)
+    a_tex = np.clip(a_along + grunge, c.min_alpha, c.max_alpha).astype(np.float32)
+    # behind the subject: the smooth along-band coverage continues (no blocky synthesis)
+    a_tex = np.where(solid, np.clip(a_along, c.min_alpha, c.max_alpha), a_tex)
+
+    # base + grunge (both colour G)
+    shape = matting.feather(rect.astype(np.float32), 0.6)
+    shape[matting.erode(rect, 1)] = 1.0
+    o = round(float(np.percentile(a_tex[known], c.base_percentile)) * 100) / 100
+    base_a = np.round(shape * o * 255) / 255
+    e = np.round(np.clip((a_tex - o) / max(1 - o, 1e-3), 0, 1) * shape * 255) / 255
+    a_tot = base_a + e * (1 - base_a)
+
+    # the background stays the clean plate; everything the clean stripe does not explain goes
+    # into the optional shade ("depth") layer on top of it
+    B = plate
+    X2 = B * (1 - a_tot[..., None]) + G * a_tot[..., None]
+
+    # shade: whatever is left (only where B had to be clipped), minimal colour-to-alpha
+    sh_a, sh_rgb = color_to_alpha(target, X2)
+    sh_a = np.where(known & (np.abs(target - X2).max(-1) > c.shade_min_diff), sh_a, 0)
+    sh_a = np.round(sh_a * 255) / 255
+    sh_rgb = np.where(sh_a[..., None] > 1e-3,
+                      X2 + (target - X2) / np.maximum(sh_a, 1e-3)[..., None], X2)
+    sh_rgb = np.clip(sh_rgb, 0, 1).astype(np.float32)
+
+    stack = X2 * (1 - sh_a[..., None]) + sh_rgb * sh_a[..., None]
     if top_a is not None:
         stack = stack * (1 - top_a[..., None]) + top_rgb * top_a[..., None]
-        check = rect & (top_a < 0.9)
-    else:
-        check = rect & ~matte
-    err = np.abs(stack - img)[check]
-    log.info("  stripe berlapis: base %s opacity %.2f | grunge alpha rata-rata %.2f | "
-             "error vs referensi maks %.4f",
+    err = np.abs(stack - img)[known]
+    log.info("  stripe 3 layer: %s | base opacity %.2f | grunge rata-rata %.2f | shade %.1f%% strip | "
+             "error vs referensi maks %.4f (rata-rata %.5f)",
              "#%02X%02X%02X" % tuple(int(round(float(x) * 255)) for x in G), o,
-             float(eq[rect].mean()), float(err.max()) if err.size else 0.0)
-    return {"base_rgb": np.broadcast_to(G, img.shape).astype(np.float32), "base_a": base_a,
-            "grunge_rgb": E, "grunge_a": eq.astype(np.float32), "color": G, "opacity": o}
+             float(e[rect].mean()), 100 * float((sh_a[rect] > 0).mean()),
+             float(err.max()) if err.size else 0.0, float(err.mean()) if err.size else 0.0)
+    rgb = np.broadcast_to(G, img.shape).astype(np.float32)
+    return {"base_rgb": rgb, "base_a": base_a.astype(np.float32),
+            "grunge_rgb": rgb, "grunge_a": e.astype(np.float32),
+            "shade_rgb": sh_rgb, "shade_a": sh_a.astype(np.float32),
+            "color": G, "opacity": o}
 
 
 def canva_geometry(stripe, color, opacity: float = 1.0) -> dict:

@@ -59,7 +59,8 @@ tepi sedikit lebih kasar).
 | `02_subject.png` | cutout subject utama, transparan, ukuran kanvas penuh |
 | `03_foreground_NN.png` | objek di DEPAN subject (berdasarkan depth). Tidak dibuat kalau tidak ada |
 | `04_stripe_NN_base.png` | strip di belakang subject: persegi panjang **1 warna, 1 opacity** (bisa dibuat native di Canva dari `shapes.csv`) |
-| `04_stripe_NN_grunge.png` | overlay bercak/tekstur di atas base. Base + grunge di atas background = **1:1 dengan referensi** |
+| `04_stripe_NN_grunge.png` | warna oranye yang SAMA, hanya bercak (opacity per-pixel). Bersih, tanpa foto |
+| `04_stripe_NN_shade.png` | layer "depth" **opsional**: sisa yang membuat tumpukan 1:1 dengan referensi (tiang yang tembus, terang jendela, dll). Matikan kalau strip digeser |
 | `05_particles.png` | debu/kapur/percikan (bintik kecil + awan/kepulan besar) sebagai overlay transparan |
 | `06_grain.png` | film grain + vignette sesuai noise level gambar asli |
 | `07_ui_NN.png` | tombol/pill di sekitar teks (mis. CTA), teksnya sudah dihapus. Bisa dipakai langsung atau dibuat ulang dari `text.csv` |
@@ -76,10 +77,10 @@ tepi sedikit lebih kasar).
 2. Upload layer **full-size** dan taruh semuanya di posisi x=0, y=0 dengan ukuran penuh. Karena ukurannya sama dengan kanvas, otomatis pas 1:1.
    Atau pakai file di `crops/` lalu posisikan sesuai kolom x, y, w, h di `manifest.csv`.
 3. Urutan tumpukan ikuti `z_order` (kecil = paling bawah). Biasanya:
-   background → stripe_base → stripe_grunge → subject → foreground → ui → teks → particles → grain.
+   background → stripe_base → stripe_grunge → stripe_shade → subject → foreground → ui → teks → particles → grain.
    (Nomor file bukan urutan tumpukan. Strip ada di BELAKANG subject.)
    Strip native: ganti `04_stripe_NN_base.png` dengan Rectangle Canva memakai
-   X/Y/W/H/Rotate/warna/Transparency dari `shapes.csv`, lalu taruh `..._grunge.png` di atasnya.
+   X/Y/W/H/Rotate/warna/Transparency dari `shapes.csv`, lalu taruh `..._grunge.png` (dan `..._shade.png`) di atasnya.
 4. Set transparency di Canva sesuai `suggested_opacity` (grain disarankan 0.6, karena grain asli
    sudah ada di layer lain dan grain ini terutama untuk menyatukan elemen baru).
 5. Buat ulang teks dari `text.csv` sebagai teks native: posisi dari `x,y`, warna `color_hex`,
@@ -87,17 +88,20 @@ tepi sedikit lebih kasar).
    angkanya). Baris `/`, `|`, `[line]`, `[decor]` adalah tanda grafis kecil di sekitar teks
    (pemisah, garis) yang juga sudah dihapus dari background.
 
-### Strip berlapis (1:1)
+### Strip berlapis
 
-1. **base**: persegi panjang warna rata `G` dengan opacity `o` (median coverage strip asli).
-2. **grunge**: dihitung sebagai color-to-alpha minimal dari referensi terhadap
-   "background + base", jadi `referensi = (1−e)·(bg + base) + e·grunge`, tepat per pixel.
-   Di bagian yang tertutup badan, tekstur strip disintesis (LaMa sepanjang arah strip) supaya
-   strip tetap utuh kalau subject digeser.
+Semua pakai blend **Normal + opacity** saja, jadi jalan di semua akun Canva.
 
-Karena background di bawah strip adalah hasil inpaint, overlay grunge juga membawa sisa
-detail foto yang tembus pandang (tiang rak, jendela) supaya hasilnya 1:1. Mau strip yang
-"bersih" saat dipindah (tidak 1:1)? Pakai `stripe.mode: single`.
+1. **base**: persegi panjang warna rata `G` dengan opacity dasar.
+2. **grunge**: warna `G` yang sama, bercak dengan opacity per-pixel. Variasi opacity antar
+   segmen strip ikut terbawa, sedangkan detail foto yang tembus (tiang, jendela) tidak.
+3. **shade** (opsional): color-to-alpha minimal dari referensi terhadap
+   `background + base + grunge`. Kalau dinyalakan, tumpukannya identik dengan referensi.
+
+Kenapa perlu shade: referensi adalah gambar AI yang sudah flat, jadi strip-nya tidak pernah
+dibuat sebagai layer dengan blend mode. Strip bersih + background bersih tidak bisa persis 1:1
+dengan cara apa pun. Selisihnya sengaja dikumpulkan di satu layer terpisah, supaya background
+dan strip tetap bersih.
 
 ### Overlay tanpa blend mode
 
