@@ -77,6 +77,24 @@ gradients:              # background grafis (bukan foto) -> bidang gradien SVG +
   max_effect_alpha: 0.95
   svg_epsilon: 1.0
 
+# ---------------------------------------------------------------- pentool
+pentool:                # "pen tool": 1 path Bezier per potongan, isi solid / gradien 2 warna
+  enabled: true
+  max_colors: 16        # warna awal per elemen vektor (sebelum potongan digabung)
+  merge_tol: 0.002      # gabung potongan selama satu gradien linear masih menjelaskan keduanya
+  max_pieces: 40        # potongan maksimal per elemen
+  color_join: 0.15      # potongan dengan rata-rata warna beda > ini tidak pernah digabung jadi gradien
+  max_interior_err: 0.04  # isi potongan beda > ini dari aslinya = foto/render 3D -> tetap PNG
+  min_part_frac: 0.02   # bagian elemen yang terpisah & < 2% bagian terbesar dibuang (sisa teks/debu)
+  min_piece_px: 30      # potongan lebih kecil dari ini digabung ke tetangga
+  gradient_min_delta: 0.08  # beda warna ujung < ini = warna solid (paling gampang diedit di Canva)
+  anchor_eps: 1.5       # jarak titik anchor (px): kecil = lebih presisi, lebih banyak anchor
+  corner_deg: 55        # belokan > ini = sudut tajam (bukan kurva)
+  smooth: 1.5           # haluskan tepi sebelum anchor dipilih
+  overlap_px: 1         # potongan saling tumpuk 1px supaya tidak ada celah
+  bg_max_pieces: 14     # background grafis: maksimal potongan
+  effects_layer: true   # semua efek (glow/kilau/bayangan/detail) digabung jadi SATU layer
+
 # -------------------------------------------------------------- vectorize
 vectorize:              # elemen flat/vektor: tepi "magic wand" + ekspor SVG ("pen tool") ke vectors/
   enabled: true

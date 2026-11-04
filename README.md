@@ -135,6 +135,22 @@ tapi tidak identik per pixel karena layer depth diblur sedikit.
 Mode lain: `single` (1 PNG), `multiply` (perlu blend Multiply, 1:1 tapi background di balik
 strip ikut berisi scene), `layered` (+ `shade: true` untuk 1:1 dengan layer sisa berisi foto).
 
+### Pen tool & potongan (desain grafis / vektor)
+
+- **Elemen vektor** (ikon, ilustrasi, tombol): tiap elemen jadi satu SVG di `vectors/` berisi
+  **satu path per potongan warna**. Garis tepinya kurva Bézier dengan sedikit anchor, sudut tajam
+  tetap sudut. Isinya **warna solid** (bisa diganti per warna di Canva lewat color tile), atau
+  **gradien 2 warna** kalau potongan itu memang bergradasi. PNG elemennya adalah render dari
+  SVG yang sama, jadi PNG = SVG.
+- **Background grafis** (tanpa foto, misalnya DORVAN/VECTALLY): dipecah jadi **satu layer per
+  potongan** (`01_bg_NN_solid|gradient.png` + `.svg`), ditambah **satu** layer `01_effects.png`
+  berisi semua kilau/glow/bayangan/detail. Untuk background polos, layer efek tidak dibuat.
+- `pieces.csv`: tiap potongan dengan jenis isi, warna 1/2, dan sudut gradien. Canva kadang
+  meratakan gradien SVG saat upload; kalau itu terjadi, pasang ulang gradiennya di Canva dengan
+  warna dan sudut dari file ini.
+- Desain foto (KINRAVA): background foto tetap PNG, manusia + objek yang dipegang jadi satu
+  asset, strip jadi base + satu layer tekstur.
+
 ### Overlay tanpa blend mode
 
 Canva tidak punya blend mode (screen/add), jadi partikel dan strip diurai menjadi
@@ -181,7 +197,9 @@ pipeline/
   imageio.py           load/save PNG, bbox
   matting.py           guided filter, levels, feather, island removal, decontaminate warna
   elements.py          pecah subject jadi elemen terpisah (putus sambungan tipis + SAM) + kategori
-  vectorize.py         tepi "magic wand" untuk vektor + ekspor SVG ("pen tool")
+  vectorize.py         tepi "magic wand" + lengkapi ikon dengan SAM
+  pentool.py           pen tool: potongan per warna/gradien, path Bezier, SVG per elemen/potongan
+  gradients.py         segmentasi bidang gradien (dipakai pentool untuk background)
   subject.py           matte subject + re-matting tepi terhadap clean plate (anti halo)
   text.py              OCR + second pass, mask glyph, deteksi tombol & dekor
   foreground.py        objek di depan subject via depth + connected components

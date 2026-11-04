@@ -81,3 +81,16 @@ def write_shapes_csv(out: Path, shapes):
         w.writeheader()
         for s in shapes:
             w.writerow({k: s.get(k, "") for k in fields})
+
+
+def write_pieces_csv(out: Path, rows):
+    """Every pen-tool piece: its fill (solid / gradient), colours and gradient angle, so a
+    gradient can be re-applied in Canva if Canva flattens the SVG gradient on upload."""
+    if not rows:
+        return
+    fields = ["svg_file", "piece", "fill", "color1", "color2", "angle_deg"]
+    with open(out / "pieces.csv", "w", newline="", encoding="utf-8-sig") as f:
+        w = csv.DictWriter(f, fieldnames=fields)
+        w.writeheader()
+        for r in rows:
+            w.writerow({k: r.get(k, "") for k in fields})
