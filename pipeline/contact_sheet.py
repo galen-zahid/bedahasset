@@ -43,6 +43,14 @@ def _on(im: Image.Image, bg="checker"):
 
 
 def render_svg(path: Path) -> Image.Image:
+    try:  # full SVG renderer (gradients, Bezier curves, transforms)
+        import io
+
+        import resvg_py
+
+        return Image.open(io.BytesIO(bytes(resvg_py.svg_to_bytes(svg_path=str(path))))).convert("RGBA")
+    except ImportError:
+        pass
     s = path.read_text(encoding="utf-8")
     W = int(re.search(r'width="(\d+)"', s).group(1))
     H = int(re.search(r'height="(\d+)"', s).group(1))
@@ -83,10 +91,19 @@ def build(d: Path, original: Path | None, dst: Path):
         tiles.append((r["file"], im.convert("RGB") if bg is None else _on(im, bg), sub))
     vec = sorted((d / "vectors").glob("*.svg")) if (d / "vectors").exists() else []
     if vec:
-        acc = Image.new("RGBA", Image.open(d / "01_background.png").size, (255, 255, 255, 255))
+        size = tiles[-1][1].size
+        acc = Image.new("RGBA", size, (255, 255, 255, 255))
         for v in vec:
-            acc.alpha_composite(render_svg(v))
-        tiles.append((f"vectors/*.svg ({len(vec)})", acc.convert("RGB"), "semua SVG di atas putih"))
+            if "background_gradients" in v.name:
+                tiles.append(("vectors/01_background_gradients.svg",
+                              render_svg(v).convert("RGB").resize(size), "bidang gradien (SVG)"))
+                continue
+            im = render_svg(v)
+            if im.size != size:
+                im = im.resize(size)
+            acc.alpha_composite(im)
+        tiles.append((f"vectors/*.svg ({len(vec)})", acc.convert("RGB"),
+                      "semua SVG elemen di atas putih"))
     W0, H0 = tiles[0][1].size
     th = int(H0 * TILE_W / W0)
     cols = 6

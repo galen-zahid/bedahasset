@@ -15,3 +15,5 @@ pymatting>=1.1.12
 transformers>=4.45     # Depth Anything V2 Small
 easyocr>=1.7.1
 fire>=0.5              # dependency of simple-lama-inpainting
+vtracer>=0.6           # SVG tracing dengan kurva Bezier ("pen tool")
+resvg-py>=0.5           # render SVG untuk contact sheet

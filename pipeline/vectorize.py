@@ -40,6 +40,43 @@ def magic_wand_alpha(img: np.ndarray, plate: np.ndarray, alpha: np.ndarray, cfg)
     return out.astype(np.float32)
 
 
+def complete_with_sam(predict, img, rgb, alpha, others, cfg):
+    """Vector icons: let SAM outline the whole object (it sees an icon as one thing, including
+    dark details in the background colour), then take that outline as the element's shape."""
+    from .elements import _grid_points
+
+    c = cfg.vectorize
+    hard = alpha > 0.5
+    if predict is None or hard.sum() < 200:
+        return rgb, alpha
+    pts = _grid_points(hard, int(c.sam_points))
+    if not pts:
+        return rgb, alpha
+    masks, scores = predict(pts)
+    zone = matting.dilate(hard, int(c.sam_grow_px))
+    best = None
+    for p in range(masks.shape[0]):
+        for k in range(masks.shape[1]):
+            mk = masks[p, k]
+            if scores[p, k] < c.sam_min_score or mk.sum() == 0:
+                continue
+            if (mk & zone).sum() / mk.sum() < 0.97:  # leaks outside the element -> background
+                continue
+            if (mk & hard).sum() / max(mk.sum(), 1) < 0.5:
+                continue
+            best = mk if best is None else (best | mk)
+    if best is None:
+        return rgb, alpha
+    add = best & ~hard & ~others
+    if not add.any():
+        return rgb, alpha
+    a = alpha.copy()
+    a[add] = 1.0
+    out = rgb.copy()
+    out[add] = img[add]
+    return out, a.astype(np.float32)
+
+
 def fill_enclosed_holes(img: np.ndarray, rgb: np.ndarray, alpha: np.ndarray, cfg):
     """Vector art often has dark details (text lines, chart bars) in the same colour as the
     background; the matte then punches them out. Fully enclosed holes that are small relative
@@ -87,9 +124,58 @@ def _contours_to_path(mask: np.ndarray, eps: float) -> tuple[str, list]:
     return " ".join(parts), polys
 
 
+def _vtracer_svg(rgb, alpha, path, cfg):
+    """Bezier tracing (vtracer) of a palette-flattened crop -> full-canvas SVG."""
+    import io
+    import re
+
+    import vtracer
+    from PIL import Image
+
+    c = cfg.vectorize
+    H, W = alpha.shape
+    m = alpha > 0.5
+    ys, xs = np.nonzero(m)
+    pad = 2
+    x0, y0 = max(xs.min() - pad, 0), max(ys.min() - pad, 0)
+    x1, y1 = min(xs.max() + pad + 1, W), min(ys.max() + pad + 1, H)
+    crop = (np.clip(rgb[y0:y1, x0:x1], 0, 1) * 255).astype(np.uint8)
+    mm = m[y0:y1, x0:x1]
+    pix = crop[mm].astype(np.float32)
+    k = int(min(c.svg_max_colors, max(2, len(np.unique((pix // 16).astype(np.int32), axis=0)))))
+    crit = (cv2.TERM_CRITERIA_EPS + cv2.TERM_CRITERIA_MAX_ITER, 30, 0.5)
+    sample = pix if len(pix) <= 40000 else pix[np.random.default_rng(0).choice(len(pix), 40000, False)]
+    _, _, centers = cv2.kmeans(sample, k, None, crit, 3, cv2.KMEANS_PP_CENTERS)
+    lab = np.linalg.norm(crop.reshape(-1, 1, 3).astype(np.float32) - centers[None], axis=-1).argmin(1)
+    flat = centers[lab].reshape(crop.shape).astype(np.uint8)
+    flat = cv2.medianBlur(flat, 3)
+    rgba = np.dstack([flat, (mm * 255).astype(np.uint8)])
+    rgba[~mm] = 0
+    buf = io.BytesIO()
+    Image.fromarray(rgba, "RGBA").save(buf, "PNG")
+    svg = vtracer.convert_raw_image_to_svg(
+        buf.getvalue(), img_format="png", colormode="color", hierarchical="stacked", mode="spline",
+        filter_speckle=int(c.vt_filter_speckle), color_precision=6,
+        layer_difference=int(c.vt_layer_difference), corner_threshold=60, length_threshold=4.0,
+        max_iterations=10, splice_threshold=45, path_precision=2)
+    inner = re.sub(r"^.*?<svg[^>]*>", "", svg, flags=re.S).rsplit("</svg>", 1)[0]
+    out = (f'<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{H}" viewBox="0 0 {W} {H}">\n'
+           f'<g transform="translate({x0},{y0})">{inner}</g>\n</svg>\n')
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(out, encoding="utf-8")
+    return {"colors": int(len(centers)), "paths": inner.count("<path"), "iou": 1.0, "engine": "vtracer"}
+
+
 def trace_svg(rgb: np.ndarray, alpha: np.ndarray, path: Path, cfg) -> dict:
     """Trace one element to an SVG. Returns stats {colors, paths, iou}."""
     c = cfg.vectorize
+    if (alpha > 0.5).sum() < 20:
+        return {}
+    if c.engine == "vtracer":
+        try:
+            return _vtracer_svg(rgb, alpha, path, cfg)
+        except ImportError:
+            log.warning("  vtracer tidak terpasang, pakai tracing dasar (pip install vtracer)")
     H, W = alpha.shape
     m = alpha > 0.5
     if m.sum() < 20:

@@ -169,6 +169,15 @@ def split_elements(rgb: np.ndarray, alpha: np.ndarray, cfg, predict=None):
         if hm.sum() == 0:
             continue
         out.append({"alpha": a, "kind": _classify(rgb, hm, H, W, c), "area": int(hm.sum())})
+    # one subject is either a photo or an illustration: if the biggest piece is photographic,
+    # smooth dark pieces of it (a black shoe, a shadow) are photo too, not vector icons
+    if out:
+        main = max(out, key=lambda e: e["area"])
+        if main["kind"].startswith("asset"):
+            for e in out:
+                if not e["kind"].startswith("asset"):
+                    e["kind"] = "asset_large" if e["area"] / (H * W) >= c.large_frac else "asset_small"
+    out = _merge_attached(out, H, W, c)
     out.sort(key=lambda e: -e["area"])
     kinds = {}
     for e in out:
@@ -176,6 +185,41 @@ def split_elements(rgb: np.ndarray, alpha: np.ndarray, cfg, predict=None):
     log.info("  elemen: subject dipecah jadi %d (%s)", len(out),
              ", ".join(f"{v} {k}" for k, v in kinds.items()))
     return out
+
+
+def _merge_attached(els, H, W, c):
+    """Photo objects that touch belong together (a hand and the barbell it holds, a plate on the
+    bar, a shoe on a leg): small photo pieces are merged into the neighbour they share the most
+    border with; big separate objects (another person) stay on their own."""
+    if len(els) < 2:
+        return els
+    changed = True
+    while changed and len(els) > 1:
+        changed = False
+        big = max(e["area"] for e in els)
+        hard = [e["alpha"] > 0.5 for e in els]
+        for i, e in enumerate(els):
+            if not e["kind"].startswith("asset"):
+                continue
+            if e["area"] >= c.keep_separate_frac * big:
+                continue  # a large object (another person / product): keep it
+            ring = matting.dilate(hard[i], 3) & ~hard[i]
+            best, best_len = None, 0
+            for j, h in enumerate(hard):
+                if j == i or not els[j]["kind"].startswith("asset"):
+                    continue
+                shared = int((ring & h).sum())
+                if shared > best_len:
+                    best, best_len = j, shared
+            if best is None or best_len < c.min_contact_px:
+                continue
+            tgt = els[best]
+            tgt["alpha"] = np.maximum(tgt["alpha"], e["alpha"])
+            tgt["area"] += e["area"]
+            els.pop(i)
+            changed = True
+            break
+    return els
 
 
 def _texture(rgb, m) -> float:

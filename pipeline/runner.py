@@ -9,7 +9,7 @@ from pathlib import Path
 
 import numpy as np
 
-from . import background, composite, elements, foreground, vectorize, glow, grain, manifest, particles, stripe, subject, text
+from . import background, composite, elements, foreground, gradients, vectorize, glow, grain, manifest, particles, stripe, subject, text
 from . import matting
 from .imageio import load_rgb, save_rgb
 
@@ -136,6 +136,18 @@ def _process(path: Path, out_root: Path, models, cfg) -> dict:
     subj_rgb, subj_a = subject.subject_layer(img, sal, fg_union, plate, cfg)
     fg_layers = [subject.edge_refine_object(img, o["alpha"], plate, cfg) for o in fgs]
     subj_rgb, subj_a, fg_layers = foreground.reassign_slivers(subj_rgb, subj_a, fg_layers, cfg)
+    if cfg.foreground.merge_touching and fg_layers:  # held / attached objects stay one asset
+        keep = []
+        for rgb_f, a_f in fg_layers:
+            if (matting.dilate(a_f > 0.5, 4) & (subj_a > 0.5)).sum() > 50:
+                na = a_f + subj_a * (1 - a_f)
+                subj_rgb = (rgb_f * a_f[..., None] + subj_rgb * (subj_a * (1 - a_f))[..., None]) / \
+                    np.maximum(na, 1e-6)[..., None]
+                subj_a = na.astype(np.float32)
+                log.info("  foreground menempel ke subject -> digabung jadi satu asset")
+            else:
+                keep.append((rgb_f, a_f))
+        fg_layers = keep
     tick("subject")
 
     # 6. glow (from plate, so subject/text never leak in)
@@ -225,6 +237,7 @@ def _process(path: Path, out_root: Path, models, cfg) -> dict:
                                                     and lname.endswith("base")) else "normal",
                        "rgb": rgb, "alpha": a, "z_order": z})
         z += 1
+    els = []
     if subj_a.max() > 0:  # graphic designs may have no separable subject
         predict = None
         if cfg.elements.enabled and cfg.elements.sam:
@@ -241,6 +254,8 @@ def _process(path: Path, out_root: Path, models, cfg) -> dict:
                     for j_, h_ in enumerate(hards):
                         if j_ != i_:
                             others |= h_
+                    subj_rgb, e["alpha"] = vectorize.complete_with_sam(
+                        predict, img, subj_rgb, e["alpha"], others, cfg)
                     a_ = vectorize.magic_wand_alpha(img, plate, e["alpha"], cfg)
                     e["alpha"] = np.where(others, e["alpha"], a_).astype(np.float32)
                     subj_rgb, e["alpha"] = vectorize.fill_enclosed_holes(img, subj_rgb, e["alpha"], cfg)
@@ -289,6 +304,28 @@ def _process(path: Path, out_root: Path, models, cfg) -> dict:
     for L in layers:
         L.setdefault("suggested_opacity", 1.0)
 
+    # graphic background -> editable gradient shapes + effects (photo designs keep the PNG)
+    photo_design = bool(fg_layers) or any(L.get("category", "").startswith("asset") for L in layers)
+    if cfg.gradients.enabled and photo_design:
+        log.info("  gradien: desain foto -> background tetap PNG")
+    elif cfg.gradients.enabled:
+        gd = gradients.decompose(plate, cfg, tmp / "vectors")
+        if gd is not None:
+            (tmp / "extra").mkdir(exist_ok=True)
+            save_rgb(tmp / "extra" / "01_background_flat.png", plate)
+            fx = [e for e in gd["effects"] if e[2].max() > 0]
+            for L in layers[1:]:
+                L["z_order"] += len(fx)
+            new_layers = [{"layer": "background_gradients", "file": "01_background_gradients.png",
+                           "type": "bg", "category": "gradient", "rgb": gd["gradient_rgb"],
+                           "alpha": None, "z_order": 0, "svg_file": gd["svg"]}]
+            for i_, (name_, rgb_, a_) in enumerate(fx, 1):
+                new_layers.append({"layer": f"background_{name_}",
+                                   "file": f"01_{'abcd'[i_ - 1]}_{name_}.png", "type": "overlay",
+                                   "category": "support" if name_ == "detail" else "effect",
+                                   "rgb": rgb_, "alpha": a_,
+                                   "z_order": i_, "suggested_opacity": 1.0})
+            layers = new_layers + layers[1:]
     if cfg.vectorize.enabled:  # "pen tool": SVG for every flat / vector layer
         n_svg = 0
         for L in layers:
@@ -309,8 +346,8 @@ def _process(path: Path, out_root: Path, models, cfg) -> dict:
                 if st:
                     L["svg_file"] = svg.as_posix()
                     n_svg += 1
-                    log.info("  svg: %s  %d warna, %d path, akurasi bentuk %.1f%%", svg.name,
-                             st["colors"], st["paths"], 100 * st["iou"])
+                    log.info("  svg: %s  %d warna, %d path (%s)", svg.name, st["colors"],
+                             st["paths"], st.get("engine", "polygon"))
     rows = manifest.write_layers(tmp, layers, cfg)
     manifest.write_text_csv(tmp, blocks)
     manifest.write_shapes_csv(tmp, shapes)
