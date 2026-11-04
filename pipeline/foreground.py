@@ -39,6 +39,13 @@ def find_foreground(img: np.ndarray, sal: np.ndarray, depth: np.ndarray | None, 
             log.info("  fg component %d terlalu besar (%.0f%% salient) -> itu subject, skip",
                      i, 100 * area / hard.sum())
             continue
+        bx, by, bw, bh = stats[i, :4]
+        touches = bx <= c.edge_px or by <= c.edge_px or bx + bw >= w - c.edge_px or by + bh >= h - c.edge_px
+        if c.require_frame_edge and not touches:
+            # a real "in front of the subject" object (plate, shoulder, leaf) is cropped by the
+            # frame; a near-depth blob in the middle is a depth artefact on a graphic/illustration
+            log.info("  fg kandidat di tengah frame (area %d px) -> bukan objek depan, skip", area)
+            continue
         comp = (lab == i).astype(np.float32)
         comp = matting.fill_holes(comp, int(0.002 * h * w))
         # inner edge (vs subject) from depth -> snap to image edges; outer edge from salient matte

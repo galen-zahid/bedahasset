@@ -81,6 +81,7 @@ def _process(path: Path, out_root: Path, models, cfg) -> dict:
     blocks, text_mask, ui = text.detect_text(img, models, sal, cfg)
     for u in ui:
         sal = sal * (1 - matting.dilate(u["mask"], 2).astype(np.float32))
+    sal, raw = subject.sanitize_salient(sal, raw, text_mask, cfg)
     tick("ocr")
 
     # 3. foreground objects by depth
@@ -96,6 +97,7 @@ def _process(path: Path, out_root: Path, models, cfg) -> dict:
     occl = sal > 0.02
     if fg_union is not None:
         occl |= fg_union > 0.02
+    occl |= text_mask  # text also sits on top of a stripe
     if cfg.stripe.enabled:
         stripes, acc_mask = stripe.find_stripes(img, sal, text_mask, fg_union, cfg)
         stripe_vis = [stripe.visible_mask(s_, acc_mask, occl, cfg) for s_ in stripes]
@@ -117,6 +119,7 @@ def _process(path: Path, out_root: Path, models, cfg) -> dict:
     inp_mask |= extra
     plate = background.clean_plate(img, inp_mask, models, cfg)
     keep = matting.dilate(text_mask, int(cfg.background.text_extra_dilate_px) + 2) | extra
+    plate = background.fix_dark_smears(plate, inp_mask, cfg, img, text_mask)
     plate, restored = background.restore_original(plate, img, inp_mask, sal, raw, fg_union, keep, cfg)
     inp_mask &= ~restored
     if cfg.background.smooth_inpainted_px > 0:  # soften LaMa's patchwork, then regrain below
@@ -205,7 +208,7 @@ def _process(path: Path, out_root: Path, models, cfg) -> dict:
     # 8. grain overlay
     grain_rgb = grain_a = None
     if cfg.grain.enabled:
-        grain_rgb, grain_a = grain.grain_overlay(img, sigma, cfg)
+        grain_rgb, grain_a = grain.grain_overlay(plate, sigma, cfg)
 
     # ---- assemble layer list (z: bg 0, glow 1, subject 2, fg 3.., text, particles, grain)
     layers = [{"layer": "background", "file": "01_background.png", "type": "bg",
@@ -222,9 +225,10 @@ def _process(path: Path, out_root: Path, models, cfg) -> dict:
                                                     and lname.endswith("base")) else "normal",
                        "rgb": rgb, "alpha": a, "z_order": z})
         z += 1
-    layers.append({"layer": "subject", "file": "02_subject.png", "type": "subject",
-                   "rgb": subj_rgb, "alpha": subj_a, "z_order": z})
-    z += 1
+    if subj_a.max() > 0:  # graphic designs may have no separable subject
+        layers.append({"layer": "subject", "file": "02_subject.png", "type": "subject",
+                       "rgb": subj_rgb, "alpha": subj_a, "z_order": z})
+        z += 1
     for i, (rgb, a) in enumerate(fg_layers, 1):
         layers.append({"layer": f"foreground_{i:02d}", "file": f"03_foreground_{i:02d}.png",
                        "type": "fg", "rgb": rgb, "alpha": a, "z_order": z})

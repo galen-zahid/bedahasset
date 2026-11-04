@@ -51,11 +51,15 @@ def grain_overlay(base_rgb: np.ndarray, sigma: float, cfg):
     h, w = base_rgb.shape[:2]
     rng = np.random.default_rng(c.seed)
     n = make_noise((h, w), sigma * c.strength, c.size_px, True, rng)[..., 0]
-    B = cv2.GaussianBlur((base_rgb @ LUMA).astype(np.float32), (0, 0), 3.0)
+    # calibrate against a heavily smoothed luminance and clamp it to mid-tones: the overlay must be
+    # pure noise. Calibrating per pixel against the design made the alpha jump wherever text or
+    # sharp graphics were, which printed a faint "ghost" of the headline into the grain layer.
+    B = cv2.GaussianBlur((base_rgb @ LUMA).astype(np.float32), (0, 0), 25.0)
+    B = np.clip(B, 0.25, 0.75)
 
     # grain: white with alpha a raises by a*(1-B); black lowers by a*B
     pos = n > 0
-    ga = np.where(pos, n / np.maximum(1 - B, 0.05), -n / np.maximum(B, 0.05))
+    ga = np.where(pos, n / (1 - B), -n / B)
     ga = np.clip(ga, 0, 0.5).astype(np.float32)
     gc = np.where(pos[..., None], 1.0, 0.0).astype(np.float32) * np.ones(3, np.float32)
 

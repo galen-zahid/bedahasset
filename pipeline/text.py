@@ -42,18 +42,26 @@ def _glyph_mask(img: np.ndarray, poly: np.ndarray, pad: int, tol: float):
     if len(samples) < 20:
         return None, None, False
     crit = (cv2.TERM_CRITERIA_EPS + cv2.TERM_CRITERIA_MAX_ITER, 20, 0.5)
-    _, labels, centers = cv2.kmeans(samples, 2, None, crit, 3, cv2.KMEANS_PP_CENTERS)
+    k = 3 if len(samples) >= 60 else 2
+    _, labels, centers = cv2.kmeans(samples, k, None, crit, 3, cv2.KMEANS_PP_CENTERS)
 
-    # border ring of the (unpadded) box decides which cluster is background
+    # clusters that dominate the border ring of the (unpadded) box are background; every other
+    # cluster is text (handles two-colour lines like white "YOU" + orange "MOVING?")
     ring = inside_c & ~matting.erode(inside_c, max(2, h // 12))
-    d_all = np.linalg.norm(lab[:, None, :] - centers[None], axis=-1)  # N x 2
-    ring_lab = d_all[ring.ravel()].argmin(1)
-    bg_k = int(np.bincount(ring_lab, minlength=2).argmax())
-    tx_k = 1 - bg_k
-
-    sep = float(np.linalg.norm(centers[0] - centers[1]))
-    d_tx, d_bg = d_all[:, tx_k], d_all[:, bg_k]
-    glyph = (d_tx < d_bg) & (d_tx < tol * sep)
+    d_all = np.linalg.norm(lab[:, None, :] - centers[None], axis=-1)  # N x k
+    ring_share = np.bincount(d_all[ring.ravel()].argmin(1), minlength=k) / max(ring.sum(), 1)
+    bg_set = ring_share >= 0.25
+    if not bg_set.any():
+        bg_set[ring_share.argmax()] = True
+    tx_set = ~bg_set
+    if not tx_set.any():
+        return None, None, False
+    near = d_all.argmin(1)
+    d_bg = d_all[:, bg_set].min(1)
+    # separation of each text cluster from the closest background cluster
+    sep_k = np.array([np.linalg.norm(centers[j] - centers[bg_set], axis=1).min() for j in range(k)])
+    sep = float(sep_k[tx_set].min())
+    glyph = tx_set[near] & (d_bg > (1 - tol) * sep_k[near])
     glyph = glyph.reshape(crop.shape[:2])
     # keep only connected pieces that mostly belong to THIS box (padding may reach neighbours)
     n, lab_cc, stats, _ = cv2.connectedComponentsWithStats(glyph.astype(np.uint8), connectivity=8)
@@ -65,7 +73,12 @@ def _glyph_mask(img: np.ndarray, poly: np.ndarray, pad: int, tol: float):
     cov = glyph[inside_c].mean()
     ok = sep > 12 and 0.03 < cov < 0.85
 
-    col = np.median(crop[glyph], axis=0) if glyph.any() else crop.reshape(-1, 3).mean(0)
+    if glyph.any():  # colour of the most common text cluster
+        nk = near.reshape(crop.shape[:2])[glyph]
+        main = np.bincount(nk, minlength=k).argmax()
+        col = np.median(crop[glyph & (near.reshape(crop.shape[:2]) == main)], axis=0)
+    else:
+        col = crop.reshape(-1, 3).mean(0)
     full = np.zeros((H, W), bool)
     full[y0:y1, x0:x1] = glyph
     return full, col, ok
@@ -151,6 +164,40 @@ def _find_container(img: np.ndarray, rect, glyph: np.ndarray, cfg):
                   "box_fill_hex": _hex(fill_c), "box_border_hex": border_hex}
 
 
+def _iou_box(a, b):
+    ax0, ay0, ax1, ay1 = a
+    bx0, by0, bx1, by1 = b
+    iw, ih = max(0, min(ax1, bx1) - max(ax0, bx0)), max(0, min(ay1, by1) - max(ay0, by0))
+    inter = iw * ih
+    return inter / max(min((ax1 - ax0) * (ay1 - ay0), (bx1 - bx0) * (by1 - by0)), 1)
+
+
+def _giant_text_pass(reader, u8: np.ndarray, found, c):
+    """Very large display type (poster headlines filling a third of the canvas) is often missed
+    at full resolution: the detector's receptive field is too small. Re-detect on downscaled
+    copies and keep only big new boxes."""
+    extra = []
+    H, W = u8.shape[:2]
+    # boxes the main pass could not read (below min_confidence) do not block a better reading
+    have = [cv2.boundingRect(np.array(b, np.int32).reshape(-1, 1, 2)) for b, _, cf in found
+            if cf >= c.min_confidence]
+    have = [(x, y, x + w, y + h) for x, y, w, h in have]
+    for s in c.giant_scales:
+        sm = cv2.resize(u8, None, fx=s, fy=s, interpolation=cv2.INTER_AREA)
+        for box, txt, conf in reader.readtext(sm):
+            b = [[p[0] / s, p[1] / s] for p in box]
+            x, y, w, h = cv2.boundingRect(np.array(b, np.int32).reshape(-1, 1, 2))
+            if h < c.giant_min_height_frac * H or conf < c.giant_min_conf:
+                continue
+            r = (x, y, x + w, y + h)
+            if any(_iou_box(r, o) > 0.5 for o in have):
+                continue
+            have.append(r)
+            extra.append((b, txt, conf))
+            log.info("  text (headline besar, pass skala %.2f): %r conf=%.2f", s, txt, conf)
+    return extra
+
+
 def detect_text(img: np.ndarray, models, sal: np.ndarray, cfg):
     """Returns (blocks, text_mask, ui_elements). ui_elements: list of {rgb, alpha, info}."""
     c = cfg.text
@@ -160,7 +207,17 @@ def detect_text(img: np.ndarray, models, sal: np.ndarray, cfg):
     if not c.enabled:
         return blocks, mask, ui
     u8 = to_u8(img)
-    results = models.ocr.readtext(u8)
+    results = list(models.ocr.readtext(u8))
+    giant = _giant_text_pass(models.ocr, u8, results, c)
+    if giant:  # drop unreadable full-res boxes that a giant-pass reading now covers
+        gb = [cv2.boundingRect(np.array(b, np.int32).reshape(-1, 1, 2)) for b, _, _ in giant]
+        gb = [(x, y, x + w, y + h) for x, y, w, h in gb]
+
+        def covered(b):
+            x, y, w, h = cv2.boundingRect(np.array(b, np.int32).reshape(-1, 1, 2))
+            return any(_iou_box((x, y, x + w, y + h), g) > 0.3 for g in gb)
+        results = [r for r in results if r[2] >= c.min_confidence or not covered(r[0])]
+    results += giant
     hard_sal = sal > cfg.subject.hard_threshold
     for box, txt, conf in results:
         poly = np.array(box, dtype=np.int32).reshape(-1, 1, 2)
@@ -175,6 +232,8 @@ def detect_text(img: np.ndarray, models, sal: np.ndarray, cfg):
         angle = float(np.degrees(np.arctan2(box[1][1] - box[0][1], box[1][0] - box[0][0])))
         ov = hard_sal[inside].mean()
         on_subject = ov > c.max_subject_overlap
+        # text printed ON the photo (e.g. a logo embossed on a plate) is rotated / barely legible;
+        # straight, readable text over the subject is design text and must be extracted
         if on_subject and not (conf >= c.design_text_min_conf and abs(angle) <= c.design_text_max_angle):
             log.info("  text skip (%.0f%% di atas subject, bagian dari foto): %r", 100 * ov, txt)
             continue
@@ -235,7 +294,10 @@ def detect_text(img: np.ndarray, models, sal: np.ndarray, cfg):
         if not on_subject:
             glyph &= ~hard_sal  # never cut into the photo subject
         blocks.append(b)
-        mask |= glyph
+        # inpaint a blob around the letters, not their exact outline: LaMa tends to "echo" a
+        # letter-shaped hole as a faint ghost of the word
+        r = max(2, int(round(c.inpaint_close_frac * h)))
+        mask |= cv2.morphologyEx(glyph.astype(np.uint8), cv2.MORPH_CLOSE, matting.disk(r)).astype(bool)
         log.info("  text: %r conf=%.2f color=%s ~%dpx", txt, conf, b["color_hex"], b["est_font_size_px"])
     if c.decor.enabled:
         dm, decor = _find_decor(img, blocks, mask | hard_sal, cfg)

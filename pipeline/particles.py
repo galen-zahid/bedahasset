@@ -20,6 +20,12 @@ LUMA = np.array([0.299, 0.587, 0.114], np.float32)
 log = logging.getLogger("split")
 
 
+def scene_is_dark(img: np.ndarray, cfg) -> bool:
+    """Dust, chalk and sparks read as light specks on a dark scene. On bright designs the
+    detector only finds fabric texture, highlights and thin graphic lines."""
+    return float(np.median(img @ LUMA)) <= cfg.particles.max_scene_luma
+
+
 def cloud_region(orig: np.ndarray, models, cfg):
     """Soft weight (0..1) of large dust / chalk / smoke clouds, or None.
 
@@ -28,6 +34,9 @@ def cloud_region(orig: np.ndarray, models, cfg):
     cleaned in the same LaMa pass as the subject (one pass = no smudgy double-inpaint)."""
     c = cfg.particles.cloud
     if not (cfg.particles.enabled and c.enabled):
+        return None
+    if not scene_is_dark(orig, cfg):
+        log.info("  cloud: desain terang -> lewati awan debu/kapur")
         return None
     H, W = orig.shape[:2]
     p = models.text_seg(to_u8(orig), c.prompts)
@@ -73,6 +82,9 @@ def extract_particles(plate: np.ndarray, subject_alpha: np.ndarray, text_mask: n
                       orig=None, cloud_soft=None):
     c = cfg.particles
     cg = ca = None
+    if not scene_is_dark(orig if orig is not None else plate, cfg):
+        log.info("  particles: desain terang -> tidak ada layer partikel")
+        return None, None, plate, 0
     if cloud_soft is not None and orig is not None:
         excl = matting.dilate(subject_alpha > 0.02, int(c.subject_dilate_px)) | text_mask
         cg, ca, plate = _cloud(orig, plate, cloud_soft, excl, cfg)

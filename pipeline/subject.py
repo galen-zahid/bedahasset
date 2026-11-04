@@ -94,3 +94,40 @@ def edge_refine_object(img, alpha, plate, cfg):
                               c.ambiguous_choke, c.detail_ref)
         F = matting.decontaminate(img, alpha)
     return F, alpha.astype(np.float32)
+
+
+def sanitize_salient(sal: np.ndarray, raw: np.ndarray, text_mask: np.ndarray, cfg):
+    """BiRefNet is a photo-subject model; on designs it also grabs big headlines and graphics.
+
+    - salient components that are mostly text are design text, not subject -> removed
+    - a "subject" covering most of the canvas means there is no separable subject (graphic /
+      full-bleed poster) -> no subject layer; everything except text stays in the background
+    """
+    import logging
+
+    import cv2
+
+    log = logging.getLogger("split")
+    c = cfg.subject
+    H, W = sal.shape
+    hard = (sal > 0.5).astype(np.uint8)
+    n, lab, st, _ = cv2.connectedComponentsWithStats(hard, connectivity=8)
+    drop = np.zeros((H, W), bool)
+    for i in range(1, n):
+        comp = lab == i
+        frac = (comp & text_mask).sum() / max(st[i, 4], 1)
+        if frac > c.text_component_frac:
+            drop |= comp
+    if drop.any():
+        log.info("  subject: %.1f%% kanvas ternyata teks/headline -> dikeluarkan dari subject",
+                 100 * drop.mean())
+        zone = matting.dilate(drop, 6)
+        sal = sal * ~zone
+        raw = raw * ~zone
+    area = (sal > 0.5).mean()
+    if area > c.max_subject_frac or area < c.min_subject_frac:
+        log.info("  subject: %.0f%% kanvas -> tidak ada subject yang bisa dipisah "
+                 "(desain grafis/full-bleed); semua kecuali teks tetap di background", 100 * area)
+        sal = np.zeros_like(sal)
+        raw = np.zeros_like(raw)
+    return sal.astype(np.float32), raw.astype(np.float32)

@@ -24,6 +24,9 @@ subject:
   min_island_frac: 0.0005  # buang pulau alpha kecil < fraksi area kanvas
   decontaminate: true   # estimasi warna foreground (pymatting) -> no halo warna background
   hard_threshold: 0.5   # alpha > ini dianggap "subject" untuk masking/inpaint
+  text_component_frac: 0.35  # bagian "subject" yang >35% isinya teks = headline, bukan subject
+  max_subject_frac: 0.65     # "subject" > 65% kanvas = tidak ada subject terpisah (desain grafis)
+  min_subject_frac: 0.003
   # Re-matting tepi terhadap clean plate (known-background matting) -> buang halo.
   plate_matting: true
   plate_min_contrast: 0.10  # hanya bila warna subject & plate cukup beda (jarak RGB)
@@ -44,6 +47,8 @@ foreground:
   max_area_frac_of_salient: 0.6  # kalau "foreground" > 60% area salient, itu subject-nya -> skip
   edge_erode_px: 1      # area foreground yang dibuang dari layer subject di-erode segini (hindari seam)
   guided_radius: 3      # refine tepi dalam (batas depth) mengikuti tepi gambar
+  require_frame_edge: true  # objek depan harus terpotong tepi frame (plate, bahu, daun di depan lensa)
+  edge_px: 6
   sliver_px: 6          # bagian subject yang lebih tipis dari ~2x ini & menempel ke tepi objek depan
                         # dipindah ke layer foreground (sisa rim objek). 0 = mati
 
@@ -56,8 +61,12 @@ text:
   second_pass: true     # OCR ulang dari crop yang sudah dibinarisasi, ambil yang confidence lebih tinggi
   pad_frac: 0.18        # padding bbox (x tinggi teks) untuk menangkap glyph yang terpotong bbox OCR
   color_tol: 0.55       # toleransi (relatif jarak antar cluster) pixel dianggap glyph
+  inpaint_close_frac: 0.25  # huruf digabung jadi gumpalan (x tinggi teks) sebelum di-inpaint -> tidak ada "bayangan huruf"
   dilate_px: 5          # mask glyph di-dilate sebelum inpaint (anti-alias + grain)
   cap_height_ratio: 0.72  # tinggi huruf kapital / font size (estimasi ukuran font)
+  giant_scales: [0.5, 0.35]   # OCR ulang di resolusi kecil untuk headline raksasa yang terlewat
+  giant_min_height_frac: 0.06 # ...hanya kotak setinggi >= 6% kanvas
+  giant_min_conf: 0.30
   second_pass_heights: [32, 48, 64]  # tinggi crop (px) untuk OCR ulang
   second_pass_thin: [0, 1, 2]        # penipisan huruf (px); font display tebal lebih terbaca
   fix_text: true        # perbaiki hasil OCR pakai geometri glyph: spasi kata, ALL CAPS, '.' vs ':',
@@ -67,7 +76,7 @@ text:
   caps_tolerance: 0.10  # semua huruf punya garis atas & bawah sama (+-10%) = ALL CAPS
   # Teks di atas area salient tetap dianggap TEKS DESAIN (bukan bagian foto) bila
   # confidence tinggi dan horizontal (mis. tombol CTA yang menempel ke subject).
-  design_text_min_conf: 0.80
+  design_text_min_conf: 0.30
   design_text_max_angle: 5
   decor:                # garis/slash/bullet kecil di baris yang sama dengan teks kecil (tidak terbaca OCR)
     enabled: true
@@ -101,6 +110,9 @@ background:
   lama_max_side: 800    # LaMa dijalankan di resolusi ini lalu di-upscale (hanya area mask yang dipakai).
                         # Lubang besar lebih koheren di ~800px; 0 = full-res (lebih tajam, struktur kurang)
   paste_feather_px: 3   # blend hasil inpaint ke plate asli dengan feather segini
+  flat_fill_max_spread: 0.08 # latar polos (sebaran kecerahan di sekitar lubang < ini, mis. kertas/dinding):
+  flat_ring_px: 30           # noda gelap/terang hasil LaMa diganti gradasi halus dari warna sekitar.
+  flat_fill_min_diff: 0.05   # pixel yang beda > ini dari gradasi halus dianggap noda. 0 di max_spread = mati
   smooth_inpainted_px: 6  # haluskan pola "tambal-sulam" LaMa di area inpaint (guided filter). 0 = mati
   regrain_inpainted: true  # tambahkan grain sintetis di area inpaint supaya cocok dengan sekitarnya
 
@@ -159,7 +171,10 @@ stripe:                 # strip/pita warna aksen yang lewat DI BELAKANG subject
   min_value: 0.30
   min_piece_frac: 0.002 # potongan strip minimal 0.2% kanvas
   collinear_tol: 1.35   # potongan dianggap segaris kalau gabungannya tidak lebih lebar dari 1.35x
-  min_elongation: 2.0   # panjang/tebal minimal
+  min_elongation: 3.5   # panjang/tebal minimal
+  min_length_frac: 0.3  # panjang minimal = 30% diagonal kanvas (lampu/bidang kecil bukan strip)
+  min_mean_saturation: 0.6  # strip = grafis berwarna pekat
+  max_accent_frac: 0.25 # warna aksen > 25% area bebas = warna latar (mis. poster biru), bukan strip
   min_behind_frac: 0.05 # minimal 5% persegi panjang strip tertutup subject ("di belakang orang")
   max_stripes: 3
   close_px: 7           # tutup bintik grunge gelap di dalam strip (tetap ikut layer strip)
@@ -188,6 +203,7 @@ particles:
   max_chroma: 0.14      # partikel harus low-saturation (debu/kapur). Naikkan untuk spark berwarna
   min_luma: 0.18
   max_blob_area: 400    # blob lebih besar dari ini (px) bukan partikel
+  max_scene_luma: 0.45  # partikel/awan hanya dicari kalau median kecerahan desain <= ini (desain gelap)
   streak_min_len: 12    # blob memanjang (>= 12px) dan tipis...
   streak_max_width: 2.5 # ...(lebar rata-rata < 2.5px) = highlight tepi alat/kusen, bukan debu
   min_pixels: 30        # total pixel partikel < ini -> layer di-skip

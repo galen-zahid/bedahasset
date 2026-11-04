@@ -48,6 +48,7 @@ def find_stripes(img: np.ndarray, sal: np.ndarray, text_mask: np.ndarray, fg_uni
     occl = sal > 0.02
     if fg_union is not None:
         occl |= fg_union > 0.02
+    occl |= text_mask
     acc = detect_accent(img, matting.dilate(occl, 4) | text_mask, cfg)
     if acc is None:
         return [], None
@@ -55,6 +56,11 @@ def find_stripes(img: np.ndarray, sal: np.ndarray, text_mask: np.ndarray, fg_uni
     h, s, v = _hsv(img)
     m = (_hue_dist(h, hue) < c.hue_tol_deg) & (s > c.min_saturation) & (v > c.min_value)
     m &= ~matting.dilate(occl, 1) & ~matting.dilate(text_mask, 2)
+    free = ~occl
+    if m.sum() > c.max_accent_frac * free.sum():
+        log.info("  stripe: warna aksen menutupi %.0f%% area -> itu warna latar, bukan strip",
+                 100 * m.sum() / max(free.sum(), 1))
+        return [], None
     m = cv2.morphologyEx(m.astype(np.uint8), cv2.MORPH_CLOSE, matting.disk(2))
     n, lab, st, _ = cv2.connectedComponentsWithStats(m, connectivity=8)
     comps = [i for i in np.argsort(-st[:, 4]) if i > 0 and st[i, 4] >= c.min_piece_frac * H * W]
@@ -81,7 +87,11 @@ def find_stripes(img: np.ndarray, sal: np.ndarray, text_mask: np.ndarray, fg_uni
         tp = P @ d
         t_lo, t_hi = np.percentile(tp, [0.2, 99.8])
         length = t_hi - t_lo
-        if length < c.min_elongation * width or width < 4:
+        diag = float(np.hypot(H, W))
+        if length < c.min_elongation * width or width < 4 or length < c.min_length_frac * diag:
+            continue
+        sat = float(np.mean([s[lab == k].mean() for k in group]))
+        if sat < c.min_mean_saturation:  # stripes are flat, vivid graphics
             continue
         # rectangle polygon
         corners = np.array([d * a + nv * b for a, b in
@@ -487,7 +497,7 @@ def build_canva(img: np.ndarray, plate: np.ndarray, stripe, vis: np.ndarray,
         U = (img - ta * top_rgb) / np.maximum(1 - ta, 1e-3)
         semi = rect & (top_a > 1.0 / 255) & (top_a < 0.9)
         target = np.where(semi[..., None], np.clip(U, 0, 1), target)
-        solid = rect & (top_a >= 0.9)
+        solid = rect & ((top_a >= 0.9) | matte)  # matte also holds text sitting on the stripe
     known = rect & ~solid
     shape = matting.feather(rect.astype(np.float32), 0.6)
     shape[matting.erode(rect, 1)] = 1.0

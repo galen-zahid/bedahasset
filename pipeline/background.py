@@ -1,11 +1,15 @@
 """Step: clean background plate - remove subject, fg objects and text, inpaint with LaMa."""
 from __future__ import annotations
 
+import logging
+
 import cv2
 import numpy as np
 
 from . import matting
 from .imageio import to_u8
+
+log = logging.getLogger("split")
 
 
 def inpaint_mask(sal: np.ndarray, raw: np.ndarray, text_mask: np.ndarray, fg_union, cfg,
@@ -64,3 +68,51 @@ def clean_plate(img: np.ndarray, mask: np.ndarray, models, cfg) -> np.ndarray:
     w = matting.feather(mask.astype(np.float32), c.paste_feather_px)
     w = np.maximum(w, mask.astype(np.float32))[..., None]
     return (img * (1 - w) + out * w).astype(np.float32)
+
+
+def fix_dark_smears(plate: np.ndarray, mask: np.ndarray, cfg, img: np.ndarray | None = None,
+                    text_mask: np.ndarray | None = None) -> np.ndarray:
+    """LaMa on a very large hole in a FLAT background (paper, studio wall) tends to echo the
+    removed dark letters as a grey smear. If the background around the hole is mostly one flat
+    tone, inpainted pixels that drift away from that tone are pulled back to a smooth fill
+    interpolated from the hole border; LaMa's fine grain is kept on top."""
+    c = cfg.background
+    if not mask.any() or c.flat_fill_max_spread <= 0:
+        return plate
+    LUM = np.array([0.299, 0.587, 0.114], np.float32)
+    ring = matting.dilate(mask, int(c.flat_ring_px)) & ~mask
+    if text_mask is not None:
+        ring &= ~matting.dilate(text_mask, 4)
+    if ring.sum() < 200:
+        return plate
+    src = img if img is not None else plate
+    Lr = src[ring] @ LUM
+    lo, hi = np.percentile(Lr, [25, 75])
+    if hi - lo > c.flat_fill_max_spread:  # busy surroundings (photo): trust LaMa
+        return plate
+    tone = np.median(src[ring], axis=0)
+    # smooth membrane fill from the border colours (normalized-convolution pyramid)
+    keep = ring & (np.abs((src @ LUM) - np.median(Lr)) < 3 * max(hi - lo, 0.02))
+    known = keep.astype(np.float32)
+    acc = np.zeros_like(plate)
+    out = np.broadcast_to(tone, plate.shape).astype(np.float32).copy()
+    for sig in (128, 64, 32, 16, 8):
+        num = cv2.GaussianBlur(src * known[..., None], (0, 0), sig)
+        den = cv2.GaussianBlur(known, (0, 0), sig)[..., None]
+        est = num / np.maximum(den, 1e-6)
+        t = np.clip(den / 0.05, 0, 1)
+        out = out * (1 - t) + est * t
+    hp = plate - cv2.GaussianBlur(plate, (0, 0), 2)
+    smooth = np.clip(out + hp, 0, 1)
+    dev = np.abs((plate @ LUM) - (out @ LUM))
+    bad = (dev > c.flat_fill_min_diff) & mask
+    if bad.sum() < 0.02 * mask.sum():
+        return plate
+    # flat surroundings + a real smear: use the smooth fill for the WHOLE hole (a partial fix
+    # leaves a visible ring where corrected and uncorrected pixels meet)
+    w = matting.feather(mask.astype(np.float32), 3) * mask
+    n_fix = int(bad.sum())
+    if n_fix:
+        log.info("  background: %d px noda di area inpaint latar polos dihaluskan", n_fix)
+    w = w[..., None]
+    return np.clip(plate * (1 - w) + smooth * w, 0, 1).astype(np.float32)
