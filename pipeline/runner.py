@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import logging
+import os
 import shutil
 import time
 from pathlib import Path
@@ -15,6 +16,24 @@ from .imageio import load_rgb, save_rgb
 log = logging.getLogger("split")
 
 DONE_MARKER = "manifest.json"
+
+
+def _replace_dir(tmp: Path, final: Path) -> None:
+    """Move the finished output into place. On Windows a folder that is open in Explorer (or a
+    file previewed) cannot be deleted/renamed for a moment, so retry before giving up."""
+    for attempt in range(10):
+        try:
+            if final.exists():
+                shutil.rmtree(final)
+            tmp.rename(final)
+            return
+        except PermissionError:
+            time.sleep(1.0 + attempt)
+    alt = final.with_name(final.name + "_baru")
+    if alt.exists():
+        shutil.rmtree(alt, ignore_errors=True)
+    tmp.rename(alt)
+    log.warning("folder %s sedang dipakai program lain; hasil disimpan di %s", final, alt)
 
 
 def is_done(out_dir: Path) -> bool:
@@ -44,6 +63,11 @@ def _process(path: Path, out_root: Path, models, cfg) -> dict:
         nonlocal t0
         T[k] = round(time.time() - t0, 1)
         t0 = time.time()
+        if os.environ.get("BEDAH_MEMLOG"):
+            import resource
+
+            log.info("  [mem] setelah %s: puncak %.2f GB", k,
+                     resource.getrusage(resource.RUSAGE_SELF).ru_maxrss / 1e6)
 
     img = load_rgb(path)
     H, W = img.shape[:2]
@@ -252,9 +276,7 @@ def _process(path: Path, out_root: Path, models, cfg) -> dict:
                 "recreate rows of text.csv as native Canva text.",
     }
     manifest.write_manifest(tmp, rows, meta)
-    if final.exists():
-        shutil.rmtree(final)
-    tmp.rename(final)
+    _replace_dir(tmp, final)
     log.info("[%s] selesai: SSIM %.4f (tanpa teks %.4f, tanpa grain %.4f) | %s",
              name, s_all, s_notext, s_ng, T)
     return meta

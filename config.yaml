@@ -5,6 +5,8 @@
 # =====================================================================
 
 device: auto            # auto | cpu | cuda   (auto = pakai GPU kalau ada)
+cache_dir: ""           # folder untuk semua model AI (~2 GB). Kosong = default di folder user (C:).
+                        # Kalau C: penuh isi mis. "D:/ai-cache" (model yang sudah ada akan di-download ulang ke sini)
 
 # ---------------------------------------------------------------- subject
 subject:

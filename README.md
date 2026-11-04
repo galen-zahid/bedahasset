@@ -4,10 +4,11 @@ CLI untuk "membedah" desain feed sosmed hasil AI yang sudah flat (PNG) menjadi l
 terpisah yang bisa disusun ulang dan diedit di Canva.
 
 ```
-python split.py in/ out/            # batch semua PNG di folder
-python split.py in/x.png out/       # satu file
-python split.py in/ out/ --force    # proses ulang walaupun sudah pernah selesai
-python split.py in/ out/ --config config_lain.yaml
+run.bat                             # Windows: klik dua kali (in -> out)
+python split.py in out              # batch semua PNG/JPG di folder
+python split.py in\x.png out        # satu file
+python split.py in out --force      # proses ulang walaupun sudah pernah selesai
+python split.py in out --config config_lain.yaml
 ```
 
 - **Resume**: desain yang sudah punya `out/<nama>/manifest.json` di-skip. Hasil ditulis dulu ke
@@ -16,40 +17,62 @@ python split.py in/ out/ --config config_lain.yaml
 - **Log** ada di `out/log.txt`. Satu file yang error dicatat (dengan traceback) dan batch tetap lanjut.
 - Jalan di CPU; otomatis pakai GPU (CUDA) kalau tersedia (`device: auto` di `config.yaml`).
 
-## Setup (Windows + PowerShell, Python 3.11)
+## Setup di Windows (cara paling gampang)
+
+Yang dibutuhkan: **Python 3.11** (https://www.python.org/downloads/, centang *Add to PATH*),
+koneksi internet, dan ruang kosong **±5 GB** (±2.5 GB untuk library di folder project, ±2 GB
+untuk model AI di folder user `C:\Users\<nama>`).
+
+1. Ambil project ini, misalnya `git clone -b ccr-6e448746-jedgxp https://github.com/galen-zahid/bedahasset.git`
+   atau download ZIP dari GitHub lalu extract. Contoh: ke `D:\bedahasset`.
+2. **Klik dua kali `setup.bat`.** Skrip ini akan membuat `.venv`, meng-install semua library, mengecek
+   instalasi, lalu men-download semua model AI.
+   - Kalau koneksi putus, jalankan `setup.bat` lagi. Langkah yang sudah beres dilewati dan download
+     model **dilanjutkan dari posisi terakhir** (tidak mulai dari nol).
+   - Punya GPU NVIDIA? Dari PowerShell jalankan `.\setup.bat -Gpu`.
+3. Taruh gambar (PNG/JPG) di folder `in`.
+4. **Klik dua kali `run.bat`.** Hasilnya muncul di folder `out`, satu subfolder per desain.
+
+Dari PowerShell juga bisa:
 
 ```powershell
-cd C:\path\ke\bedahasset
-py -3.11 -m venv .venv
-# kalau diblokir execution policy:  Set-ExecutionPolicy -Scope CurrentUser RemoteSigned
-.\.venv\Scripts\Activate.ps1
-python -m pip install --upgrade pip
-
-# 1) PyTorch - pilih SALAH SATU
-pip install torch torchvision --index-url https://download.pytorch.org/whl/cpu      # CPU saja
-# pip install torch torchvision --index-url https://download.pytorch.org/whl/cu124  # GPU NVIDIA
-
-# 2) dependency lain
-pip install -r requirements.txt
-pip install --no-deps simple-lama-inpainting==0.1.2
-
-# (opsional, GPU) rembg di GPU:
-# pip uninstall -y onnxruntime; pip install onnxruntime-gpu
+cd D:\bedahasset
+.\run.bat                                   # in -> out
+powershell -ExecutionPolicy Bypass -File run.ps1 -In D:\desain -Out D:\hasil
+powershell -ExecutionPolicy Bypass -File run.ps1 -Force   # proses ulang semuanya
+.\.venv\Scripts\python.exe split.py --check            # cek instalasi
+.\.venv\Scripts\python.exe split.py --download-models  # download/cek model saja
 ```
 
-**Run pertama mendownload model** (sekali saja, ±2 GB total, butuh internet):
+- Desain yang sudah selesai otomatis di-skip, jadi batch boleh dihentikan (Ctrl+C) lalu dilanjutkan.
+- Satu file yang error tidak menghentikan batch. Detailnya ada di `out\log.txt`.
+- Drive C: penuh? Isi `cache_dir: "D:/ai-cache"` di `config.yaml`, maka semua model disimpan di sana.
 
-| model | dipakai untuk | lokasi cache |
+### Instalasi manual (kalau tidak mau pakai setup.bat)
+
+```powershell
+py -3.11 -m venv .venv
+.\.venv\Scripts\Activate.ps1      # kalau diblokir: Set-ExecutionPolicy -Scope CurrentUser RemoteSigned
+python -m pip install --upgrade pip
+pip install torch torchvision --index-url https://download.pytorch.org/whl/cpu   # GPU: .../whl/cu124
+pip install -r requirements.txt
+pip install --no-deps simple-lama-inpainting==0.1.2
+python split.py --download-models
+```
+
+### Model AI (di-download sekali, ±2 GB)
+
+| model | dipakai untuk | lokasi default |
 |---|---|---|
-| BiRefNet-general (~970 MB) | cutout subject | `%USERPROFILE%\.u2net\` |
+| BiRefNet-general (~970 MB) | cutout subject | `%USERPROFILE%\.rembg\models\` |
 | big-lama (~200 MB) | inpaint background | `%USERPROFILE%\.cache\torch\hub\checkpoints\` |
 | Depth-Anything-V2-Small (~100 MB) | foreground by depth | `%USERPROFILE%\.cache\huggingface\` |
-| EasyOCR en (~100 MB) | baca teks | `%USERPROFILE%\.EasyOCR\` |
 | CLIPSeg rd64-refined (~600 MB) | lokasi awan debu/kapur/asap | `%USERPROFILE%\.cache\huggingface\` |
+| EasyOCR en (~100 MB) | baca teks | `%USERPROFILE%\.EasyOCR\` |
 
-Waktu per desain (~1100×1400) di CPU 4 core: ±80 detik, separuhnya untuk BiRefNet. Di GPU jauh lebih
-cepat. Kalau terlalu lambat, ganti `subject.rembg_model` ke `birefnet-general-lite` (2–3× lebih cepat,
-tepi sedikit lebih kasar).
+Waktu per desain (~1100×1400) di CPU 4 core: ±1–2 menit, separuhnya untuk BiRefNet. Di GPU jauh
+lebih cepat. Kalau terlalu lambat, ganti `subject.rembg_model` ke `birefnet-general-lite`
+(2–3× lebih cepat, tepi sedikit lebih kasar).
 
 ## Output per desain: `out/<nama>/`
 
@@ -138,10 +161,13 @@ Semua threshold ada di `config.yaml`, lengkap dengan komentar. Yang paling serin
 ## Struktur kode
 
 ```
-split.py               CLI: batch, resume, logging, isolasi error per file
+split.py               CLI: batch, resume, logging, isolasi error per file, --check, --download-models
+setup.bat / setup.ps1  instalasi Windows sekali jalan
+run.bat / run.ps1      jalankan di Windows
 config.yaml            semua threshold
 pipeline/
   config.py            loader config
+  download.py          download model yang bisa dilanjutkan + checksum (first run)
   models.py            model (BiRefNet, Depth Anything, EasyOCR, LaMa, CLIPSeg), load sekali per batch, auto GPU
   imageio.py           load/save PNG, bbox
   matting.py           guided filter, levels, feather, island removal, decontaminate warna
