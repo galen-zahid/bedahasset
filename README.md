@@ -95,6 +95,7 @@ lebih cepat. Kalau terlalu lambat, ganti `subject.rembg_model` ke `birefnet-gene
 | `text.csv` | semua teks: string, bbox, warna, estimasi font size (px), plus box/warna tombol kalau ada |
 | `shapes.csv` | strip sebagai persegi panjang native Canva: `canva_x, canva_y, canva_w, canva_h, canva_rotation_deg, color_hex, canva_transparency_pct` |
 | `preview_recomposite.png` | semua layer ditumpuk ulang (teks TIDAK ikut, karena teks dibuat native di Canva) |
+| `out/<nama>_sheet.png` | **contact sheet**: original, recomposite, semua layer (dengan kategori & z_order), semua SVG, dan daftar teks dalam satu gambar. Buat ulang: `python tools/contact_sheet.py out` |
 | `preview_diff.png` | selisih vs asli (diperkuat 4×, terang = beda) |
 
 ### Cara menyusun di Canva

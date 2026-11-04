@@ -243,6 +243,8 @@ def _process(path: Path, out_root: Path, models, cfg) -> dict:
                             others |= h_
                     a_ = vectorize.magic_wand_alpha(img, plate, e["alpha"], cfg)
                     e["alpha"] = np.where(others, e["alpha"], a_).astype(np.float32)
+                    subj_rgb, e["alpha"] = vectorize.fill_enclosed_holes(img, subj_rgb, e["alpha"], cfg)
+                    e["alpha"] = np.where(others & (e["alpha"] < 1), e["alpha"], e["alpha"])
                     subj_rgb = np.where((e["alpha"] > 0)[..., None] & (subj_a == 0)[..., None],
                                         img, subj_rgb)
         if len(els) == 1:
@@ -336,6 +338,12 @@ def _process(path: Path, out_root: Path, models, cfg) -> dict:
     }
     manifest.write_manifest(tmp, rows, meta)
     _replace_dir(tmp, final)
+    if cfg.output.get("contact_sheet", True):
+        try:
+            from .contact_sheet import build
+            build(final, path, out_root / f"{name}_sheet.png")
+        except Exception as e:  # noqa: BLE001 - a preview must never fail a design
+            log.warning("  contact sheet gagal: %s", e)
     log.info("[%s] selesai: SSIM %.4f (tanpa teks %.4f, tanpa grain %.4f) | %s",
              name, s_all, s_notext, s_ng, T)
     return meta

@@ -40,6 +40,34 @@ def magic_wand_alpha(img: np.ndarray, plate: np.ndarray, alpha: np.ndarray, cfg)
     return out.astype(np.float32)
 
 
+def fill_enclosed_holes(img: np.ndarray, rgb: np.ndarray, alpha: np.ndarray, cfg):
+    """Vector art often has dark details (text lines, chart bars) in the same colour as the
+    background; the matte then punches them out. Fully enclosed holes that are small relative
+    to the element are filled back with the original pixels (Photoshop-like "fill holes")."""
+    c = cfg.vectorize
+    hard = alpha > 0.5
+    if hard.sum() < 50:
+        return rgb, alpha
+    inv = (~hard).astype(np.uint8)
+    n, lab, st, _ = cv2.connectedComponentsWithStats(inv, connectivity=4)
+    H, W = hard.shape
+    border = np.unique(np.r_[lab[0], lab[-1], lab[:, 0], lab[:, -1]])
+    limit = c.max_hole_frac * hard.sum()
+    fill = np.zeros_like(hard)
+    for i in range(1, n):
+        if i in border or st[i, 4] > limit:
+            continue
+        fill |= lab == i
+    # vector art has no background colour mixed in: the whole interior (filled silhouette minus
+    # a 1px rim) is opaque and keeps the ORIGINAL colours; only the rim stays anti-aliased
+    solid = matting.erode(hard | fill, 1)
+    a = alpha.copy()
+    a[solid] = 1.0
+    out = rgb.copy()
+    out[solid] = img[solid]
+    return out, a.astype(np.float32)
+
+
 def _hex(c) -> str:
     r, g, b = (int(round(float(v) * 255)) for v in c)
     return f"#{r:02x}{g:02x}{b:02x}"
@@ -84,16 +112,27 @@ def trace_svg(rgb: np.ndarray, alpha: np.ndarray, path: Path, cfg) -> dict:
     regions = []
     for j in range(len(centers)):
         mj = lab == j
-        mj = cv2.morphologyEx(mj.astype(np.uint8), cv2.MORPH_OPEN, np.ones((2, 2), np.uint8)).astype(bool)
-        if mj.sum() < c.svg_min_region_px:
+        # drop only isolated specks (thin lines stay: no morphological opening)
+        nn, ll, ss, _ = cv2.connectedComponentsWithStats(mj.astype(np.uint8), connectivity=8)
+        if nn > 1:
+            ok = ss[:, 4] >= c.svg_min_region_px
+            ok[0] = False
+            mj = ok[ll]
+        if not mj.any():
             continue
         regions.append((int(mj.sum()), centers[j], mj))
     regions.sort(key=lambda r: -r[0])
     body = []
     n_paths = 0
+    # base: the whole silhouette in the dominant colour, so no gap / hole can ever show inside
+    if regions:
+        d_attr, polys = _contours_to_path(m, c.svg_epsilon)
+        if d_attr:
+            body.append(f'<path fill="{_hex(regions[0][1])}" fill-rule="evenodd" d="{d_attr}"/>')
+            n_paths += len(polys)
+        regions = regions[1:]
     for i, (_, col, mj) in enumerate(regions):
-        # all but the top-most colours are grown 1px so no hairline gaps show between paths
-        mg = matting.dilate(mj, 1) & matting.dilate(m, 1) if i < len(regions) - 1 else mj
+        mg = matting.dilate(mj, 1) & m if c.svg_grow_px else mj  # overlap neighbours by 1px
         d_attr, polys = _contours_to_path(mg, c.svg_epsilon)
         if not d_attr:
             continue
@@ -111,7 +150,7 @@ def trace_svg(rgb: np.ndarray, alpha: np.ndarray, path: Path, cfg) -> dict:
            f'viewBox="0 0 {W} {H}">\n' + "\n".join(body) + "\n</svg>\n")
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(svg, encoding="utf-8")
-    return {"colors": len(regions), "paths": n_paths, "iou": round(iou, 4)}
+    return {"colors": len(regions) + 1, "paths": n_paths, "iou": round(iou, 4)}
 
 
 def rect_svg(corners, color, opacity: float, W: int, H: int, path: Path) -> None:

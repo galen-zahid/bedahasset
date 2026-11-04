@@ -65,6 +65,8 @@ vectorize:              # elemen flat/vektor: tepi "magic wand" + ekspor SVG ("p
   svg_max_colors: 12    # warna maksimum per SVG (tiap warna = path terpisah, bisa diganti di Canva)
   svg_merge_tol: 0.06   # warna yang beda < ini digabung
   svg_min_region_px: 12 # potongan warna lebih kecil dari ini dibuang
+  max_hole_frac: 0.15   # lubang tertutup di elemen vektor < 15% luas elemen diisi kembali (anti bolong)
+  svg_grow_px: 1        # path warna dilebarkan 1px supaya tidak ada celah di antara warna
   svg_epsilon: 0.8      # ketelitian path (px). Kecil = lebih presisi, file lebih besar
 
 # ------------------------------------------------------------- foreground
@@ -270,3 +272,4 @@ grain:
 output:
   crop_alpha_threshold: 0.004  # pixel dengan alpha > ini masuk bbox crop
   diff_gain: 4.0               # penguat preview_diff.png
+  contact_sheet: true          # out/<nama>_sheet.png: semua layer + SVG + daftar teks dalam 1 gambar
