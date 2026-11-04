@@ -192,6 +192,11 @@ def detect_text(img: np.ndarray, models, sal: np.ndarray, cfg):
             if sp and sp[1] > conf + 0.02:
                 log.info("  text 2nd pass: %r (%.2f) -> %r (%.2f)", txt, conf, sp[0], sp[1])
                 txt, conf = sp
+        if c.fix_text and method == "glyph":
+            fixed = _fix_text(txt, glyph, (x, y, w, h), pad, c)
+            if fixed != txt:
+                log.info("  text fix (geometri glyph): %r -> %r", txt, fixed)
+                txt = fixed
 
         # glyph extent -> font size
         rows = np.where(glyph[y:y + h].sum(1) > max(2, 0.01 * w))[0]
@@ -288,9 +293,14 @@ def _find_decor(img: np.ndarray, blocks, taken: np.ndarray, cfg):
             comp = labcc == i
             sub_m = np.zeros((H, W), bool)
             sub_m[y0:y1, x0:x1] = comp
-            out |= sub_m
+            label = _decor_label(comp[cy:cy + ch, cx:cx + cw])
             col = np.median(img[sub_m], axis=0)
-            found.append({"text": "[decor]", "confidence": "", "x": int(x0 + cx), "y": int(y0 + cy),
+            if label == "[line]":  # rules often fade out at the ends: extend along the axis
+                ext = int(c.line_extend * h)
+                sub_m = cv2.dilate(sub_m.astype(np.uint8), np.ones((1, 2 * ext + 1), np.uint8)).astype(bool)
+            out |= sub_m
+            found.append({"text": label, "confidence": "",
+                          "x": int(x0 + cx), "y": int(y0 + cy),
                           "w": int(cw), "h": int(ch), "color_hex": _hex(col),
                           "mask_method": "decor"})
             log.info("  decor dekat %r: bbox %s %s", b["text"], [int(x0 + cx), int(y0 + cy), int(cw), int(ch)],
@@ -300,3 +310,95 @@ def _find_decor(img: np.ndarray, blocks, taken: np.ndarray, cfg):
 
 def _rgb(hexs: str):
     return [int(hexs[i:i + 2], 16) / 255.0 for i in (1, 3, 5)]
+
+
+JUNK_EDGE = "~`'^_|\"´‘’“”,; "
+
+
+def _runs(cols: np.ndarray):
+    """Start/end (exclusive) of consecutive True runs."""
+    d = np.diff(np.r_[0, cols.astype(np.int8), 0])
+    return list(zip(np.where(d == 1)[0], np.where(d == -1)[0]))
+
+
+def _fix_text(txt: str, glyph: np.ndarray, rect, pad: int, c) -> str:
+    """Repair typical OCR slips on display type using the glyph geometry:
+    junk characters at the ends, missing word spaces, mixed case on all-caps text and
+    '.' read as ':'."""
+    H, W = glyph.shape
+    x, y, w, h = rect
+    x0, x1 = max(x - pad, 0), min(x + w + pad, W)
+    g = glyph[y:y + h, x0:x1]
+    runs = [r for r in _runs(g.sum(0) > 0) if r[1] - r[0] >= 1]
+    t = txt.strip(JUNK_EDGE) or txt
+    if len(runs) < 2:
+        return t
+    rows = np.where(g.sum(1) > 0)[0]
+    gh = rows.max() - rows.min() + 1
+    info = []
+    for a, b in runs:
+        rr = np.where(g[:, a:b].sum(1) > 0)[0]
+        info.append((a, b, rr.min(), rr.max()))
+    full = [r for r in info if (r[3] - r[2] + 1) >= 0.5 * gh]  # letters, not punctuation
+
+    # trailing punctuation: a lone small blob on the baseline is '.', two stacked blobs ':'
+    la, lb, lt, lbm = info[-1]
+    if (lbm - lt + 1) < 0.4 * gh and (lb - la) < 0.6 * np.median([r[1] - r[0] for r in info]):
+        n_blobs = len(_runs(g[:, la:lb].sum(1) > 0))
+        p = "." if n_blobs == 1 else ":"
+        if t[-1:] in ".:;,":
+            t = t[:-1] + p
+        else:
+            t = t + p
+
+    # all caps: every letter-run spans the same top and bottom line
+    if len(full) >= 2 and any(ch.isupper() for ch in t):
+        tops = np.array([r[2] for r in full])
+        bots = np.array([r[3] for r in full])
+        if np.ptp(tops) <= c.caps_tolerance * gh and np.ptp(bots) <= c.caps_tolerance * gh:
+            t = t.upper()
+
+    # word spaces from unusually wide gaps
+    gaps = [(info[i + 1][0] - info[i][1], info[i][1], info[i + 1][0]) for i in range(len(info) - 1)]
+    widths = np.array([gp[0] for gp in gaps], float)
+    thr = max(c.space_gap_mult * np.median(widths), c.space_min_frac * gh)
+    word_gaps = [gp for gp in gaps if gp[0] > thr]
+    if len(word_gaps) > t.count(" "):
+        core = t.replace(" ", "")
+        trail = ""
+        while core and not core[-1].isalnum():
+            trail, core = core[-1] + trail, core[:-1]
+        letters = [r for r in info if (r[3] - r[2] + 1) >= 0.5 * gh]
+        if len(letters) == len(core):  # one run per character: exact split
+            starts = [r[0] for r in letters]
+            cut = sorted({sum(1 for s0 in starts if s0 < gp[2]) for gp in word_gaps})
+        else:  # proportional
+            xa, xb = info[0][0], letters[-1][1] if letters else info[-1][1]
+            cut = sorted({int(round(len(core) * ((gp[1] + gp[2]) / 2 - xa) / max(xb - xa, 1)))
+                          for gp in word_gaps})
+        parts, prev = [], 0
+        for k in cut:
+            if 0 < k < len(core):
+                parts.append(core[prev:k])
+                prev = k
+        parts.append(core[prev:])
+        t = " ".join(p for p in parts if p) + trail
+    return t
+
+
+def _decor_label(m: np.ndarray) -> str:
+    """Name a small graphic mark: '/', '\\', '|', '[line]' or '[decor]'."""
+    h, w = m.shape
+    if w >= 4 * h:
+        return "[line]"
+    if h >= 1.5 * w:
+        ys, xs = np.nonzero(m)
+        if len(xs) > 3 and w >= 3:
+            top = xs[ys < h / 2].mean() if (ys < h / 2).any() else 0
+            bot = xs[ys >= h / 2].mean() if (ys >= h / 2).any() else 0
+            if top - bot > 0.25 * w:
+                return "/"
+            if bot - top > 0.25 * w:
+                return "\\"
+        return "|"
+    return "[decor]"

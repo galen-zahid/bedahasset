@@ -96,7 +96,7 @@ def _process(path: Path, out_root: Path, models, cfg) -> dict:
     part_rgb = part_a = None
     n_blobs = 0
     if cfg.particles.enabled:
-        part_rgb, part_a, plate, n_blobs = particles.extract_particles(plate, sal, text_mask, cfg, models)
+        part_rgb, part_a, plate, n_blobs = particles.extract_particles(plate, sal, text_mask, cfg, models, img)
     tick("overlays")
 
     # 8. grain overlay

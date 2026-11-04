@@ -29,6 +29,7 @@ class Models:
         self._depth = None
         self._ocr = None
         self._lama = None
+        self._clipseg = None
 
     # ---------------------------------------------------------------- rembg
     def salient_mask(self, rgb_u8: np.ndarray) -> np.ndarray:
@@ -76,6 +77,27 @@ class Models:
             self._ocr = easyocr.Reader(list(self.cfg.text.languages),
                                        gpu=self.device == "cuda", verbose=False)
         return self._ocr
+
+    # -------------------------------------------------------------- clipseg
+    def text_seg(self, rgb_u8: np.ndarray, prompts) -> np.ndarray:
+        """CLIPSeg: max probability over text prompts, resized to HxW (coarse, 352px)."""
+        import cv2
+        import torch
+        from PIL import Image
+        from transformers import CLIPSegForImageSegmentation, CLIPSegProcessor
+
+        if self._clipseg is None:
+            name = self.cfg.particles.cloud.model
+            self._clipseg = (CLIPSegProcessor.from_pretrained(name),
+                             CLIPSegForImageSegmentation.from_pretrained(name).to(self.device).eval())
+        proc, model = self._clipseg
+        im = Image.fromarray(rgb_u8)
+        inp = proc(text=list(prompts), images=[im] * len(prompts), return_tensors="pt", padding=True)
+        inp = {k: v.to(self.device) for k, v in inp.items()}
+        with torch.no_grad():
+            p = torch.sigmoid(model(**inp).logits).cpu().numpy()
+        p = p.reshape(len(prompts), *p.shape[-2:]).max(0)
+        return cv2.resize(p, (rgb_u8.shape[1], rgb_u8.shape[0]), interpolation=cv2.INTER_CUBIC)
 
     # ----------------------------------------------------------------- lama
     def inpaint(self, rgb_u8: np.ndarray, mask_u8: np.ndarray) -> np.ndarray:

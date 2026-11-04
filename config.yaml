@@ -8,7 +8,8 @@ device: auto            # auto | cpu | cuda   (auto = pakai GPU kalau ada)
 
 # ---------------------------------------------------------------- subject
 subject:
-  rembg_model: birefnet-general
+  rembg_model: birefnet-general   # ~40 dtk/desain di CPU. Lebih cepat (~2-3x, tepi sedikit kasar):
+                                  # birefnet-general-lite
   # Guided filter untuk merapikan tepi mask mengikuti tepi gambar asli.
   guided_radius: 4      # makin besar = tepi makin "menempel" ke gambar, tapi bisa bleeding
   guided_eps: 0.0005    # makin kecil = tepi makin tajam mengikuti detail (rambut)
@@ -16,6 +17,8 @@ subject:
   alpha_lo: 0.06
   alpha_hi: 0.94
   feather_px: 0.8       # sigma gaussian feather tepi (0 = mati)
+  raw_cap_gain: 3.0     # alpha hasil refine maks. 3x matte mentah BiRefNet (+1px). Mencegah guided
+                        # filter "meluberkan" alpha ke background -> pita krem/abu di tepi rambut. 0 = mati
   min_island_frac: 0.0005  # buang pulau alpha kecil < fraksi area kanvas
   decontaminate: true   # estimasi warna foreground (pymatting) -> no halo warna background
   hard_threshold: 0.5   # alpha > ini dianggap "subject" untuk masking/inpaint
@@ -25,6 +28,8 @@ subject:
   plate_max_grow: 0.10      # alpha boleh naik maks segini dari matte awal
   ambiguous_choke: 0.25     # tepi yang warnanya mirip background (rambut gelap di latar gelap):
                             # alpha < 0.25 dibuang -> tidak jadi "asap" di latar terang. 0 = mati
+  detail_ref: 0.012         # di zona ambigu, alpha dikali (energi detail lokal / nilai ini): helai
+                            # rambut bertekstur tetap, area gelap yang mulus (= background) hilang
 
 # ------------------------------------------------------------- foreground
 foreground:
@@ -53,6 +58,11 @@ text:
   cap_height_ratio: 0.72  # tinggi huruf kapital / font size (estimasi ukuran font)
   second_pass_heights: [32, 48, 64]  # tinggi crop (px) untuk OCR ulang
   second_pass_thin: [0, 1, 2]        # penipisan huruf (px); font display tebal lebih terbaca
+  fix_text: true        # perbaiki hasil OCR pakai geometri glyph: spasi kata, ALL CAPS, '.' vs ':',
+                        # karakter sampah di ujung (~ ' ^ |)
+  space_gap_mult: 2.0   # celah > 2x celah antar-huruf (median) = spasi kata
+  space_min_frac: 0.18  # ...dan minimal 18% tinggi huruf
+  caps_tolerance: 0.10  # semua huruf punya garis atas & bawah sama (+-10%) = ALL CAPS
   # Teks di atas area salient tetap dianggap TEKS DESAIN (bukan bagian foto) bila
   # confidence tinggi dan horizontal (mis. tombol CTA yang menempel ke subject).
   design_text_min_conf: 0.80
@@ -64,6 +74,7 @@ text:
     search_x: 5.0       # cari sampai 5x tinggi teks ke kiri/kanan
     line_contrast: 25   # garis lurus: selisih L (Lab) vs median pita
     line_max_thickness: 0.3  # tebal garis maks (x tinggi teks)
+    line_extend: 1.0    # mask garis diperpanjang (x tinggi teks) di kedua ujung: ujung gradasi pudar
     min_area: 6
     max_area_h2: 3.0    # maks luas = 3 x tinggi_teks^2
   container:            # deteksi tombol/pill/kotak di sekitar teks -> layer UI terpisah
@@ -120,14 +131,18 @@ particles:
   min_pixels: 30        # total pixel partikel < ini -> layer di-skip
   subject_dilate_px: 4
   max_alpha: 0.95
-  cloud:                # EKSPERIMENTAL: awan debu/kapur besar (area kepadatan bintik tinggi) ikut
-                        # diekstrak. Region-nya belum stabil (bisa memotong awan dengan tepi tajam),
-                        # jadi default mati: awan besar tetap menempel di 01_background.
-    enabled: false
-    density_sigma: 25   # radius (px) penghitungan kepadatan
-    density_threshold: 0.2
-    min_area_frac: 0.01 # area awan minimal 1% kanvas
-    max_aspect: 3.0     # area sangat tinggi-sempit (rak) / lebar-pipih (lantai) bukan awan
+  cloud:                # awan debu/kapur/asap besar (bukan bintik) ikut masuk 05_particles
+    enabled: true
+    model: CIDAS/clipseg-rd64-refined   # segmentasi via text prompt (~600 MB, download sekali)
+    prompts: ["chalk dust cloud", "white powder smoke", "dust cloud", "mist"]
+    min_prob: 0.15      # prob CLIPSeg maksimum di bawah ini = tidak ada awan
+    rel_threshold: 0.35 # seed = pixel dengan prob >= 35% dari maksimum
+    min_area_frac: 0.003
+    max_area_frac: 0.30 # seed > 30% kanvas = kabut seluruh background, jangan diekstrak
+    grow_frac: 0.06     # seed diperluas & di-feather selebar 6% diagonal (transisi lembut,
+                        # dan LaMa tidak melihat sisa awan di tepi region)
+    min_lift: 0.02      # pixel harus lebih terang dari "lantai gelap" sekitarnya sebesar ini...
+    lift_soft: 0.06     # ...dengan ramp lembut
     max_chroma: 0.15
   color: null           # null = warna per-pixel (lossless). Atau mis. [0.96, 0.95, 0.93] = satu warna
 

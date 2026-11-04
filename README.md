@@ -37,7 +37,7 @@ pip install --no-deps simple-lama-inpainting==0.1.2
 # pip uninstall -y onnxruntime; pip install onnxruntime-gpu
 ```
 
-**Run pertama mendownload model** (sekali saja, ±1.4 GB total, butuh internet):
+**Run pertama mendownload model** (sekali saja, ±2 GB total, butuh internet):
 
 | model | dipakai untuk | lokasi cache |
 |---|---|---|
@@ -45,8 +45,11 @@ pip install --no-deps simple-lama-inpainting==0.1.2
 | big-lama (~200 MB) | inpaint background | `%USERPROFILE%\.cache\torch\hub\checkpoints\` |
 | Depth-Anything-V2-Small (~100 MB) | foreground by depth | `%USERPROFILE%\.cache\huggingface\` |
 | EasyOCR en (~100 MB) | baca teks | `%USERPROFILE%\.EasyOCR\` |
+| CLIPSeg rd64-refined (~600 MB) | lokasi awan debu/kapur/asap | `%USERPROFILE%\.cache\huggingface\` |
 
-Waktu per desain (~1100×1400) di CPU 4 core: ±70 detik, dan sebagian besar untuk BiRefNet. Di GPU jauh lebih cepat.
+Waktu per desain (~1100×1400) di CPU 4 core: ±80 detik, separuhnya untuk BiRefNet. Di GPU jauh lebih
+cepat. Kalau terlalu lambat, ganti `subject.rembg_model` ke `birefnet-general-lite` (2–3× lebih cepat,
+tepi sedikit lebih kasar).
 
 ## Output per desain: `out/<nama>/`
 
@@ -56,7 +59,7 @@ Waktu per desain (~1100×1400) di CPU 4 core: ±70 detik, dan sebagian besar unt
 | `02_subject.png` | cutout subject utama, transparan, ukuran kanvas penuh |
 | `03_foreground_NN.png` | objek di DEPAN subject (berdasarkan depth). Tidak dibuat kalau tidak ada |
 | `04_glow.png` | cahaya/aksen warna dominan sebagai overlay transparan (sudah pre-baked, tanpa blend mode) |
-| `05_particles.png` | debu/kapur/percikan kecil sebagai overlay transparan |
+| `05_particles.png` | debu/kapur/percikan (bintik kecil + awan/kepulan besar) sebagai overlay transparan |
 | `06_grain.png` | film grain + vignette sesuai noise level gambar asli |
 | `07_ui_NN.png` | tombol/pill di sekitar teks (mis. CTA), teksnya sudah dihapus. Bisa dipakai langsung atau dibuat ulang dari `text.csv` |
 | `crops/` | tiap layer di-crop ke bounding box-nya |
@@ -77,7 +80,8 @@ Waktu per desain (~1100×1400) di CPU 4 core: ±70 detik, dan sebagian besar unt
    sudah ada di layer lain dan grain ini terutama untuk menyatukan elemen baru).
 5. Buat ulang teks dari `text.csv` sebagai teks native: posisi dari `x,y`, warna `color_hex`,
    ukuran dari `est_font_size_px` (dalam px kanvas; kalau kanvas Canva di-skala, skala juga
-   angkanya). Baris `[decor]` adalah garis/slash kecil di sekitar teks.
+   angkanya). Baris `/`, `|`, `[line]`, `[decor]` adalah tanda grafis kecil di sekitar teks
+   (pemisah, garis) yang juga sudah dihapus dari background.
 
 ### Kenapa overlay-nya "lossless"
 
@@ -96,7 +100,11 @@ Semua threshold ada di `config.yaml`, lengkap dengan komentar. Yang paling serin
 - `text.min_confidence`, `text.max_subject_overlap`: teks terlewat atau teks di foto ikut terhapus.
 - `glow.hue_tol_deg`, `glow.min_chroma`, `glow.color_mode`: cakupan dan warna glow.
 - `particles.min_contrast`, `particles.max_chroma`, `particles.max_blob_area`: partikel.
-- `particles.cloud.enabled`: eksperimental, untuk mengekstrak awan debu besar.
+- `particles.cloud.*`: awan debu/kapur/asap besar (CLIPSeg dengan text prompt). Ubah `prompts`
+  untuk efek lain (mis. "sparks", "fog"); `max_area_frac` mencegah kabut di seluruh background
+  ikut diekstrak.
+- `text.fix_text`, `text.space_gap_mult`, `text.caps_tolerance`: perbaikan hasil OCR
+  (spasi kata, ALL CAPS, tanda titik).
 
 ## Struktur kode
 
@@ -105,7 +113,7 @@ split.py               CLI: batch, resume, logging, isolasi error per file
 config.yaml            semua threshold
 pipeline/
   config.py            loader config
-  models.py            model (BiRefNet, Depth Anything, EasyOCR, LaMa), load sekali per batch, auto GPU
+  models.py            model (BiRefNet, Depth Anything, EasyOCR, LaMa, CLIPSeg), load sekali per batch, auto GPU
   imageio.py           load/save PNG, bbox
   matting.py           guided filter, levels, feather, island removal, decontaminate warna
   subject.py           matte subject + re-matting tepi terhadap clean plate (anti halo)
@@ -113,7 +121,7 @@ pipeline/
   foreground.py        objek di depan subject via depth + connected components
   background.py        mask inpaint, LaMa, kembalikan pixel asli yang jelas background
   glow.py              deteksi warna aksen + color-to-alpha
-  particles.py         partikel kecil (+ awan, eksperimental)
+  particles.py         partikel kecil + awan debu/kapur (CLIPSeg + color-to-alpha)
   grain.py             estimasi noise, regrain area inpaint, overlay grain + vignette
   composite.py         recomposite, diff, SSIM
   manifest.py          tulis PNG, crop, manifest, text.csv
@@ -122,10 +130,14 @@ pipeline/
 
 ## Batasan yang diketahui
 
-- Awan debu/kapur besar (bukan bintik) tetap menempel di background. Mode `cloud` masih eksperimental.
-- Rambut gelap di atas latar gelap secara matematis tidak bisa dipisah dengan sempurna. Di latar
-  terang mungkin masih ada sedikit kabut tipis (atur `ambiguous_choke`).
-- Area di belakang subject adalah hasil "karangan" LaMa, jadi wajar kalau tidak 100% realistis
-  saat subject digeser jauh.
-- OCR font display/grunge bisa salah eja (kolom `confidence`), jadi selalu cek isi `text.csv`.
+- Rambut gelap di atas latar gelap secara matematis tidak bisa dipisah dengan sempurna. Helai
+  halus yang tidak terlihat oleh BiRefNet sengaja dibuang (supaya tidak ada pita/kabut di latar
+  terang), jadi rambut bisa terlihat sedikit lebih "rapi" daripada aslinya.
+- Area di belakang subject dan awan adalah hasil "karangan" LaMa, jadi wajar kalau tidak 100%
+  realistis saat subject digeser jauh.
+- Layer awan di `05_particles` punya lubang berbentuk subject (karena layer ini ada di atas subject).
+- OCR font display/grunge masih bisa salah eja; perbaikan otomatis hanya untuk spasi, kapitalisasi,
+  tanda titik, dan karakter sampah. Selalu cek `text.csv` (kolom `confidence`).
   Estimasi font size mengasumsikan cap-height ≈ 0.72 em.
+- Model segmentasi awan (CLIPSeg) kasar (352 px), jadi bentuk awan berasal dari analisis warna,
+  bukan dari model. Awan yang berwarna (asap oranye, dll.) perlu `max_chroma` dinaikkan.

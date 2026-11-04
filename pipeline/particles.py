@@ -20,40 +20,60 @@ LUMA = np.array([0.299, 0.587, 0.114], np.float32)
 log = logging.getLogger("split")
 
 
-def _cloud(plate, cand, excl, models, cfg):
-    """Dense dust/chalk clouds: regions with a high density of particle specks.
-    Base under the cloud = LaMa inpaint, cloud = brighten-only colour-to-alpha against it."""
+def _cloud(orig, plate, excl, models, cfg):
+    """Large dust / chalk / smoke clouds.
+
+    CLIPSeg (text prompts) says WHERE a cloud is; its blurred probability is used as a soft
+    weight (no hard region border). Inside, the scene without the cloud comes from LaMa and
+    the cloud itself is a brighten-only colour-to-alpha against that base, restricted to
+    low-saturation pixels that are brighter than their surroundings.
+    """
     from .background import clean_plate
 
     c = cfg.particles.cloud
-    H, W = cand.shape
-    dens = cv2.GaussianBlur(cand.astype(np.float32), (0, 0), c.density_sigma)
-    reg = (dens > c.density_threshold) & ~excl
-    n, lab, st, _ = cv2.connectedComponentsWithStats(reg.astype(np.uint8), connectivity=8)
-    keep = np.zeros(n, bool)
-    for i in range(1, n):
-        w, h, a = st[i, 2], st[i, 3], st[i, 4]
-        if a < c.min_area_frac * H * W:
-            continue
-        if max(w, h) / max(min(w, h), 1) > c.max_aspect:  # racks (tall) / floor bands (wide)
-            continue
-        keep[i] = True
-    reg = keep[lab]
-    if not reg.any():
+    H, W = excl.shape
+    p = models.text_seg(to_u8(orig), c.prompts)
+    pmax = float(p.max())
+    if pmax < c.min_prob:
+        log.info("  particles: tidak ada awan debu/kapur (clipseg max %.2f)", pmax)
         return None, None, plate
-    soft = matting.feather(matting.dilate(reg, int(c.density_sigma)).astype(np.float32), c.density_sigma / 2)
-    B = clean_plate(plate, soft > 0.05, models, cfg)
+    seed = p >= c.rel_threshold * pmax
+    if seed.sum() < c.min_area_frac * H * W:
+        log.info("  particles: kandidat awan terlalu kecil -> skip")
+        return None, None, plate
+    if seed.sum() > c.max_area_frac * H * W:
+        log.info("  particles: kandidat awan %.0f%% kanvas (kabut seluruh bg?) -> skip",
+                 100 * seed.sum() / (H * W))
+        return None, None, plate
+    diag = float(np.hypot(H, W))
+    sig = c.grow_frac * diag
+    soft = cv2.GaussianBlur(matting.dilate(seed, int(sig)).astype(np.float32), (0, 0), sig)
+    soft = np.clip(soft / max(soft.max(), 1e-6), 0, 1)
+    # LaMa region also covers the (already inpainted) subject area: otherwise LaMa copies the
+    # cloud texture it finds there back into the base
+    region = soft > 0.05
+    B = clean_plate(plate, region, models, cfg)
+    # the overlay sits ABOVE the subject, so it gets a subject-shaped hole; the base is
+    # de-clouded everywhere (also behind the subject) so no subject-shaped rim is left in the bg
+    hole = cv2.GaussianBlur(matting.dilate(excl, 2).astype(np.float32), (0, 0), 1.5)
+
     a, G = color_to_alpha(plate, B, brighten_only=True)
+    # only haze-like pixels: brighter than the local dark floor, low saturation
+    L = plate @ LUMA
+    floor = cv2.GaussianBlur(cv2.erode(L, matting.disk(15)), (0, 0), 15)
+    haze = np.clip(((L - floor) - c.min_lift) / max(c.lift_soft, 1e-3), 0, 1)
     chroma = G.max(-1) - G.min(-1)
-    a = a * soft * np.clip(1 - (chroma - c.max_chroma) / 0.1, 0, 1) * ~excl
-    a = np.clip(a, 0, cfg.particles.max_alpha).astype(np.float32)
-    a[a < 1.0 / 255] = 0
-    log.info("  particles: awan debu/kapur %d px", int((a > 0.05).sum()))
-    return G, a, recombine_base(plate, B, G, a)
+    lowsat = np.clip(1 - (chroma - c.max_chroma) / 0.1, 0, 1)
+    a_full = np.clip(a * soft * haze * lowsat, 0, cfg.particles.max_alpha).astype(np.float32)
+    a_full[a_full < 1.0 / 255] = 0
+    base = recombine_base(plate, B, G, a_full)
+    a = (a_full * (1 - hole)).astype(np.float32)
+    log.info("  particles: awan debu/kapur %d px (clipseg max %.2f)", int((a > 0.05).sum()), pmax)
+    return G, a, base
 
 
 def extract_particles(plate: np.ndarray, subject_alpha: np.ndarray, text_mask: np.ndarray, cfg,
-                      models=None):
+                      models=None, orig=None):
     c = cfg.particles
     luma = (plate @ np.array([0.299, 0.587, 0.114], np.float32)).astype(np.float32)
     k = matting.disk(int(c.tophat_px))
@@ -66,7 +86,6 @@ def extract_particles(plate: np.ndarray, subject_alpha: np.ndarray, text_mask: n
     cand = (tophat > c.min_contrast) & (chroma < c.max_chroma) & (luma > c.min_luma)
     cand &= ~matting.dilate(subject_alpha > 0.02, int(c.subject_dilate_px))
     cand &= ~text_mask
-    cand_all = cand.copy()  # before size filtering: dense clouds merge into big blobs
     n, lab, stats, _ = cv2.connectedComponentsWithStats(cand.astype(np.uint8), connectivity=8)
     keep = np.zeros(n, bool)
     area = stats[:, cv2.CC_STAT_AREA]
@@ -100,7 +119,7 @@ def extract_particles(plate: np.ndarray, subject_alpha: np.ndarray, text_mask: n
 
     if c.cloud.enabled and models is not None:
         excl = matting.dilate(subject_alpha > 0.02, int(c.subject_dilate_px)) | text_mask
-        cg, ca, base = _cloud(base, cand_all, excl, models, cfg)
+        cg, ca, base = _cloud(orig if orig is not None else plate, base, excl, models, cfg)
         if ca is not None:  # merge: specks OVER cloud, as one pre-baked layer
             a_out = a + ca * (1 - a)
             G = (G * a[..., None] + cg * (ca * (1 - a))[..., None]) / np.maximum(a_out, 1e-6)[..., None]

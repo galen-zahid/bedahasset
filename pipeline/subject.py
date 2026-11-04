@@ -15,11 +15,19 @@ def salient_alpha(img: np.ndarray, models, cfg):
     h, w = raw.shape
     a = matting.refine_alpha(img, raw, c.guided_radius, c.guided_eps, c.alpha_lo, c.alpha_hi,
                              c.feather_px, int(c.min_island_frac * h * w))
+    if c.raw_cap_gain > 0:
+        # the guided filter may spread alpha past what the model actually saw (beige/grey
+        # fringe around dark hair); never exceed gain x the (1px-dilated) raw matte
+        import cv2
+
+        cap = np.clip(cv2.dilate(raw, matting.disk(1)) * c.raw_cap_gain, 0, 1)
+        a = np.minimum(a, cap).astype(np.float32)
     return a, raw
 
 
 def plate_matting(C: np.ndarray, B: np.ndarray, a: np.ndarray, F: np.ndarray,
-                  min_contrast: float, max_grow: float, ambiguous_choke: float = 0.0) -> np.ndarray:
+                  min_contrast: float, max_grow: float, ambiguous_choke: float = 0.0,
+                  detail_ref: float = 0.0) -> np.ndarray:
     """Known-background matting on the soft edge band.
 
     With the clean plate B and an estimate of the foreground colour F, the true alpha of
@@ -32,12 +40,24 @@ def plate_matting(C: np.ndarray, B: np.ndarray, a: np.ndarray, F: np.ndarray,
     proj = ((C - B) * d).sum(-1) / np.maximum(den, 1e-6)
     valid = band & (den > min_contrast ** 2)
     out = a.copy()
-    out[valid] = np.clip(np.minimum(proj[valid], a[valid] + max_grow), 0, 1)
+    # alpha may only grow where the model already saw substantial foreground; otherwise an
+    # inpainted plate that is a bit darker than the real background creates a fringe
+    grow = np.where(a >= 0.25, max_grow, 0.0)
+    out[valid] = np.clip(np.minimum(proj[valid], a[valid] + grow[valid]), 0, 1)
     # where subject and background look alike (dark hair on dark bg) alpha is undecidable:
     # choke it a bit so it does not turn into a smoky fringe on a light background
     amb = band & ~valid
     if ambiguous_choke > 0:
         out[amb] = np.clip((a[amb] - ambiguous_choke) / (1 - ambiguous_choke), 0, 1)
+    if detail_ref > 0 and amb.any():
+        # real strands carry fine texture; a smooth dark patch next to dark hair is background
+        import cv2
+
+        L = (C @ np.array([0.299, 0.587, 0.114], np.float32)).astype(np.float32)
+        hp = np.abs(L - cv2.GaussianBlur(L, (0, 0), 1.0))
+        energy = cv2.GaussianBlur(hp, (0, 0), 1.5)
+        detail = np.clip(energy / detail_ref, 0, 1)
+        out[amb] *= detail[amb]
     return out
 
 
@@ -57,7 +77,7 @@ def subject_layer(img: np.ndarray, sal: np.ndarray, fg_union, plate, cfg):
     F = matting.decontaminate(img, a)
     if c.plate_matting and plate is not None:
         a = plate_matting(img, plate, a, F, c.plate_min_contrast, c.plate_max_grow,
-                          c.ambiguous_choke)
+                          c.ambiguous_choke, c.detail_ref)
         a = matting.remove_islands(a, int(c.min_island_frac * h * w))
         F = matting.decontaminate(img, a)
     return F, a.astype(np.float32)
@@ -71,6 +91,6 @@ def edge_refine_object(img, alpha, plate, cfg):
     F = matting.decontaminate(img, alpha)
     if c.plate_matting and plate is not None:
         alpha = plate_matting(img, plate, alpha, F, c.plate_min_contrast, c.plate_max_grow,
-                              c.ambiguous_choke)
+                              c.ambiguous_choke, c.detail_ref)
         F = matting.decontaminate(img, alpha)
     return F, alpha.astype(np.float32)
