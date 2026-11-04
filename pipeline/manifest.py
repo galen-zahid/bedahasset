@@ -66,7 +66,7 @@ def write_shapes_csv(out: Path, shapes):
     """Geometry of graphic shapes (stripes) to rebuild them natively in Canva."""
     if not shapes:
         return
-    fields = ["id", "layer_file", "overlay_file", "shade_file", "blend_mode", "shape", "canva_x", "canva_y", "canva_w",
+    fields = ["id", "layer_file", "depth_file", "overlay_file", "shade_file", "blend_mode", "shape", "canva_x", "canva_y", "canva_w",
               "canva_h", "canva_rotation_deg", "color_hex", "canva_transparency_pct", "cx", "cy",
               "corners"]
     with open(out / "shapes.csv", "w", newline="", encoding="utf-8-sig") as f:

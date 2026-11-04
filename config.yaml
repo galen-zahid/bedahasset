@@ -137,7 +137,12 @@ stripe:                 # strip/pita warna aksen yang lewat DI BELAKANG subject
   #   01_background           scene di balik strip (jendela, balok), tanpa oranye & tanpa bercak
   #   04_stripe_NN_base.png   oranye, blend MULTIPLY, opacity per segmen
   #   04_stripe_NN_grunge.png bercak HITAM, blend normal (setara multiply) -> semua layer bersih, 1:1
-  mode: multiply
+  # canva = (default) background BERSIH + strip bersih, blend NORMAL saja (jalan di semua akun Canva):
+  #   04_stripe_NN_base.png   oranye solid 100%
+  #   04_stripe_NN_depth.png  gelap-terang ABU-ABU netral (tanpa warna foto), halus
+  #   04_stripe_NN_grunge.png bercak hitam kecil
+  mode: canva
+  depth_blur: 1.5       # blur layer depth (px): bentuk gelap-terang ada, tepi tajam foto tidak
   mult_min_scene: 0.12  # pixel scene lebih gelap dari ini tidak dipakai untuk mengukur opacity strip
   neutral_scene: false  # true = scene di balik strip pakai warna cast background (lebih netral kalau
                         # strip digeser, tapi tumpukan tidak lagi 1:1)

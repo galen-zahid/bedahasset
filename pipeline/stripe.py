@@ -457,6 +457,111 @@ def build_multiply(img: np.ndarray, plate: np.ndarray, stripe, vis: np.ndarray,
             "bg_under": B, "bg_mask": known, "color": G, "opacity": round(med, 2)}
 
 
+def build_canva(img: np.ndarray, plate: np.ndarray, stripe, vis: np.ndarray,
+                matte: np.ndarray, models, cfg, top_rgb=None, top_a=None):
+    """Clean background + clean stripe layers, NORMAL blend only (any Canva plan).
+
+    The reference stripe behaves like orange x scene, i.e. inside the stripe everything is
+    the same orange at different brightness. So the "scene seen through" never has to be
+    carried as photo colour: it is rebuilt as neutral light/dark on top of a solid orange.
+
+      01_background        clean plate (no stripe, no patch)
+      ..._base.png         solid orange G, opacity per segment (normal)
+      ..._depth.png        smooth BLACK/WHITE shading, blurred (no sharp photo edges)
+      ..._grunge.png       small BLACK specks
+    """
+    c = cfg.stripe
+    rect = stripe["rect"]
+    LUMA = np.array([0.299, 0.587, 0.114], np.float32)
+    vis_core = vis & ~matting.dilate(matte, int(c.subject_clearance_px))
+    if vis_core.sum() < 50:
+        return None
+    pix = img[vis_core]
+    G = np.median(pix[(pix @ LUMA) >= np.percentile(pix @ LUMA, 70)], axis=0).astype(np.float32)
+    G = np.round(G / max(G.max(), 1e-3) * 255) / 255  # brightest version of the hue
+
+    target = img.copy()
+    solid = rect & matte
+    if top_a is not None:
+        ta = top_a[..., None]
+        U = (img - ta * top_rgb) / np.maximum(1 - ta, 1e-3)
+        semi = rect & (top_a > 1.0 / 255) & (top_a < 0.9)
+        target = np.where(semi[..., None], np.clip(U, 0, 1), target)
+        solid = rect & (top_a >= 0.9)
+    known = rect & ~solid
+    shape = matting.feather(rect.astype(np.float32), 0.6)
+    shape[matting.erode(rect, 1)] = 1.0
+
+    # 1. base: solid orange, fully opaque -> the background under it never matters
+    base_a = np.round(shape * 255) / 255
+    X1 = plate * (1 - base_a[..., None]) + G * base_a[..., None]
+
+    # 2. depth: one NEUTRAL (grey) layer on top:  C = (1-d)*G + d*v  with v grey in [0,1].
+    #    Linear in (d, u = d*v):  C - G = -d*G + u*[1,1,1]  -> 2x2 least squares per pixel.
+    #    Darkens, lightens and desaturates the orange; carries no photo colour. Blurred so the
+    #    light/dark of what shows through has no sharp photo edges.
+    R = target - G
+    one = np.ones(3, np.float32)
+    a11, a12, a22 = float(G @ G), float(-(G @ one)), 3.0
+    b1, b2 = -(R @ G), R @ one
+    det = a11 * a22 - a12 * a12
+    dd = (a22 * b1 - a12 * b2) / det
+    uu = (a11 * b2 - a12 * b1) / det
+    dd = np.clip(dd, 0, 1)
+    uu = np.clip(uu, 0, dd)
+    # near the subject the reference contains hair/edge spill: do not measure there, continue
+    # the shading smoothly from the clean stripe pixels around it instead
+    clear = matting.dilate(matte, int(c.subject_clearance_px))
+    wk = (known & ~clear).astype(np.float32)
+    nb = np.maximum(cv2.GaussianBlur(wk, (0, 0), c.depth_blur), 1e-3)
+    dd_s = cv2.GaussianBlur(dd * wk, (0, 0), c.depth_blur) / nb
+    uu_s = cv2.GaussianBlur(uu * wk, (0, 0), c.depth_blur) / nb
+    sig_f = 3 * float(c.subject_clearance_px)
+    nf = np.maximum(cv2.GaussianBlur(wk, (0, 0), sig_f), 1e-4)
+    dd_f = cv2.GaussianBlur(dd * wk, (0, 0), sig_f) / nf
+    uu_f = cv2.GaussianBlur(uu * wk, (0, 0), sig_f) / nf
+    fill = known & (clear | (nb < 0.3))
+    # behind the subject: very smooth continuation, so the stripe looks consistent if moved
+    sig_b = 6 * float(c.subject_clearance_px)
+    nB = np.maximum(cv2.GaussianBlur(wk, (0, 0), sig_b), 1e-4)
+    dd_b = cv2.GaussianBlur(dd * wk, (0, 0), sig_b) / nB
+    uu_b = cv2.GaussianBlur(uu * wk, (0, 0), sig_b) / nB
+    dd_med = float(np.median(dd[wk > 0])) if (wk > 0).any() else 0.0
+    uu_med = float(np.median(uu[wk > 0])) if (wk > 0).any() else 0.0
+    dd_b = np.where(nB > 0.01, dd_b, dd_med)
+    uu_b = np.where(nB > 0.01, uu_b, uu_med)
+    dd = np.where(known, np.where(fill, dd_f, dd_s), dd_b) * rect
+    uu = np.where(known, np.where(fill, uu_f, uu_s), uu_b) * rect
+    dep_a = np.round(dd * shape * 255) / 255
+    v = np.clip(uu / np.maximum(dd, 1e-3), 0, 1)
+    dep_rgb = np.repeat(v[..., None], 3, -1).astype(np.float32)
+    X2 = X1 * (1 - dep_a[..., None]) + dep_rgb * dep_a[..., None]
+    Lc = target @ LUMA
+    a_s = base_a
+
+    # 3. grunge: small black specks still missing (darken only, speck scale)
+    Lx2 = X2 @ LUMA
+    gd = np.clip(1 - Lc / np.maximum(Lx2, 1e-3), 0, 1) * known
+    gd = gd - cv2.GaussianBlur(gd, (0, 0), c.speck_px * 2)  # keep only the fine part
+    gd = np.clip(gd, 0, 1)
+    gd[gd < c.speck_min] = 0
+    gd[matting.dilate(matte, int(c.subject_clearance_px))] = 0
+    g_a = np.round(gd * shape * 255) / 255
+    stack = X2 * (1 - g_a[..., None])
+    if top_a is not None:
+        stack = stack * (1 - top_a[..., None]) + top_rgb * top_a[..., None]
+    err = np.abs(stack - img)[known]
+    log.info("  stripe canva: %s | base opacity 1.00 | depth rata-rata %.2f | bercak %.0f%% | "
+             "error vs referensi rata-rata %.1f/255",
+             "#%02X%02X%02X" % tuple(int(round(float(x) * 255)) for x in G),
+             float(dep_a[known].mean()), 100 * float((g_a[known] > 0.05).mean()), 255 * float(err.mean()))
+    return {"base_rgb": np.broadcast_to(G, img.shape).astype(np.float32),
+            "base_a": base_a.astype(np.float32),
+            "depth_rgb": dep_rgb.astype(np.float32), "depth_a": dep_a.astype(np.float32),
+            "grunge_rgb": np.zeros_like(img), "grunge_a": g_a.astype(np.float32),
+            "color": G, "opacity": 1.0}
+
+
 def canva_geometry(stripe, color, opacity: float = 1.0) -> dict:
     """Rotated-rectangle parameters for rebuilding the band as a native Canva shape."""
     corners = stripe["corners"]
