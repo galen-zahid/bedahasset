@@ -1,0 +1,148 @@
+# =====================================================================
+#  bedahasset - config. Semua threshold yang bisa di-tune ada di sini.
+#  Nilai warna/alpha pakai skala 0..1 kecuali disebut lain.
+#  Jarak/ukuran dalam pixel di resolusi asli kanvas.
+# =====================================================================
+
+device: auto            # auto | cpu | cuda   (auto = pakai GPU kalau ada)
+
+# ---------------------------------------------------------------- subject
+subject:
+  rembg_model: birefnet-general
+  # Guided filter untuk merapikan tepi mask mengikuti tepi gambar asli.
+  guided_radius: 4      # makin besar = tepi makin "menempel" ke gambar, tapi bisa bleeding
+  guided_eps: 0.0005    # makin kecil = tepi makin tajam mengikuti detail (rambut)
+  # "Levels" alpha untuk membuang halo tipis: alpha < lo -> 0, alpha > hi -> 1.
+  alpha_lo: 0.06
+  alpha_hi: 0.94
+  feather_px: 0.8       # sigma gaussian feather tepi (0 = mati)
+  min_island_frac: 0.0005  # buang pulau alpha kecil < fraksi area kanvas
+  decontaminate: true   # estimasi warna foreground (pymatting) -> no halo warna background
+  hard_threshold: 0.5   # alpha > ini dianggap "subject" untuk masking/inpaint
+  # Re-matting tepi terhadap clean plate (known-background matting) -> buang halo.
+  plate_matting: true
+  plate_min_contrast: 0.10  # hanya bila warna subject & plate cukup beda (jarak RGB)
+  plate_max_grow: 0.10      # alpha boleh naik maks segini dari matte awal
+  ambiguous_choke: 0.25     # tepi yang warnanya mirip background (rambut gelap di latar gelap):
+                            # alpha < 0.25 dibuang -> tidak jadi "asap" di latar terang. 0 = mati
+
+# ------------------------------------------------------------- foreground
+foreground:
+  enabled: true
+  depth_model: depth-anything/Depth-Anything-V2-Small-hf
+  # Pixel salient dianggap "di depan subject" bila depth_norm > median_subject + margin.
+  # depth_norm 0..1 (1 = paling dekat kamera), dinormalisasi per gambar.
+  depth_margin: 0.25
+  min_area_frac: 0.004  # komponen < 0.4% kanvas diabaikan
+  max_area_frac_of_salient: 0.6  # kalau "foreground" > 60% area salient, itu subject-nya -> skip
+  edge_erode_px: 1      # area foreground yang dibuang dari layer subject di-erode segini (hindari seam)
+  guided_radius: 3      # refine tepi dalam (batas depth) mengikuti tepi gambar
+  sliver_px: 6          # bagian subject yang lebih tipis dari ~2x ini & menempel ke tepi objek depan
+                        # dipindah ke layer foreground (sisa rim objek). 0 = mati
+
+# ------------------------------------------------------------------- text
+text:
+  enabled: true
+  languages: [en]
+  min_confidence: 0.10  # font display/grunge sering confidence rendah, jangan terlalu ketat
+  max_subject_overlap: 0.4  # teks yang >40% di atas subject (mis. logo di plate) dianggap bagian foto
+  second_pass: true     # OCR ulang dari crop yang sudah dibinarisasi, ambil yang confidence lebih tinggi
+  pad_frac: 0.18        # padding bbox (x tinggi teks) untuk menangkap glyph yang terpotong bbox OCR
+  color_tol: 0.55       # toleransi (relatif jarak antar cluster) pixel dianggap glyph
+  dilate_px: 5          # mask glyph di-dilate sebelum inpaint (anti-alias + grain)
+  cap_height_ratio: 0.72  # tinggi huruf kapital / font size (estimasi ukuran font)
+  second_pass_heights: [32, 48, 64]  # tinggi crop (px) untuk OCR ulang
+  second_pass_thin: [0, 1, 2]        # penipisan huruf (px); font display tebal lebih terbaca
+  # Teks di atas area salient tetap dianggap TEKS DESAIN (bukan bagian foto) bila
+  # confidence tinggi dan horizontal (mis. tombol CTA yang menempel ke subject).
+  design_text_min_conf: 0.80
+  design_text_max_angle: 5
+  decor:                # garis/slash/bullet kecil di baris yang sama dengan teks kecil (tidak terbaca OCR)
+    enabled: true
+    color_tol: 14       # jarak warna Lab ke warna teks di baris itu
+    band_pad: 0.35      # tinggi pita pencarian = tinggi teks +- 35%
+    search_x: 5.0       # cari sampai 5x tinggi teks ke kiri/kanan
+    line_contrast: 25   # garis lurus: selisih L (Lab) vs median pita
+    line_max_thickness: 0.3  # tebal garis maks (x tinggi teks)
+    min_area: 6
+    max_area_h2: 3.0    # maks luas = 3 x tinggi_teks^2
+  container:            # deteksi tombol/pill/kotak di sekitar teks -> layer UI terpisah
+    enabled: true
+    max_text_height_frac: 0.06   # hanya untuk teks kecil (headline besar tidak punya tombol)
+    search_margin_x: 3.0         # area cari = bbox teks + margin (x tinggi teks)
+    search_margin_y: 1.5
+    edge_threshold: 18           # kekuatan tepi (Lab) untuk garis tepi tombol
+    max_area_mult: 5.0           # kotak maks. 5x luas bbox teks
+    min_rectangularity: 0.85
+
+# ------------------------------------------------------------- background
+background:
+  raw_threshold: 0.01   # pixel dengan nilai mask mentah BiRefNet > ini ikut di-inpaint (helai rambut)
+  dilate_px: 28         # mask subject/fg di-dilate sebelum inpaint. Terlalu kecil -> LaMa
+                        # "melanjutkan" helai rambut jadi hantu subject di background
+  restore_beyond_px: 8  # setelah inpaint, pixel asli dikembalikan bila > 8px dari subject (celah
+                         # antara lengan/kaki tetap asli). 0 = pakai hasil LaMa di seluruh mask
+  text_extra_dilate_px: 2
+  lama_max_side: 800    # LaMa dijalankan di resolusi ini lalu di-upscale (hanya area mask yang dipakai).
+                        # Lubang besar lebih koheren di ~800px; 0 = full-res (lebih tajam, struktur kurang)
+  paste_feather_px: 3   # blend hasil inpaint ke plate asli dengan feather segini
+  regrain_inpainted: true  # tambahkan grain sintetis di area inpaint supaya cocok dengan sekitarnya
+
+# ------------------------------------------------------------------- glow
+glow:
+  enabled: true
+  # Deteksi warna aksen dominan (di luar subject).
+  min_saturation: 0.45
+  min_value: 0.30
+  min_pixels_frac: 0.004  # kalau pixel aksen < 0.4% kanvas -> tidak ada glow layer
+  # Area yang diekstrak jadi glow:
+  hue_tol_deg: 18       # jarak hue penuh masuk
+  hue_soft_deg: 12      # ramp lembut di luar hue_tol
+  min_chroma: 0.06      # chroma (max-min RGB) minimal
+  chroma_soft: 0.06     # ramp lembut di atas min_chroma
+  max_alpha: 1.0        # batas alpha glow
+  base_mode: lama       # lama = area glow di-inpaint untuk dapat base bertekstur | blur = base halus
+  base_blur_px: 25      # (base_mode: blur) sigma blur estimasi "scene tanpa glow"
+  color_mode: pixel     # pixel = warna glow per-pixel (akurat, recomposite lossless)
+                        # accent = satu warna aksen rata (mudah di-recolor di Canva, sedikit lossy)
+  subject_dilate_px: 6  # jauhi tepi subject
+
+# -------------------------------------------------------------- particles
+particles:
+  enabled: true
+  tophat_px: 9          # ukuran kernel top-hat; struktur terang lebih kecil dari ini = partikel
+  min_contrast: 0.06    # selisih luminance minimal vs sekitarnya
+  max_chroma: 0.14      # partikel harus low-saturation (debu/kapur). Naikkan untuk spark berwarna
+  min_luma: 0.18
+  max_blob_area: 400    # blob lebih besar dari ini (px) bukan partikel
+  streak_min_len: 12    # blob memanjang (>= 12px) dan tipis...
+  streak_max_width: 2.5 # ...(lebar rata-rata < 2.5px) = highlight tepi alat/kusen, bukan debu
+  min_pixels: 30        # total pixel partikel < ini -> layer di-skip
+  subject_dilate_px: 4
+  max_alpha: 0.95
+  cloud:                # EKSPERIMENTAL: awan debu/kapur besar (area kepadatan bintik tinggi) ikut
+                        # diekstrak. Region-nya belum stabil (bisa memotong awan dengan tepi tajam),
+                        # jadi default mati: awan besar tetap menempel di 01_background.
+    enabled: false
+    density_sigma: 25   # radius (px) penghitungan kepadatan
+    density_threshold: 0.2
+    min_area_frac: 0.01 # area awan minimal 1% kanvas
+    max_aspect: 3.0     # area sangat tinggi-sempit (rak) / lebar-pipih (lantai) bukan awan
+    max_chroma: 0.15
+  color: null           # null = warna per-pixel (lossless). Atau mis. [0.96, 0.95, 0.93] = satu warna
+
+# ------------------------------------------------------------------ grain
+grain:
+  enabled: true
+  size_px: 0.7          # sigma blur noise (besar butiran)
+  strength: 1.0         # pengali terhadap noise level hasil estimasi dari gambar asli
+  monochrome: true
+  vignette_strength: 0.25  # alpha hitam di sudut (0 = tanpa vignette)
+  vignette_radius: 0.75    # mulai gelap dari radius (relatif setengah diagonal)
+  suggested_opacity: 0.6   # opacity yang disarankan di Canva (grain asli sudah ada di layer lain)
+  seed: 1234
+
+# ----------------------------------------------------------------- output
+output:
+  crop_alpha_threshold: 0.004  # pixel dengan alpha > ini masuk bbox crop
+  diff_gain: 4.0               # penguat preview_diff.png

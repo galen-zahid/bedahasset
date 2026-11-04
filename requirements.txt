@@ -1,0 +1,17 @@
+# Python 3.11. Install PyTorch FIRST (see README: CPU vs CUDA wheel), then:
+#   pip install -r requirements.txt
+#   pip install --no-deps simple-lama-inpainting==0.1.2
+# (simple-lama-inpainting pins numpy<2 / pillow<10 which conflict with everything else;
+#  it works fine with the newer versions, so it is installed without its deps.)
+numpy>=1.26
+pillow>=10.0
+opencv-python-headless>=4.9
+scikit-image>=0.22
+scipy>=1.11
+pyyaml>=6.0
+rembg>=2.0.60          # BiRefNet-general (subject matte); pulls onnxruntime + pymatting
+onnxruntime>=1.17      # GPU: uninstall this and `pip install onnxruntime-gpu`
+pymatting>=1.1.12
+transformers>=4.45     # Depth Anything V2 Small
+easyocr>=1.7.1
+fire>=0.5              # dependency of simple-lama-inpainting
