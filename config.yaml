@@ -124,8 +124,13 @@ glow:
   subject_dilate_px: 6  # jauhi tepi subject
 
 # ----------------------------------------------------------------- stripe
-stripe:                 # strip/pita warna aksen yang lewat DI BELAKANG subject -> 04_stripe_NN.png
+stripe:                 # strip/pita warna aksen yang lewat DI BELAKANG subject
   enabled: true
+  # layered = 2 layer yang bila ditumpuk 1:1 dengan referensi:
+  #   04_stripe_NN_base.png   persegi panjang 1 warna, 1 opacity (bisa dibuat native, lihat shapes.csv)
+  #   04_stripe_NN_grunge.png overlay bercak/tekstur di atasnya
+  # single  = 1 PNG: warna rata + grunge di alpha (lebih bersih saat digeser, tidak 1:1)
+  mode: layered
   hue_tol_deg: 20       # jarak hue ke warna aksen
   min_saturation: 0.45
   min_value: 0.30

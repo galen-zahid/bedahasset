@@ -58,14 +58,15 @@ tepi sedikit lebih kasar).
 | `01_background.png` | clean plate: subject, objek foreground, teks, tombol, glow dan partikel dihapus lalu di-inpaint (LaMa) |
 | `02_subject.png` | cutout subject utama, transparan, ukuran kanvas penuh |
 | `03_foreground_NN.png` | objek di DEPAN subject (berdasarkan depth). Tidak dibuat kalau tidak ada |
-| `04_stripe_NN.png` | strip/pita warna aksen yang lewat **di belakang subject**, utuh (bagian yang tertutup badan disintesis). Satu warna rata + tekstur grunge di alpha, jadi bisa digeser/diputar/di-resize bebas. Geometrinya juga ada di `shapes.csv` |
+| `04_stripe_NN_base.png` | strip di belakang subject: persegi panjang **1 warna, 1 opacity** (bisa dibuat native di Canva dari `shapes.csv`) |
+| `04_stripe_NN_grunge.png` | overlay bercak/tekstur di atas base. Base + grunge di atas background = **1:1 dengan referensi** |
 | `05_particles.png` | debu/kapur/percikan (bintik kecil + awan/kepulan besar) sebagai overlay transparan |
 | `06_grain.png` | film grain + vignette sesuai noise level gambar asli |
 | `07_ui_NN.png` | tombol/pill di sekitar teks (mis. CTA), teksnya sudah dihapus. Bisa dipakai langsung atau dibuat ulang dari `text.csv` |
 | `crops/` | tiap layer di-crop ke bounding box-nya |
 | `manifest.csv` / `.json` | layer, file, type, x, y, w, h, z_order, suggested_opacity (+ SSIM, warna aksen, noise, timing di json) |
 | `text.csv` | semua teks: string, bbox, warna, estimasi font size (px), plus box/warna tombol kalau ada |
-| `shapes.csv` | strip sebagai persegi panjang native Canva: `canva_x, canva_y, canva_w, canva_h, canva_rotation_deg, color_hex` |
+| `shapes.csv` | strip sebagai persegi panjang native Canva: `canva_x, canva_y, canva_w, canva_h, canva_rotation_deg, color_hex, canva_transparency_pct` |
 | `preview_recomposite.png` | semua layer ditumpuk ulang (teks TIDAK ikut, karena teks dibuat native di Canva) |
 | `preview_diff.png` | selisih vs asli (diperkuat 4×, terang = beda) |
 
@@ -75,16 +76,28 @@ tepi sedikit lebih kasar).
 2. Upload layer **full-size** dan taruh semuanya di posisi x=0, y=0 dengan ukuran penuh. Karena ukurannya sama dengan kanvas, otomatis pas 1:1.
    Atau pakai file di `crops/` lalu posisikan sesuai kolom x, y, w, h di `manifest.csv`.
 3. Urutan tumpukan ikuti `z_order` (kecil = paling bawah). Biasanya:
-   background → stripe → subject → foreground → ui → teks → particles → grain.
-   (Nomor file bukan urutan tumpukan. Stripe ada di BELAKANG subject.)
-   Mau strip yang 100% native? Hapus `04_stripe` lalu buat Rectangle di Canva dengan
-   posisi/ukuran/rotasi/warna dari `shapes.csv` (pakai Position → X/Y/W/H/Rotate).
+   background → stripe_base → stripe_grunge → subject → foreground → ui → teks → particles → grain.
+   (Nomor file bukan urutan tumpukan. Strip ada di BELAKANG subject.)
+   Strip native: ganti `04_stripe_NN_base.png` dengan Rectangle Canva memakai
+   X/Y/W/H/Rotate/warna/Transparency dari `shapes.csv`, lalu taruh `..._grunge.png` di atasnya.
 4. Set transparency di Canva sesuai `suggested_opacity` (grain disarankan 0.6, karena grain asli
    sudah ada di layer lain dan grain ini terutama untuk menyatukan elemen baru).
 5. Buat ulang teks dari `text.csv` sebagai teks native: posisi dari `x,y`, warna `color_hex`,
    ukuran dari `est_font_size_px` (dalam px kanvas; kalau kanvas Canva di-skala, skala juga
    angkanya). Baris `/`, `|`, `[line]`, `[decor]` adalah tanda grafis kecil di sekitar teks
    (pemisah, garis) yang juga sudah dihapus dari background.
+
+### Strip berlapis (1:1)
+
+1. **base**: persegi panjang warna rata `G` dengan opacity `o` (median coverage strip asli).
+2. **grunge**: dihitung sebagai color-to-alpha minimal dari referensi terhadap
+   "background + base", jadi `referensi = (1−e)·(bg + base) + e·grunge`, tepat per pixel.
+   Di bagian yang tertutup badan, tekstur strip disintesis (LaMa sepanjang arah strip) supaya
+   strip tetap utuh kalau subject digeser.
+
+Karena background di bawah strip adalah hasil inpaint, overlay grunge juga membawa sisa
+detail foto yang tembus pandang (tiang rak, jendela) supaya hasilnya 1:1. Mau strip yang
+"bersih" saat dipindah (tidak 1:1)? Pakai `stripe.mode: single`.
 
 ### Overlay tanpa blend mode
 

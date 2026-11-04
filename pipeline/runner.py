@@ -84,8 +84,10 @@ def _process(path: Path, out_root: Path, models, cfg) -> dict:
         ui_mask |= u["mask"]
     inp_mask = background.inpaint_mask(sal, raw, text_mask, fg_union, cfg, exclude=ui_mask)
     extra = np.zeros_like(inp_mask)
-    for v in stripe_vis:
+    for s_, v in zip(stripes, stripe_vis):
         extra |= matting.dilate(v, int(cfg.stripe.dilate_px))
+        if cfg.stripe.mode == "layered":  # whole band: the bg under the stripe must be stripe-free
+            extra |= matting.dilate(s_["rect"], int(cfg.stripe.dilate_px))
     if cloud_soft is not None:
         extra |= cloud_soft > 0.05
     inp_mask |= extra
@@ -115,21 +117,51 @@ def _process(path: Path, out_root: Path, models, cfg) -> dict:
     if cfg.glow.enabled:
         glow_rgb, glow_a, plate, ginfo = glow.extract_glow(img, plate, sal, cfg, models)
 
-    # 6b. stripe layers (full band, hidden part synthesized) + Canva geometry
-    stripe_layers, shapes = [], []
-    for k, (s_, v) in enumerate(zip(stripes, stripe_vis), 1):
-        rgb, a, col = stripe.build_layer(img, plate, s_, v, occl, models, cfg)
-        if rgb is None:
-            continue
-        stripe_layers.append((rgb, a))
-        shapes.append({"id": k, "layer_file": f"04_stripe_{k:02d}.png", **stripe.canva_geometry(s_, col)})
-
     # 7. particles (+ dust cloud, measured on the original against the clean plate)
+    plate_pre = plate.copy()
     part_rgb = part_a = None
     n_blobs = 0
     if cfg.particles.enabled:
         part_rgb, part_a, plate, n_blobs = particles.extract_particles(
             plate, sal, text_mask, cfg, orig=img, cloud_soft=cloud_soft)
+
+    # 7b. stripe layers, built on the FINAL plate so the stack reproduces the reference.
+    #     Inside a stripe the particles overlay is cleared (the stripe grunge carries it).
+    stripe_layers, shapes = [], []
+    band = np.zeros(img.shape[:2], bool)
+    for s_ in stripes:
+        band |= matting.dilate(s_["rect"], 2)
+    if band.any():
+        plate = np.where(band[..., None], plate_pre, plate)
+        if part_a is not None:
+            part_a = part_a * ~band
+    plate = np.round(np.clip(plate, 0, 1) * 255) / 255  # exactly what 01_background.png stores
+    # everything that will sit ABOVE the stripe, flattened (subject, then fg objects)
+    top_a = subj_a.copy()
+    top_p = subj_rgb * subj_a[..., None]
+    for rgb_f, a_f in fg_layers:
+        top_p = top_p * (1 - a_f[..., None]) + rgb_f * a_f[..., None]
+        top_a = top_a * (1 - a_f) + a_f
+    top_rgb = top_p / np.maximum(top_a, 1e-6)[..., None]
+    for k, (s_, v) in enumerate(zip(stripes, stripe_vis), 1):
+        if cfg.stripe.mode == "layered":
+            res = stripe.build_layered(img, plate, s_, v, occl, models, cfg, top_rgb, top_a)
+            if res is None:
+                continue
+            stripe_layers.append((f"stripe_{k:02d}_base", f"04_stripe_{k:02d}_base.png",
+                                  res["base_rgb"], res["base_a"]))
+            stripe_layers.append((f"stripe_{k:02d}_grunge", f"04_stripe_{k:02d}_grunge.png",
+                                  res["grunge_rgb"], res["grunge_a"]))
+            shapes.append({"id": k, "layer_file": f"04_stripe_{k:02d}_base.png",
+                           "overlay_file": f"04_stripe_{k:02d}_grunge.png",
+                           **stripe.canva_geometry(s_, res["color"], res["opacity"])})
+        else:
+            rgb, a_, col = stripe.build_layer(img, plate, s_, v, occl, models, cfg)
+            if rgb is None:
+                continue
+            stripe_layers.append((f"stripe_{k:02d}", f"04_stripe_{k:02d}.png", rgb, a_))
+            shapes.append({"id": k, "layer_file": f"04_stripe_{k:02d}.png",
+                           **stripe.canva_geometry(s_, col)})
     tick("overlays")
 
     # 8. grain overlay
@@ -145,8 +177,9 @@ def _process(path: Path, out_root: Path, models, cfg) -> dict:
         layers.append({"layer": "glow", "file": "04_glow.png", "type": "overlay",
                        "rgb": glow_rgb, "alpha": glow_a, "z_order": z})
         z += 1
-    for k, (rgb, a) in enumerate(stripe_layers, 1):
-        layers.append({"layer": f"stripe_{k:02d}", "file": f"04_stripe_{k:02d}.png", "type": "shape",
+    for lname, fname, rgb, a in stripe_layers:
+        layers.append({"layer": lname, "file": fname,
+                       "type": "overlay" if lname.endswith("grunge") else "shape",
                        "rgb": rgb, "alpha": a, "z_order": z})
         z += 1
     layers.append({"layer": "subject", "file": "02_subject.png", "type": "subject",

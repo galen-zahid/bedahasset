@@ -182,7 +182,108 @@ def build_layer(img: np.ndarray, plate: np.ndarray, stripe, vis: np.ndarray, occ
     return rgb, alpha, G
 
 
-def canva_geometry(stripe, color) -> dict:
+def _synth_along_band(src: np.ndarray, rect: np.ndarray, known: np.ndarray, theta: float,
+                      fill, models) -> np.ndarray:
+    """Fill rect & ~known of an RGB image with LaMa in band-aligned (rotated) space, using only
+    the known band pixels as context (everything else = fill colour), so the band texture
+    continues along the band. Returns a full-size image (only rect & ~known is new)."""
+    H, W = rect.shape
+    M = cv2.getRotationMatrix2D((W / 2, H / 2), theta, 1.0)
+    cos, sin = abs(M[0, 0]), abs(M[0, 1])
+    nW, nH = int(H * sin + W * cos) + 2, int(H * cos + W * sin) + 2
+    M[0, 2] += nW / 2 - W / 2
+    M[1, 2] += nH / 2 - H / 2
+    rot = lambda x, interp: cv2.warpAffine(x, M, (nW, nH), flags=interp)  # noqa: E731
+    r_src = rot(src, cv2.INTER_LINEAR)
+    r_rect = rot(rect.astype(np.uint8), cv2.INTER_NEAREST).astype(bool)
+    r_known = rot(known.astype(np.uint8), cv2.INTER_NEAREST).astype(bool)
+    ys, xs = np.nonzero(r_rect)
+    pad = 8
+    y0, y1 = max(ys.min() - pad, 0), min(ys.max() + pad + 1, nH)
+    x0, x1 = max(xs.min() - pad, 0), min(xs.max() + pad + 1, nW)
+    ck = r_known[y0:y1, x0:x1] & r_rect[y0:y1, x0:x1]  # context = known BAND pixels only
+    canvas = np.where(ck[..., None], r_src[y0:y1, x0:x1], np.asarray(fill, np.float32))
+    hole = r_rect[y0:y1, x0:x1] & ~ck
+    if hole.any():
+        hm = matting.dilate(hole, 2) & ~matting.erode(ck, 1)
+        filled = models.inpaint(to_u8(canvas), (hm * 255).astype(np.uint8)).astype(np.float32) / 255.0
+        canvas = np.where(hm[..., None], filled, canvas)
+    r_full = np.zeros((nH, nW, 3), np.float32)
+    r_full[y0:y1, x0:x1] = canvas
+    back = cv2.warpAffine(r_full, cv2.invertAffineTransform(M), (W, H), flags=cv2.INTER_LINEAR)
+    return np.where(known[..., None], src, back).astype(np.float32)
+
+
+def build_layered(img: np.ndarray, plate: np.ndarray, stripe, vis: np.ndarray,
+                  matte: np.ndarray, models, cfg, top_rgb=None, top_a=None):
+    """Two stacked layers that reproduce the reference 1:1:
+
+      1. base    = solid rectangle, ONE colour G at ONE opacity o (rebuildable natively)
+      2. grunge  = overlay (E, e) = minimal colour-to-alpha of the reference C against
+                   "background + base", i.e.  C = (1 - e) * X1 + e * E  exactly.
+
+    Where the stripe is hidden by the subject the reference is synthesized along the band
+    first, so the stack stays complete when the subject is moved."""
+    from .glow import color_to_alpha
+
+    rect = stripe["rect"]
+    vis_core = vis & ~matting.dilate(matte, int(cfg.stripe.subject_clearance_px))
+    if vis_core.sum() < 50:
+        return None
+    pix = img[vis_core]
+    lum = pix @ np.array([0.299, 0.587, 0.114], np.float32)
+    G = np.median(pix[lum >= np.percentile(lum, 70)], axis=0).astype(np.float32)
+    # base opacity: typical coverage of the band over the clean background
+    d = G[None, None] - plate
+    a_ls = ((img - plate) * d).sum(-1) / np.maximum((d * d).sum(-1), 1e-4)
+    o = float(np.clip(np.median(a_ls[vis_core]), 0.2, 1.0))
+    # quantize to what Canva's transparency slider / an 8-bit PNG can represent
+    o = round(o * 100) / 100
+
+    shape = matting.feather(rect.astype(np.float32), 0.6)
+    shape[matting.erode(rect, 1)] = 1.0
+    base_a = (shape * o).astype(np.float32)
+    base_a = np.round(base_a * 255) / 255  # what will actually be stored in the PNG
+    X1 = plate * (1 - base_a[..., None]) + G * base_a[..., None]
+
+    # target under the subject stack: the reference itself where nothing covers it; behind a
+    # semi-transparent edge the exact un-mixed value U = (C - a*F) / (1 - a); behind solid
+    # subject (nothing visible) synthesized along the band
+    target = img.copy()
+    solid = rect & matte
+    if top_a is not None:
+        ta = top_a[..., None]
+        U = (img - ta * top_rgb) / np.maximum(1 - ta, 1e-3)
+        semi = rect & (top_a > 1.0 / 255) & (top_a < 0.9)
+        target = np.where(semi[..., None], np.clip(U, 0, 1), target)
+        solid = rect & (top_a >= 0.9)
+    if solid.any():
+        target = _synth_along_band(target, rect, ~solid, stripe["theta"], G, models)
+    C = target
+    e, E = color_to_alpha(C, X1)
+    inside = matting.dilate(rect, 1)
+    e = (e * inside).astype(np.float32)
+    # re-solve E against the 8-bit quantized alpha so the stack stays exact after saving
+    eq = np.round(e * 255) / 255
+    E = np.where(eq[..., None] > 1e-3,
+                 X1 + (C - X1) / np.maximum(eq, 1e-3)[..., None], X1)
+    E = np.clip(E, 0, 1).astype(np.float32)
+    stack = X1 * (1 - eq[..., None]) + E * eq[..., None]
+    if top_a is not None:
+        stack = stack * (1 - top_a[..., None]) + top_rgb * top_a[..., None]
+        check = rect & (top_a < 0.9)
+    else:
+        check = rect & ~matte
+    err = np.abs(stack - img)[check]
+    log.info("  stripe berlapis: base %s opacity %.2f | grunge alpha rata-rata %.2f | "
+             "error vs referensi maks %.4f",
+             "#%02X%02X%02X" % tuple(int(round(float(x) * 255)) for x in G), o,
+             float(eq[rect].mean()), float(err.max()) if err.size else 0.0)
+    return {"base_rgb": np.broadcast_to(G, img.shape).astype(np.float32), "base_a": base_a,
+            "grunge_rgb": E, "grunge_a": eq.astype(np.float32), "color": G, "opacity": o}
+
+
+def canva_geometry(stripe, color, opacity: float = 1.0) -> dict:
     """Rotated-rectangle parameters for rebuilding the band as a native Canva shape."""
     corners = stripe["corners"]
     cx, cy = corners.mean(0)
@@ -194,5 +295,6 @@ def canva_geometry(stripe, color) -> dict:
         "canva_w": round(float(L), 1), "canva_h": round(float(Wd), 1),
         "canva_rotation_deg": round(float(stripe["theta"]), 1),
         "color_hex": "#%02X%02X%02X" % tuple(int(round(float(x) * 255)) for x in color),
+        "canva_transparency_pct": int(round(opacity * 100)),
         "corners": [[round(float(a), 1), round(float(b), 1)] for a, b in corners],
     }
