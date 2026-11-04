@@ -7,7 +7,7 @@ from pathlib import Path
 
 from .imageio import bbox, save_rgb, save_rgba
 
-FIELDS = ["layer", "file", "type", "category", "blend_mode", "x", "y", "w", "h", "z_order", "suggested_opacity",
+FIELDS = ["layer", "file", "svg_file", "type", "category", "blend_mode", "x", "y", "w", "h", "z_order", "suggested_opacity",
           "crop_file"]
 
 
@@ -40,6 +40,7 @@ def write_layers(out: Path, layers, cfg):
                 save_rgba(out / crop_file, L["rgb"][y:y + h, x:x + w], L["alpha"][y:y + h, x:x + w])
         rows.append({"layer": L["layer"], "file": L["file"], "type": L["type"],
                      "category": L.get("category") or CATEGORY.get(L["type"], L["type"]),
+                     "svg_file": L.get("svg_file", ""),
                      "blend_mode": L.get("blend_mode", "normal"), "x": x, "y": y,
                      "w": w, "h": h, "z_order": L["z_order"],
                      "suggested_opacity": L.get("suggested_opacity", 1.0),

@@ -9,7 +9,7 @@ from pathlib import Path
 
 import numpy as np
 
-from . import background, composite, elements, foreground, glow, grain, manifest, particles, stripe, subject, text
+from . import background, composite, elements, foreground, vectorize, glow, grain, manifest, particles, stripe, subject, text
 from . import matting
 from .imageio import load_rgb, save_rgb
 
@@ -226,7 +226,25 @@ def _process(path: Path, out_root: Path, models, cfg) -> dict:
                        "rgb": rgb, "alpha": a, "z_order": z})
         z += 1
     if subj_a.max() > 0:  # graphic designs may have no separable subject
-        els = elements.split_elements(subj_rgb, subj_a, cfg)
+        predict = None
+        if cfg.elements.enabled and cfg.elements.sam:
+            try:
+                predict = models.sam_session((img * 255).astype(np.uint8))
+            except Exception as e:  # noqa: BLE001 - SAM is an improvement, never a blocker
+                log.warning("  SAM tidak tersedia (%s), pakai pemecahan dasar", e)
+        els = elements.split_elements(subj_rgb, subj_a, cfg, predict)
+        if cfg.vectorize.enabled:  # magic-wand edges for flat/vector elements
+            hards = [e["alpha"] > 0.5 for e in els]
+            for i_, e in enumerate(els):
+                if e["kind"] in ("shape", "vector_icon", "vector_large"):
+                    others = np.zeros_like(hards[i_])
+                    for j_, h_ in enumerate(hards):
+                        if j_ != i_:
+                            others |= h_
+                    a_ = vectorize.magic_wand_alpha(img, plate, e["alpha"], cfg)
+                    e["alpha"] = np.where(others, e["alpha"], a_).astype(np.float32)
+                    subj_rgb = np.where((e["alpha"] > 0)[..., None] & (subj_a == 0)[..., None],
+                                        img, subj_rgb)
         if len(els) == 1:
             layers.append({"layer": "subject", "file": "02_subject.png", "type": "subject",
                            "category": els[0]["kind"], "rgb": subj_rgb, "alpha": subj_a,
@@ -269,6 +287,28 @@ def _process(path: Path, out_root: Path, models, cfg) -> dict:
     for L in layers:
         L.setdefault("suggested_opacity", 1.0)
 
+    if cfg.vectorize.enabled:  # "pen tool": SVG for every flat / vector layer
+        n_svg = 0
+        for L in layers:
+            if L.get("alpha") is None or not L.get("file"):
+                continue
+            cat = L.get("category") or manifest.CATEGORY.get(L["type"], "")
+            svg = Path("vectors") / (Path(L["file"]).stem + ".svg")
+            if L["layer"].endswith("_base") and L["type"] == "shape":
+                sh = next((s_ for s_ in shapes if s_.get("layer_file") == L["file"]), None)
+                if sh:
+                    vectorize.rect_svg(sh["corners"], [int(sh["color_hex"][i:i + 2], 16) / 255
+                                                       for i in (1, 3, 5)],
+                                       sh.get("canva_transparency_pct", 100) / 100, W, H, tmp / svg)
+                    L["svg_file"] = svg.as_posix()
+                    n_svg += 1
+            elif cat in ("shape", "vector_icon", "vector_large"):
+                st = vectorize.trace_svg(L["rgb"], L["alpha"], tmp / svg, cfg)
+                if st:
+                    L["svg_file"] = svg.as_posix()
+                    n_svg += 1
+                    log.info("  svg: %s  %d warna, %d path, akurasi bentuk %.1f%%", svg.name,
+                             st["colors"], st["paths"], 100 * st["iou"])
     rows = manifest.write_layers(tmp, layers, cfg)
     manifest.write_text_csv(tmp, blocks)
     manifest.write_shapes_csv(tmp, shapes)

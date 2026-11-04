@@ -68,6 +68,7 @@ python split.py --download-models
 | big-lama (~200 MB) | inpaint background | `%USERPROFILE%\.cache\torch\hub\checkpoints\` |
 | Depth-Anything-V2-Small (~100 MB) | foreground by depth | `%USERPROFILE%\.cache\huggingface\` |
 | CLIPSeg rd64-refined (~600 MB) | lokasi awan debu/kapur/asap | `%USERPROFILE%\.cache\huggingface\` |
+| SAM vit-base (~375 MB) | memisahkan objek yang menempel (orang vs barbell, 2 orang) | `%USERPROFILE%\.cache\huggingface\` |
 | EasyOCR en (~100 MB) | baca teks | `%USERPROFILE%\.EasyOCR\` |
 
 Waktu per desain (~1100×1400) di CPU 4 core: ±1–2 menit, separuhnya untuk BiRefNet. Di GPU jauh
@@ -87,6 +88,8 @@ lebih cepat. Kalau terlalu lambat, ganti `subject.rembg_model` ke `birefnet-gene
 | `05_particles.png` | debu/kapur/percikan (bintik kecil + awan/kepulan besar) sebagai overlay transparan |
 | `06_grain.png` | film grain + vignette sesuai noise level gambar asli |
 | `07_ui_NN.png` | tombol/pill di sekitar teks (mis. CTA), teksnya sudah dihapus. Bisa dipakai langsung atau dibuat ulang dari `text.csv` |
+| `vectors/*.svg` | **"pen tool"**: tiap layer flat/vektor (ilustrasi, ikon, garis, tombol, strip) sebagai SVG, path per warna. Upload SVG ke Canva lalu warnanya bisa diganti satu-satu. Ukuran = kanvas, taruh di 0,0 |
+| `extra/02_subject_all.png` | semua elemen subject digabung jadi satu (opsional) |
 | `crops/` | tiap layer di-crop ke bounding box-nya |
 | `manifest.csv` / `.json` | layer, file, type, **category** (background / asset_* / vector_* / shape / support / text), x, y, w, h, z_order, suggested_opacity (+ SSIM, warna aksen, noise, timing di json) |
 | `text.csv` | semua teks: string, bbox, warna, estimasi font size (px), plus box/warna tombol kalau ada |
@@ -152,6 +155,9 @@ Semua threshold ada di `config.yaml`, lengkap dengan komentar. Yang paling serin
 - `stripe.*`: deteksi strip di belakang subject (`hue_tol_deg`, `min_behind_frac`,
   `collinear_tol`) dan teksturnya (`texture_sigma`, `subject_clearance_px`).
 - `particles.min_contrast`, `particles.max_chroma`, `particles.max_blob_area`: partikel.
+- `elements.sam`, `elements.sam_model`: SAM untuk memisahkan objek yang menempel. Lebih cepat:
+  `Zigeng/SlimSAM-uniform-77`. Matikan dengan `sam: false`.
+- `vectorize.*`: toleransi magic wand dan ketelitian SVG (`svg_epsilon`, `svg_max_colors`).
 - `elements.link_cut_frac`: makin besar, makin banyak elemen dipecah (sambungan tebal ikut diputus).
   `elements.enabled: false` untuk kembali ke satu layer subject.
 - `particles.cloud.*`: awan debu/kapur/asap besar (CLIPSeg dengan text prompt). Ubah `prompts`
@@ -173,7 +179,8 @@ pipeline/
   models.py            model (BiRefNet, Depth Anything, EasyOCR, LaMa, CLIPSeg), load sekali per batch, auto GPU
   imageio.py           load/save PNG, bbox
   matting.py           guided filter, levels, feather, island removal, decontaminate warna
-  elements.py          pecah subject jadi elemen terpisah + kategori (asset/vector/shape)
+  elements.py          pecah subject jadi elemen terpisah (putus sambungan tipis + SAM) + kategori
+  vectorize.py         tepi "magic wand" untuk vektor + ekspor SVG ("pen tool")
   subject.py           matte subject + re-matting tepi terhadap clean plate (anti halo)
   text.py              OCR + second pass, mask glyph, deteksi tombol & dekor
   foreground.py        objek di depan subject via depth + connected components

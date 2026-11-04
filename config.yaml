@@ -45,7 +45,27 @@ elements:               # subject dipecah jadi elemen terpisah (asset besar/keci
   min_link_area_frac: 0.0015  # sambungan yang terputus & cukup besar jadi elemen "shape" sendiri
   large_frac: 0.08      # elemen >= 8% kanvas = asset_large, selebihnya asset_small
   flat_shape_threshold: 0.8   # >= 80% pixel di 4 warna dominan = shape (flat)
+  sam: true            # SAM (Segment Anything) memisahkan objek yang menempel/bertumpuk
+  sam_model: facebook/sam-vit-base   # ~375 MB, ~6 dtk/desain di CPU. Cepat: Zigeng/SlimSAM-uniform-77
+  sam_points: 24        # jumlah titik klik per elemen
+  sam_min_score: 0.80   # keyakinan minimal mask SAM
+  sam_min_inside: 0.90  # mask harus >= 90% di dalam elemen (tidak bocor ke background)
+  sam_min_part: 0.06    # objek minimal 6% elemen
+  sam_part_overlap: 0.6 # mask yang >60% di dalam objek lain = bagiannya (tidak dipisah)
+  sam_min_cover: 0.6   # objek-objek SAM harus menutup >= 60% elemen, kalau tidak elemen tidak dipecah
+  sam_min_elem_frac: 0.01  # hanya elemen >= 1% kanvas yang dicoba dipecah dengan SAM
   photo_texture: 0.004  # tekstur halus >= ini = foto (asset_*), di bawah = ilustrasi vektor (vector_*)
+
+# -------------------------------------------------------------- vectorize
+vectorize:              # elemen flat/vektor: tepi "magic wand" + ekspor SVG ("pen tool") ke vectors/
+  enabled: true
+  wand_band_px: 3       # lebar pita di tepi elemen yang dihitung ulang dengan magic wand
+  wand_tol_lo: 0.04     # beda warna vs background: < lo = background (transparan)
+  wand_tol_hi: 0.12     #                           > hi = elemen (penuh). Di antaranya = anti-alias
+  svg_max_colors: 12    # warna maksimum per SVG (tiap warna = path terpisah, bisa diganti di Canva)
+  svg_merge_tol: 0.06   # warna yang beda < ini digabung
+  svg_min_region_px: 12 # potongan warna lebih kecil dari ini dibuang
+  svg_epsilon: 0.8      # ketelitian path (px). Kecil = lebih presisi, file lebih besar
 
 # ------------------------------------------------------------- foreground
 foreground:

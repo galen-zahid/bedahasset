@@ -39,6 +39,7 @@ class Models:
         self._ocr = None
         self._lama = None
         self._clipseg = None
+        self._sam = None
 
     # ---------------------------------------------------------------- rembg
     def salient_mask(self, rgb_u8: np.ndarray) -> np.ndarray:
@@ -108,6 +109,38 @@ class Models:
             p = torch.sigmoid(model(**inp).logits).cpu().numpy()
         p = p.reshape(len(prompts), *p.shape[-2:]).max(0)
         return cv2.resize(p, (rgb_u8.shape[1], rgb_u8.shape[0]), interpolation=cv2.INTER_CUBIC)
+
+    # ------------------------------------------------------------------ sam
+    def sam_session(self, rgb_u8: np.ndarray):
+        """Embed the image once; returns predict(points) -> (masks[3,H,W] bool, scores[3])."""
+        import torch
+        from PIL import Image
+        from transformers import SamModel, SamProcessor
+
+        if self._sam is None:
+            name = self.cfg.elements.sam_model
+            proc = _cached(SamProcessor.from_pretrained, name)
+            model = _cached(SamModel.from_pretrained, name).to(self.device).eval()
+            self._sam = (proc, model)
+        proc, model = self._sam
+        im = Image.fromarray(rgb_u8)
+        inp = proc(im, return_tensors="pt")
+        with torch.no_grad():
+            emb = model.get_image_embeddings(inp["pixel_values"].to(self.device))
+
+        def predict(points):
+            # one separate prompt per point: shape [image, prompt, points_per_prompt, xy]
+            ii = proc(im, input_points=[[[[float(x), float(y)]] for x, y in points]],
+                      return_tensors="pt")
+            ii.pop("pixel_values")
+            ii = {k: v.to(self.device) for k, v in ii.items()}
+            with torch.no_grad():
+                o = model(image_embeddings=emb, multimask_output=True, **ii)
+            masks = proc.image_processor.post_process_masks(
+                o.pred_masks.cpu(), ii["original_sizes"].cpu(), ii["reshaped_input_sizes"].cpu())[0]
+            return masks.numpy().astype(bool), o.iou_scores[0].cpu().numpy()  # [P,3,H,W], [P,3]
+
+        return predict
 
     # ----------------------------------------------------------------- lama
     def inpaint(self, rgb_u8: np.ndarray, mask_u8: np.ndarray) -> np.ndarray:

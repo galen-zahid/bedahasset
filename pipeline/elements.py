@@ -39,8 +39,74 @@ def _flatness(rgb: np.ndarray, m: np.ndarray) -> float:
     return float(np.sort(counts)[::-1][:4].sum() / len(key))
 
 
-def split_elements(rgb: np.ndarray, alpha: np.ndarray, cfg):
-    """Return a list of {alpha, kind, area, bbox} whose alphas sum to `alpha`."""
+def _grid_points(m: np.ndarray, n: int):
+    """Up to n well-spread points inside mask m (farthest-point sampling on the interior)."""
+    inner = cv2.erode(m.astype(np.uint8), matting.disk(5)).astype(bool)
+    ys, xs = np.nonzero(inner if inner.sum() > 50 else m)
+    if len(xs) == 0:
+        return []
+    pts = np.c_[xs, ys].astype(np.float32)
+    if len(pts) > 6000:
+        pts = pts[np.random.default_rng(0).choice(len(pts), 6000, replace=False)]
+    dt = cv2.distanceTransform((inner if inner.sum() > 50 else m).astype(np.uint8), cv2.DIST_L2, 5)
+    first = np.unravel_index(np.argmax(dt), dt.shape)
+    chosen = [np.array([first[1], first[0]], np.float32)]
+    d = np.linalg.norm(pts - chosen[0], axis=1)
+    for _ in range(n - 1):
+        k = int(np.argmax(d))
+        if d[k] < 8:
+            break
+        chosen.append(pts[k])
+        d = np.minimum(d, np.linalg.norm(pts - pts[k], axis=1))
+    return [(float(x), float(y)) for x, y in chosen]
+
+
+def sam_split(predict, alpha: np.ndarray, elem_mask: np.ndarray, cfg):
+    """Split one element into whole objects using SAM point prompts.
+
+    For each prompt the LARGEST of SAM's 3 masks that stays inside the element (does not leak
+    into the background) and is confident is taken as "the whole object under this point".
+    Masks that are mostly inside a bigger kept mask are parts of it and are dropped.
+    Returns a list of masks (>= 2) or None when the element is one object."""
+    c = cfg.elements
+    area = elem_mask.sum()
+    pts = _grid_points(elem_mask, int(c.sam_points))
+    if len(pts) < 2:
+        return None
+    masks, scores = predict(pts)
+    cands = []
+    for p in range(masks.shape[0]):
+        best = None
+        for k in range(masks.shape[1]):
+            mk = masks[p, k]
+            ma = mk.sum()
+            if ma == 0 or scores[p, k] < c.sam_min_score:
+                continue
+            inside = (mk & elem_mask).sum() / ma
+            if inside < c.sam_min_inside or ma < c.sam_min_part * area:
+                continue
+            if best is None or ma > best.sum():
+                best = mk & elem_mask
+        if best is not None:
+            cands.append(best)
+    if len(cands) < 2:
+        return None
+    cands.sort(key=lambda m: -m.sum())
+    objs = []
+    for m in cands:
+        if any((m & o).sum() / m.sum() > c.sam_part_overlap for o in objs):
+            continue  # a part of (or the same as) an object we already have
+        objs.append(m)
+    if len(objs) < 2:
+        return None
+    covered = np.any(objs, axis=0).sum() / area
+    if covered < c.sam_min_cover:
+        return None
+    return objs
+
+
+def split_elements(rgb: np.ndarray, alpha: np.ndarray, cfg, predict=None):
+    """Return a list of {alpha, kind, area} whose alphas sum to `alpha`."""
     c = cfg.elements
     H, W = alpha.shape
     hard = alpha > 0.5
@@ -67,6 +133,28 @@ def split_elements(rgb: np.ndarray, alpha: np.ndarray, cfg):
         if rareas[i] >= c.min_link_area_frac * H * W:
             k += 1
             seeds[rlab == i] = k
+    # SAM: split elements whose objects touch / overlap (person + barbell, two people)
+    if predict is not None and c.sam:
+        k2 = k
+        for j in range(1, k + 1):
+            em = (seeds == j)
+            if em.sum() < c.sam_min_elem_frac * H * W:
+                continue
+            objs = sam_split(predict, alpha, em | (hard & matting.dilate(em, r + 1)), cfg)
+            if not objs:
+                continue
+            seeds[em] = 0
+            for o in objs:
+                k2 += 1
+                seeds[o & em & (seeds == 0)] = k2
+            log.info("  elemen: SAM memisahkan 1 elemen jadi %d objek", len(objs))
+        if k2 != k:  # relabel compactly
+            ids = [i for i in np.unique(seeds) if i > 0]
+            remap = np.zeros(seeds.max() + 1, seeds.dtype)
+            for new_i, old_i in enumerate(ids, 1):
+                remap[old_i] = new_i
+            seeds = remap[seeds]
+            k = len(ids)
     if k <= 1:
         return [{"alpha": alpha, "kind": _classify(rgb, hard, H, W, c), "area": int(hard.sum())}]
     # every subject pixel (incl. soft edges) goes to the nearest seed

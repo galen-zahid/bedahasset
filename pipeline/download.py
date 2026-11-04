@@ -126,6 +126,8 @@ def ensure_models(cfg) -> None:
         repos.append(cfg.foreground.depth_model)
     if cfg.particles.enabled and cfg.particles.cloud.enabled:
         repos.append(cfg.particles.cloud.model)
+    if cfg.elements.enabled and cfg.elements.sam:
+        repos.append(cfg.elements.sam_model)
     for repo in repos:
         try:
             snapshot_download(repo, local_files_only=True)
