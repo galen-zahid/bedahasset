@@ -232,6 +232,9 @@ def detect_text(img: np.ndarray, models, sal: np.ndarray, cfg):
         angle = float(np.degrees(np.arctan2(box[1][1] - box[0][1], box[1][0] - box[0][0])))
         ov = hard_sal[inside].mean()
         on_subject = ov > c.max_subject_overlap
+        if on_subject and len(txt.strip()) <= 2:  # an icon / chart read as "2", "O", ...
+            log.info("  text skip (1-2 huruf di atas elemen, kemungkinan ikon): %r", txt)
+            continue
         # text printed ON the photo (e.g. a logo embossed on a plate) is rotated / barely legible;
         # straight, readable text over the subject is design text and must be extracted
         if on_subject and not (conf >= c.design_text_min_conf and abs(angle) <= c.design_text_max_angle):

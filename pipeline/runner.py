@@ -357,8 +357,8 @@ def _process(path: Path, out_root: Path, models, cfg) -> dict:
             elif L.get("pentool"):
                 continue
             elif cat in ("shape", "vector_icon", "vector_large") and cfg.pentool.enabled:
-                res_ = pentool.vectorize_element(
-                    L["rgb"], L["alpha"] * ~matting.dilate(text_mask, 2), cfg)
+                a_in = L["alpha"] * ~matting.dilate(text_mask, 2) if L["type"] == "subject" else L["alpha"]
+                res_ = pentool.vectorize_element(L["rgb"], a_in, cfg)
                 if res_ and res_[5] > cfg.pentool.max_interior_err:  # photographic -> stays PNG
                     L["category"] = "asset_large"
                     log.info("  pen tool: %s terlalu foto (selisih %.3f) -> tetap PNG", L["file"], res_[5])
