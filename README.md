@@ -79,7 +79,7 @@ lebih cepat. Kalau terlalu lambat, ganti `subject.rembg_model` ke `birefnet-gene
 | file | isi |
 |---|---|
 | `01_background.png` | clean plate: subject, objek foreground, teks, tombol, glow dan partikel dihapus lalu di-inpaint (LaMa) |
-| `02_subject.png` | cutout subject utama, transparan, ukuran kanvas penuh |
+| `02_element_NN_<kategori>.png` | subject **dipecah per elemen** (orang, barbell, ikon, garis penghubung, dll.), masing-masing transparan, ukuran kanvas penuh. Kategori: `asset_large`/`asset_small` (foto), `vector_large`/`vector_icon` (ilustrasi), `shape` (flat: garis, konektor, badge). Kalau subject cuma satu elemen, namanya tetap `02_subject.png`. Gabungannya ada di `extra/02_subject_all.png` |
 | `03_foreground_NN.png` | objek di DEPAN subject (berdasarkan depth). Tidak dibuat kalau tidak ada |
 | `04_stripe_NN_base.png` | strip di belakang subject: oranye **solid 100%**, 1 warna (bisa diganti Rectangle native, lihat `shapes.csv`) |
 | `04_stripe_NN_depth.png` | gelap-terang **abu-abu netral** di atas oranye (tanpa warna foto): balok/jendela yang terlihat menembus strip di referensi |
@@ -88,7 +88,7 @@ lebih cepat. Kalau terlalu lambat, ganti `subject.rembg_model` ke `birefnet-gene
 | `06_grain.png` | film grain + vignette sesuai noise level gambar asli |
 | `07_ui_NN.png` | tombol/pill di sekitar teks (mis. CTA), teksnya sudah dihapus. Bisa dipakai langsung atau dibuat ulang dari `text.csv` |
 | `crops/` | tiap layer di-crop ke bounding box-nya |
-| `manifest.csv` / `.json` | layer, file, type, x, y, w, h, z_order, suggested_opacity (+ SSIM, warna aksen, noise, timing di json) |
+| `manifest.csv` / `.json` | layer, file, type, **category** (background / asset_* / vector_* / shape / support / text), x, y, w, h, z_order, suggested_opacity (+ SSIM, warna aksen, noise, timing di json) |
 | `text.csv` | semua teks: string, bbox, warna, estimasi font size (px), plus box/warna tombol kalau ada |
 | `shapes.csv` | strip sebagai persegi panjang native Canva: `canva_x, canva_y, canva_w, canva_h, canva_rotation_deg, color_hex, canva_transparency_pct` |
 | `preview_recomposite.png` | semua layer ditumpuk ulang (teks TIDAK ikut, karena teks dibuat native di Canva) |
@@ -152,6 +152,8 @@ Semua threshold ada di `config.yaml`, lengkap dengan komentar. Yang paling serin
 - `stripe.*`: deteksi strip di belakang subject (`hue_tol_deg`, `min_behind_frac`,
   `collinear_tol`) dan teksturnya (`texture_sigma`, `subject_clearance_px`).
 - `particles.min_contrast`, `particles.max_chroma`, `particles.max_blob_area`: partikel.
+- `elements.link_cut_frac`: makin besar, makin banyak elemen dipecah (sambungan tebal ikut diputus).
+  `elements.enabled: false` untuk kembali ke satu layer subject.
 - `particles.cloud.*`: awan debu/kapur/asap besar (CLIPSeg dengan text prompt). Ubah `prompts`
   untuk efek lain (mis. "sparks", "fog"); `max_area_frac` mencegah kabut di seluruh background
   ikut diekstrak.
@@ -171,6 +173,7 @@ pipeline/
   models.py            model (BiRefNet, Depth Anything, EasyOCR, LaMa, CLIPSeg), load sekali per batch, auto GPU
   imageio.py           load/save PNG, bbox
   matting.py           guided filter, levels, feather, island removal, decontaminate warna
+  elements.py          pecah subject jadi elemen terpisah + kategori (asset/vector/shape)
   subject.py           matte subject + re-matting tepi terhadap clean plate (anti halo)
   text.py              OCR + second pass, mask glyph, deteksi tombol & dekor
   foreground.py        objek di depan subject via depth + connected components

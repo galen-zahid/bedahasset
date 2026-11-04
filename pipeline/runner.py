@@ -9,7 +9,7 @@ from pathlib import Path
 
 import numpy as np
 
-from . import background, composite, foreground, glow, grain, manifest, particles, stripe, subject, text
+from . import background, composite, elements, foreground, glow, grain, manifest, particles, stripe, subject, text
 from . import matting
 from .imageio import load_rgb, save_rgb
 
@@ -226,9 +226,24 @@ def _process(path: Path, out_root: Path, models, cfg) -> dict:
                        "rgb": rgb, "alpha": a, "z_order": z})
         z += 1
     if subj_a.max() > 0:  # graphic designs may have no separable subject
-        layers.append({"layer": "subject", "file": "02_subject.png", "type": "subject",
-                       "rgb": subj_rgb, "alpha": subj_a, "z_order": z})
-        z += 1
+        els = elements.split_elements(subj_rgb, subj_a, cfg)
+        if len(els) == 1:
+            layers.append({"layer": "subject", "file": "02_subject.png", "type": "subject",
+                           "category": els[0]["kind"], "rgb": subj_rgb, "alpha": subj_a,
+                           "z_order": z})
+            z += 1
+        else:
+            for k, e in enumerate(els, 1):
+                layers.append({"layer": f"element_{k:02d}_{e['kind']}",
+                               "file": f"02_element_{k:02d}_{e['kind']}.png", "type": "subject",
+                               "category": e["kind"], "rgb": subj_rgb, "alpha": e["alpha"],
+                               "z_order": z})
+                z += 1
+            # the whole subject in one file, for convenience (not part of the stack)
+            extra_dir = tmp / "extra"
+            extra_dir.mkdir(exist_ok=True)
+            from .imageio import save_rgba
+            save_rgba(extra_dir / "02_subject_all.png", subj_rgb, subj_a)
     for i, (rgb, a) in enumerate(fg_layers, 1):
         layers.append({"layer": f"foreground_{i:02d}", "file": f"03_foreground_{i:02d}.png",
                        "type": "fg", "rgb": rgb, "alpha": a, "z_order": z})

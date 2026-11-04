@@ -36,6 +36,17 @@ subject:
   detail_ref: 0.012         # di zona ambigu, alpha dikali (energi detail lokal / nilai ini): helai
                             # rambut bertekstur tetap, area gelap yang mulus (= background) hilang
 
+# --------------------------------------------------------------- elements
+elements:               # subject dipecah jadi elemen terpisah (asset besar/kecil, shape) bukan 1 layer
+  enabled: true
+  link_cut_frac: 0.008  # sambungan lebih tipis dari ~2x (0.8% diagonal) diputus: garis penghubung,
+                        # batang barbell, panah. Naikkan = lebih banyak pecahan
+  min_area_frac: 0.002  # elemen minimal 0.2% kanvas (lebih kecil digabung ke elemen terdekat)
+  min_link_area_frac: 0.0015  # sambungan yang terputus & cukup besar jadi elemen "shape" sendiri
+  large_frac: 0.08      # elemen >= 8% kanvas = asset_large, selebihnya asset_small
+  flat_shape_threshold: 0.8   # >= 80% pixel di 4 warna dominan = shape (flat)
+  photo_texture: 0.004  # tekstur halus >= ini = foto (asset_*), di bawah = ilustrasi vektor (vector_*)
+
 # ------------------------------------------------------------- foreground
 foreground:
   enabled: true
