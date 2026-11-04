@@ -93,15 +93,20 @@ background:
                         # "melanjutkan" helai rambut jadi hantu subject di background
   restore_beyond_px: 8  # setelah inpaint, pixel asli dikembalikan bila > 8px dari subject (celah
                          # antara lengan/kaki tetap asli). 0 = pakai hasil LaMa di seluruh mask
+  restore_strict_px: 45   # dalam radius ini dari subject, pixel asli hanya dikembalikan kalau mirip
+  restore_max_diff: 0.08  # hasil LaMa (selisih < 0.08) -> helai rambut tipis tidak "balik" ke bg
   text_extra_dilate_px: 2
   lama_max_side: 800    # LaMa dijalankan di resolusi ini lalu di-upscale (hanya area mask yang dipakai).
                         # Lubang besar lebih koheren di ~800px; 0 = full-res (lebih tajam, struktur kurang)
   paste_feather_px: 3   # blend hasil inpaint ke plate asli dengan feather segini
+  smooth_inpainted_px: 6  # haluskan pola "tambal-sulam" LaMa di area inpaint (guided filter). 0 = mati
   regrain_inpainted: true  # tambahkan grain sintetis di area inpaint supaya cocok dengan sekitarnya
 
 # ------------------------------------------------------------------- glow
 glow:
-  enabled: true
+  # Glow per-pixel (semua cahaya oranye) -> MATI: yang dijadikan layer editable hanya strip
+  # grafis di belakang subject (lihat "stripe"). Lampu/pantulan oranye lain tetap di background.
+  enabled: false
   # Deteksi warna aksen dominan (di luar subject).
   min_saturation: 0.45
   min_value: 0.30
@@ -117,6 +122,25 @@ glow:
   color_mode: pixel     # pixel = warna glow per-pixel (akurat, recomposite lossless)
                         # accent = satu warna aksen rata (mudah di-recolor di Canva, sedikit lossy)
   subject_dilate_px: 6  # jauhi tepi subject
+
+# ----------------------------------------------------------------- stripe
+stripe:                 # strip/pita warna aksen yang lewat DI BELAKANG subject -> 04_stripe_NN.png
+  enabled: true
+  hue_tol_deg: 20       # jarak hue ke warna aksen
+  min_saturation: 0.45
+  min_value: 0.30
+  min_piece_frac: 0.002 # potongan strip minimal 0.2% kanvas
+  collinear_tol: 1.35   # potongan dianggap segaris kalau gabungannya tidak lebih lebar dari 1.35x
+  min_elongation: 2.0   # panjang/tebal minimal
+  min_behind_frac: 0.05 # minimal 5% persegi panjang strip tertutup subject ("di belakang orang")
+  max_stripes: 3
+  close_px: 7           # tutup bintik grunge gelap di dalam strip (tetap ikut layer strip)
+  max_hole_px: 4000
+  dilate_px: 4          # mask strip di-dilate sebelum dihapus dari background
+  texture_sigma: 6     # alpha strip = opacity dasar + grunge halus (< ~6px). Bentuk besar (tiang,
+                        # jendela yang tembus) dibuang karena sudah ada di background. 0 = apa adanya
+  subject_clearance_px: 12 # pixel strip sedekat ini ke subject (tercemar helai rambut/tepi) tidak
+                           # dipakai; teksturnya disintesis seperti bagian di belakang subject
 
 # -------------------------------------------------------------- particles
 particles:

@@ -32,8 +32,14 @@ def restore_original(plate: np.ndarray, img: np.ndarray, inp_mask: np.ndarray, s
     core = (sal > 0.02) | (raw > cfg.background.raw_threshold)
     if fg_union is not None:
         core |= fg_union > 0.02
+    near = matting.dilate(core, int(cfg.background.restore_strict_px))
     core = matting.dilate(core, r)
     restore = inp_mask & ~core & ~keep_mask
+    # close to the subject only restore pixels that look like what LaMa put there: fine hair
+    # wisps / edge spill that BiRefNet missed differ strongly and stay inpainted
+    diff = np.abs(img - plate).max(-1)
+    restore &= ~near | (diff < cfg.background.restore_max_diff)
+    restore = cv2.morphologyEx(restore.astype(np.uint8), cv2.MORPH_OPEN, matting.disk(2)).astype(bool)
     w = matting.feather(restore.astype(np.float32), 2.0) * (~core & ~keep_mask)
     out = plate * (1 - w[..., None]) + img * w[..., None]
     return out.astype(np.float32), w > 0.5

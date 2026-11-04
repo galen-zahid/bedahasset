@@ -20,6 +20,15 @@ def pick_device(pref: str = "auto") -> str:
     return "cpu"
 
 
+def _cached(loader, name):
+    """Load a HuggingFace model from the local cache first (no network round-trips, no rate
+    limits); only download when it is not cached yet."""
+    try:
+        return loader(name, local_files_only=True)
+    except Exception:  # noqa: BLE001 - not cached yet
+        return loader(name)
+
+
 class Models:
     def __init__(self, cfg):
         self.cfg = cfg
@@ -57,11 +66,11 @@ class Models:
         from transformers import pipeline
 
         if self._depth is None:
-            self._depth = pipeline(
-                "depth-estimation",
-                model=self.cfg.foreground.depth_model,
-                device=0 if self.device == "cuda" else -1,
-            )
+            self._depth = _cached(
+                lambda name, **kw: pipeline("depth-estimation", model=name,
+                                            device=0 if self.device == "cuda" else -1,
+                                            model_kwargs=kw),
+                self.cfg.foreground.depth_model)
         out = self._depth(Image.fromarray(rgb_u8))
         d = np.asarray(out["predicted_depth"], dtype=np.float32).squeeze()
         d = cv2.resize(d, (rgb_u8.shape[1], rgb_u8.shape[0]), interpolation=cv2.INTER_CUBIC)
@@ -88,8 +97,9 @@ class Models:
 
         if self._clipseg is None:
             name = self.cfg.particles.cloud.model
-            self._clipseg = (CLIPSegProcessor.from_pretrained(name),
-                             CLIPSegForImageSegmentation.from_pretrained(name).to(self.device).eval())
+            proc = _cached(CLIPSegProcessor.from_pretrained, name)
+            model = _cached(CLIPSegForImageSegmentation.from_pretrained, name)
+            self._clipseg = (proc, model.to(self.device).eval())
         proc, model = self._clipseg
         im = Image.fromarray(rgb_u8)
         inp = proc(text=list(prompts), images=[im] * len(prompts), return_tensors="pt", padding=True)

@@ -8,7 +8,7 @@ from pathlib import Path
 
 import numpy as np
 
-from . import background, composite, foreground, glow, grain, manifest, particles, subject, text
+from . import background, composite, foreground, glow, grain, manifest, particles, stripe, subject, text
 from . import matting
 from .imageio import load_rgb, save_rgb
 
@@ -66,15 +66,38 @@ def _process(path: Path, out_root: Path, models, cfg) -> dict:
         fgs, fg_union = foreground.find_foreground(img, sal, depth, cfg)
     tick("depth")
 
+    # 3b. accent stripes behind the subject + 3c. dust cloud region (both removed in the
+    #     SAME LaMa pass as the subject: one pass = no smudgy double-inpaint)
+    stripes, stripe_vis = [], []
+    occl = sal > 0.02
+    if fg_union is not None:
+        occl |= fg_union > 0.02
+    if cfg.stripe.enabled:
+        stripes, acc_mask = stripe.find_stripes(img, sal, text_mask, fg_union, cfg)
+        stripe_vis = [stripe.visible_mask(s_, acc_mask, occl, cfg) for s_ in stripes]
+    cloud_soft = particles.cloud_region(img, models, cfg)
+    tick("stripe+cloud")
+
     # 4. clean plate
     ui_mask = np.zeros_like(text_mask)
     for u in ui:
         ui_mask |= u["mask"]
     inp_mask = background.inpaint_mask(sal, raw, text_mask, fg_union, cfg, exclude=ui_mask)
+    extra = np.zeros_like(inp_mask)
+    for v in stripe_vis:
+        extra |= matting.dilate(v, int(cfg.stripe.dilate_px))
+    if cloud_soft is not None:
+        extra |= cloud_soft > 0.05
+    inp_mask |= extra
     plate = background.clean_plate(img, inp_mask, models, cfg)
-    keep = matting.dilate(text_mask, int(cfg.background.text_extra_dilate_px) + 2)
+    keep = matting.dilate(text_mask, int(cfg.background.text_extra_dilate_px) + 2) | extra
     plate, restored = background.restore_original(plate, img, inp_mask, sal, raw, fg_union, keep, cfg)
     inp_mask &= ~restored
+    if cfg.background.smooth_inpainted_px > 0:  # soften LaMa's patchwork, then regrain below
+        r_ = int(cfg.background.smooth_inpainted_px)
+        sm = np.stack([matting.guided_filter(plate, plate[..., i], r_, 1e-3) for i in range(3)], -1)
+        w_ = matting.feather(inp_mask.astype(np.float32), 2.0)[..., None]
+        plate = np.clip(plate * (1 - w_) + sm * w_, 0, 1).astype(np.float32)
     sigma = grain.estimate_noise(img, exclude=inp_mask)
     if cfg.background.regrain_inpainted:
         plate = grain.regrain(plate, inp_mask, sigma, cfg)
@@ -92,11 +115,21 @@ def _process(path: Path, out_root: Path, models, cfg) -> dict:
     if cfg.glow.enabled:
         glow_rgb, glow_a, plate, ginfo = glow.extract_glow(img, plate, sal, cfg, models)
 
-    # 7. particles
+    # 6b. stripe layers (full band, hidden part synthesized) + Canva geometry
+    stripe_layers, shapes = [], []
+    for k, (s_, v) in enumerate(zip(stripes, stripe_vis), 1):
+        rgb, a, col = stripe.build_layer(img, plate, s_, v, occl, models, cfg)
+        if rgb is None:
+            continue
+        stripe_layers.append((rgb, a))
+        shapes.append({"id": k, "layer_file": f"04_stripe_{k:02d}.png", **stripe.canva_geometry(s_, col)})
+
+    # 7. particles (+ dust cloud, measured on the original against the clean plate)
     part_rgb = part_a = None
     n_blobs = 0
     if cfg.particles.enabled:
-        part_rgb, part_a, plate, n_blobs = particles.extract_particles(plate, sal, text_mask, cfg, models, img)
+        part_rgb, part_a, plate, n_blobs = particles.extract_particles(
+            plate, sal, text_mask, cfg, orig=img, cloud_soft=cloud_soft)
     tick("overlays")
 
     # 8. grain overlay
@@ -111,6 +144,10 @@ def _process(path: Path, out_root: Path, models, cfg) -> dict:
     if glow_a is not None:
         layers.append({"layer": "glow", "file": "04_glow.png", "type": "overlay",
                        "rgb": glow_rgb, "alpha": glow_a, "z_order": z})
+        z += 1
+    for k, (rgb, a) in enumerate(stripe_layers, 1):
+        layers.append({"layer": f"stripe_{k:02d}", "file": f"04_stripe_{k:02d}.png", "type": "shape",
+                       "rgb": rgb, "alpha": a, "z_order": z})
         z += 1
     layers.append({"layer": "subject", "file": "02_subject.png", "type": "subject",
                    "rgb": subj_rgb, "alpha": subj_a, "z_order": z})
@@ -142,6 +179,7 @@ def _process(path: Path, out_root: Path, models, cfg) -> dict:
 
     rows = manifest.write_layers(tmp, layers, cfg)
     manifest.write_text_csv(tmp, blocks)
+    manifest.write_shapes_csv(tmp, shapes)
 
     # ---- verification
     comp = composite.recomposite(layers)
@@ -160,7 +198,7 @@ def _process(path: Path, out_root: Path, models, cfg) -> dict:
         "ssim_without_grain_excluding_text": round(s_ng_notext, 4),
         "noise_sigma": round(sigma, 4),
         "accent": ginfo, "particle_blobs": n_blobs, "foreground_objects": len(fg_layers),
-        "text_blocks": len(blocks), "ui_elements": len(ui), "timings_s": T,
+        "text_blocks": len(blocks), "ui_elements": len(ui), "stripes": shapes, "timings_s": T,
         "note": "Stack layers by z_order at x=0,y=0 (full-size files). Text is not an image: "
                 "recreate rows of text.csv as native Canva text.",
     }
