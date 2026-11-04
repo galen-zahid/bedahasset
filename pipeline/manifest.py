@@ -7,7 +7,8 @@ from pathlib import Path
 
 from .imageio import bbox, save_rgb, save_rgba
 
-FIELDS = ["layer", "file", "type", "x", "y", "w", "h", "z_order", "suggested_opacity", "crop_file"]
+FIELDS = ["layer", "file", "type", "blend_mode", "x", "y", "w", "h", "z_order", "suggested_opacity",
+          "crop_file"]
 
 
 def write_layers(out: Path, layers, cfg):
@@ -32,7 +33,8 @@ def write_layers(out: Path, layers, cfg):
             crop_file = f"crops/{f.stem}_crop.png"
             if w and h:
                 save_rgba(out / crop_file, L["rgb"][y:y + h, x:x + w], L["alpha"][y:y + h, x:x + w])
-        rows.append({"layer": L["layer"], "file": L["file"], "type": L["type"], "x": x, "y": y,
+        rows.append({"layer": L["layer"], "file": L["file"], "type": L["type"],
+                     "blend_mode": L.get("blend_mode", "normal"), "x": x, "y": y,
                      "w": w, "h": h, "z_order": L["z_order"],
                      "suggested_opacity": L.get("suggested_opacity", 1.0),
                      "crop_file": crop_file})
@@ -64,7 +66,7 @@ def write_shapes_csv(out: Path, shapes):
     """Geometry of graphic shapes (stripes) to rebuild them natively in Canva."""
     if not shapes:
         return
-    fields = ["id", "layer_file", "overlay_file", "shade_file", "shape", "canva_x", "canva_y", "canva_w",
+    fields = ["id", "layer_file", "overlay_file", "shade_file", "blend_mode", "shape", "canva_x", "canva_y", "canva_w",
               "canva_h", "canva_rotation_deg", "color_hex", "canva_transparency_pct", "cx", "cy",
               "corners"]
     with open(out / "shapes.csv", "w", newline="", encoding="utf-8-sig") as f:

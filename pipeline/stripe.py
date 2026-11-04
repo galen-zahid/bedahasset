@@ -297,14 +297,30 @@ def build_layered(img: np.ndarray, plate: np.ndarray, stripe, vis: np.ndarray,
     e = np.round(np.clip((a_tex - o) / max(1 - o, 1e-3), 0, 1) * shape * 255) / 255
     a_tot = base_a + e * (1 - base_a)
 
-    # the background stays the clean plate; everything the clean stripe does not explain goes
-    # into the optional shade ("depth") layer on top of it
-    B = plate
+    # background under the visible stripe: the scene seen THROUGH the stripe (dark beams,
+    # bright window) as LUMINANCE only, un-mixed from the reference, applied to the clean
+    # plate's colour. Grey-level un-mixing cannot produce the orange/teal patches of a full
+    # RGB un-mix, and none of the photo ends up in the stripe layers.
+    LUMA = np.array([0.299, 0.587, 0.114], np.float32)
+    Cl, Gl, Pl = target @ LUMA, float(G @ LUMA), plate @ LUMA
+    Bl = np.clip((Cl - a_tot * Gl) / np.maximum(1 - a_tot, 1e-3), 0, 1)
+    Bl = matting.guided_filter(np.repeat(Cl[..., None], 3, -1), Bl, 2, 1e-4)  # tame noise gain
+    ratio = np.clip(Bl / np.maximum(Pl, 0.02), 0, c.max_luma_gain)
+    B_scene = np.clip(plate * ratio[..., None], 0, 1)
+    # where the plate is near black, ratio is unstable -> use neutral grey of that luminance
+    dark = (Pl < 0.02)[..., None]
+    B_scene = np.where(dark, np.clip(Bl, 0, 1)[..., None].repeat(3, -1), B_scene)
+    B_scene = np.round(B_scene * 255) / 255
+    B = np.where(known[..., None], B_scene, plate).astype(np.float32)
+    if c.shade:  # with a shade layer the residual goes there and the background stays clean
+        B = plate
     X2 = B * (1 - a_tot[..., None]) + G * a_tot[..., None]
 
     # shade: whatever is left (only where B had to be clipped), minimal colour-to-alpha
     sh_a, sh_rgb = color_to_alpha(target, X2)
     sh_a = np.where(known & (np.abs(target - X2).max(-1) > c.shade_min_diff), sh_a, 0)
+    if not c.shade:
+        sh_a = np.zeros_like(sh_a)
     sh_a = np.round(sh_a * 255) / 255
     sh_rgb = np.where(sh_a[..., None] > 1e-3,
                       X2 + (target - X2) / np.maximum(sh_a, 1e-3)[..., None], X2)
@@ -323,7 +339,122 @@ def build_layered(img: np.ndarray, plate: np.ndarray, stripe, vis: np.ndarray,
     return {"base_rgb": rgb, "base_a": base_a.astype(np.float32),
             "grunge_rgb": rgb, "grunge_a": e.astype(np.float32),
             "shade_rgb": sh_rgb, "shade_a": sh_a.astype(np.float32),
-            "color": G, "opacity": o}
+            "bg_under": B, "bg_mask": known, "color": G, "opacity": o}
+
+
+def build_multiply(img: np.ndarray, plate: np.ndarray, stripe, vis: np.ndarray,
+                   matte: np.ndarray, models, cfg, top_rgb=None, top_a=None):
+    """Stripe as it behaves in the reference: an orange layer in MULTIPLY blend.
+
+        C = S * (1 - a + a*G)        (per channel; S = scene behind the stripe)
+
+    Fitting this per pixel separates cleanly: a (how orange) is almost constant per stripe
+    segment, S holds the scene (window, beams) without any orange. S is further split into
+    S = S_low * T, where T are the small dark grunge specks:
+
+      01_background           S_low under the stripe (scene, no orange, no specks)
+      04_stripe_NN_base       colour G, MULTIPLY, opacity a (smooth, per segment)
+      04_stripe_NN_grunge     BLACK specks, NORMAL blend, opacity 1 - T
+                              (black + normal == multiply by T, so no blend mode needed)
+    """
+    c = cfg.stripe
+    rect = stripe["rect"]
+    LUMA = np.array([0.299, 0.587, 0.114], np.float32)
+    vis_core = vis & ~matting.dilate(matte, int(c.subject_clearance_px))
+    if vis_core.sum() < 50:
+        return None
+    pix = img[vis_core]
+    lum = pix @ LUMA
+    G = np.median(pix[lum >= np.percentile(lum, 70)], axis=0).astype(np.float32)
+    G = np.round(G / max(G.max(), 1e-3) * 255) / 255  # brightest version of the hue
+
+    target = img.copy()
+    solid = rect & matte
+    if top_a is not None:
+        ta = top_a[..., None]
+        U = (img - ta * top_rgb) / np.maximum(1 - ta, 1e-3)
+        semi = rect & (top_a > 1.0 / 255) & (top_a < 0.9)
+        target = np.where(semi[..., None], np.clip(U, 0, 1), target)
+        solid = rect & (top_a >= 0.9)
+    known = rect & ~solid
+
+    # 1. per-pixel multiply fit (grid over a, closed form for neutral s)
+    Cb = target[known]
+    best = np.full(len(Cb), 1e9, np.float32)
+    a_px = np.zeros(len(Cb), np.float32)
+    s_px = np.zeros(len(Cb), np.float32)
+    for a in np.linspace(0, 1, 101, dtype=np.float32):
+        f = 1 - a + a * G
+        sv = np.clip((Cb @ f) / float(f @ f), 0, None)
+        err = ((Cb - sv[:, None] * f) ** 2).sum(1)
+        m = err < best
+        best[m], a_px[m], s_px[m] = err[m], a, sv[m]
+    A = np.zeros(rect.shape, np.float32)
+    A[known] = a_px
+    Sv = np.zeros(rect.shape, np.float32)
+    Sv[known] = s_px
+    rel = known & (Sv > c.mult_min_scene)  # in near-black pixels a is undetermined
+
+    # 2. smooth coverage per segment (no scene structure), filled behind the subject
+    w = rel.astype(np.float32)
+    sig = c.coverage_sigma
+    num, den = cv2.GaussianBlur(A * w, (0, 0), sig), cv2.GaussianBlur(w, (0, 0), sig)
+    num2, den2 = cv2.GaussianBlur(A * w, (0, 0), sig * 4), cv2.GaussianBlur(w, (0, 0), sig * 4)
+    med = float(np.median(A[rel])) if rel.any() else 1.0
+    a_s = np.where(den > 0.02, num / np.maximum(den, 1e-4),
+                   np.where(den2 > 0.005, num2 / np.maximum(den2, 1e-4), med))
+    a_s = np.clip(a_s, 0, 1).astype(np.float32)
+    shape = matting.feather(rect.astype(np.float32), 0.6)
+    shape[matting.erode(rect, 1)] = 1.0
+    base_a = np.round(a_s * shape * 255) / 255
+
+    # 3. scene behind the stripe: exact division, then split off the grunge specks
+    f = 1 - base_a[..., None] + base_a[..., None] * G
+    S = np.clip(target / np.maximum(f, 1e-3), 0, 1)
+    if c.neutral_scene:  # scene keeps its brightness but takes the colour cast of the clean plate
+        pb = cv2.GaussianBlur(plate, (0, 0), 15)
+        tint = pb / np.maximum(pb @ LUMA, 1e-3)[..., None]
+        tint = np.clip(tint / np.maximum(tint.max(-1, keepdims=True), 1e-3) *
+                       np.minimum(tint.max(-1, keepdims=True), 1.3), 0, 2)
+        S = np.where(known[..., None], np.clip((S @ LUMA)[..., None] * tint, 0, 1), S)
+    L = S @ LUMA
+    env = cv2.GaussianBlur(cv2.dilate(L, matting.disk(int(c.speck_px))), (0, 0), c.speck_px / 2)
+    T = np.clip(L / np.maximum(env, 1e-3), 0, 1)
+    g_a = np.where(known, 1 - T, 0).astype(np.float32)
+    g_a[g_a < c.speck_min] = 0
+    # specks are blob-like; thin long lines (window frame edges, hair strands) are photo
+    # detail -> they stay in the background (S_low absorbs them, the stack stays exact)
+    g_a[matting.dilate(matte, int(c.subject_clearance_px))] = 0
+    ink = (g_a > c.line_min_alpha).astype(np.uint8)
+    n, lab, st, _ = cv2.connectedComponentsWithStats(ink, connectivity=8)
+    if n > 1:
+        long_side = np.maximum(st[:, 2], st[:, 3]).astype(np.float32)
+        line = (long_side >= c.line_min_len) & (st[:, 4] / np.maximum(long_side, 1) < c.line_max_width)
+        big = st[:, 4] > c.speck_max_area  # large connected dark shapes = structure, not specks
+        line = line | big
+        line[0] = False
+        g_a[matting.dilate(line[lab], 1)] = 0
+    if solid.any():  # continue the speck texture behind the subject
+        g3 = _synth_along_band(np.repeat(g_a[..., None], 3, -1), rect, ~solid, stripe["theta"],
+                               [0.0] * 3, models)
+        g_a = np.where(solid, g3.mean(-1), g_a)
+    g_a = np.round(np.clip(g_a, 0, 1) * shape * 255) / 255
+    S_low = np.clip(S / np.maximum(1 - g_a, 1e-3)[..., None], 0, 1)
+    B = np.where(known[..., None], S_low, plate).astype(np.float32)
+    B = np.round(B * 255) / 255
+
+    stack = B * (1 - base_a[..., None]) + B * G * base_a[..., None]  # multiply
+    stack = stack * (1 - g_a[..., None])  # black specks, normal
+    if top_a is not None:
+        stack = stack * (1 - top_a[..., None]) + top_rgb * top_a[..., None]
+    err = np.abs(stack - img)[known]
+    log.info("  stripe multiply: %s | opacity base %.2f (median) | bercak %.0f%% strip | "
+             "error vs referensi rata-rata %.2f/255, maks %.0f/255",
+             "#%02X%02X%02X" % tuple(int(round(float(x) * 255)) for x in G), med,
+             100 * float((g_a[rect] > 0.05).mean()), 255 * float(err.mean()), 255 * float(err.max()))
+    return {"base_rgb": np.broadcast_to(G, img.shape).astype(np.float32), "base_a": base_a.astype(np.float32),
+            "grunge_rgb": np.zeros_like(img), "grunge_a": g_a.astype(np.float32),
+            "bg_under": B, "bg_mask": known, "color": G, "opacity": round(med, 2)}
 
 
 def canva_geometry(stripe, color, opacity: float = 1.0) -> dict:

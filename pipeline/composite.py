@@ -20,7 +20,11 @@ def recomposite(layers) -> np.ndarray:
         if out is None:
             out = L["rgb"].copy()
             continue
-        out = over(out, L["rgb"], L["alpha"], L.get("suggested_opacity", 1.0))
+        if L.get("blend_mode") == "multiply":
+            a = (L["alpha"] * L.get("suggested_opacity", 1.0))[..., None]
+            out = out * (1 - a) + out * L["rgb"] * a
+        else:
+            out = over(out, L["rgb"], L["alpha"], L.get("suggested_opacity", 1.0))
     return np.clip(out, 0, 1)
 
 

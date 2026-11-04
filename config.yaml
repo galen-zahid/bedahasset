@@ -129,11 +129,24 @@ stripe:                 # strip/pita warna aksen yang lewat DI BELAKANG subject
   # layered = 3 layer, blend NORMAL + opacity saja (jalan di semua akun Canva), ditumpuk = 1:1:
   #   04_stripe_NN_base.png   persegi panjang 1 warna, opacity dasar (bisa dibuat native, shapes.csv)
   #   04_stripe_NN_grunge.png warna yang SAMA, cuma bercak (opacity per-pixel), tanpa foto
-  #   04_stripe_NN_shade.png  "depth" OPSIONAL: semua sisa yang bikin tumpukan 1:1 (tiang yang tembus,
-  #                           terang jendela). Matikan kalau strip digeser -> semua tetap bersih
-  #   01_background di bawah strip = bersih (tanpa strip)
+  #   01_background di bawah strip = scene yang terlihat menembus strip (balok gelap, terang
+  #                           jendela), tanpa warna oranye -> strip semi-transparan seperti referensi
+  #   04_stripe_NN_shade.png  hanya kalau shade: true (lihat bawah)
   # single  = 1 PNG: warna rata + grunge di alpha
-  mode: layered
+  # multiply = (default) seperti referensi: strip oranye ber-blend MULTIPLY di atas scene.
+  #   01_background           scene di balik strip (jendela, balok), tanpa oranye & tanpa bercak
+  #   04_stripe_NN_base.png   oranye, blend MULTIPLY, opacity per segmen
+  #   04_stripe_NN_grunge.png bercak HITAM, blend normal (setara multiply) -> semua layer bersih, 1:1
+  mode: multiply
+  mult_min_scene: 0.12  # pixel scene lebih gelap dari ini tidak dipakai untuk mengukur opacity strip
+  neutral_scene: false  # true = scene di balik strip pakai warna cast background (lebih netral kalau
+                        # strip digeser, tapi tumpukan tidak lagi 1:1)
+  speck_px: 2           # ukuran bercak grunge (px); detail lebih besar (balok, jendela) tetap di background
+  speck_min: 0.03       # bercak lebih tipis dari ini dibuang (noise)
+  line_min_alpha: 0.12  # garis tipis panjang di grunge (tepi kusen, helai rambut) = detail foto,
+  line_min_len: 10      # dikembalikan ke background: panjang >= 10px dan
+  line_max_width: 2.5   # lebar rata-rata < 2.5px
+  speck_max_area: 400   # bercak > 400px (bentuk gelap besar/tebal) = struktur foto -> background
   hue_tol_deg: 20       # jarak hue ke warna aksen
   min_saturation: 0.45
   min_value: 0.30
@@ -147,6 +160,9 @@ stripe:                 # strip/pita warna aksen yang lewat DI BELAKANG subject
   dilate_px: 4          # mask strip di-dilate sebelum dihapus dari background
   coverage_sigma: 30    # variasi opacity strip dihaluskan (px): beda antar segmen tertangkap,
                         # tiang/jendela (detail foto) tidak masuk ke layer strip
+  shade: false          # true = tambah 04_stripe_NN_shade.png (sisa selisih -> tumpukan 1:1 pixel,
+                        # tapi layer itu berisi potongan foto). false = semua layer strip bersih
+  max_luma_gain: 6.0    # batas penguatan kecerahan scene di bawah strip
   shade_min_diff: 0.01  # layer shade hanya di pixel yang selisihnya > ini (sisanya dibulatkan)
   base_percentile: 15   # opacity base = persentil ke-15 coverage strip. Grunge menambah bercak oranye
                         # di atasnya; bagian yang lebih gelap dari base jadi bercak gelap di grunge

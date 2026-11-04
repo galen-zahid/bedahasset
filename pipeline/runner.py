@@ -86,7 +86,7 @@ def _process(path: Path, out_root: Path, models, cfg) -> dict:
     extra = np.zeros_like(inp_mask)
     for s_, v in zip(stripes, stripe_vis):
         extra |= matting.dilate(v, int(cfg.stripe.dilate_px))
-        if cfg.stripe.mode == "layered":  # whole band: the bg under the stripe must be stripe-free
+        if cfg.stripe.mode in ("layered", "multiply"):  # whole band must be stripe-free in the bg
             extra |= matting.dilate(s_["rect"], int(cfg.stripe.dilate_px))
     if cloud_soft is not None:
         extra |= cloud_soft > 0.05
@@ -144,20 +144,25 @@ def _process(path: Path, out_root: Path, models, cfg) -> dict:
         top_a = top_a * (1 - a_f) + a_f
     top_rgb = top_p / np.maximum(top_a, 1e-6)[..., None]
     for k, (s_, v) in enumerate(zip(stripes, stripe_vis), 1):
-        if cfg.stripe.mode == "layered":
-            res = stripe.build_layered(img, plate, s_, v, occl, models, cfg, top_rgb, top_a)
+        if cfg.stripe.mode in ("layered", "multiply"):
+            build = stripe.build_multiply if cfg.stripe.mode == "multiply" else stripe.build_layered
+            res = build(img, plate, s_, v, occl, models, cfg, top_rgb, top_a)
             if res is None:
                 continue
+            # the scene seen THROUGH the stripe belongs to the background
+            plate = np.where(res["bg_mask"][..., None], res["bg_under"], plate)
             stripe_layers.append((f"stripe_{k:02d}_base", f"04_stripe_{k:02d}_base.png",
                                   res["base_rgb"], res["base_a"]))
             stripe_layers.append((f"stripe_{k:02d}_grunge", f"04_stripe_{k:02d}_grunge.png",
                                   res["grunge_rgb"], res["grunge_a"]))
-            if res["shade_a"].max() > 0:
+            if "shade_a" in res and res["shade_a"].max() > 0:
                 stripe_layers.append((f"stripe_{k:02d}_shade", f"04_stripe_{k:02d}_shade.png",
                                       res["shade_rgb"], res["shade_a"]))
             shapes.append({"id": k, "layer_file": f"04_stripe_{k:02d}_base.png",
                            "overlay_file": f"04_stripe_{k:02d}_grunge.png",
-                           "shade_file": f"04_stripe_{k:02d}_shade.png" if res["shade_a"].max() > 0 else "",
+                           "shade_file": f"04_stripe_{k:02d}_shade.png"
+                           if "shade_a" in res and res["shade_a"].max() > 0 else "",
+                           "blend_mode": "multiply" if cfg.stripe.mode == "multiply" else "normal",
                            **stripe.canva_geometry(s_, res["color"], res["opacity"])})
         else:
             rgb, a_, col = stripe.build_layer(img, plate, s_, v, occl, models, cfg)
@@ -184,6 +189,8 @@ def _process(path: Path, out_root: Path, models, cfg) -> dict:
     for lname, fname, rgb, a in stripe_layers:
         layers.append({"layer": lname, "file": fname,
                        "type": "overlay" if lname.endswith(("grunge", "shade")) else "shape",
+                       "blend_mode": "multiply" if (cfg.stripe.mode == "multiply"
+                                                    and lname.endswith("base")) else "normal",
                        "rgb": rgb, "alpha": a, "z_order": z})
         z += 1
     layers.append({"layer": "subject", "file": "02_subject.png", "type": "subject",
