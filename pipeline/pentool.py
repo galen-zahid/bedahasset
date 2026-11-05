@@ -156,13 +156,44 @@ def merge_pieces(img, labels, merge_tol, min_px, max_pieces, color_join=0.15):
     return out, betas, sizes
 
 
-def palette_components(rgb, mask, max_colors, min_px):
+def design_palette(items, max_colors, merge_tol):
+    """One palette for the whole design (so the same purple is the same purple in every icon).
+    Built from 'stable' pixels (flat neighbourhood), not from anti-aliased edges."""
+    samples = []
+    for rgb, m in items:
+        L = rgb.mean(-1).astype(np.float32)
+        var = cv2.blur(L * L, (3, 3)) - cv2.blur(L, (3, 3)) ** 2
+        st = m & (var < 2e-4)
+        if st.sum() < 20:
+            st = m
+        px = rgb[st]
+        if len(px) > 20000:
+            px = px[np.random.default_rng(0).choice(len(px), 20000, False)]
+        samples.append(px)
+    pix = np.concatenate(samples).astype(np.float32)
+    k = int(min(max_colors, max(2, len(np.unique((pix * 16).astype(np.int32), axis=0)))))
+    crit = (cv2.TERM_CRITERIA_EPS + cv2.TERM_CRITERIA_MAX_ITER, 40, 0.001)
+    _, lab, centers = cv2.kmeans(pix, k, None, crit, 4, cv2.KMEANS_PP_CENTERS)
+    counts = np.bincount(lab.ravel(), minlength=k)
+    order = np.argsort(-counts)
+    keep = []
+    for i in order:  # merge near-identical colours, the more common one wins
+        if counts[i] < 0.002 * len(pix):
+            continue
+        if all(np.abs(centers[i] - centers[j]).max() > merge_tol for j in keep):
+            keep.append(i)
+    return centers[keep].astype(np.float32)
+
+
+def palette_components(rgb, mask, max_colors, min_px, centers=None):
     """Initial pieces for vector art: palette colour x connected component (keeps thin lines)."""
     pix = rgb[mask].astype(np.float32)
-    k = int(min(max_colors, max(2, len(np.unique((pix * 16).astype(np.int32), axis=0)))))
-    sample = pix if len(pix) <= 40000 else pix[np.random.default_rng(0).choice(len(pix), 40000, False)]
-    crit = (cv2.TERM_CRITERIA_EPS + cv2.TERM_CRITERIA_MAX_ITER, 30, 0.002)
-    _, _, centers = cv2.kmeans(sample, k, None, crit, 3, cv2.KMEANS_PP_CENTERS)
+    if centers is None:
+        k = int(min(max_colors, max(2, len(np.unique((pix * 16).astype(np.int32), axis=0)))))
+        sample = pix if len(pix) <= 40000 else pix[np.random.default_rng(0).choice(len(pix), 40000, False)]
+        crit = (cv2.TERM_CRITERIA_EPS + cv2.TERM_CRITERIA_MAX_ITER, 30, 0.002)
+        _, _, centers = cv2.kmeans(sample, k, None, crit, 3, cv2.KMEANS_PP_CENTERS)
+    k = len(centers)
     pal = np.full(mask.shape, -1, np.int32)
     pal[mask] = np.linalg.norm(pix[:, None, :] - centers[None], axis=-1).argmin(1)
     labels = np.full(mask.shape, -1, np.int32)
@@ -237,7 +268,8 @@ def bezier_d(mask, eps=1.2, corner_deg=55.0, smooth=1.0, min_len=6) -> str:
 
 
 # -------------------------------------------------------------------------------- svg
-def pieces_to_svg(labels, betas, W, H, cfg, ids=None, base_fill_mask=None):
+def pieces_to_svg(labels, betas, W, H, cfg, ids=None, base_fill_mask=None, palette=None,
+                  grad_min_px=0):
     """SVG text + per-piece rows. Big pieces first; each grown 1px (no seams)."""
     c = cfg.pentool
     defs, body, rows = [], [], []
@@ -247,6 +279,13 @@ def pieces_to_svg(labels, betas, W, H, cfg, ids=None, base_fill_mask=None):
         if not m.any():
             continue
         f = piece_fill(betas[k], m, W, H, c.gradient_min_delta)
+        if f[0] == "linear" and m.sum() < grad_min_px:  # small pieces: always one clean colour
+            ys_, xs_ = np.nonzero(m)
+            f = ("solid", np.clip(np.array([1, xs_.mean() / W, ys_.mean() / H]) @ betas[k], 0, 1))
+        if f[0] == "solid" and palette is not None and len(palette):
+            j = np.abs(palette - f[1]).max(1).argmin()
+            if np.abs(palette[j] - f[1]).max() < c.palette_snap:
+                f = ("solid", palette[j])
         grow = matting.dilate(m, int(c.overlap_px))
         if base_fill_mask is not None:
             grow &= base_fill_mask
@@ -330,6 +369,90 @@ def vectorize_element(rgb, alpha, cfg):
         inside = (r_a > 0.5) & m
     rms = float(np.median(np.abs(r_rgb[inside] - rgb[inside]).max(-1))) if inside.any() else 1.0
     return svg, rows, r_rgb, r_a, iou, rms
+
+
+def group_pieces(lab, contact):
+    """Pieces that belong together (lines inside a document, a shadow under an icon) share a
+    large part of their outline; a connector line only touches an icon at its tip."""
+    ids = [i for i in np.unique(lab) if i >= 0]
+    if len(ids) < 2:
+        return [ids]
+    n = int(lab.max()) + 2
+    lc = np.where(lab < 0, n - 1, lab)
+    per = np.zeros(n)
+    shared = {}
+    for d0, d1 in ((lc[:, :-1], lc[:, 1:]), (lc[:-1, :], lc[1:, :])):
+        diff = d0 != d1
+        np.add.at(per, d0[diff], 1)
+        np.add.at(per, d1[diff], 1)
+        pr = np.stack([d0[diff], d1[diff]], 1)
+        pr = pr[(pr < n - 1).all(1)]
+        pr.sort(1)
+        u, cnt = np.unique(pr, axis=0, return_counts=True)
+        for (a, b), k in zip(map(tuple, u), cnt):
+            shared[(a, b)] = shared.get((a, b), 0) + k
+    parent = {i: i for i in ids}
+
+    def find(i):
+        while parent[i] != i:
+            parent[i] = parent[parent[i]]
+            i = parent[i]
+        return i
+
+    for (a, b), k in shared.items():
+        if k / max(min(per[a], per[b]), 1) >= contact:
+            parent[find(a)] = find(b)
+    groups = {}
+    for i in ids:
+        groups.setdefault(find(i), []).append(i)
+    return sorted(groups.values(), key=lambda g: -sum((lab == i).sum() for i in g))
+
+
+def vectorize_objects(rgb, alpha, cfg, palette=None, allow_gradients=False):
+    """One vector element -> list of objects (icon, connector line, ...), each:
+    (svg, rows, rgb, alpha, iou, interior_err). Pieces of an object share one SVG."""
+    c = cfg.pentool
+    H, W = alpha.shape
+    m = alpha > 0.5
+    n_, lab_, st_, _ = cv2.connectedComponentsWithStats(m.astype(np.uint8), connectivity=8)
+    if n_ > 2:
+        big = st_[1:, 4].max()
+        keep = st_[:, 4] >= c.min_part_frac * big
+        keep[0] = False
+        m = keep[lab_]
+    ys, xs = np.nonzero(m)
+    if len(xs) < 30:
+        return []
+    pad = 4
+    x0, y0 = max(xs.min() - pad, 0), max(ys.min() - pad, 0)
+    x1, y1 = min(xs.max() + pad + 1, W), min(ys.max() + pad + 1, H)
+    cr, cm = rgb[y0:y1, x0:x1], m[y0:y1, x0:x1]
+    lab = palette_components(cr, cm, int(c.max_colors), int(c.min_piece_px), palette)
+    lab, betas, _ = merge_pieces(cr, lab, c.merge_tol, int(c.min_piece_px), int(c.max_pieces),
+                                 c.color_join)
+    bw, bh = x1 - x0, y1 - y0
+    fit = {k: np.stack([b[0] - b[1] * x0 / bw - b[2] * y0 / bh, b[1] * W / bw, b[2] * H / bh])
+           for k, b in betas.items()}
+    groups = group_pieces(lab, c.group_contact) if c.split_objects else [list(betas)]
+    full = np.full((H, W), -1, np.int32)
+    full[y0:y1, x0:x1] = lab
+    out = []
+    for g in groups:
+        gm = np.isin(full, g)
+        if gm.sum() < c.min_object_px:
+            continue
+        sub = np.where(gm, full, -1)
+        svg, rows = pieces_to_svg(sub, {k: fit[k] for k in g}, W, H, cfg,
+                                  base_fill_mask=matting.dilate(gm, 1), palette=palette,
+                                  grad_min_px=0 if allow_gradients else c.gradient_min_area_frac * H * W)
+        r_rgb, r_a = render_svg(svg, W, H)
+        iou = float(((r_a > 0.5) & gm).sum() / max(((r_a > 0.5) | gm).sum(), 1))
+        inside = matting.erode((r_a > 0.5) & gm, 3)
+        if inside.sum() < 50:
+            inside = (r_a > 0.5) & gm
+        err = float(np.median(np.abs(r_rgb[inside] - rgb[inside]).max(-1))) if inside.any() else 1.0
+        out.append((svg, rows, r_rgb, r_a, iou, err))
+    return out
 
 
 def vectorize_background(plate, cfg):

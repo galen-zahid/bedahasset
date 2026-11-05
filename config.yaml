@@ -84,6 +84,13 @@ pentool:                # "pen tool": 1 path Bezier per potongan, isi solid / gr
   merge_tol: 0.002      # gabung potongan selama satu gradien linear masih menjelaskan keduanya
   max_pieces: 40        # potongan maksimal per elemen
   color_join: 0.15      # potongan dengan rata-rata warna beda > ini tidak pernah digabung jadi gradien
+  split_objects: true   # pisah per objek: potongan yang cuma bersentuhan sedikit (garis penghubung vs
+  group_contact: 0.2    # ikon) jadi layer sendiri. Bersentuhan >= 20% keliling = satu objek
+  min_object_px: 150    # objek lebih kecil dari ini dibuang
+  palette_colors: 16    # SATU palet warna untuk seluruh desain (warna konsisten antar ikon)
+  palette_merge: 0.07   # warna palet yang beda < ini digabung
+  palette_snap: 0.12    # warna potongan dikunci ke warna palet terdekat kalau beda < ini
+  gradient_min_area_frac: 0.01  # gradien hanya untuk potongan >= 1% kanvas; yang kecil selalu solid
   max_interior_err: 0.04  # isi potongan beda > ini dari aslinya = foto/render 3D -> tetap PNG
   min_part_frac: 0.02   # bagian elemen yang terpisah & < 2% bagian terbesar dibuang (sisa teks/debu)
   min_piece_px: 30      # potongan lebih kecil dari ini digabung ke tetangga
@@ -94,6 +101,22 @@ pentool:                # "pen tool": 1 path Bezier per potongan, isi solid / gr
   overlap_px: 1         # potongan saling tumpuk 1px supaya tidak ada celah
   bg_max_pieces: 14     # background grafis: maksimal potongan
   effects_layer: true   # semua efek (glow/kilau/bayangan/detail) digabung jadi SATU layer
+
+# ---------------------------------------------------------------- graphic
+graphic:                # background grafis (DORVAN): potongan + aksen + 2 efek umum
+  inpaint_smooth: 18    # bekas teks di background grafis dihaluskan (tidak burek)
+  accent_min_sat: 0.35  # garis/panah aksen: warna jenuh yang berbeda dari warna utama background
+  accent_min_val: 0.35
+  accent_min_hue_gap: 45   # beda hue minimal dari warna dominan (emas vs biru)
+  accent_hue_tol: 22
+  accent_min_part_px: 30
+  accent_min_frac: 0.0008  # aksen minimal 0.08% kanvas
+  max_accents: 3
+  light_sigma: 10       # layer efek "light": cahaya & bayangan lembut menyeluruh
+  highlight_px: 18       # layer efek "highlight": kilau tajam yang lebih tipis dari ~2x ini
+  highlight_min: 0.06
+  min_alpha: 0.02
+  max_alpha: 0.95
 
 # -------------------------------------------------------------- vectorize
 vectorize:              # elemen flat/vektor: tepi "magic wand" + ekspor SVG ("pen tool") ke vectors/

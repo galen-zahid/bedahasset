@@ -9,7 +9,7 @@ from pathlib import Path
 
 import numpy as np
 
-from . import background, composite, elements, foreground, gradients, pentool, vectorize, glow, grain, manifest, particles, stripe, subject, text
+from . import background, composite, elements, foreground, gradients, graphic, pentool, vectorize, glow, grain, manifest, particles, stripe, subject, text
 from . import matting
 from .imageio import load_rgb, save_rgb
 
@@ -318,13 +318,13 @@ def _process(path: Path, out_root: Path, models, cfg) -> dict:
     if cfg.gradients.enabled and photo_design:
         log.info("  gradien: desain foto -> background tetap PNG")
     elif cfg.gradients.enabled:
-        bg_pieces, (fx_rgb, fx_a) = pentool.vectorize_background(plate, cfg)
+        ui_ex = np.zeros(plate.shape[:2], bool)
+        for u in ui:
+            ui_ex |= matting.dilate(u["mask"], 4)
+        bg_pieces, fx, accents = graphic.decompose(plate, img, inp_mask, ui_ex, models, cfg)
         (tmp / "extra").mkdir(exist_ok=True)
         (tmp / "vectors").mkdir(exist_ok=True)
         save_rgb(tmp / "extra" / "01_background_flat.png", plate)
-        n_new = len(bg_pieces) + (1 if fx_a.max() > 0 else 0)
-        for L in layers[1:]:
-            L["z_order"] += n_new - 1
         new_layers = []
         for i_, (svg_, row_, rgb_, a_) in enumerate(bg_pieces, 1):
             fn = f"01_bg_{i_:02d}_{row_.get('fill', 'solid')}"
@@ -334,17 +334,46 @@ def _process(path: Path, out_root: Path, models, cfg) -> dict:
                                "rgb": rgb_, "alpha": None if i_ == 1 else a_, "z_order": i_ - 1,
                                "svg_file": f"vectors/{fn}.svg", "pentool": True})
             piece_rows.append({"svg_file": f"vectors/{fn}.svg", **row_})
-        if fx_a.max() > 0:
-            new_layers.append({"layer": "effects", "file": "01_effects.png", "type": "overlay",
-                               "category": "effect", "rgb": fx_rgb, "alpha": fx_a,
-                               "z_order": len(bg_pieces), "suggested_opacity": 1.0})
+        for name_, rgb_, a_ in fx:
+            new_layers.append({"layer": f"fx_{name_}", "file": f"01_fx_{name_}.png", "type": "overlay",
+                               "category": "effect", "rgb": rgb_, "alpha": a_,
+                               "z_order": len(new_layers), "suggested_opacity": 1.0})
+        for j_, (svg_, hex_, rgb_, a_) in enumerate(accents, 1):
+            fn = f"03_accent_{j_:02d}"
+            (tmp / "vectors" / f"{fn}.svg").write_text(svg_, encoding="utf-8")
+            new_layers.append({"layer": f"accent_{j_:02d} ({hex_})", "file": f"{fn}.png",
+                               "type": "shape", "category": "shape", "rgb": rgb_, "alpha": a_,
+                               "z_order": len(new_layers), "svg_file": f"vectors/{fn}.svg",
+                               "pentool": True})
+            piece_rows.append({"svg_file": f"vectors/{fn}.svg", "piece": 1, "fill": "solid",
+                               "color1": hex_})
+        for L in layers[1:]:
+            L["z_order"] += len(new_layers)
         layers = new_layers + layers[1:]
     if cfg.vectorize.enabled:  # "pen tool": SVG for every flat / vector layer
-        n_svg = 0
+        vec_cats = ("shape", "vector_icon", "vector_large")
+
+        def _cat(L):
+            return L.get("category") or manifest.CATEGORY.get(L["type"], "")
+
+        def _a_in(L):
+            return L["alpha"] * ~matting.dilate(text_mask, 2) if L["type"] == "subject" else L["alpha"]
+
+        palette = None
+        if cfg.pentool.enabled:  # one palette for the whole design -> consistent colours
+            items = [(L["rgb"], _a_in(L) > 0.5) for L in layers
+                     if L.get("alpha") is not None and L.get("file") and not L.get("pentool")
+                     and _cat(L) in vec_cats and not L["layer"].endswith("_base")]
+            if items:
+                palette = pentool.design_palette(items, int(cfg.pentool.palette_colors),
+                                                 cfg.pentool.palette_merge)
+                log.info("  palet desain: %s", " ".join(pentool._hex(c_) for c_ in palette))
+        out_layers = []
         for L in layers:
-            if L.get("alpha") is None or not L.get("file"):
+            if L.get("alpha") is None or not L.get("file") or L.get("pentool"):
+                out_layers.append(L)
                 continue
-            cat = L.get("category") or manifest.CATEGORY.get(L["type"], "")
+            cat = _cat(L)
             svg = Path("vectors") / (Path(L["file"]).stem + ".svg")
             if L["layer"].endswith("_base") and L["type"] == "shape":
                 sh = next((s_ for s_ in shapes if s_.get("layer_file") == L["file"]), None)
@@ -353,33 +382,46 @@ def _process(path: Path, out_root: Path, models, cfg) -> dict:
                                                        for i in (1, 3, 5)],
                                        sh.get("canva_transparency_pct", 100) / 100, W, H, tmp / svg)
                     L["svg_file"] = svg.as_posix()
-                    n_svg += 1
-            elif L.get("pentool"):
-                continue
-            elif cat in ("shape", "vector_icon", "vector_large") and cfg.pentool.enabled:
-                a_in = L["alpha"] * ~matting.dilate(text_mask, 2) if L["type"] == "subject" else L["alpha"]
-                res_ = pentool.vectorize_element(L["rgb"], a_in, cfg)
-                if res_ and res_[5] > cfg.pentool.max_interior_err:  # photographic -> stays PNG
-                    L["category"] = "asset_large"
-                    log.info("  pen tool: %s terlalu foto (selisih %.3f) -> tetap PNG", L["file"], res_[5])
-                    res_ = None
-                if res_:
-                    svg_, rows_, rgb_, a_, iou_, _ = res_
-                    (tmp / svg).parent.mkdir(parents=True, exist_ok=True)
-                    (tmp / svg).write_text(svg_, encoding="utf-8")
-                    L["rgb"], L["alpha"], L["svg_file"] = rgb_, a_, svg.as_posix()
+                out_layers.append(L)
+            elif cat in vec_cats and cfg.pentool.enabled:
+                objs = pentool.vectorize_objects(L["rgb"], _a_in(L), cfg, palette)
+                if objs and max(o[5] for o in objs) > cfg.pentool.max_interior_err:
+                    # a shaded vector shape (shadow, gradient badge): try again with gradients
+                    objs = pentool.vectorize_objects(L["rgb"], _a_in(L), cfg, palette, True)
+                if objs and max(o[5] for o in objs) > cfg.pentool.max_interior_err:
+                    # needs more shades than the shared palette: own palette for this element
+                    objs = pentool.vectorize_objects(L["rgb"], _a_in(L), cfg, None, True)
+                if objs and max(o[5] for o in objs) > cfg.pentool.max_interior_err:
+                    L["category"] = "asset_large"  # photographic -> stays PNG
+                    log.info("  pen tool: %s terlalu foto -> tetap PNG", L["file"])
+                    objs = []
+                if not objs:
+                    out_layers.append(L)
+                    continue
+                stem = Path(L["file"]).stem
+                for oi, (svg_, rows_, rgb_, a_, iou_, _) in enumerate(objs, 1):
+                    st_ = stem if len(objs) == 1 else f"{stem}_{oi:02d}"
+                    sv = Path("vectors") / f"{st_}.svg"
+                    (tmp / sv).parent.mkdir(parents=True, exist_ok=True)
+                    (tmp / sv).write_text(svg_, encoding="utf-8")
+                    ncol = len({r_["color1"] for r_ in rows_})
+                    kind = L.get("category") or cat
+                    if L["type"] == "subject" and len(objs) > 1:
+                        kind = "vector_icon" if a_.mean() < 0.02 else kind
+                        if ncol == 1 and all(r_["fill"] == "solid" for r_ in rows_):
+                            kind = "shape"
+                    out_layers.append({**L, "layer": f"{L['layer']}_{oi:02d}" if len(objs) > 1 else L["layer"],
+                                       "file": f"{st_}.png", "rgb": rgb_, "alpha": a_,
+                                       "svg_file": sv.as_posix(), "category": kind})
                     for rr in rows_:
-                        piece_rows.append({"svg_file": svg.as_posix(), **rr})
-                    n_svg += 1
-                    log.info("  pen tool: %s  %d potongan (%d solid), bentuk %.1f%% cocok", svg.name,
-                             len(rows_), sum(1 for x in rows_ if x["fill"] == "solid"), 100 * iou_)
-            elif cat in ("shape", "vector_icon", "vector_large"):
-                st = vectorize.trace_svg(L["rgb"], L["alpha"], tmp / svg, cfg)
-                if st:
-                    L["svg_file"] = svg.as_posix()
-                    n_svg += 1
-                    log.info("  svg: %s  %d warna, %d path (%s)", svg.name, st["colors"],
-                             st["paths"], st.get("engine", "polygon"))
+                        piece_rows.append({"svg_file": sv.as_posix(), **rr})
+                log.info("  pen tool: %s -> %d objek, %d potongan", stem, len(objs),
+                         sum(len(o[1]) for o in objs))
+            else:
+                out_layers.append(L)
+        layers = out_layers
+    for i_, L in enumerate(sorted(layers, key=lambda L: L["z_order"])):
+        L["z_order"] = i_  # unique, consecutive stacking order
     rows = manifest.write_layers(tmp, layers, cfg)
     manifest.write_text_csv(tmp, blocks)
     manifest.write_shapes_csv(tmp, shapes)
