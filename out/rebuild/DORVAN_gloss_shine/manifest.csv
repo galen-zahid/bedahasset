@@ -1,0 +1,13 @@
+layer,file,svg_file,x,y,w,h,z_order
+00_background,00_background.png,vectors/00_background.svg,0,0,1122,1402,0
+01_panel_lower,01_panel_lower.png,vectors/01_panel_lower.svg,0,631,1122,529,1
+02_panel_upper,02_panel_upper.png,vectors/02_panel_upper.svg,300,393,822,429,2
+03_gloss_edges,03_gloss_edges.png,vectors/03_gloss_edges.svg,0,396,1122,558,3
+04_window_reflection,04_window_reflection.png,vectors/04_window_reflection.svg,565,462,557,225,4
+05_swoosh_top,05_swoosh_top.png,vectors/05_swoosh_top.svg,480,0,642,138,5
+06_swoosh_bottom,06_swoosh_bottom.png,vectors/06_swoosh_bottom.svg,0,1162,540,240,6
+07_arrows_gold,07_arrows_gold.png,vectors/07_arrows_gold.svg,55,190,871,634,7
+08_accents_gold,08_accents_gold.png,vectors/08_accents_gold.svg,33,56,1056,1260,8
+09_callout_reflection,09_callout_reflection.png,vectors/09_callout_reflection.svg,488,375,233,222,9
+10_callout_surface,10_callout_surface.png,vectors/10_callout_surface.svg,57,872,327,138,10
+11_effects_light_texture,11_effects_light_texture.png,,0,576,1122,628,11

@@ -23,6 +23,21 @@ def render(svg_text):
     return Image.open(io.BytesIO(bytes(resvg_py.svg_to_bytes(svg_string=svg_text)))).convert("RGBA")
 
 
+def crop_svgs(out, rows):
+    """Copy of every SVG with its viewBox cropped to the object (for Canva: small, clickable)."""
+    import re
+
+    d = out / "vectors_cropped"
+    d.mkdir(exist_ok=True)
+    for r in rows:
+        if not r["svg_file"] or not r["w"]:
+            continue
+        s = (out / r["svg_file"]).read_text(encoding="utf-8")
+        s = re.sub(r'width="\d+" height="\d+" viewBox="0 0 \d+ \d+"',
+                   f'width="{r["w"]}" height="{r["h"]}" viewBox="{r["x"]} {r["y"]} {r["w"]} {r["h"]}"', s, count=1)
+        (d / Path(r["svg_file"]).name).write_text(s, encoding="utf-8")
+
+
 def main(mod_name, original, out, auto_dir=None):
     from PIL import Image
 
@@ -38,6 +53,16 @@ def main(mod_name, original, out, auto_dir=None):
         bb = a.getbbox() or (0, 0, 0, 0)
         rows.append({"layer": name, "file": f"{name}.png", "svg_file": f"vectors/{name}.svg",
                      "x": bb[0], "y": bb[1], "w": bb[2] - bb[0], "h": bb[3] - bb[1], "z_order": z})
+    z = len(rows)
+    for name, fn in getattr(mod, "RASTERS", {}).items():
+        fn(out / f"{name}.png")
+        im = Image.open(out / f"{name}.png").convert("RGBA")
+        acc.alpha_composite(im)
+        bb = im.getchannel("A").getbbox() or (0, 0, 0, 0)
+        rows.append({"layer": name, "file": f"{name}.png", "svg_file": "",
+                     "x": bb[0], "y": bb[1], "w": bb[2] - bb[0], "h": bb[3] - bb[1], "z_order": z})
+        z += 1
+    crop_svgs(out, rows)
     with open(out / "manifest.csv", "w", newline="", encoding="utf-8") as f:
         w = csv.DictWriter(f, fieldnames=list(rows[0]))
         w.writeheader()

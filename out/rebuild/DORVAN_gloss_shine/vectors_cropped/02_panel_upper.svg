@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="822" height="429" viewBox="300 393 822 429"><defs><linearGradient id="up" gradientUnits="userSpaceOnUse" x1="800" y1="470" x2="900" y2="820"><stop offset="0" stop-color="#0a4a92"/><stop offset="0.55" stop-color="#3b86d0"/><stop offset="1" stop-color="#9ccdf9"/></linearGradient></defs>
+<path d="M300 636 L1122 393 L1122 822 C950 808 820 776 700 735 C560 688 470 628 300 632 Z" fill="url(#up)"/>
+</svg>
