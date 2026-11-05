@@ -191,8 +191,44 @@ def _run(path, out, models, cfg, c):
             hit = np.bincount(cl_[near & sm].ravel(), minlength=n_)
             size = np.bincount(cl_.ravel(), minlength=n_)
             keep = (hit >= 0.2 * size) & (np.arange(n_) > 0)
-            photo |= keep[cl_] & ~(text_mask & ~photo)
+            add = keep[cl_] & ~photo & ~text_mask
+            # design accents the matte grabbed too (the orange outline of a button): flat,
+            # strongly coloured regions stay vector
+            labc = cv2.cvtColor(s, cv2.COLOR_RGB2Lab).astype(np.float32)
+            chroma_img = np.hypot(labc[..., 1] - 128, labc[..., 2] - 128)
+            for rid in np.unique(lab[add]):
+                if rid == 0:
+                    continue
+                rm = lab == rid
+                px_ = sf[rm]
+                flat = px_.std(0).max() < c.subject_flat_std
+                if flat or (chroma_img[rm].mean() > c.subject_accent_chroma and px_.std(0).max() < 0.06) or \
+                        shapes.is_line(rm, c):
+                    add &= ~rm
+            photo |= add
             photo = ndi.binary_fill_holes(photo)
+    if photo.any():
+        # UI on top of a photo (a button, a badge): a flat region with a clean geometric shape is
+        # design, not photo, even where it sits on the photo
+        freed = 0
+        for rid, sl_, m_ in regions.region_masks(lab):
+            if m_.sum() < c.photo_ui_min_px or not photo[sl_][m_].mean() > 0.5:
+                continue
+            sel_ = m_ & ~matting.dilate(text_mask, 3)[sl_]
+            px_ = sf[sl_][sel_] if sel_.sum() > 50 else sf[sl_][m_]
+            spread = (np.percentile(px_, 90, axis=0) - np.percentile(px_, 10, axis=0)).max()
+            if spread >= c.photo_ui_flat:
+                continue
+            fm = ndi.binary_fill_holes(m_)
+            kind = shapes.fit_shape(fm, c, allow_stroke=False)[0]
+            if kind in ("rect", "ellipse", "polygon"):
+                # with its border (a thin outline ring around the button)
+                full_ = np.zeros((H, W), bool)
+                full_[sl_] = fm
+                photo &= ~matting.dilate(full_, int(c.photo_ui_border_px))
+                freed += 1
+        if freed:
+            log.info("  %d bidang UI (tombol/badge) di atas foto tetap vektor", freed)
     if photo.mean() > c.photo_max_frac:  # (almost) all photo: nothing to vectorise but keep a base
         log.info("  hampir seluruh gambar adalah foto")
     lab[photo] = 0

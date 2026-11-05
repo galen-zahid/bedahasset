@@ -357,6 +357,7 @@ rebuild:
   stripe_max: 4
   stripe_chroma_frac: 0.25  # pita di foto: bagian yang kena bayangan (oranye gelap) tetap bagian pita
   stripe_edge_contrast: 0.25 # tepi pita harus tajam (cahaya/kilau buram di lantai bukan pita)
+  stripe_bridge_open: 0.3  # potongan pita = 1 pita bila jalur di antaranya <= 30% latar kosong yang terlihat
   stripe_merge_deg: 8    # potongan pita sejajar & segaris (kiri-kanan orang) = 1 pita
   stripe_same_color: 30  # pita-pita dengan warna semirip ini dapat 1 warna yang sama (paling pekat)
   stripe_bit_px: 400     # potongan kecil pita yang segaris (di sela siku & badan) ikut memperpanjang pita
@@ -418,6 +419,11 @@ rebuild:
   photo_absorb_px: 6000  # bidang kecil yang menempel ke foto (>= 30% kelilingnya) ikut jadi foto
   photo_close: 81         # garis tepi foto dihaluskan (px)
   photo_max_frac: 0.95
+  photo_ui_flat: 0.08   # ...polos = 80% pikselnya beda warna < 8%
+  photo_ui_border_px: 10  # ...beserta garis tepinya
+  photo_ui_min_px: 1500 # bidang polos berbentuk bersih (tombol/badge) di atas foto tetap vektor
+  subject_flat_std: 0.035  # bidang polos (isi tombol) yang ikut terambil pemisah subjek tetap vektor
+  subject_accent_chroma: 35  # bidang berwarna tegas & rata yang ikut terambil pemisah subjek tetap vektor
   photo_text_lama: true  # teks di atas foto dihapus pakai LaMa (lebih bersih)
   photo_subject: true   # foto: orang/produk dipisah dari background foto (rembg + LaMa)
   fill_holes: true      # bentuk ditutup penuh (tanpa bolong); isi lubang ditumpuk di atasnya

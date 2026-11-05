@@ -41,7 +41,7 @@ def photo_layers(img, photo, models, cfg, sal=None):
         try:
             if sal is None:
                 sal = models.salient_mask(to_u8(img))
-            subj = np.clip(sal, 0, 1) * matting.dilate(photo, 3)
+            subj = np.clip(sal, 0, 1) * photo
             if (subj > 0.5).sum() > 0.01 * H * W:
                 hole = matting.dilate(subj > 0.1, 8) & photo
                 bg = models.inpaint(to_u8(img), (hole * 255).astype(np.uint8)).astype(np.float32) / 255.0

@@ -227,7 +227,7 @@ def reread(blocks, img_u8, glyphs, models, c, batch_vocab=None):
             continue
         line_h = np.median([e - s for s, e in lines])
         lines = [(s, e) for s, e in lines if e - s >= 0.35 * line_h]
-        texts, confs = [], []
+        texts, confs, all_lines = [], [], []
         for s, e in lines:
             lp = max(2, int(0.2 * (e - s)))
             ys, ye = max(s - lp, 0), min(e + lp, gm.shape[0])
@@ -263,6 +263,7 @@ def reread(blocks, img_u8, glyphs, models, c, batch_vocab=None):
             if best:
                 texts.append(best[1])
                 confs.append(best[2])
+                all_lines.append(allread)
         # a letter the OCR skipped: more letter shapes than letters read ("FINIS" + H)
         word = str(b["text"]).strip()
         if len(lines) == 1 and re.fullmatch(r"[A-Za-z]+[.!?]?", word):
@@ -277,6 +278,16 @@ def reread(blocks, img_u8, glyphs, models, c, batch_vocab=None):
                 letters_ = int(sum(max(1, int(round(w_ / mw))) for w_ in ws_))
             else:
                 letters_ = 0
+            if letters_ == len(core_) + 1 and all_lines:
+                # a variant that read every letter (letter-spaced logo "K I N R A V A")
+                full = [re.sub(r"[^A-Za-z]", "", t_) for t_, _ in all_lines[0]]
+                full = [f_ for f_ in full if len(f_) == letters_ and _ed(f_.lower(), core_.lower()) == 1]
+                if full:
+                    vals, cnt = np.unique([f_.upper() if core_.isupper() else f_ for f_ in full], return_counts=True)
+                    pick = str(vals[cnt.argmax()])
+                    log.info("  huruf terlewat (%d bentuk huruf): %r -> %r", letters_, word, pick + word[len(core_):])
+                    b["text"] = pick + word[len(core_):]
+                    continue
             if letters_ == len(core_) + 1:
                 cands = [w_ for w_ in _edits1(core_.lower()) if len(w_) == len(core_) + 1
                          and _rank_ok(w_, cost, c.text_dict_max_cost)]

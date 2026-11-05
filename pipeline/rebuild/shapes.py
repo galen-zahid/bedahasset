@@ -811,7 +811,9 @@ def photo_stripes(R, s_u8, img, occluder, photo, H, W, c):
         if counts[j] < 0.05 * len(px):
             continue
         ref = centers[j]
-        ink = ink_match(lab, ref, c, c.stripe_chroma_frac) & known & ~used
+        # stripes behind the photo subject are part of the photo: look only there (not at the
+        # orange outline of a vector button)
+        ink = ink_match(lab, ref, c, c.stripe_chroma_frac) & known & ~used & photo
         m = cv2.morphologyEx(ink.astype(np.uint8), cv2.MORPH_OPEN, np.ones((3, 3), np.uint8))
         kc = int(c.stripe_close_px) | 1
         m = cv2.morphologyEx(m, cv2.MORPH_CLOSE, cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (kc, kc)))
@@ -840,35 +842,94 @@ def photo_stripes(R, s_u8, img, occluder, photo, H, W, c):
                 small.append(dict(P=P, mu=mu))
                 continue
             blobs.append(dict(P=P, mu=mu, u=u, ang=math.atan2(u[1], u[0]), W=Wb))
-        # pieces of one stripe (left and right of the person): same direction, same line
-        groups = []
-        for bl in sorted(blobs, key=lambda b: -len(b["P"])):
-            for g in groups:
-                g0 = g[0]
-                dang = abs((bl["ang"] - g0["ang"] + math.pi / 2) % math.pi - math.pi / 2)
-                d = bl["mu"] - g0["mu"]
-                off = abs(d @ np.array([-g0["u"][1], g0["u"][0]]))
-                if dang < math.radians(c.stripe_merge_deg) and off < 0.6 * max(g0["W"], bl["W"]):
-                    g.append(bl)
-                    break
-            else:
-                groups.append([bl])
+        # pieces of one stripe (left and right of the person): short pieces have no reliable
+        # direction of their own, so test the line THROUGH their centres: both pieces must lie
+        # across it the same way, and what is between them must be hidden or stripe-coloured
+        n_b = len(blobs)
+        par = list(range(n_b))
+
+        def fnd(i):
+            while par[i] != i:
+                par[i] = par[par[i]]
+                i = par[i]
+            return i
+
+        for i in range(n_b):
+            for j in range(i + 1, n_b):
+                A, B = blobs[i], blobs[j]
+                d = B["mu"] - A["mu"]
+                L_ = np.linalg.norm(d)
+                if L_ < 1:
+                    continue
+                d /= L_
+                vv = np.array([-d[1], d[0]])
+                ra = np.percentile((A["P"] - A["mu"]) @ vv, [5, 95])
+                rb = np.percentile((B["P"] - A["mu"]) @ vv, [5, 95])
+                ov = min(ra[1], rb[1]) - max(ra[0], rb[0])
+                wmin = min(ra[1] - ra[0], rb[1] - rb[0])
+                wmax = max(ra[1] - ra[0], rb[1] - rb[0])
+                if ov < 0.5 * wmin or wmax > 1.8 * wmin:
+                    continue
+                ts = np.linspace(0, L_, 60)[5:-5]
+                pts_ = A["mu"] + ts[:, None] * d
+                xq = np.clip(pts_[:, 0].round().astype(int), 0, W - 1)
+                yq = np.clip(pts_[:, 1].round().astype(int), 0, H - 1)
+                open_empty = (known[yq, xq] & ~ink[yq, xq]).mean()
+                if open_empty > c.stripe_bridge_open:
+                    continue
+                par[fnd(j)] = fnd(i)
+        gmap = {}
+        for i in range(n_b):
+            gmap.setdefault(fnd(i), []).append(blobs[i])
+        groups = list(gmap.values())
+        for g in groups:
+            if len(g) > 1:  # direction = the line through the pieces (far apart -> accurate)
+                Ps = np.vstack([b_["P"] for b_ in g])
+                ctr = np.array([b_["mu"] for b_ in g])
+                wts = np.array([len(b_["P"]) for b_ in g], np.float64)
+                cm = (ctr * wts[:, None]).sum(0) / wts.sum()
+                _, _, vt2 = np.linalg.svd((ctr - cm) * np.sqrt(wts)[:, None], full_matrices=False)
+                d2 = vt2[0] if vt2[0][0] >= 0 else -vt2[0]
+                g[0] = dict(g[0], u=d2, ang=math.atan2(d2[1], d2[0]),
+                            mu=Ps.mean(0), W=max(b_["W"] for b_ in g), fixed_dir=True)
         # small visible bits of a stripe (between an elbow and the body) extend it
         for sb in small:
             for g in groups:
                 g0 = g[0]
                 d = sb["mu"] - g0["mu"]
-                if abs(d @ np.array([-g0["u"][1], g0["u"][0]])) < 0.5 * g0["W"]:
-                    g.append(dict(sb, u=g0["u"], ang=g0["ang"], W=g0["W"]))
-                    break
+                if abs(d @ np.array([-g0["u"][1], g0["u"][0]])) >= 0.5 * g0["W"]:
+                    continue
+                # close to the stripe, with the person in between (the stripe runs behind them)
+                Pg = np.vstack([b_["P"] for b_ in g])
+                tg = (Pg - g0["mu"]) @ g0["u"]
+                tb = float((sb["mu"] - g0["mu"]) @ g0["u"])
+                gap = max(tg.min() - tb, tb - tg.max(), 0.0)
+                if gap > 2.0 * g0["W"]:
+                    continue
+                end = tg.min() if tb < tg.min() else tg.max()
+                ts = np.linspace(min(end, tb), max(end, tb), 25)
+                pts_ = g0["mu"] + ts[:, None] * g0["u"]
+                ok_ = [occluder[int(min(max(py, 0), H - 1)), int(min(max(px, 0), W - 1))] for px, py in pts_]
+                if gap > 0 and np.mean(ok_) < 0.6:
+                    continue
+                g.append(dict(sb, u=g0["u"], ang=g0["ang"], W=g0["W"]))
+                break
         for g in groups:
             P = np.vstack([b["P"] for b in g])
             mu = P.mean(0)
             _, _, vt = np.linalg.svd(P - mu, full_matrices=False)
             u = vt[0] if vt[0][0] >= 0 else -vt[0]
+            # direction from the two long EDGES where they are seen (not from the blob's mass,
+            # which other orange lights and occluders skew): one shared slope, robust
+            if g[0].get("fixed_dir"):
+                u = g[0]["u"]
+            else:
+                ed = _edge_direction(P, u, known, H, W)
+                if ed is not None:
+                    u = ed
             v = np.array([-u[1], u[0]])
             pu, pv = (P - mu) @ u, (P - mu) @ v
-            t0, t1 = np.percentile(pv, 2), np.percentile(pv, 98)
+            t0, t1 = _edge_offsets(P, mu, u, v, known, H, W)
             u0, u1 = np.percentile(pu, 0.5), np.percentile(pu, 99.5)
             far = 2.0 * (H + W)
             for side in (0, 1):
@@ -1098,3 +1159,62 @@ def _crisp(f, lab, ref, known, H, W, c):
     import logging
     logging.getLogger('split').debug('  tepi pita: %.2f x chroma', float(np.median(diffs)) / max(rch, 1))
     return float(np.median(diffs)) >= c.stripe_edge_contrast * rch
+
+
+def _edge_direction(P, u, known, H, W):
+    """Shared slope of a stripe's two long edges, from visible edge pixels only."""
+    swap = abs(u[1]) > abs(u[0])  # steep stripe: measure per row instead of per column
+    xs = P[:, 1] if swap else P[:, 0]
+    ys = P[:, 0] if swap else P[:, 1]
+    xi = np.round(xs).astype(int)
+    pts_t, pts_b = [], []
+    for x in np.unique(xi):
+        sel = xi == x
+        if sel.sum() < 5:
+            continue
+        yt, yb = np.percentile(ys[sel], 1), np.percentile(ys[sel], 99)
+        for yy, lst, dy in ((yt, pts_t, -4), (yb, pts_b, 4)):
+            qy, qx = (int(x), int(yy + dy)) if swap else (int(yy + dy), int(x))
+            if 0 <= qy < H and 0 <= qx < W and known[qy, qx]:
+                lst.append((x, yy))
+    if len(pts_t) + len(pts_b) < 10:
+        return None
+    X = np.array([p_[0] for p_ in pts_t + pts_b], np.float64)
+    Y = np.array([p_[1] for p_ in pts_t + pts_b], np.float64)
+    is_t = np.r_[np.ones(len(pts_t), bool), np.zeros(len(pts_b), bool)]
+    keep = np.ones(len(X), bool)
+    k = 0.0
+    for _ in range(5):
+        A = np.stack([X, is_t.astype(float), (~is_t).astype(float)], 1)
+        sol, *_ = np.linalg.lstsq(A[keep], Y[keep], rcond=None)
+        k = sol[0]
+        res = Y - A @ sol
+        mad = np.median(np.abs(res[keep])) + 1e-6
+        nk = np.abs(res) <= 2.5 * mad + 2.0
+        if nk.sum() < 6 or (nk == keep).all():
+            break
+        keep = nk
+    d = np.array([k, 1.0]) if swap else np.array([1.0, k])
+    d /= np.linalg.norm(d)
+    return d if d[0] >= 0 else -d
+
+
+def _edge_offsets(P, mu, u, v, known, H, W):
+    """Where the two long edges are (across the stripe), from visible edge pixels."""
+    pu, pv = (P - mu) @ u, (P - mu) @ v
+    bins = np.linspace(pu.min(), pu.max(), max(6, int((pu.max() - pu.min()) / 12)) + 1)
+    tops, bots = [], []
+    for i in range(len(bins) - 1):
+        sel = (pu >= bins[i]) & (pu < bins[i + 1])
+        if sel.sum() < 8:
+            continue
+        tv, bv = np.percentile(pv[sel], 1), np.percentile(pv[sel], 99)
+        um = pu[sel].mean()
+        for vv, lst, dv in ((tv, tops, -4), (bv, bots, 4)):
+            q = mu + um * u + (vv + dv) * v
+            qx, qy = int(round(q[0])), int(round(q[1]))
+            if 0 <= qy < H and 0 <= qx < W and known[qy, qx]:
+                lst.append(vv)
+    t0 = np.median(tops) if len(tops) >= 2 else np.percentile(pv, 2)
+    t1 = np.median(bots) if len(bots) >= 2 else np.percentile(pv, 98)
+    return t0, t1
