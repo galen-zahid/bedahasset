@@ -355,10 +355,19 @@ rebuild:
   photo_stripes: true    # pita warna aksen di belakang orang/produk di foto -> pita vektor utuh
   stripe_min_chroma: 45
   stripe_max: 4
+  stripe_chroma_frac: 0.25  # pita di foto: bagian yang kena bayangan (oranye gelap) tetap bagian pita
+  stripe_edge_contrast: 0.25 # tepi pita harus tajam (cahaya/kilau buram di lantai bukan pita)
+  stripe_merge_deg: 8    # potongan pita sejajar & segaris (kiri-kanan orang) = 1 pita
+  stripe_same_color: 30  # pita-pita dengan warna semirip ini dapat 1 warna yang sama (paling pekat)
+  stripe_bit_px: 400     # potongan kecil pita yang segaris (di sela siku & badan) ikut memperpanjang pita
+  stripe_edge_snap: 60   # ujung pita < 60px dari tepi kanvas diteruskan sampai tepi
+  stripe_close_px: 15    # lubang grunge di pita dirapatkan sebelum diukur
+  stripe_min_fill: 0.45  # gumpalan harus mengisi bentuk pitanya (bukan bercak acak)
+  stripe_min_aspect: 1.0 # pita di foto boleh terlihat pendek (sisanya di belakang orang)
   stripe_iou: 0.35       # pita di foto kena cahaya/grunge/tertutup alat: kecocokan minimal lebih longgar
                          # (yang ada di DEPAN pita dipotong jadi layer photo_front di atas pita)
-  stripe_min_width: 25   # ...minimal selebar 25px (kilau tipis di lantai bukan pita)
-  stripe_min_hidden: 0.03 # ...dan sebagian tertutup subject (pita memang di belakang orang)
+  stripe_min_width: 50   # ...minimal selebar 50px (kilau/cahaya tipis di lantai bukan pita)
+  stripe_min_hidden: 0.0 # pita boleh tertutup apa saja (orang, rak); kilau lantai tersaring oleh lebar minimal
   bands: true            # pita/strip yang terpotong huruf disambung jadi 1 pita utuh di belakang teks
   rules: true            # garis tipis lurus (pemisah di samping teks kecil) -> 1 garis vektor utuh
   rule_contrast: 30
@@ -366,6 +375,7 @@ rebuild:
   rule_side_tol: 18      # garis = warna di kedua sisinya sama (bukan tepi bidang)
   rule_max_thick: 6
   stripe_clean_px: 60    # pita hasil rebuild + 60px di sekitarnya bersih dari layer efek (tanpa sobekan/grunge)
+  band_max_cover: 0.08   # pita di belakang teks tidak boleh menutupi bentuk lain (> 8% luasnya)
   band_max_width_frac: 0.2  # pita maksimal selebar 20% sisi kanvas (panel besar bukan pita)
   band_iou: 0.6 
   band_color_tol: 45     # potongan pita dengan warna semirip ini (Lab) = pita yang sama
