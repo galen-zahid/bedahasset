@@ -112,6 +112,12 @@ def _run(path, out, models, cfg, c):
                 # letters + their drop shadow / glow (grows with the letter size), only when the
                 # letters really have one: the band just outside differs from further out
                 g = glyphs & box
+                # thin rules on the same line ("—— TRAINING NOTES / 002") are graphics, not letters
+                ncc, gcl, gst, _ = cv2.connectedComponentsWithStats(g.astype(np.uint8), connectivity=8)
+                for j in range(1, ncc):
+                    ww_, hh_ = gst[j, cv2.CC_STAT_WIDTH], gst[j, cv2.CC_STAT_HEIGHT]
+                    if (ww_ >= 4 * hh_ and hh_ <= 0.3 * b["h"]) or (hh_ >= 4 * ww_ and ww_ <= 0.3 * b["h"] and hh_ > 1.5 * b["h"]):
+                        g[gcl == j] = False
                 r = int(c.text_glyph_dilate)
                 rs = int(round(c.text_shadow_frac * b["h"]))
                 if rs > 2 and g.any():
@@ -225,6 +231,17 @@ def _run(path, out, models, cfg, c):
             R = keep_r
             for z, r in enumerate(R):
                 r["z"] = z
+    if c.rules:
+        rules = shapes.thin_rules(u8, text_mask, H, W, c, photo)
+        if rules:
+            # regions that were only a piece of such a rule are replaced by it
+            rm = np.zeros((H, W), bool)
+            for q in rules:
+                rm[q["sl"]] |= matting.dilate(q["m"], 2)
+            R = [r for r in R if r["bg"] or rm[r["sl"]][r["m"]].mean() < 0.7] + rules
+            for z, r in enumerate(R):
+                r["z"] = z
+            log.info("  %d garis tipis lurus", len(rules))
     palette = shapes.snap_palette([r["fill"] for r in R], [r["area"] for r in R], c.palette_tol)
     if c.bands and text_mask.any():
         R, nb = shapes.occluded_bands(R, text_mask, H, W, c, s, img)
@@ -334,7 +351,7 @@ def group_objects(R, H, W, c, photo=None):
                 if pk == k:
                     del parent[ch]
     # candidates for "line" layers: thin & long, not a plain bar (bars stay shapes)
-    cand = {k for k, r in byz.items() if k not in parent and r["line"] and r["shape"][0] != "rect"}
+    cand = {k for k, r in byz.items() if k not in parent and r["line"] and (r["shape"][0] != "rect" or r.get("rule"))}
     tops = [k for k in byz if k not in parent]
     top_lab = np.zeros((H, W), np.int32)
     for k in sorted(tops):
@@ -364,7 +381,7 @@ def group_objects(R, H, W, c, photo=None):
     for (x, y), nn in cnt.items():
         hug[x] = hug.get(x, 0) + nn
         hug[y] = hug.get(y, 0) + nn
-    lset = {k for k in cand if hug.get(k, 0) < c.line_max_contact * per.get(k, 1)}
+    lset = {k for k in cand if byz[k].get("rule") or hug.get(k, 0) < c.line_max_contact * per.get(k, 1)}
     lines = [byz[k] for k in sorted(lset)]
     uf = {k: k for k in tops if k not in lset}
 

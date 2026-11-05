@@ -557,6 +557,24 @@ def fit_band(V, seed_pts, known, occluder, H, W, c, lab_img=None, ref=None, min_
     pv_seed = (P - mu) @ v
     wd0 = np.percentile(pv_seed, 99) - np.percentile(pv_seed, 1)
     yy, xx = np.mgrid[0:H, 0:W]
+    Vk = V
+    if lab_img is not None and ref is not None:
+        Vk = V | (ink_match(lab_img, ref, c) & known)
+    # refine direction / width from ALL stripe pixels along the seed's path, not one piece
+    for _ in range(2):
+        qx, qy = (xx - mu[0]).astype(np.float32), (yy - mu[1]).astype(np.float32)
+        qv = qx * v[0] + qy * v[1]
+        sel = Vk & (np.abs(qv - np.median(pv_seed)) <= 0.9 * wd0 + 4)
+        ys2, xs2 = np.nonzero(sel)
+        if len(xs2) < 100:
+            break
+        P2 = np.stack([xs2, ys2], 1).astype(np.float64)
+        mu = P2.mean(0)
+        _, _, vt = np.linalg.svd(P2 - mu, full_matrices=False)
+        u = vt[0] if vt[0][0] >= 0 else -vt[0]
+        v = np.array([-u[1], u[0]])
+        pv_seed = (P2 - mu) @ v
+        wd0 = np.percentile(pv_seed, 98) - np.percentile(pv_seed, 2)
     qx, qy = (xx - mu[0]).astype(np.float32), (yy - mu[1]).astype(np.float32)
     qv = qx * v[0] + qy * v[1]
     qu = qx * u[0] + qy * u[1]
@@ -615,46 +633,109 @@ def fit_band(V, seed_pts, known, occluder, H, W, c, lab_img=None, ref=None, min_
     pv = qv[ys_, xs_].astype(np.float64)
     nb = max(6, min(48, int((run_u1 - run_u0) / 20)))
     edges = np.linspace(pu.min(), pu.max(), nb + 1)
-    bu, top, bot = [], [], []
+    bu, top, bot, tok, bok = [], [], [], [], []
     for i in range(nb):
         sel = (pu >= edges[i]) & (pu < edges[i + 1])
         if sel.sum() < 20:
             continue
-        bu.append(pu[sel].mean())
-        top.append(np.percentile(pv[sel], 3))
-        bot.append(np.percentile(pv[sel], 97))
+        um = pu[sel].mean()
+        t_, b_ = np.percentile(pv[sel], 2), np.percentile(pv[sel], 98)
+        bu.append(um)
+        top.append(t_)
+        bot.append(b_)
+        # an edge only counts where we SEE it: just outside it is visible background, not a
+        # letter / the subject (there the stripe may simply continue under the occluder)
+        okt = okb = True
+        for dv, lst in ((-6.0, "t"), (6.0, "b")):
+            vv_ = (t_ if lst == "t" else b_) + dv
+            px_ = mu + um * u + vv_ * v
+            xi, yi = int(round(px_[0])), int(round(px_[1]))
+            vis = 0 <= xi < W and 0 <= yi < H and known[yi, xi] and not V[yi, xi]
+            # beyond the canvas edge we cannot see where the stripe ends: not an edge
+            if lst == "t":
+                okt = vis
+            else:
+                okb = vis
+        tok.append(okt)
+        bok.append(okb)
     if len(bu) < 4:
         return _why("r5", locals())
     bu, top, bot = map(np.array, (bu, top, bot))
+    tok, bok = np.array(tok), np.array(bok)
+    # best evidence: cross-sections of the stripe with NOTHING in front of them
+    occ_u = qu[strip & ~known]
+    clear = []
+    for um in bu:
+        i = np.searchsorted(edges, um) - 1
+        lo_, hi_ = edges[max(i, 0)], edges[min(i + 1, len(edges) - 1)]
+        clear.append(not ((occ_u >= lo_ - 6) & (occ_u < hi_ + 6)).any())
+    clear = np.array(clear)
+    if clear.sum() >= 3:
+        tok = tok & clear
+        bok = bok & clear
+    if tok.sum() < 2:
+        tok[:] = True
+    if bok.sum() < 2:
+        bok[:] = True
 
-    def robust_line(x, y):
-        keep_ = np.ones(len(x), bool)
-        k_, d_ = np.polyfit(x, y, 1)
-        for _ in range(3):
-            k_, d_ = np.polyfit(x[keep_], y[keep_], 1)
-            res = y - (k_ * x + d_)
-            mad = np.median(np.abs(res[keep_])) + 1e-6
-            nk = np.abs(res) <= 2.5 * mad + 1.5
-            if nk.sum() < 3:
-                break
-            keep_ = nk
-        return k_, d_
-
-    kt, dt_ = robust_line(bu, top)
-    kb, db = robust_line(bu, bot)
-    # occlusion only makes a stripe look narrower: push each edge out to its outer envelope
-    q = float(c.band_envelope)
-    dt_ += min(0.0, float(np.percentile(top - (kt * bu + dt_), 100 * q)))
-    db += max(0.0, float(np.percentile(bot - (kb * bu + db), 100 * (1 - q))))
+    # a stripe is a parallelogram: both long edges share ONE slope; fit it robustly on the
+    # visible edge points only
+    xs_all = np.concatenate([bu[tok], bu[bok]])
+    ys_all = np.concatenate([top[tok], bot[bok]])
+    is_t = np.concatenate([np.ones(tok.sum(), bool), np.zeros(bok.sum(), bool)])
+    keep_ = np.ones(len(xs_all), bool)
+    k_ = dt_ = db = 0.0
+    for _ in range(4):
+        A = np.stack([xs_all, is_t.astype(float), (~is_t).astype(float)], 1)
+        sol, *_ = np.linalg.lstsq(A[keep_], ys_all[keep_], rcond=None)
+        k_, dt_, db = sol
+        res = ys_all - A @ sol
+        mad = np.median(np.abs(res[keep_])) + 1e-6
+        nk = np.abs(res) <= 2.5 * mad + 2.0
+        if nk.sum() < 4 or (nk == keep_).all():
+            break
+        keep_ = nk
+    kt = kb = k_
     far = 2.0 * (H + W)
     hidden = kn < 0.25 * np.maximum(tot, 1)  # bins where the stripe is behind the subject/text
     u0 = -far if reach0 else (run_u0 if hidden[i0:i0 + 2].any() else max(run_u0, np.percentile(pu, 2)))
     u1 = far if reach1 else (run_u1 if hidden[max(i1 - 1, 0):i1 + 1].any() else min(run_u1, np.percentile(pu, 98)))
-    Wd = float(np.median(bot - top))
+    Wd = float(db - dt_) if "db" in dir() else float(np.median(bot - top))
+    if Wd > c.band_max_width_frac * min(H, W):  # a stripe is slim; a big panel is not a stripe
+        return _why("wide", locals())
     if Wd < 4 or (u1 - u0) < 3 * Wd:
         return _why("r6", locals())
+    # ends: a cut can be slanted (a parallelogram button): measure where the stripe ends at
+    # each height across it, fit that line (only for visible, in-canvas ends)
+    uL_t = uL_b = u0
+    uR_t = uR_b = u1
+    # look a bit past where the walk stopped: a slanted tip is only partly filled
+    ext = 1.5 * max(db - dt_, 1.0)
+    ya, xa = np.nonzero(V & strip & known)
+    pua = qu[ya, xa].astype(np.float64)
+    pva = qv[ya, xa].astype(np.float64)
+    frac_a = (pva - (kt * pua + dt_)) / max(db - dt_, 1e-6)
+    inb_a = (frac_a >= 0) & (frac_a <= 1) & (pua >= u0 - ext) & (pua <= u1 + ext)
+    for side in (0, 1):
+        if (side == 0 and u0 <= -far / 2) or (side == 1 and u1 >= far / 2):
+            continue
+        fr, ue = [], []
+        for j in range(8):
+            selj = inb_a & (frac_a >= j / 8) & (frac_a < (j + 1) / 8)
+            selj &= (pua <= u0 + ext) if side == 0 else (pua >= u1 - ext)
+            if selj.sum() < 5:
+                continue
+            fr.append((j + 0.5) / 8)
+            ue.append(np.percentile(pua[selj], 1) if side == 0 else np.percentile(pua[selj], 99))
+        if len(fr) >= 4:
+            bb, aa = np.polyfit(np.array(fr), np.array(ue), 1)
+            if abs(bb) < 2.0 * Wd:  # sane slant only
+                if side == 0:
+                    uL_t, uL_b = aa, aa + bb
+                else:
+                    uR_t, uR_b = aa, aa + bb
     corners = np.array([mu + uu * u + (k_ * uu + d_) * v
-                        for uu, k_, d_ in ((u0, kt, dt_), (u1, kt, dt_), (u1, kb, db), (u0, kb, db))])
+                        for uu, k_, d_ in ((uL_t, kt, dt_), (uR_t, kt, dt_), (uR_b, kb, db), (uL_b, kb, db))])
     Rm = np.zeros((H, W), np.uint8)
     cv2.fillPoly(Rm, [np.round(corners * 8).astype(np.int32)], 1, cv2.LINE_8, 3)
     Rm = Rm.astype(bool)
@@ -780,3 +861,64 @@ def ink_match(lab_img, ref, c):
     rh = np.degrees(np.arctan2(ref[2], ref[1]))
     dh = np.abs((hue - rh + 180) % 360 - 180)
     return (dh < c.band_hue_tol) & (ch >= max(c.band_min_chroma_frac * rch, 12))
+
+
+def thin_rules(img_u8, text_mask, H, W, c, photo=None):
+    """Thin straight rules (1-6 px divider lines next to small text, underlines): too thin to
+    become a region, so they are found directly and rebuilt as ONE straight line each."""
+    gray = img_u8.astype(np.float32).mean(-1)
+    bg = cv2.medianBlur(img_u8, 21).astype(np.float32).mean(-1)
+    contrast = np.abs(gray - bg) > c.rule_contrast
+    out = []
+    L = int(c.rule_min_len)
+    for horiz in (True, False):
+        k = np.ones((1, L), np.uint8) if horiz else np.ones((L, 1), np.uint8)
+        m = cv2.morphologyEx(contrast.astype(np.uint8), cv2.MORPH_OPEN, k)
+        n, cl, st, _ = cv2.connectedComponentsWithStats(m, connectivity=8)
+        for i in range(1, n):
+            x, y, w, h = st[i, :4]
+            length, thick = (w, h) if horiz else (h, w)
+            if thick > c.rule_max_thick or length < L:
+                continue
+            comp = cl == i
+            if (comp & text_mask).mean() > 0.5 * comp.mean():  # mostly letters (an "I" stroke)
+                continue
+            if photo is not None and (comp & photo).any():
+                continue
+            # a rule lies ON a plain background: the same colour on both sides of it; the edge
+            # of a shape has different colours on its two sides
+            d = int(thick) + 4
+            f32 = img_u8.astype(np.float32)
+            if horiz:
+                a_ = f32[max(y - d, 0), x:x + w]
+                b_ = f32[min(y + h - 1 + d, H - 1), x:x + w]
+            else:
+                a_ = f32[y:y + h, max(x - d, 0)]
+                b_ = f32[y:y + h, min(x + w - 1 + d, W - 1)]
+            ys0, xs0 = np.nonzero(comp)
+            ink_ = np.median(f32[ys0, xs0], 0)
+            side = np.abs(np.median(a_, 0) - np.median(b_, 0)).max()
+            if side > c.rule_side_tol or np.abs(np.median(a_, 0) - ink_).max() < c.rule_contrast:
+                continue
+            ys, xs = np.nonzero(comp)
+            px_ = img_u8[ys, xs].astype(np.float32)
+            dif = np.abs(px_.mean(-1) - bg[ys, xs])
+            col = np.median(px_[dif >= np.percentile(dif, 70)], 0) / 255.0  # the ink, not its AA rim
+            th = float(comp.sum()) / max(length, 1)
+            if horiz:
+                yc = float(np.median(ys)) + 0.5
+                pts = np.array([[x, yc], [x + w, yc]], np.float64)
+            else:
+                xc = float(np.median(xs)) + 0.5
+                pts = np.array([[xc, y], [xc, y + h]], np.float64)
+            pad = int(np.ceil(th)) + 2
+            sl = (slice(max(y - pad, 0), min(y + h + pad, H)), slice(max(x - pad, 0), min(x + w + pad, W)))
+            mm = np.zeros((sl[0].stop - sl[0].start, sl[1].stop - sl[1].start), bool)
+            local = pts - [sl[1].start, sl[0].start]
+            cv2.line(mm.view(np.uint8), tuple(np.round(local[0]).astype(int)), tuple(np.round(local[1]).astype(int)),
+                     1, max(1, int(round(th))))
+            out.append(dict(id=-2, sl=sl, m=mm.astype(bool), filled=mm.astype(bool), area=int(mm.sum()),
+                            farea=int(mm.sum()), fill=dict(kind="solid", color=col, rmse=0, median=col),
+                            border=False, shape=("stroke", dict(pts=local, w=max(1.0, th)), 1.0),
+                            line=True, bg=False, rule=True))
+    return out

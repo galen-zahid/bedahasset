@@ -395,12 +395,16 @@ def write(out: Path, src: Path, img, W, H, R, objects, photos, blocks, text_mask
 
     vec_only = acc.copy()
     clean_zone = None
-    st_regs = [r for r in R if r.get("stripe")]
+    st_regs = [r for r in R if r.get("stripe") or r.get("rule")]
     if st_regs:
         clean_zone = np.zeros((H, W), bool)
         for r in st_regs:
             clean_zone[r["sl"]] |= r["m"]
-        clean_zone = matting.dilate(clean_zone, int(c.stripe_clean_px))
+        big = np.zeros((H, W), bool)
+        for r in st_regs:
+            if r.get("stripe"):
+                big[r["sl"]] |= r["m"]
+        clean_zone = matting.dilate(big, int(c.stripe_clean_px)) | matting.dilate(clean_zone, 3)
     fx_rgb, fx_a = effect_layer(img if target is None else target, acc, lab, text_mask, c, text_zone, clean_zone)
     if c.effects and fx_a.sum() > c.fx_min_total * H * W:
         z = len(layers)
