@@ -2,9 +2,11 @@
 #   .\run.ps1                         # semua gambar di .\in  ->  .\out
 #   .\run.ps1 -In D:\desain -Out D:\hasil
 #   .\run.ps1 -Force                  # proses ulang yang sudah selesai
+#   .\run.ps1 -Mode layers            # mode lama (pecah layer); default: rebuild
 param(
     [string]$In = "in",
     [string]$Out = "out",
+    [ValidateSet("rebuild", "layers")][string]$Mode = "rebuild",
     [switch]$Force
 )
 $ErrorActionPreference = "Continue"
@@ -19,7 +21,7 @@ if (-not (Test-Path $In)) {
     Write-Host "Folder '$In' dibuat. Taruh gambar PNG/JPG di sana lalu jalankan lagi." -ForegroundColor Yellow
     exit 0
 }
-$argsList = @("split.py", $In, $Out)
+$argsList = @("split.py", $In, $Out, "--mode", $Mode)
 if ($Force) { $argsList += "--force" }
 & $vpy @argsList
 $code = $LASTEXITCODE

@@ -4,7 +4,9 @@ CLI untuk "membedah" desain feed sosmed hasil AI yang sudah flat (PNG) menjadi l
 terpisah yang bisa disusun ulang dan diedit di Canva.
 
 ```
-run.bat                             # Windows: klik dua kali (in -> out)
+run.bat                             # Windows: klik dua kali (in -> out), mode REBUILD
+.\run.ps1 -Mode layers              # mode lama: pecah jadi layer (foto/inpaint)
+python split.py in out --mode rebuild   # gambar ulang dari nol (default)
 python split.py in out              # batch semua PNG/JPG di folder
 python split.py in\x.png out        # satu file
 python split.py in out --force      # proses ulang walaupun sudah pernah selesai
@@ -16,6 +18,48 @@ python split.py in out --config config_lain.yaml
   akan dianggap selesai.
 - **Log** ada di `out/log.txt`. Satu file yang error dicatat (dengan traceback) dan batch tetap lanjut.
 - Jalan di CPU; otomatis pakai GPU (CUDA) kalau tersedia (`device: auto` di `config.yaml`).
+
+## Mode REBUILD (default): gambar ulang dari kanvas kosong
+
+Desain tidak "dipotong", tapi **digambar ulang** seperti desainer: setiap bidang warna dicocokkan
+ke bentuk dasar (kotak, kapsul/sudut bulat, lingkaran, elips, poligon, garis dengan ujung bulat),
+kalau tidak cocok baru jadi kurva Bezier rapi. Hasilnya bersih, tanpa bolong, dan warnanya
+dikunci ke satu palet desain.
+
+1. **Teks** dibaca (OCR) lalu dihapus dari gambar. Teks dibuat ulang sebagai teks asli Canva
+   (`text.csv`, termasuk saran ukuran font).
+2. **Bidang** dipisah hanya di tepi warna yang tajam. Gradasi halus tetap 1 bidang dan diisi
+   gradien 2 warna. Tekstur/banding digabung.
+3. **Bentuk** tiap bidang dicari yang paling sederhana. Bentuk besar di bawah dan bentuk kecil
+   ditumpuk di atasnya, jadi lubang tertutup (tidak ada vektor bolong).
+4. **Objek**: 1 layer = 1 objek. Contohnya: ikon (kertas dan semua isinya), buku, kapsul +
+   tombol. Garis konektor yang warnanya sama digabung jadi **1 layer**, jadi warnanya bisa diganti
+   sekali klik. Kapsul dan garis yang menempel (warna sama) dipisah otomatis.
+5. **Foto tetap foto**: area dengan detail foto (orang, makanan, mobil) disimpan sebagai PNG.
+   Orang/produknya dipisah dari foto background (rembg + LaMa), dan teks di atas foto dihapus.
+6. **Efek**: semua yang tidak bisa digambar vektor (glow, bayangan halus, kilau, tekstur) masuk ke
+   **SATU** layer efek umum (`NN_effects.png`, normal blend, bisa diatur opacity).
+
+Output `out/<nama>/`:
+
+| file | isi |
+|---|---|
+| `CANVA_IMPORT.pdf` | seluruh desain dalam 1 file: Canva > Upload > PDF, langsung jadi desain yang bisa diedit (bentuk, foto, teks terpisah) |
+| `canva/NN_<objek>.svg/.png` | 1 file per layer, sudah di-crop ke objeknya. Drag semua ke Canva lalu susun sesuai `CARA_IMPORT_CANVA.txt` (X, Y, W, H per layer) |
+| `vectors/` | layer vektor ukuran kanvas penuh (tumpuk di 0,0) |
+| `layers/` | semua layer sebagai PNG ukuran kanvas penuh |
+| `scene.svg` | semuanya dalam 1 SVG (untuk Figma/Illustrator) |
+| `text.csv` | teks, posisi, warna, `canva_font_size` |
+| `manifest.csv/json` | urutan layer, posisi, warna, SSIM |
+| `preview.png` / `sheet.png` | asli vs rebuild, dan semua layer |
+| `CARA_IMPORT_CANVA.txt` | panduan langkah demi langkah |
+
+Semua angka (ketelitian bentuk, kapan dianggap foto, pengelompokan, efek) ada di `config.yaml`
+bagian `rebuild:`, lengkap dengan komentar.
+
+Batasan: OCR sering salah membaca font grunge/condensed (ketik ulang di Canva), font asli tidak
+dikenali (pilih font sendiri), dan grafis render 3D yang mengkilap dipecah jadi gradien dan efek,
+bukan bentuk yang sempurna.
 
 ## Setup di Windows (cara paling gampang)
 

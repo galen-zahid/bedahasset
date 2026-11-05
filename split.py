@@ -6,6 +6,7 @@ Usage:
     python split.py in out --force           # re-process designs already done
     python split.py --download-models        # only download / verify the AI models
     python split.py --check                  # check the installation
+    python split.py in out --mode rebuild    # gambar ulang dari nol (vektor rapi + paket Canva)
 """
 from __future__ import annotations
 
@@ -106,6 +107,8 @@ def main(argv=None) -> int:
     ap.add_argument("--force", action="store_true", help="proses ulang desain yang sudah selesai")
     ap.add_argument("--download-models", action="store_true", help="hanya download/cek model AI")
     ap.add_argument("--check", action="store_true", help="cek instalasi")
+    ap.add_argument("--mode", choices=["layers", "rebuild"], default=None,
+                    help="layers = pecah jadi layer (lama); rebuild = gambar ulang dari nol")
     args = ap.parse_args(argv)
 
     from pipeline.config import load_config
@@ -134,6 +137,10 @@ def main(argv=None) -> int:
 
     cfg = load_config(args.config)
     apply_cache_dir(cfg)
+    mode = args.mode or cfg.get("mode", "layers")
+    if mode == "rebuild":
+        from pipeline.rebuild.run import process_rebuild as process
+    log.info("mode: %s", mode)
     files = collect(args.input)
     log.info("=== %d gambar di %s ===", len(files), args.input)
     todo = []
