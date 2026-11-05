@@ -31,7 +31,7 @@ log = logging.getLogger("split")
 
 
 # ------------------------------------------------------------------------------ photos
-def photo_layers(img, photo, models, cfg):
+def photo_layers(img, photo, models, cfg, sal=None):
     """Photo areas stay photos. With models: person/product (subject) split from the photo
     background, the hole behind the subject inpainted."""
     H, W = photo.shape
@@ -39,7 +39,8 @@ def photo_layers(img, photo, models, cfg):
     out = []
     if models is not None:
         try:
-            sal = models.salient_mask(to_u8(img))
+            if sal is None:
+                sal = models.salient_mask(to_u8(img))
             subj = np.clip(sal, 0, 1) * matting.dilate(photo, 3)
             if (subj > 0.5).sum() > 0.01 * H * W:
                 hole = matting.dilate(subj > 0.1, 8) & photo
@@ -55,9 +56,14 @@ def photo_layers(img, photo, models, cfg):
                 return out
         except Exception as e:  # noqa: BLE001
             log.warning("  pemisahan subject foto gagal (%s); foto jadi 1 layer", e)
-    n, lab = cv2.connectedComponents(photo.astype(np.uint8))
-    for i in range(1, n):
-        out.append(dict(name=f"photo_{i}", rgb=img, alpha=a * (lab == i), where="bottom"))
+    # big separate photos get their own layer; every small piece goes into one shared layer
+    n, lab, st, _ = cv2.connectedComponentsWithStats(photo.astype(np.uint8))
+    big = [i for i in range(1, n) if st[i, cv2.CC_STAT_AREA] >= 0.05 * H * W]
+    rest = np.isin(lab, [i for i in range(1, n) if i not in big])
+    for k, i in enumerate(big, 1):
+        out.append(dict(name=f"photo_{k}", rgb=img, alpha=a * (lab == i), where="bottom"))
+    if rest.any():
+        out.append(dict(name="photo_bits" if big else "photo", rgb=img, alpha=a * rest, where="bottom"))
     return out
 
 

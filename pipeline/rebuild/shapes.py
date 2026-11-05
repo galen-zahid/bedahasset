@@ -393,7 +393,7 @@ def shape_xml(kind, p, m, ox, oy, fill, c, extra=""):
     return f'<path transform="translate({ox} {oy})" fill-rule="evenodd" d="{d}" {fill}{extra}/>'
 
 
-def occluded_bands(R, text_mask, H, W, c):
+def occluded_bands(R, text_mask, H, W, c, s_u8=None, orig=None):
     """A stripe / panel running BEHIND text is cut into pieces by the letters. Pieces of the same
     colour that together form one straight band (fitted on the visible pixels only) become ONE
     rotated rectangle that continues under the text."""
@@ -461,49 +461,31 @@ def occluded_bands(R, text_mask, H, W, c):
         V = np.zeros((H, W), bool)
         for r in rs:
             V[r["sl"]] |= r["m"]
-        mu = P.mean(0)
-        _, _, vt = np.linalg.svd(P - mu, full_matrices=False)
-        u, v = vt[0], vt[1]
-        pu, pv = (P - mu) @ u, (P - mu) @ v
-        u0, u1 = pu.min(), pu.max()
-        v0, v1 = np.percentile(pv, [0.5, 99.5])
-        L_, Wd = u1 - u0, v1 - v0
-        if Wd < 4 or L_ < 3 * Wd:
+        lab_img = _lab_image(s_u8) if s_u8 is not None else None
+        fb = fit_band(V, pts_of(seed), known, text_mask, H, W, c, lab_img, L(col_of(seed)))
+        if fb is None:
             continue
-        corners = [mu + a * u + b * v for a, b in ((u0, v0), (u1, v0), (u1, v1), (u0, v1))]
-        Rm = np.zeros((H, W), np.uint8)
-        cv2.fillPoly(Rm, [np.round(np.array(corners) * 8).astype(np.int32)], 1, cv2.LINE_8, 3)
-        Rm = Rm.astype(bool)
-        inter = (Rm & V).sum()
-        union = ((Rm | V) & known).sum()
-        if union == 0 or inter / union < c.band_iou or (Rm & text_mask).sum() < 0.02 * Rm.sum():
-            continue
-        yy, xx = np.nonzero(Rm)
-        sl = (slice(yy.min(), yy.max() + 1), slice(xx.min(), xx.max() + 1))
-        cx, cy = mu + ((u0 + u1) / 2) * u + ((v0 + v1) / 2) * v
-        ang = math.degrees(math.atan2(u[1], u[0]))
+        Rm, poly, sl, iou, V = fb["Rm"], fb["poly"], fb["sl"], fb["iou"], fb["V"]
         base = min(rs, key=lambda r: r["z"])
         nr = dict(base)
-        big = max(r["area"] for r in rs)
-        main = max((r for r in rs if r["area"] >= 0.2 * big),  # the purest (most saturated) piece
-                   key=lambda r: np.hypot(*L(col_of(r))[1:]))
-        nr["fill"] = dict(kind="solid", color=col_of(main), rmse=0, median=col_of(main))
+        # colour: the solid ink of the stripe = the most saturated half of its visible pixels
+        src = orig if orig is not None else s_u8.astype(np.float32) / 255.0
+        pix = src[V & Rm & known]
+        if len(pix) > 50:
+            labp = cv2.cvtColor(pix.astype(np.float32)[None], cv2.COLOR_RGB2Lab)[0]
+            chroma = np.hypot(labp[:, 1], labp[:, 2])
+            col = np.median(pix[chroma >= np.percentile(chroma, 50)], 0)
+        else:
+            col = col_of(seed)
+        nr["fill"] = dict(kind="solid", color=col, rmse=0, median=col)
         nr.update(sl=sl, m=Rm[sl], filled=Rm[sl], area=int(Rm.sum()), farea=int(Rm.sum()),
-                  shape=("rect", dict(cx=cx - sl[1].start, cy=cy - sl[0].start, w=L_, h=Wd, ang=ang, r=0.0),
-                         inter / union), line=False, bg=False)
+                  shape=("polygon", dict(pts=poly - [sl[1].start, sl[0].start]), iou),
+                  line=False, bg=False, stripe=True)
         out_new.append(nr)
         gone |= {id(r) for r in rs}
         # blotches sitting inside the stripe (faded / grunge bits) become part of it; their
         # difference is drawn by the effect layer
-        Rd = cv2.dilate(Rm.astype(np.uint8), cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (51, 51))).astype(bool)
-        for r in R:
-            if r is R[0] or id(r) in gone or r["area"] >= nr["area"]:
-                continue
-            inside = Rm[r["sl"]][r["m"]].mean()
-            hug = Rd[r["sl"]][r["m"]].mean()
-            same = np.linalg.norm(L(col_of(r)) - L(nr["fill"]["color"])) < c.band_color_tol * 1.5
-            if inside >= c.band_absorb or (same and hug >= 0.9 and r["area"] < 0.05 * nr["area"]):
-                gone.add(id(r))
+        gone |= absorb_into_stripe(R, Rm, nr["area"], gone, c, nr["fill"]["color"])
     if not out_new:
         return R, 0
     R2 = [r for r in R if id(r) not in gone] + out_new
@@ -511,3 +493,290 @@ def occluded_bands(R, text_mask, H, W, c):
     for z, r in enumerate(R2):
         r["z"] = z
     return R2, len(out_new)
+
+
+def _clip_poly(pts, W, H):
+    """Sutherland-Hodgman clip of a polygon to the canvas rectangle."""
+    def clip(poly, inside, inter):
+        out = []
+        for i in range(len(poly)):
+            a, b = poly[i - 1], poly[i]
+            ia, ib = inside(a), inside(b)
+            if ib:
+                if not ia:
+                    out.append(inter(a, b))
+                out.append(b)
+            elif ia:
+                out.append(inter(a, b))
+        return out
+
+    def ix(a, b, x):
+        t = (x - a[0]) / (b[0] - a[0])
+        return np.array([x, a[1] + t * (b[1] - a[1])])
+
+    def iy(a, b, y):
+        t = (y - a[1]) / (b[1] - a[1])
+        return np.array([a[0] + t * (b[0] - a[0]), y])
+
+    p = [np.asarray(q, np.float64) for q in pts]
+    for inside, inter in ((lambda q: q[0] >= 0, lambda a, b: ix(a, b, 0)),
+                          (lambda q: q[0] <= W, lambda a, b: ix(a, b, W)),
+                          (lambda q: q[1] >= 0, lambda a, b: iy(a, b, 0)),
+                          (lambda q: q[1] <= H, lambda a, b: iy(a, b, H))):
+        p = clip(p, inside, inter)
+        if not p:
+            break
+    return np.array(p) if p else np.asarray(pts, np.float64)
+
+
+def _lab_image(s_u8):
+    lab = cv2.cvtColor(s_u8, cv2.COLOR_RGB2Lab).astype(np.float32)
+    lab[..., 0] *= 100.0 / 255.0
+    lab[..., 1:] -= 128.0
+    return lab
+
+
+def _why(tag, loc):
+    import logging
+    keys = ("iou", "Wd", "wd0", "i0", "i1", "nbins", "reach0", "reach1")
+    logging.getLogger("split").debug("    fit_band stop %s %s", tag, {k: (round(float(loc[k]), 2) if isinstance(loc.get(k), (int, float, np.floating, np.integer)) else loc.get(k)) for k in keys if k in loc})
+    return None
+
+
+def fit_band(V, seed_pts, known, occluder, H, W, c, lab_img=None, ref=None, min_iou=None, min_occl=0.02):
+    """Fit ONE straight stripe (two straight long edges, ends off-canvas when it leaves the
+    canvas) to the visible stripe pixels V. seed_pts give its direction and width. Pixels of the
+    stripe colour in the image (lab_img vs ref) are added. Returns dict or None."""
+    P = np.asarray(seed_pts, np.float64)
+    if len(P) < 50:
+        return _why("r1", locals())
+    mu = P.mean(0)
+    _, _, vt = np.linalg.svd(P - mu, full_matrices=False)
+    u = vt[0] if vt[0][0] >= 0 else -vt[0]
+    v = np.array([-u[1], u[0]])
+    pv_seed = (P - mu) @ v
+    wd0 = np.percentile(pv_seed, 99) - np.percentile(pv_seed, 1)
+    yy, xx = np.mgrid[0:H, 0:W]
+    qx, qy = (xx - mu[0]).astype(np.float32), (yy - mu[1]).astype(np.float32)
+    qv = qx * v[0] + qy * v[1]
+    qu = qx * u[0] + qy * u[1]
+    strip = np.abs(qv - np.median(pv_seed)) <= 0.9 * wd0 + 4
+    if lab_img is not None and ref is not None:
+        Vimg = ink_match(lab_img, ref, c) & strip & known
+        Vimg = cv2.morphologyEx(Vimg.astype(np.uint8), cv2.MORPH_OPEN, np.ones((3, 3), np.uint8)).astype(bool)
+        V = V | Vimg
+    # --- walk along the stripe from the seed: it goes on while its pixels are visible (or it is
+    #     hidden behind the subject/text) and stops where the strip is visible but empty
+    step = 12.0
+    su = qu[strip]
+    if not len(su):
+        return _why("r2", locals())
+    lo_u, hi_u = float(su.min()), float(su.max())
+    nbins = int((hi_u - lo_u) / step) + 1
+    bi = np.clip(((qu - lo_u) / step).astype(np.int32), 0, nbins - 1)
+    tot = np.bincount(bi[strip], minlength=nbins)
+    kn = np.bincount(bi[strip & known], minlength=nbins)
+    vv = np.bincount(bi[strip & V], minlength=nbins)
+    good = (vv >= 0.25 * np.maximum(kn, 1)) | (kn < 0.25 * np.maximum(tot, 1))
+    good &= tot > 0
+    start = int(np.clip((np.median(P @ u - mu @ u) - lo_u) / step, 0, nbins - 1))
+    if not good[start]:
+        cand = np.nonzero(good)[0]
+        if not len(cand):
+            return _why("r3", locals())
+        start = int(cand[np.argmin(np.abs(cand - start))])
+    gap = int(c.band_gap_bins)
+    i0 = start
+    miss = 0
+    while i0 - 1 >= 0 and miss <= gap:
+        i0 -= 1
+        miss = 0 if good[i0] else miss + 1
+    i0 += miss
+    i1 = start
+    miss = 0
+    while i1 + 1 < nbins and miss <= gap:
+        i1 += 1
+        miss = 0 if good[i1] else miss + 1
+    i1 -= miss
+    run_u0, run_u1 = lo_u + i0 * step, lo_u + (i1 + 1) * step
+    # the run leaves the canvas at an end when stripe pixels near that end touch the canvas frame
+    frame = np.zeros((H, W), bool)
+    frame[:6, :] = frame[-6:, :] = True
+    frame[:, :6] = frame[:, -6:] = True
+    core = np.abs(qv - np.median(pv_seed)) <= 0.6 * wd0
+    need = max(10, int(0.3 * wd0))
+    reach0 = i0 == 0 or int((V & frame & core & (bi >= i0) & (bi <= i0 + 3)).sum()) >= need
+    reach1 = i1 == nbins - 1 or int((V & frame & core & (bi <= i1) & (bi >= i1 - 3)).sum()) >= need
+    inrun = strip & (qu >= run_u0) & (qu <= run_u1)
+    ys_, xs_ = np.nonzero(V & inrun)
+    if len(xs_) < c.band_min_px:
+        return _why("r4", locals())
+    pu = qu[ys_, xs_].astype(np.float64)
+    pv = qv[ys_, xs_].astype(np.float64)
+    nb = max(6, min(48, int((run_u1 - run_u0) / 20)))
+    edges = np.linspace(pu.min(), pu.max(), nb + 1)
+    bu, top, bot = [], [], []
+    for i in range(nb):
+        sel = (pu >= edges[i]) & (pu < edges[i + 1])
+        if sel.sum() < 20:
+            continue
+        bu.append(pu[sel].mean())
+        top.append(np.percentile(pv[sel], 3))
+        bot.append(np.percentile(pv[sel], 97))
+    if len(bu) < 4:
+        return _why("r5", locals())
+    bu, top, bot = map(np.array, (bu, top, bot))
+
+    def robust_line(x, y):
+        keep_ = np.ones(len(x), bool)
+        k_, d_ = np.polyfit(x, y, 1)
+        for _ in range(3):
+            k_, d_ = np.polyfit(x[keep_], y[keep_], 1)
+            res = y - (k_ * x + d_)
+            mad = np.median(np.abs(res[keep_])) + 1e-6
+            nk = np.abs(res) <= 2.5 * mad + 1.5
+            if nk.sum() < 3:
+                break
+            keep_ = nk
+        return k_, d_
+
+    kt, dt_ = robust_line(bu, top)
+    kb, db = robust_line(bu, bot)
+    # occlusion only makes a stripe look narrower: push each edge out to its outer envelope
+    q = float(c.band_envelope)
+    dt_ += min(0.0, float(np.percentile(top - (kt * bu + dt_), 100 * q)))
+    db += max(0.0, float(np.percentile(bot - (kb * bu + db), 100 * (1 - q))))
+    far = 2.0 * (H + W)
+    hidden = kn < 0.25 * np.maximum(tot, 1)  # bins where the stripe is behind the subject/text
+    u0 = -far if reach0 else (run_u0 if hidden[i0:i0 + 2].any() else max(run_u0, np.percentile(pu, 2)))
+    u1 = far if reach1 else (run_u1 if hidden[max(i1 - 1, 0):i1 + 1].any() else min(run_u1, np.percentile(pu, 98)))
+    Wd = float(np.median(bot - top))
+    if Wd < 4 or (u1 - u0) < 3 * Wd:
+        return _why("r6", locals())
+    corners = np.array([mu + uu * u + (k_ * uu + d_) * v
+                        for uu, k_, d_ in ((u0, kt, dt_), (u1, kt, dt_), (u1, kb, db), (u0, kb, db))])
+    Rm = np.zeros((H, W), np.uint8)
+    cv2.fillPoly(Rm, [np.round(corners * 8).astype(np.int32)], 1, cv2.LINE_8, 3)
+    Rm = Rm.astype(bool)
+    if not Rm.any():
+        return _why("r7", locals())
+    inter = (Rm & V).sum()
+    span = inrun & (qu >= u0) & (qu <= u1)
+    union = ((Rm | (V & span)) & known).sum()
+    iou = inter / max(union, 1)
+    if iou < (c.band_iou if min_iou is None else min_iou) or (Rm & occluder).sum() < min_occl * Rm.sum():
+        return _why("r8", locals())
+    y2, x2 = np.nonzero(Rm)
+    sl = (slice(y2.min(), y2.max() + 1), slice(x2.min(), x2.max() + 1))
+    return dict(Rm=Rm, poly=_clip_poly(corners, W, H), sl=sl, iou=iou, V=V, width=Wd, inter=int(inter))
+
+
+def stripe_color(src, V, Rm, known):
+    pix = src[V & Rm & known]
+    if len(pix) <= 50:
+        return None
+    labp = cv2.cvtColor(pix.astype(np.float32)[None], cv2.COLOR_RGB2Lab)[0]
+    chroma = np.hypot(labp[:, 1], labp[:, 2])
+    return np.median(pix[chroma >= np.percentile(chroma, 50)], 0)
+
+
+def photo_stripes(R, s_u8, img, occluder, photo, H, W, c):
+    """Accent-colour stripes (e.g. orange bars) partly hidden by the photo subject -> clean vector
+    stripes. Colours are found in the image itself: the dominant strongly saturated colours."""
+    lab = _lab_image(s_u8)
+    chroma = np.hypot(lab[..., 1], lab[..., 2])
+    hot = (chroma > c.stripe_min_chroma) & ~occluder
+    if hot.sum() < c.band_min_px:
+        return R, 0
+    px = lab[hot].astype(np.float32)
+    if len(px) > 40000:
+        px = px[np.random.default_rng(0).choice(len(px), 40000, False)]
+    k = 3
+    crit = (cv2.TERM_CRITERIA_EPS + cv2.TERM_CRITERIA_MAX_ITER, 30, 0.5)
+    _, labl, centers = cv2.kmeans(px, k, None, crit, 3, cv2.KMEANS_PP_CENTERS)
+    counts = np.bincount(labl.ravel(), minlength=k)
+    known = ~occluder
+    new, gone = [], set()
+    used = np.zeros((H, W), bool)
+    for j in np.argsort(-counts):
+        if counts[j] < 0.05 * len(px):
+            continue
+        ref = centers[j]
+        V = ink_match(lab, ref, c) & known & ~used
+        V = cv2.morphologyEx(V.astype(np.uint8), cv2.MORPH_OPEN, np.ones((3, 3), np.uint8)).astype(bool)
+        for _ in range(int(c.stripe_max)):
+            Vc = cv2.morphologyEx(V.astype(np.uint8), cv2.MORPH_CLOSE, np.ones((9, 9), np.uint8))
+            n, cl, st, _ = cv2.connectedComponentsWithStats(Vc, connectivity=8)
+            if n <= 1:
+                break
+            order = np.argsort(-st[1:, cv2.CC_STAT_AREA]) + 1
+            fb = None
+            for i in order[:8]:  # the stripe that explains the most stripe pixels wins
+                if st[i, cv2.CC_STAT_AREA] < c.band_min_px:
+                    break
+                ys, xs = np.nonzero(cl == i)
+                f = fit_band(V, np.stack([xs, ys], 1), known, occluder, H, W, c, lab, ref,
+                             min_iou=c.stripe_iou, min_occl=c.stripe_min_hidden)
+                import logging
+                logging.getLogger("split").debug("  pita? seed %d px -> %s", len(xs), None if f is None else
+                                                 (round(f["iou"], 2), round(f["width"]), f["inter"]))
+                if f is not None and f["width"] >= c.stripe_min_width and (fb is None or f["inter"] > fb["inter"]):
+                    fb = f
+            if fb is None:
+                break
+            Rm = fb["Rm"]
+            col = stripe_color(img, fb["V"], Rm, known)
+            if col is None:
+                break
+            sl = fb["sl"]
+            new.append(dict(id=-1, sl=sl, m=Rm[sl], filled=Rm[sl], area=int(Rm.sum()), farea=int(Rm.sum()),
+                            fill=dict(kind="solid", color=col, rmse=0, median=col), border=True,
+                            shape=("polygon", dict(pts=fb["poly"] - [sl[1].start, sl[0].start]), fb["iou"]),
+                            line=False, bg=False, stripe=True, z=len(R) + len(new),
+                            ink=ink_match(lab, ref, c)))
+            used |= cv2.dilate(Rm.astype(np.uint8), np.ones((7, 7), np.uint8)).astype(bool)
+            V &= ~used
+            gone |= absorb_into_stripe(R, Rm, int(Rm.sum()), gone, c, col)
+    if not new:
+        return R, 0
+    R2 = [r for r in R if id(r) not in gone] + new
+    for z, r in enumerate(R2):
+        r["z"] = z
+    return R2, len(new)
+
+
+def absorb_into_stripe(R, Rm, band_area, gone, c, col=None):
+    """Bits that belong to a stripe disappear into it: anything mostly inside it, and small bits
+    (torn grunge edges, faded patches) hugging it. Their detail lives in the effect layer."""
+    out = set()
+    k = int(c.band_hug_px) * 2 + 1
+    Rd = cv2.dilate(Rm.astype(np.uint8), cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (k, k))).astype(bool)
+    k2 = 3 * k
+    Rf = cv2.dilate(Rm.astype(np.uint8), cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (k2, k2))).astype(bool)
+    for r in R:
+        if r is R[0] or id(r) in gone or r.get("stripe") or r["area"] >= band_area:
+            continue
+        inside = Rm[r["sl"]][r["m"]].mean()
+        hug = Rd[r["sl"]][r["m"]].mean()
+        if inside >= c.band_absorb or (hug >= 0.6 and r["area"] < c.band_bits_frac * band_area):
+            out.add(id(r))
+        elif col is not None and r["area"] < c.band_bits_frac * band_area and Rf[r["sl"]][r["m"]].mean() >= 0.6:
+            rc = r["fill"]["color"] if r["fill"]["kind"] == "solid" else r["fill"]["median"]
+            lc = cv2.cvtColor(np.asarray([rc, col], np.float32)[None], cv2.COLOR_RGB2Lab)[0]
+            if np.linalg.norm(lc[0] - lc[1]) < 1.5 * c.band_color_tol:  # torn bits of the same ink
+                out.add(id(r))
+    return out
+
+
+def ink_match(lab_img, ref, c):
+    """Pixels of the same ink as ref under any lighting: same hue, enough colour. (A stripe in
+    a photo is lighter in the light and darker in the shadow, but stays orange.)"""
+    a, b = lab_img[..., 1], lab_img[..., 2]
+    ch = np.hypot(a, b)
+    rch = float(np.hypot(ref[1], ref[2]))
+    if rch < 15:  # neutral ink (black / white stripe): fall back to plain colour distance
+        return np.linalg.norm(lab_img - ref, axis=-1) < c.band_pix_tol
+    hue = np.degrees(np.arctan2(b, a))
+    rh = np.degrees(np.arctan2(ref[2], ref[1]))
+    dh = np.abs((hue - rh + 180) % 360 - 180)
+    return (dh < c.band_hue_tol) & (ch >= max(c.band_min_chroma_frac * rch, 12))

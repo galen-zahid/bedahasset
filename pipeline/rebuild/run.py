@@ -101,6 +101,7 @@ def _run(path, out, models, cfg, c):
             # only the letters themselves are removed: what shows between them (a stripe, a
             # panel edge) stays and is continued under the letters
             area = np.zeros((H, W), bool)
+            shadow_area = np.zeros((H, W), bool)
             text_mask = np.zeros((H, W), bool)
             for b in keep:
                 x, y, w, h = b["ocr_bbox"]
@@ -119,9 +120,10 @@ def _run(path, out, models, cfg, c):
                     d2 = matting.dilate(g, r + 3 * rs) & ~matting.dilate(g, r + 2 * rs) & box
                     if d1.any() and d2.any() and abs(np.median(gray[d1]) - np.median(gray[d2])) > c.text_shadow_min:
                         r += rs
+                        shadow_area |= box  # this block has a drop shadow / glow
                 text_mask |= matting.dilate(g, r)
             # zone around the letters (their drop shadow / glow): nothing there but text
-            text_zone = matting.dilate(blob_mask & area, int(c.text_zone_px)) & ~text_mask
+            text_zone = matting.dilate(blob_mask & shadow_area, int(c.text_zone_px)) & ~text_mask
         elif len(keep) != len(blocks):  # rebuild the mask from the kept blocks only
             text_mask = np.zeros((H, W), bool)
             for b in keep:
@@ -150,6 +152,23 @@ def _run(path, out, models, cfg, c):
         lab = m_ + 1
     lab = regions.relabel(regions.split_thin(lab, c))
     photo = regions.photo_from_regions(lab, sf, text_mask, c) if c.photos else np.zeros((H, W), bool)
+    sal = None
+    if photo.any() and c.photo_subject and models is not None:
+        # the photo subject (athlete + what they hold: barbell, plates) is photo as a whole,
+        # even its dark low-contrast parts
+        try:
+            sal = models.salient_mask(u8)
+        except Exception as e:  # noqa: BLE001
+            log.warning("  subject foto tidak bisa dipisah (%s)", e)
+        if sal is not None:
+            sm = sal > 0.5
+            n_, cl_ = cv2.connectedComponents(sm.astype(np.uint8), connectivity=8)
+            near = matting.dilate(photo, 5)
+            hit = np.bincount(cl_[near & sm].ravel(), minlength=n_)
+            size = np.bincount(cl_.ravel(), minlength=n_)
+            keep = (hit >= 0.2 * size) & (np.arange(n_) > 0)
+            photo |= keep[cl_] & ~(text_mask & ~photo)
+            photo = ndi.binary_fill_holes(photo)
     if photo.mean() > c.photo_max_frac:  # (almost) all photo: nothing to vectorise but keep a base
         log.info("  hampir seluruh gambar adalah foto")
     lab[photo] = 0
@@ -186,9 +205,29 @@ def _run(path, out, models, cfg, c):
         r["line"] = (not is_bg) and shapes.is_line(r["filled"], c)
         if r["line"] and r["fill"]["kind"] != "solid":  # lines are drawn with one colour
             r["fill"] = dict(kind="solid", color=r["fill"]["median"], rmse=r["fill"]["rmse"])
+    if photo.any():
+        # small irregular bits right next to the photo are photo detail (equipment, lights in a
+        # dark corner), not design shapes
+        near = matting.dilate(photo, int(c.photo_absorb_dist))
+        keep_r = []
+        for r in R:
+            col_ = r["fill"]["color"] if r["fill"]["kind"] == "solid" else r["fill"]["median"]
+            lab_ = _lab(col_)
+            dull = np.hypot(lab_[1], lab_[2]) < c.photo_dull_chroma  # grey / brown leftovers
+            if (not r["bg"] and r["area"] < c.photo_absorb_px and r["shape"][0] in ("path", "polygon")
+                    and not r.get("line") and (near[r["sl"]][r["m"]].mean() >= 0.3 or dull)):
+                photo[r["sl"]] |= r["m"]
+                lab[r["sl"]][r["m"]] = 0
+            else:
+                keep_r.append(r)
+        if len(keep_r) != len(R):
+            log.info("  %d serpihan kecil di tepi foto dikembalikan ke foto", len(R) - len(keep_r))
+            R = keep_r
+            for z, r in enumerate(R):
+                r["z"] = z
     palette = shapes.snap_palette([r["fill"] for r in R], [r["area"] for r in R], c.palette_tol)
     if c.bands and text_mask.any():
-        R, nb = shapes.occluded_bands(R, text_mask, H, W, c)
+        R, nb = shapes.occluded_bands(R, text_mask, H, W, c, s, img)
         if nb:
             log.info("  %d pita/bidang di belakang teks disambung", nb)
     T["shapes"] = time.time() - t0
@@ -197,22 +236,45 @@ def _run(path, out, models, cfg, c):
         kinds[r["shape"][0]] = kinds.get(r["shape"][0], 0) + 1
     log.info("  bentuk: %s | palet %d warna", ", ".join(f"{k} {v}" for k, v in sorted(kinds.items())), len(palette))
 
-    # ---------------------------------------------------------------- 4. objects
-    objects = group_objects(R, H, W, c, photo)
-    log.info("  %d objek vektor", len(objects))
-
-    # ---------------------------------------------------------------- 5. photos
+    # ---------------------------------------------------------------- 4. photos
     photos = []
+    pimg = img
     if photo.any():
         # text printed on a photo is removed from it (it comes back as native text)
         ptxt = text_mask & photo
-        pimg = img
         if ptxt.any():
             if models is not None and c.photo_text_lama:
                 pimg = models.inpaint(u8, (matting.dilate(ptxt, 3) * 255).astype(np.uint8)).astype(np.float32) / 255.0
             else:
                 pimg = np.where(ptxt[..., None], clean.astype(np.float32) / 255.0, img)
-        photos = package.photo_layers(pimg, photo, models if c.photo_subject else None, cfg)
+        photos = package.photo_layers(pimg, photo, models if c.photo_subject else None, cfg, sal=sal)
+
+    # stripes running behind the photo subject (the athlete) become vector stripes between the
+    # photo background and the subject
+    subj = next((p_["alpha"] for p_ in photos if p_["name"] == "photo_subject"), None)
+    if c.photo_stripes and subj is not None and any(p_["name"] == "photo_background" for p_ in photos):
+        R, ns = shapes.photo_stripes(R, s, img, (subj > 0.3) | text_mask, photo, H, W, c)
+        if ns:
+            log.info("  %d pita di belakang subject foto -> vektor", ns)
+            # what stands IN FRONT of a stripe in the photo (rack posts, equipment) is cut out of
+            # the photo as its own layer above the stripe, so the stripe can be a whole shape
+            front = np.zeros((H, W), bool)
+            for r in R:
+                if r.get("stripe") and r.get("ink") is not None:
+                    full = np.zeros((H, W), bool)
+                    full[r["sl"]] = r["m"]
+                    front |= full & photo & ~r["ink"] & (subj < 0.5)
+                    r.pop("ink")
+            front = cv2.morphologyEx(front.astype(np.uint8), cv2.MORPH_OPEN, np.ones((3, 3), np.uint8)).astype(bool)
+            if front.sum() > 200:
+                bgp = next(p_ for p_ in photos if p_["name"] == "photo_background")
+                a_ = matting.feather(front.astype(np.float32), 0.7) * bgp["alpha"]
+                photos.insert([p_["name"] for p_ in photos].index("photo_subject"),
+                              dict(name="photo_front", rgb=bgp["rgb"], alpha=a_, where="top"))
+
+    # ---------------------------------------------------------------- 5. objects
+    objects = group_objects(R, H, W, c, photo)
+    log.info("  %d objek vektor", len(objects))
 
     # ---------------------------------------------------------------- 6. write + effects
     target = img if not c.fx_from_smoothed else np.where(photo[..., None], pimg if photo.any() else img, sf)
@@ -233,7 +295,8 @@ def group_objects(R, H, W, c, photo=None):
     - top-level shapes that share a long edge are one object (book cover + pages)
     - long free lines (connectors) are their own layer, one layer per colour"""
     bgs = [r for r in R if r["bg"]]
-    fg = [r for r in R if not r["bg"]]
+    stripes = [r for r in R if r.get("stripe") and not r["bg"]]
+    fg = [r for r in R if not r["bg"] and not r.get("stripe")]
     owner = np.zeros((H, W), np.int32)  # top-most filled shape per pixel so far (by z)
     parent = {}
     for r in fg:  # R is sorted big -> small
@@ -326,6 +389,7 @@ def group_objects(R, H, W, c, photo=None):
             continue
         groups.setdefault(find(rt), []).append(r)
     objs = [dict(kind="background" if r is R[0] else "bg_shape", regions=[r]) for r in bgs]
+    objs += [dict(kind="stripe", regions=[r]) for r in stripes]
     for rs in groups.values():
         x0 = min(r["sl"][1].start for r in rs)
         x1 = max(r["sl"][1].stop for r in rs)

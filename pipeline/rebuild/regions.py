@@ -273,6 +273,9 @@ def photo_from_regions(lab, sf, text_mask, c):
     sg = float(c.photo_blur)
     band = cv2.GaussianBlur(res, (0, 0), sg) - cv2.GaussianBlur(res, (0, 0), 4 * sg)
     errb = cv2.GaussianBlur(np.abs(band).mean(-1), (0, 0), 2 * sg)
+    # relative to brightness: in a dark photo (black plates, shadows) small contrast is detail
+    luma = cv2.GaussianBlur(sf.mean(-1), (0, 0), 4 * sg)
+    errb = errb * np.clip((0.4 + c.photo_dark_ref) / (luma + c.photo_dark_ref), 1.0, c.photo_dark_max)
     hot = errb > c.photo_err
     rough = np.bincount(lab[hot].ravel(), minlength=n) >= 0.3 * np.maximum(area, 1)
     rough &= area >= 50
@@ -314,4 +317,15 @@ def photo_from_regions(lab, sf, text_mask, c):
         join[0] = False
         photo = photo | join[lab] | (pc & (lab == 0))
         photo = ndi.binary_fill_holes(photo)
+        # small bits clinging to the photo (pieces of equipment, highlights) are photo too
+        for _ in range(2):
+            ring = cv2.dilate(photo.astype(np.uint8), np.ones((5, 5), np.uint8)).astype(bool) & ~photo
+            touch = np.bincount(lab[ring].ravel(), minlength=n)
+            per = np.bincount(lab[cv2.dilate((lab > 0).astype(np.uint8), np.ones((3, 3), np.uint8)).astype(bool)
+                                  & (cv2.erode(lab.astype(np.float32), np.ones((3, 3))) != lab)].ravel(), minlength=n)
+            add = (area < c.photo_absorb_px) & (touch >= 0.3 * np.maximum(per, 1)) & (touch > 0)
+            add[0] = False
+            if not add.any():
+                break
+            photo |= add[lab]
     return photo

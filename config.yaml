@@ -352,10 +352,24 @@ mode: rebuild           # rebuild (gambar ulang dari nol, default) | layers (pem
 rebuild:
   text: true            # baca teks (OCR) -> text.csv, teks dihapus dari gambar
   text_extra_dilate: 2
+  photo_stripes: true    # pita warna aksen di belakang orang/produk di foto -> pita vektor utuh
+  stripe_min_chroma: 45
+  stripe_max: 4
+  stripe_iou: 0.35       # pita di foto kena cahaya/grunge/tertutup alat: kecocokan minimal lebih longgar
+                         # (yang ada di DEPAN pita dipotong jadi layer photo_front di atas pita)
+  stripe_min_width: 25   # ...minimal selebar 25px (kilau tipis di lantai bukan pita)
+  stripe_min_hidden: 0.03 # ...dan sebagian tertutup subject (pita memang di belakang orang)
   bands: true            # pita/strip yang terpotong huruf disambung jadi 1 pita utuh di belakang teks
   band_iou: 0.6 
   band_color_tol: 45     # potongan pita dengan warna semirip ini (Lab) = pita yang sama
   band_min_px: 2000
+  band_envelope: 0.15    # tepi pita = sisi terluar yang terlihat (persentil 15%)
+  band_gap_bins: 5       # pita berhenti setelah > 4x12px kosong (terlihat tapi tidak ada pita)
+  band_hue_tol: 16       # piksel pita: corak warna (hue) beda < 16 derajat...
+  band_min_chroma_frac: 0.45  # ...dan cukup berwarna (terang/gelap karena cahaya tetap ikut)
+  band_pix_tol: 32        # piksel gambar dengan warna semirip ini (Lab) = bagian pita
+  band_hug_px: 40         # serpihan kecil (sobekan grunge, bagian pudar) dalam 40px dari pita...
+  band_bits_frac: 0.08    # ...dan < 8% luas pita ikut diserap ke pita
   band_absorb: 0.6        # bercak yang >= 60% di dalam pita jadi bagian pita (pudar/grunge -> layer efek)
   text_mask_mode: glyph  # glyph = hanya huruf yang dihapus (pita/bidang di sela huruf tetap) | blob
   text_glyph_dilate: 3
@@ -376,10 +390,15 @@ rebuild:
   photo_window: 61
   photo_density: 0.45
   photo_err: 0.02        # detail (frekuensi menengah) yang tidak bisa digambar vektor > ini = isi foto
+  photo_dark_ref: 0.3    # detail di area gelap dihitung relatif (piringan hitam, bayangan)...
+  photo_dark_max: 1.4    # ...dikuatkan maksimal 1.4x
   photo_blur: 4          # blur selisih: tekstur halus/grain tidak dihitung foto
   photo_small_px: 2500
   photo_solidity: 0.8
   photo_min_frac: 0.02
+  photo_absorb_dist: 25  # ...atau dalam 25px dari foto (serpihan tak beraturan)
+  photo_dull_chroma: 22  # ...atau serpihan kusam (abu/coklat) di desain yang punya foto
+  photo_absorb_px: 6000  # bidang kecil yang menempel ke foto (>= 30% kelilingnya) ikut jadi foto
   photo_close: 81         # garis tepi foto dihaluskan (px)
   photo_max_frac: 0.95
   photo_text_lama: true  # teks di atas foto dihapus pakai LaMa (lebih bersih)
