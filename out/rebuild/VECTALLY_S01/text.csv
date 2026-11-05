@@ -1,0 +1,8 @@
+﻿id,text,confidence,x,y,w,h,color_hex,est_font_size_px,glyph_height_px,is_upper,angle_deg,ocr_bbox,mask_method,box_x,box_y,box_w,box_h,box_fill_hex,box_border_hex
+1,VECTALLY,0.998,47,102,287,37,#F3F5F8,51,37,True,0.0,"[46, 94, 295, 55]",glyph,,,,,,
+2,THE BUOKS,0.458,46,213,612,226,#F5F7FB,314,226,True,0.0,"[26, 192, 668, 265]",glyph,,,,,,
+3,TELL A,0.983,399,747,219,52,#0B131E,72,52,True,0.0,"[395, 739, 227, 69]",glyph,352,728,305,90,#07E3A0,#08A074
+4,thakeuebseof,0.892,82,1368,261,83,#F4F4F6,115,83,False,0.0,"[68, 1358, 287, 105]",glyph,,,,,,
+5,STORY,0.733,396,1240,500,301,#F5F7FB,418,301,True,0.0,"[361, 1209, 581, 353]",glyph,,,,,,
+6,behind your,0.999,84,1464,222,43,#F4F4F6,60,43,False,0.0,"[77, 1457, 238, 57]",glyph,,,,,,
+7,business.,0.976,84,1512,172,35,#F2F3F5,49,35,False,0.0,"[75, 1504, 186, 53]",glyph,,,,,,
