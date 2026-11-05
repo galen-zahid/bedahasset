@@ -207,6 +207,25 @@ def _run(path, out, models, cfg, c):
                     add &= ~rm
             photo |= add
             photo = ndi.binary_fill_holes(photo)
+    if photo.mean() >= c.photo_bg_takeover:
+        # a photo design: big background areas that continue the photo (dim gym behind the
+        # headline) are photo too, not a flat colour + a ghost in the effect layer
+        took = 0
+        ring_k = np.ones((5, 5), np.uint8)
+        for rid, sl_, m_ in regions.region_masks(lab):
+            area_ = m_.sum()
+            if area_ < c.photo_bg_min_frac * H * W:
+                continue
+            full_ = np.zeros((H, W), bool)
+            full_[sl_] = m_
+            edge_ = cv2.dilate(full_.astype(np.uint8), ring_k).astype(bool) & ~full_
+            contact = (edge_ & photo).sum() / max(edge_.sum(), 1)
+            if contact >= c.photo_bg_contact:
+                photo |= full_
+                took += 1
+        if took:
+            photo = ndi.binary_fill_holes(photo)
+            log.info("  %d bidang background ikut jadi foto (desain foto)", took)
     if photo.any():
         # UI on top of a photo (a button, a badge): a flat region with a clean geometric shape is
         # design, not photo, even where it sits on the photo
@@ -256,7 +275,10 @@ def _run(path, out, models, cfg, c):
     base = R[0]
     for z, r in enumerate(R):
         r["z"] = z
-        is_bg = r is base or (r["border"] and r["farea"] >= c.bg_min_frac * H * W)
+        # the base is a background only when it is one (big); in a full-photo design the
+        # biggest vector shape is just a shape (a button)
+        is_bg = (r is base and (r["farea"] >= c.bg_min_frac * H * W or not photo.any())) or \
+            (r["border"] and r["farea"] >= c.bg_min_frac * H * W)
         r["bg"] = is_bg
         if r is base and r["farea"] >= 0.5 * H * W:
             r["shape"] = ("canvas", {}, 1.0)
@@ -459,7 +481,8 @@ def group_objects(R, H, W, c, photo=None):
         if rt in lset:  # shape sitting on a line: belongs to that line
             continue
         groups.setdefault(find(rt), []).append(r)
-    objs = [dict(kind="background" if r is R[0] else "bg_shape", regions=[r]) for r in bgs]
+    objs = [dict(kind="background" if (r is R[0] and r["farea"] >= 0.5 * H * W) else "bg_shape", regions=[r])
+            for r in bgs]
     objs += [dict(kind="stripe", regions=[r]) for r in stripes]
     for rs in groups.values():
         x0 = min(r["sl"][1].start for r in rs)

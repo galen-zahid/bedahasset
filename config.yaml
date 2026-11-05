@@ -419,6 +419,9 @@ rebuild:
   photo_absorb_px: 6000  # bidang kecil yang menempel ke foto (>= 30% kelilingnya) ikut jadi foto
   photo_close: 81         # garis tepi foto dihaluskan (px)
   photo_max_frac: 0.95
+  photo_bg_takeover: 0.45 # desain yang >= 45% foto: background yang menyambung ke foto ikut jadi foto
+  photo_bg_min_frac: 0.02
+  photo_bg_contact: 0.25  # ...bila >= 25% kelilingnya menempel ke foto
   photo_ui_flat: 0.08   # ...polos = 80% pikselnya beda warna < 8%
   photo_ui_border_px: 10  # ...beserta garis tepinya
   photo_ui_min_px: 1500 # bidang polos berbentuk bersih (tombol/badge) di atas foto tetap vektor
