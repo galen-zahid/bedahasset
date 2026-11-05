@@ -130,7 +130,7 @@ def _bbox(a, thr=0.004, pad=1):
 
 
 # --------------------------------------------------------------------------- effects
-def effect_layer(orig, base, lab, text_mask, c, text_zone=None):
+def effect_layer(orig, base, lab, text_mask, c, text_zone=None, clean_zone=None):
     """The ONE general effect layer: the smallest-alpha overlay (normal blend) that turns the
     vector + photo rebuild into the original: glows, soft shadows, texture, sheen."""
     O, B = orig.astype(np.float64), base.astype(np.float64)
@@ -145,6 +145,8 @@ def effect_layer(orig, base, lab, text_mask, c, text_zone=None):
     a[matting.dilate(text_mask, 2)] = 0                      # text is native in Canva
     if text_zone is not None:
         a[text_zone] = 0
+    if clean_zone is not None:  # rebuilt stripes stay clean: no copied grunge / torn bits on them
+        a[clean_zone] = 0
     if c.fx_open_px > 0:  # thin leftovers = outlines of shapes, not effects
         k = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (2 * int(c.fx_open_px) + 1,) * 2)
         keep = cv2.morphologyEx((a > 0).astype(np.uint8), cv2.MORPH_OPEN, k)
@@ -392,7 +394,14 @@ def write(out: Path, src: Path, img, W, H, R, objects, photos, blocks, text_mask
         layers.append(L)
 
     vec_only = acc.copy()
-    fx_rgb, fx_a = effect_layer(img if target is None else target, acc, lab, text_mask, c, text_zone)
+    clean_zone = None
+    st_regs = [r for r in R if r.get("stripe")]
+    if st_regs:
+        clean_zone = np.zeros((H, W), bool)
+        for r in st_regs:
+            clean_zone[r["sl"]] |= r["m"]
+        clean_zone = matting.dilate(clean_zone, int(c.stripe_clean_px))
+    fx_rgb, fx_a = effect_layer(img if target is None else target, acc, lab, text_mask, c, text_zone, clean_zone)
     if c.effects and fx_a.sum() > c.fx_min_total * H * W:
         z = len(layers)
         name = f"{z:02d}_effects"

@@ -360,6 +360,7 @@ rebuild:
   stripe_min_width: 25   # ...minimal selebar 25px (kilau tipis di lantai bukan pita)
   stripe_min_hidden: 0.03 # ...dan sebagian tertutup subject (pita memang di belakang orang)
   bands: true            # pita/strip yang terpotong huruf disambung jadi 1 pita utuh di belakang teks
+  stripe_clean_px: 60    # pita hasil rebuild + 60px di sekitarnya bersih dari layer efek (tanpa sobekan/grunge)
   band_iou: 0.6 
   band_color_tol: 45     # potongan pita dengan warna semirip ini (Lab) = pita yang sama
   band_min_px: 2000
