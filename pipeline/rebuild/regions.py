@@ -112,7 +112,7 @@ def segment(s_u8: np.ndarray, grad: np.ndarray, exclude: np.ndarray, c, no_seed=
     small[0] = False
     seeds[small[seeds]] = 0
     lab = watershed(grad, seeds, mask=~exclude)
-    if no_seed is not None and no_seed.any():
+    if no_seed is not None and no_seed.any() and text_colors is not None:
         lab = _fill_text(lab, no_seed & ~exclude, s_u8, text_colors)
     lab = merge_small(lab, s_u8, c.min_region_px)
     return relabel(lab)

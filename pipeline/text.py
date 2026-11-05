@@ -54,6 +54,24 @@ def _glyph_mask(img: np.ndarray, poly: np.ndarray, pad: int, tol: float):
     if not bg_set.any():
         bg_set[ring_share.argmax()] = True
     tx_set = ~bg_set
+    # giant text fills its box to the edges, so the ring also hits letters; and a stripe running
+    # behind the words is not text. Prefer the cluster(s) that LOOK like letters: several pieces
+    # about as tall as the line, not much wider than tall.
+    near0 = d_all.argmin(1).reshape(crop.shape[:2])
+    score = np.zeros(k)
+    for j in range(k):
+        mj = ((near0 == j) & inside_c).astype(np.uint8)
+        mj = cv2.morphologyEx(mj, cv2.MORPH_OPEN, np.ones((3, 3), np.uint8))
+        nn, _, stt, _ = cv2.connectedComponentsWithStats(mj, connectivity=8)
+        if nn <= 1:
+            continue
+        hh, ww = stt[1:, cv2.CC_STAT_HEIGHT], stt[1:, cv2.CC_STAT_WIDTH]
+        letter = (hh >= 0.45 * h) & (hh <= 1.3 * h) & (ww <= 1.6 * hh)
+        score[j] = letter.sum()
+    if score.max() >= 2 and score[tx_set].max(initial=0) < 2:  # the ring's choice is no letters
+        cand = score >= 0.5 * score.max()
+        tx_set = cand
+        bg_set = ~cand
     if not tx_set.any():
         return None, None, False
     near = d_all.argmin(1)
@@ -198,14 +216,15 @@ def _giant_text_pass(reader, u8: np.ndarray, found, c):
     return extra
 
 
-def detect_text(img: np.ndarray, models, sal: np.ndarray, cfg):
+def detect_text(img: np.ndarray, models, sal: np.ndarray, cfg, return_glyphs=False):
     """Returns (blocks, text_mask, ui_elements). ui_elements: list of {rgb, alpha, info}."""
     c = cfg.text
     H, W = img.shape[:2]
     mask = np.zeros((H, W), bool)
     blocks, ui = [], []
+    glyphs = np.zeros((H, W), bool)
     if not c.enabled:
-        return blocks, mask, ui
+        return (blocks, mask, ui, glyphs) if return_glyphs else (blocks, mask, ui)
     u8 = to_u8(img)
     results = list(models.ocr.readtext(u8))
     giant = _giant_text_pass(models.ocr, u8, results, c)
@@ -297,6 +316,7 @@ def detect_text(img: np.ndarray, models, sal: np.ndarray, cfg):
         if not on_subject:
             glyph &= ~hard_sal  # never cut into the photo subject
         blocks.append(b)
+        glyphs |= glyph
         # inpaint a blob around the letters, not their exact outline: LaMa tends to "echo" a
         # letter-shaped hole as a faint ghost of the word
         r = max(2, int(round(c.inpaint_close_frac * h)))
@@ -309,6 +329,8 @@ def detect_text(img: np.ndarray, models, sal: np.ndarray, cfg):
             d["id"] = len(blocks) + 1
             blocks.append(d)
     mask = matting.dilate(mask, int(c.dilate_px))
+    if return_glyphs:
+        return blocks, mask, ui, glyphs
     return blocks, mask, ui
 
 

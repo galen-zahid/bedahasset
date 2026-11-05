@@ -62,6 +62,20 @@ def fit_fill(img: np.ndarray, sl, m: np.ndarray, valid: np.ndarray, W: int, H: i
     if np.abs(ends[0][2] - ends[1][2]).max() < c.grad_min_delta:
         return out
     out.update(kind="linear", stops=ends, rmse=rmse_l)
+    # multi-stop: rendered panels brighten and darken again along the same direction
+    K = int(c.grad_max_stops)
+    if K > 2 and len(px) >= c.grad_multi_min_px:
+        t = np.clip((proj - p0) / max(p1 - p0, 1e-6), 0, 1)
+        knots = np.linspace(0, 1, K)
+        # piecewise-linear least squares in t (hat basis)
+        Bm = np.maximum(0, 1 - np.abs(t[:, None] - knots[None]) * (K - 1))
+        cols, *_ = np.linalg.lstsq(Bm, px, rcond=None)
+        rmse_m = float(np.sqrt(((Bm @ cols - px) ** 2).mean()))
+        if rmse_m < c.grad_multi_gain * rmse_l:
+            out["mid"] = [(float(k), np.clip(col, 0, 1)) for k, col in zip(knots, cols)]
+            out["stops"] = [(ends[0][0], ends[0][1], np.clip(cols[0], 0, 1)),
+                            (ends[1][0], ends[1][1], np.clip(cols[-1], 0, 1))]
+            out["rmse"] = rmse_m
     return out
 
 
@@ -109,6 +123,8 @@ def snap_palette(fills, areas, tol):
             f["color"] = snap(f["color"])
         else:
             f["stops"] = [(x, y, snap(col)) for x, y, col in f["stops"]]
+            if f.get("mid"):
+                f["mid"] = [(o, snap(col)) for o, col in f["mid"]]
     return palette
 
 
@@ -117,9 +133,10 @@ def fill_attr(f, gid: str):
     if f["kind"] == "solid":
         return f'fill="{_hex(f["color"])}"', ""
     (x1, y1, c1), (x2, y2, c2) = f["stops"]
+    stops = f.get("mid") or [(0.0, c1), (1.0, c2)]
+    st = "".join(f'<stop offset="{o:.3f}" stop-color="{_hex(col)}"/>' for o, col in stops)
     defs = (f'<linearGradient id="{gid}" gradientUnits="userSpaceOnUse" x1="{_f(x1)}" y1="{_f(y1)}" '
-            f'x2="{_f(x2)}" y2="{_f(y2)}"><stop offset="0" stop-color="{_hex(c1)}"/>'
-            f'<stop offset="1" stop-color="{_hex(c2)}"/></linearGradient>')
+            f'x2="{_f(x2)}" y2="{_f(y2)}">{st}</linearGradient>')
     return f'fill="url(#{gid})"', defs
 
 
@@ -374,3 +391,123 @@ def shape_xml(kind, p, m, ox, oy, fill, c, extra=""):
     if not d:
         return ""
     return f'<path transform="translate({ox} {oy})" fill-rule="evenodd" d="{d}" {fill}{extra}/>'
+
+
+def occluded_bands(R, text_mask, H, W, c):
+    """A stripe / panel running BEHIND text is cut into pieces by the letters. Pieces of the same
+    colour that together form one straight band (fitted on the visible pixels only) become ONE
+    rotated rectangle that continues under the text."""
+    import math
+
+    near = cv2.dilate(text_mask.astype(np.uint8), np.ones((31, 31), np.uint8)).astype(bool)
+    known = ~text_mask
+
+    def L(col):
+        return cv2.cvtColor(np.asarray(col, np.float32)[None, None], cv2.COLOR_RGB2Lab)[0, 0]
+
+    bgc = L(R[0]["fill"]["color"] if R[0]["fill"]["kind"] == "solid" else R[0]["fill"]["stops"][0][2])
+
+    def col_of(r):
+        return r["fill"]["color"] if r["fill"]["kind"] == "solid" else r["fill"]["median"]
+
+    pool = [r for r in R if r is not R[0] and np.linalg.norm(L(col_of(r)) - bgc) > c.band_color_tol]
+    cands = [r for r in pool if near[r["sl"]][r["m"]].any()]  # paper is no stripe
+    # one family of colour (a faded part of the same stripe is lighter) = one group
+    labs = [L(col_of(r)) for r in cands]
+    groups = {}
+    order = sorted(range(len(cands)), key=lambda i: -cands[i]["area"])
+    heads = []
+    for i in order:
+        for h in heads:
+            if np.linalg.norm(labs[i] - labs[h]) < c.band_color_tol:
+                groups[h].append(cands[i])
+                break
+        else:
+            heads.append(i)
+            groups[i] = [cands[i]]
+    out_new, gone = [], set()
+    for rs in groups.values():
+        rs = [r for r in rs if r["area"] >= 30]
+        if not rs:
+            continue
+
+        def pts_of(r):
+            ys_, xs_ = np.nonzero(r["m"])
+            return np.stack([xs_ + r["sl"][1].start, ys_ + r["sl"][0].start], 1).astype(np.float64)
+
+        # direction from the longest piece, then keep only pieces lying in that strip (robust to
+        # other shapes of the same colour, e.g. orange letters next to an orange stripe)
+        seed = max(rs, key=lambda r: max(r["sl"][0].stop - r["sl"][0].start, r["sl"][1].stop - r["sl"][1].start))
+        P = pts_of(seed)
+        if len(P) < 50:
+            continue
+        mu = P.mean(0)
+        _, _, vt = np.linalg.svd(P - mu, full_matrices=False)
+        u, v = vt[0], vt[1]
+        pv = (P - mu) @ v
+        lo, hi = np.percentile(pv, [1, 99])
+        pad = 0.15 * (hi - lo) + 2
+        fam = [r for r in pool if r["area"] >= 30
+               and np.linalg.norm(L(col_of(r)) - L(col_of(seed))) < c.band_color_tol]
+        keep = []
+        for r in fam:
+            q = (pts_of(r) - mu) @ v
+            if ((q >= lo - pad) & (q <= hi + pad)).mean() >= 0.8:
+                keep.append(r)
+        rs = keep
+        P = np.vstack([pts_of(r) for r in rs])
+        if len(P) < c.band_min_px:
+            continue
+        V = np.zeros((H, W), bool)
+        for r in rs:
+            V[r["sl"]] |= r["m"]
+        mu = P.mean(0)
+        _, _, vt = np.linalg.svd(P - mu, full_matrices=False)
+        u, v = vt[0], vt[1]
+        pu, pv = (P - mu) @ u, (P - mu) @ v
+        u0, u1 = pu.min(), pu.max()
+        v0, v1 = np.percentile(pv, [0.5, 99.5])
+        L_, Wd = u1 - u0, v1 - v0
+        if Wd < 4 or L_ < 3 * Wd:
+            continue
+        corners = [mu + a * u + b * v for a, b in ((u0, v0), (u1, v0), (u1, v1), (u0, v1))]
+        Rm = np.zeros((H, W), np.uint8)
+        cv2.fillPoly(Rm, [np.round(np.array(corners) * 8).astype(np.int32)], 1, cv2.LINE_8, 3)
+        Rm = Rm.astype(bool)
+        inter = (Rm & V).sum()
+        union = ((Rm | V) & known).sum()
+        if union == 0 or inter / union < c.band_iou or (Rm & text_mask).sum() < 0.02 * Rm.sum():
+            continue
+        yy, xx = np.nonzero(Rm)
+        sl = (slice(yy.min(), yy.max() + 1), slice(xx.min(), xx.max() + 1))
+        cx, cy = mu + ((u0 + u1) / 2) * u + ((v0 + v1) / 2) * v
+        ang = math.degrees(math.atan2(u[1], u[0]))
+        base = min(rs, key=lambda r: r["z"])
+        nr = dict(base)
+        big = max(r["area"] for r in rs)
+        main = max((r for r in rs if r["area"] >= 0.2 * big),  # the purest (most saturated) piece
+                   key=lambda r: np.hypot(*L(col_of(r))[1:]))
+        nr["fill"] = dict(kind="solid", color=col_of(main), rmse=0, median=col_of(main))
+        nr.update(sl=sl, m=Rm[sl], filled=Rm[sl], area=int(Rm.sum()), farea=int(Rm.sum()),
+                  shape=("rect", dict(cx=cx - sl[1].start, cy=cy - sl[0].start, w=L_, h=Wd, ang=ang, r=0.0),
+                         inter / union), line=False, bg=False)
+        out_new.append(nr)
+        gone |= {id(r) for r in rs}
+        # blotches sitting inside the stripe (faded / grunge bits) become part of it; their
+        # difference is drawn by the effect layer
+        Rd = cv2.dilate(Rm.astype(np.uint8), cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (51, 51))).astype(bool)
+        for r in R:
+            if r is R[0] or id(r) in gone or r["area"] >= nr["area"]:
+                continue
+            inside = Rm[r["sl"]][r["m"]].mean()
+            hug = Rd[r["sl"]][r["m"]].mean()
+            same = np.linalg.norm(L(col_of(r)) - L(nr["fill"]["color"])) < c.band_color_tol * 1.5
+            if inside >= c.band_absorb or (same and hug >= 0.9 and r["area"] < 0.05 * nr["area"]):
+                gone.add(id(r))
+    if not out_new:
+        return R, 0
+    R2 = [r for r in R if id(r) not in gone] + out_new
+    R2.sort(key=lambda r: r["z"])
+    for z, r in enumerate(R2):
+        r["z"] = z
+    return R2, len(out_new)

@@ -80,18 +80,53 @@ def _run(path, out, models, cfg, c):
 
     # ---------------------------------------------------------------- 1. text
     blocks, text_mask = [], np.zeros((H, W), bool)
+    text_zone = np.zeros((H, W), bool)
     if c.text and models is not None:
         from .. import text as textmod
 
-        blocks, text_mask, _ = textmod.detect_text(img, models, np.zeros((H, W), np.float32), _text_cfg(cfg))
-        keep = [b for b in blocks if sum(ch.isalnum() for ch in str(b["text"])) >= c.text_min_chars]
+        blocks, blob_mask, _, glyphs = textmod.detect_text(img, models, np.zeros((H, W), np.float32),
+                                                           _text_cfg(cfg), return_glyphs=True)
+        def _is_text(b):
+            t = str(b["text"]).strip()
+            n = sum(ch.isalnum() for ch in t)
+            # "No", "Hi" are words; "2", "7s", "$" read off icons are not
+            return n >= c.text_min_chars or (n == 2 and t.isalpha() and b["confidence"] >= 0.9)
+
+        keep = [b for b in blocks if _is_text(b)]
         for b in blocks:
             if b not in keep:
                 log.info("  bukan teks (terlalu pendek, kemungkinan ikon): %r", b["text"])
-        if len(keep) != len(blocks):  # rebuild the mask from the kept blocks only
+        text_mask = blob_mask
+        if c.text_mask_mode == "glyph":
+            # only the letters themselves are removed: what shows between them (a stripe, a
+            # panel edge) stays and is continued under the letters
+            area = np.zeros((H, W), bool)
+            text_mask = np.zeros((H, W), bool)
+            for b in keep:
+                x, y, w, h = b["ocr_bbox"]
+                p = int(round(cfg.text.pad_frac * h)) + 2
+                box = np.zeros((H, W), bool)
+                box[max(y - p, 0):y + h + p, max(x - p, 0):x + w + p] = True
+                area |= box
+                # letters + their drop shadow / glow (grows with the letter size), only when the
+                # letters really have one: the band just outside differs from further out
+                g = glyphs & box
+                r = int(c.text_glyph_dilate)
+                rs = int(round(c.text_shadow_frac * b["h"]))
+                if rs > 2 and g.any():
+                    gray = u8.astype(np.float32).mean(-1)
+                    d1 = matting.dilate(g, r + rs) & ~matting.dilate(g, r)
+                    d2 = matting.dilate(g, r + 3 * rs) & ~matting.dilate(g, r + 2 * rs) & box
+                    if d1.any() and d2.any() and abs(np.median(gray[d1]) - np.median(gray[d2])) > c.text_shadow_min:
+                        r += rs
+                text_mask |= matting.dilate(g, r)
+            # zone around the letters (their drop shadow / glow): nothing there but text
+            text_zone = matting.dilate(blob_mask & area, int(c.text_zone_px)) & ~text_mask
+        elif len(keep) != len(blocks):  # rebuild the mask from the kept blocks only
             text_mask = np.zeros((H, W), bool)
             for b in keep:
                 text_mask |= _block_mask(img, b, cfg)
+        if len(keep) != len(blocks):
             blocks = keep
             for i, b in enumerate(blocks, 1):
                 b["id"] = i
@@ -105,7 +140,8 @@ def _run(path, out, models, cfg, c):
     s = regions.smooth(clean, c)
     grad = regions.color_gradient(s)
     sf = s.astype(np.float32) / 255.0
-    lab = regions.segment(s, grad, np.zeros((H, W), bool), c, no_seed=text_mask & ~own_paper, text_colors=tcols)
+    lab = regions.segment(s, grad, np.zeros((H, W), bool), c, no_seed=text_mask & ~own_paper,
+                          text_colors=tcols if c.text_mask_mode != "glyph" else None)
     if c.merge_tol > 0:  # texture / banding: neighbours one gradient explains become one region
         from ..pentool import merge_pieces
 
@@ -151,6 +187,10 @@ def _run(path, out, models, cfg, c):
         if r["line"] and r["fill"]["kind"] != "solid":  # lines are drawn with one colour
             r["fill"] = dict(kind="solid", color=r["fill"]["median"], rmse=r["fill"]["rmse"])
     palette = shapes.snap_palette([r["fill"] for r in R], [r["area"] for r in R], c.palette_tol)
+    if c.bands and text_mask.any():
+        R, nb = shapes.occluded_bands(R, text_mask, H, W, c)
+        if nb:
+            log.info("  %d pita/bidang di belakang teks disambung", nb)
     T["shapes"] = time.time() - t0
     kinds = {}
     for r in R:
@@ -176,7 +216,8 @@ def _run(path, out, models, cfg, c):
 
     # ---------------------------------------------------------------- 6. write + effects
     target = img if not c.fx_from_smoothed else np.where(photo[..., None], pimg if photo.any() else img, sf)
-    info = package.write(out, path, img, W, H, R, objects, photos, blocks, text_mask, lab, c, target)
+    info = package.write(out, path, img, W, H, R, objects, photos, blocks, text_mask, lab, c, target,
+                         text_zone=text_zone & ~photo)
     T["total"] = time.time() - t0
     info["timing_s"] = {k: round(v, 1) for k, v in T.items()}
     (out / "manifest.json").write_text(json.dumps(info, indent=2, ensure_ascii=False), encoding="utf-8")

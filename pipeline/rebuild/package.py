@@ -124,7 +124,7 @@ def _bbox(a, thr=0.004, pad=1):
 
 
 # --------------------------------------------------------------------------- effects
-def effect_layer(orig, base, lab, text_mask, c):
+def effect_layer(orig, base, lab, text_mask, c, text_zone=None):
     """The ONE general effect layer: the smallest-alpha overlay (normal blend) that turns the
     vector + photo rebuild into the original: glows, soft shadows, texture, sheen."""
     O, B = orig.astype(np.float64), base.astype(np.float64)
@@ -137,6 +137,8 @@ def effect_layer(orig, base, lab, text_mask, c):
     edges[1:, :] |= lab[1:, :] != lab[:-1, :]
     a[matting.dilate(edges, int(c.fx_edge_px))] = 0          # no outlines of mismatched edges
     a[matting.dilate(text_mask, 2)] = 0                      # text is native in Canva
+    if text_zone is not None:
+        a[text_zone] = 0
     if c.fx_open_px > 0:  # thin leftovers = outlines of shapes, not effects
         k = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (2 * int(c.fx_open_px) + 1,) * 2)
         keep = cv2.morphologyEx((a > 0).astype(np.uint8), cv2.MORPH_OPEN, k)
@@ -148,6 +150,21 @@ def effect_layer(orig, base, lab, text_mask, c):
     a[small[cl]] = 0
     safe = np.maximum(a, 1e-4)[..., None]
     rgb = np.clip(B + (O - B) / safe, 0, 1)
+    if text_zone is not None and text_zone.any():
+        # around the letters the effect (glow, sheen) simply continues from its surroundings;
+        # the letters' own shadow is not copied
+        hole = (text_zone | matting.dilate(text_mask, 2)).astype(np.uint8)
+        H, W = a.shape
+        sw, sh = max(W // 4, 1), max(H // 4, 1)
+        pm = np.dstack([rgb * a[..., None], a[..., None]]).astype(np.float32)
+        small = cv2.resize(pm, (sw, sh), interpolation=cv2.INTER_AREA)
+        hs = cv2.resize(hole, (sw, sh), interpolation=cv2.INTER_NEAREST)
+        filled = np.dstack([cv2.inpaint(to_u8(small[..., i]), hs, 5, cv2.INPAINT_TELEA) for i in range(4)])
+        up = cv2.resize(filled, (W, H), interpolation=cv2.INTER_CUBIC).astype(np.float32) / 255.0
+        hb = hole.astype(bool)
+        a = np.where(hb, np.clip(up[..., 3], 0, 1), a)
+        rgb = np.where(hb[..., None], np.clip(up[..., :3] / np.maximum(up[..., 3:4], 1e-3), 0, 1), rgb)
+        a[a < c.fx_min_alpha] = 0
     return rgb.astype(np.float32), a.astype(np.float32)
 
 
@@ -277,7 +294,9 @@ def _pdf_region(cv, r, W, H, c):
     else:
         (x1, y1, c1), (x2, y2, c2) = f["stops"]
         cv.clipPath(path, stroke=0, fill=0, fillMode=1)
-        cv.linearGradient(x1, y1, x2, y2, (_rl_color(c1), _rl_color(c2)), extend=True)
+        stops = f.get("mid") or [(0.0, c1), (1.0, c2)]
+        cv.linearGradient(x1, y1, x2, y2, [_rl_color(col) for _, col in stops],
+                          [o for o, _ in stops], extend=True)
     cv.restoreState()
 
 
@@ -316,7 +335,8 @@ def write_pdf(path, W, H, layers, blocks, c):
 
 
 # ----------------------------------------------------------------------------- write
-def write(out: Path, src: Path, img, W, H, R, objects, photos, blocks, text_mask, lab, c, target=None):
+def write(out: Path, src: Path, img, W, H, R, objects, photos, blocks, text_mask, lab, c, target=None,
+          text_zone=None):
     from skimage.metrics import structural_similarity
 
     for d in ("canva", "vectors", "layers"):
@@ -366,7 +386,7 @@ def write(out: Path, src: Path, img, W, H, R, objects, photos, blocks, text_mask
         layers.append(L)
 
     vec_only = acc.copy()
-    fx_rgb, fx_a = effect_layer(img if target is None else target, acc, lab, text_mask, c)
+    fx_rgb, fx_a = effect_layer(img if target is None else target, acc, lab, text_mask, c, text_zone)
     if c.effects and fx_a.sum() > c.fx_min_total * H * W:
         z = len(layers)
         name = f"{z:02d}_effects"
@@ -381,7 +401,7 @@ def write(out: Path, src: Path, img, W, H, R, objects, photos, blocks, text_mask
     # ---- text
     for b in blocks:
         b["canva_font_size"] = fit_text(b)
-    tm = matting.dilate(text_mask, 1)[..., None]
+    tm = matting.dilate(text_mask if text_zone is None else (text_mask | text_zone), 1)[..., None]
     final_cmp = np.where(tm, img, acc)    # text area: what native text will show
     vec_cmp = np.where(tm, img, vec_only)
     ssim = structural_similarity(img, final_cmp, channel_axis=2, data_range=1.0)

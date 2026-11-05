@@ -352,6 +352,16 @@ mode: rebuild           # rebuild (gambar ulang dari nol, default) | layers (pem
 rebuild:
   text: true            # baca teks (OCR) -> text.csv, teks dihapus dari gambar
   text_extra_dilate: 2
+  bands: true            # pita/strip yang terpotong huruf disambung jadi 1 pita utuh di belakang teks
+  band_iou: 0.6 
+  band_color_tol: 45     # potongan pita dengan warna semirip ini (Lab) = pita yang sama
+  band_min_px: 2000
+  band_absorb: 0.6        # bercak yang >= 60% di dalam pita jadi bagian pita (pudar/grunge -> layer efek)
+  text_mask_mode: glyph  # glyph = hanya huruf yang dihapus (pita/bidang di sela huruf tetap) | blob
+  text_glyph_dilate: 3
+  text_shadow_frac: 0.05  # bayangan huruf: + 5% tinggi huruf ikut dihapus bersama hurufnya...
+  text_shadow_min: 6      # ...hanya bila tepi di sekitar huruf memang lebih gelap/terang (selisih > 6)
+  text_zone_px: 6        # bayangan/glow huruf (sampai 6px di luar gumpalan teks) tidak masuk layer efek
   smooth_passes: 2      # bilateral filter: hilangkan grain/noise, tepi tetap tajam
   smooth_d: 7
   smooth_sigma_color: 22
@@ -376,8 +386,11 @@ rebuild:
   photo_subject: true   # foto: orang/produk dipisah dari background foto (rembg + LaMa)
   fill_holes: true      # bentuk ditutup penuh (tanpa bolong); isi lubang ditumpuk di atasnya
   grad_min_px: 400      # bidang lebih kecil selalu 1 warna solid
-  grad_gain: 0.6        # gradien dipakai bila error turun ke < 60% dibanding warna solid
+  grad_gain: 0.85       # gradien dipakai bila error turun ke < 85% dibanding warna solid
   grad_min_delta: 0.05  # ...dan beda warna ujung ke ujung > 5%
+  grad_max_stops: 5      # gradien sampai 5 titik warna (panel render yang terang-gelap-terang)
+  grad_multi_min_px: 3000
+  grad_multi_gain: 0.75  # dipakai bila error turun ke < 75% dibanding gradien 2 warna
   palette_tol: 7.0      # warna yang beda < 7 (Lab) disamakan -> warna konsisten
   bg_min_frac: 0.12     # bidang besar yang menyentuh tepi kanvas = bagian background
   # pencocokan bentuk dasar (IoU = seberapa pas, 1 = sempurna)

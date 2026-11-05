@@ -115,7 +115,9 @@ def merge_pieces(img, labels, merge_tol, min_px, max_pieces, color_join=0.15, ma
         if min(st[a].n, st[b].n) < min_px or a in thin or b in thin:  # tiny / rim slivers
             c -= 1e3
         elif max_both is not None and min(st[a].n, st[b].n) > max_both:  # two big shapes stay two
-            c += 1e3
+            ma, mb = st[a].xty[0] / st[a].n, st[b].xty[0] / st[b].n
+            if np.abs(ma - mb).max() > 0.05:  # ...unless they are the same colour (cut by text)
+                c += 1e3
         else:  # different colours (dark line on a page) never become one gradient piece
             ma, mb = st[a].xty[0] / st[a].n, st[b].xty[0] / st[b].n
             if np.abs(ma - mb).max() > color_join:
