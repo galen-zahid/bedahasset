@@ -190,17 +190,25 @@ def _font(size):
     return ImageFont.load_default()
 
 
+def _bbox_lines(f, lines):
+    ws = [f.getbbox(s)[2] - f.getbbox(s)[0] for s in lines if s] or [0]
+    return max(ws)
+
+
 def fit_text(b):
     """Font size so the text fills its box width (what to type in Canva's size field)."""
     lines = [s for s in str(b["text"]).split("\n") if s] or [" "]
-    size = max(6, int(b.get("est_font_size_px", b["h"])))
+    nl = len(lines)
+    size = max(6, int(b.get("est_font_size_px", b["h"] / max(nl, 1))))
     for _ in range(6):
         f = _font(size)
-        wmax = max(f.getbbox(s)[2] - f.getbbox(s)[0] for s in lines)
+        wmax = _bbox_lines(f, lines)
         if wmax <= 0:
             break
         new = int(round(size * b["w"] / wmax))
         new = int(np.clip(new, 0.5 * size, 2.0 * size))
+        if nl > 1:  # several lines must also fit the box height
+            new = min(new, int(b["h"] / (nl * 1.15)) + 1)
         if abs(new - size) <= 1:
             size = new
             break
@@ -214,8 +222,14 @@ def draw_text(canvas_u8, blocks):
     for b in blocks:
         size = b.get("canva_font_size") or fit_text(b)
         f = _font(size)
-        bb = f.getbbox(b["text"])
-        d.text((b["x"] - bb[0], b["y"] - bb[1]), b["text"], font=f, fill=b["color_hex"])
+        lines = str(b["text"]).split("\n")
+        y = b["y"]
+        step = b["h"] / max(len(lines), 1)
+        for ln in lines:
+            if ln:
+                bb = f.getbbox(ln)
+                d.text((b["x"] - bb[0], y - bb[1]), ln, font=f, fill=b["color_hex"])
+            y += step
     return np.asarray(im)
 
 
@@ -336,7 +350,10 @@ def write_pdf(path, W, H, layers, blocks, c):
         cv.scale(1, -1)
         cv.setFillColor(_rl_color(np.array([int(b["color_hex"][i:i + 2], 16) for i in (1, 3, 5)]) / 255))
         cv.setFont("Helvetica-Bold", size)
-        cv.drawString(0, 0, b["text"])
+        lines = str(b["text"]).split("\n")
+        step = b["h"] / max(len(lines), 1)
+        for i_, ln in enumerate(lines):
+            cv.drawString(0, (len(lines) - 1 - i_) * step, ln)
         cv.restoreState()
     cv.showPage()
     cv.save()
@@ -496,9 +513,11 @@ def _scene_svg(out, layers, blocks, W, H):
             body.append(f'<image id="{L["name"]}" x="{x}" y="{y}" width="{w}" height="{h}" '
                         f'xlink:href="{L["file"]}"/>')
     for b in blocks:
-        t = str(b["text"]).replace("&", "&amp;").replace("<", "&lt;")
-        body.append(f'<text x="{b["x"]}" y="{b["y"] + b["h"]}" font-family="Arial" font-weight="bold" '
-                    f'font-size="{b["canva_font_size"]}" fill="{b["color_hex"]}">{t}</text>')
+        lines = [ln.replace("&", "&amp;").replace("<", "&lt;") for ln in str(b["text"]).split("\n")]
+        step = b["h"] / max(len(lines), 1)
+        spans = "".join(f'<tspan x="{b["x"]}" y="{b["y"] + (i + 1) * step:.0f}">{ln}</tspan>' for i, ln in enumerate(lines))
+        body.append(f'<text font-family="Arial" font-weight="bold" font-size="{b["canva_font_size"]}" '
+                    f'fill="{b["color_hex"]}">{spans}</text>')
     (out / "scene.svg").write_text(_svg(W, H, "\n".join(body)), encoding="utf-8")
 
 

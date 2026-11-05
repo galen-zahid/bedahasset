@@ -462,6 +462,16 @@ rebuild:
   fx_min_px: 120       # gumpalan efek lebih kecil dari ini dibuang (bintik)
   fx_from_smoothed: true  # efek dihitung dari gambar yang sudah dihaluskan: grain/bintik tidak ikut
   fx_min_total: 0.0005
+  text_reread: true      # baca ulang tiap baris (diregangkan utk font condensed, hitam-putih) + perbaiki kata
+  text_stretch: [0.7, 1.0, 1.6]   # dirapatkan (logo berspasi lebar), asli, diregangkan (font condensed)
+  text_logo_max_h: 0.04 # ...dan hurufnya kecil (< 4% tinggi kanvas); headline besar tetap dikoreksi
+  text_logo_top: 0.15    # teks 1-2 kata di 15% atas = logo/brand: tidak pernah dikoreksi kamus
+  text_line_px: 64
+  text_side_pad: 0.8      # baca ulang juga huruf yang terpotong di luar kotak OCR ("FINIS" -> "FINISH")
+  text_reread_min_words: 0.8  # bacaan ulang dipakai hanya bila >= 80% katanya kata sungguhan
+  text_word_bonus: 0.5   # bacaan yang terdiri dari kata sungguhan lebih dipercaya
+  text_dict_max_cost: 11.5   # kata dianggap ada di kamus (semakin besar semakin longgar)
+  text_split_max_cost: 10.0  # potongan kata gabungan harus kata yang cukup umum
   text_min_chars: 3     # teks < 3 huruf/angka dianggap ikon (mis. "$", "2"), bukan teks
   contain_frac: 0.85    # bentuk yang >= 85% berada DI ATAS bentuk lain = bagian objek itu
   group_gap_px: 4       # bentuk berjarak <= 4px (dipisah garis tepi tipis) dianggap bersentuhan

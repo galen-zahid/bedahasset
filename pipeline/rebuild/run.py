@@ -139,6 +139,24 @@ def _run(path, out, models, cfg, c):
             for i, b in enumerate(blocks, 1):
                 b["id"] = i
         text_mask = matting.dilate(text_mask, int(c.text_extra_dilate))
+        if c.text_reread and blocks:
+            from . import textfix
+
+            bv_path = Path(out).parent / "_brand_words.json"
+            try:
+                bv = json.loads(bv_path.read_text(encoding="utf-8")) if bv_path.exists() else {}
+            except Exception:  # noqa: BLE001
+                bv = {}
+            blocks = textfix.reread(blocks, u8, glyphs, models, c, batch_vocab=bv)
+            for b in blocks:  # remember this design's logo words for the next designs
+                if b["y"] < c.text_logo_top * H and b["h"] < c.text_logo_max_h * H:
+                    for tk in str(b["text"]).split():
+                        if tk.isalpha() and len(tk) >= 4:
+                            bv[tk.lower()] = bv.get(tk.lower(), 0) + 1
+            try:
+                bv_path.write_text(json.dumps(bv), encoding="utf-8")
+            except Exception:  # noqa: BLE001
+                pass
     T["text"] = time.time() - t0
 
     # ---------------------------------------------------------------- 2. regions
