@@ -2,7 +2,7 @@
 // Baca CANVA_PACKAGE.json dari program rebuild -> susun semua elemen di halaman Canva:
 // shape asli (warna bisa diganti), teks asli (bisa diketik), gambar (bisa diganti).
 import { Button, Rows, Text } from "@canva/app-ui-kit";
-import { addElementAtPoint } from "@canva/design";
+import { addElementAtPoint, addPage } from "@canva/design";
 import { useState } from "react";
 import * as styles from "styles/components.css";
 
@@ -81,44 +81,91 @@ const toCanva = (e: El): any => {
   };
 };
 
+const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
+
+const parsePkg = async (f: File): Promise<Pkg> => {
+  const p = JSON.parse(await readText(f)) as Pkg;
+  if (p.format !== "cusbe-canva-package" || !Array.isArray(p.elements)) {
+    throw new Error("bukan file CANVA_PACKAGE.json dari program rebuild");
+  }
+  return p;
+};
+
 export const App = () => {
-  const [pkg, setPkg] = useState<Pkg | null>(null);
-  const [error, setError] = useState("");
+  const [pkgs, setPkgs] = useState<Pkg[]>([]);
+  const [errors, setErrors] = useState<string[]>([]);
   const [busy, setBusy] = useState(false);
   const [log, setLog] = useState<string[]>([]);
 
-  const onFile = async (f: File | undefined) => {
-    setError("");
+  const onFiles = async (list: FileList | null) => {
+    setErrors([]);
     setLog([]);
-    setPkg(null);
-    if (!f) return;
-    try {
-      const p = JSON.parse(await readText(f)) as Pkg;
-      if (p.format !== "cusbe-canva-package" || !Array.isArray(p.elements)) {
-        throw new Error("bukan file CANVA_PACKAGE.json dari program rebuild");
+    setPkgs([]);
+    if (!list) return;
+    const ok: Pkg[] = [];
+    const bad: string[] = [];
+    for (const f of Array.from(list)) {
+      try {
+        ok.push(await parsePkg(f));
+      } catch (e) {
+        bad.push(`${f.name}: ${String(e)}`);
       }
-      setPkg(p);
-    } catch (e) {
-      setError("File tidak valid: " + String(e));
     }
+    setPkgs(ok);
+    setErrors(bad);
   };
 
-  const assemble = async () => {
-    if (!pkg) return;
-    setBusy(true);
-    const out: string[] = [];
-    let ok = 0;
-    for (let i = 0; i < pkg.elements.length; i++) {
-      const e = pkg.elements[i];
+  // current page (single package, old behaviour)
+  const assembleHere = async (pkg: Pkg) => {
+    const fails: string[] = [];
+    for (const e of pkg.elements) {
       try {
         await addElementAtPoint(toCanva(e));
-        ok++;
       } catch (err) {
-        out.push(`GAGAL ${e.name} (${e.type}): ${String(err)}`);
+        fails.push(`GAGAL ${e.name} (${e.type}): ${String(err)}`);
       }
-      setLog([`Menyusun ${i + 1}/${pkg.elements.length}...`, ...out]);
     }
-    setLog([`Selesai: ${ok} dari ${pkg.elements.length} elemen berhasil.`, ...out]);
+    return fails;
+  };
+
+  // every package -> its own new page, with its own size, all elements in one call
+  const assembleAsPages = async () => {
+    setBusy(true);
+    const out: string[] = [];
+    let done = 0;
+    for (let i = 0; i < pkgs.length; i++) {
+      const p = pkgs[i];
+      setLog([`Halaman ${i + 1}/${pkgs.length}: ${p.source}...`, ...out]);
+      try {
+        await addPage({
+          title: p.source.slice(0, 255),
+          dimensions: { width: p.width, height: p.height },
+          elements: p.elements.map(toCanva),
+        } as any);
+        done++;
+      } catch (err) {
+        // fallback: empty page first, then the elements one by one onto it
+        try {
+          await addPage({ title: p.source.slice(0, 255), dimensions: { width: p.width, height: p.height } } as any);
+          await sleep(600);
+          const fails = await assembleHere(p);
+          done++;
+          out.push(`${p.source}: disusun per elemen (${String(err).slice(0, 80)})`);
+          fails.forEach((f) => out.push(`${p.source}: ${f}`));
+        } catch (err2) {
+          out.push(`GAGAL ${p.source}: ${String(err2)}`);
+        }
+      }
+      await sleep(1100); // Canva limit: 10 halaman / 10 detik
+    }
+    setLog([`Selesai: ${done} dari ${pkgs.length} desain jadi halaman baru.`, ...out]);
+    setBusy(false);
+  };
+
+  const onlyOne = async () => {
+    setBusy(true);
+    const fails = await assembleHere(pkgs[0]);
+    setLog([`Selesai: ${pkgs[0].elements.length - fails.length} dari ${pkgs[0].elements.length} elemen.`, ...fails]);
     setBusy(false);
   };
 
@@ -127,27 +174,31 @@ export const App = () => {
       <Rows spacing="2u">
         <Text>CUSBE Native Importer</Text>
         <Text size="small">
-          1) Buat desain dengan ukuran yang tertulis di bawah setelah memilih file. 2) Pilih
-          CANVA_PACKAGE.json dari folder out\nama_desain. 3) Klik Susun.
+          Pilih SATU atau BANYAK file CANVA_PACKAGE.json (tahan Ctrl untuk pilih banyak). Setiap desain
+          jadi halaman baru dengan ukuran aslinya.
         </Text>
-        <input type="file" accept=".json,application/json" onChange={(e) => onFile(e.target.files?.[0])} />
-        {error && <Text tone="critical">{error}</Text>}
-        {pkg && (
+        <input type="file" multiple accept=".json,application/json" onChange={(e) => onFiles(e.target.files)} />
+        {errors.map((m, i) => (
+          <Text key={"e" + i} size="small" tone="critical">
+            {m}
+          </Text>
+        ))}
+        {pkgs.length > 0 && (
           <Rows spacing="1u">
-            <Text>
-              {pkg.source} - ukuran desain {pkg.width} x {pkg.height} px
-            </Text>
-            <Text size="small">
-              {pkg.summary.shape} shape asli, {pkg.summary.text} teks asli, {pkg.summary.image} gambar
-            </Text>
-            {pkg.warnings.map((w, i) => (
-              <Text key={i} size="small" tone="tertiary">
-                - {w}
+            <Text>{pkgs.length} desain dipilih</Text>
+            {pkgs.map((p, i) => (
+              <Text key={"p" + i} size="small">
+                - {p.source} ({p.width}x{p.height}): {p.summary.shape} shape, {p.summary.text} teks, {p.summary.image} gambar
               </Text>
             ))}
-            <Button variant="primary" onClick={assemble} disabled={busy} loading={busy} stretch>
-              Susun di halaman ini
+            <Button variant="primary" onClick={assembleAsPages} disabled={busy} loading={busy} stretch>
+              Susun semua (1 desain = 1 halaman baru)
             </Button>
+            {pkgs.length === 1 && (
+              <Button variant="secondary" onClick={onlyOne} disabled={busy} stretch>
+                Susun di halaman yang sedang dibuka
+              </Button>
+            )}
           </Rows>
         )}
         {log.map((m, i) => (
