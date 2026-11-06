@@ -471,6 +471,12 @@ def write(out: Path, src: Path, img, W, H, R, objects, photos, blocks, text_mask
     except Exception as e:  # noqa: BLE001
         log.warning("  PDF gagal dibuat: %s", e)
     _guide(out, src, W, H, layers, blocks)
+    try:
+        from . import canva_package
+
+        canva_package.write(out, src, W, H, layers, blocks, c)
+    except Exception as e:  # noqa: BLE001
+        log.warning("  CANVA_PACKAGE.json gagal dibuat: %s", e)
     return {
         "source": src.name, "mode": "rebuild", "width": W, "height": H,
         "ssim": round(float(ssim), 4), "ssim_vectors_only": round(float(ssim_v), 4),

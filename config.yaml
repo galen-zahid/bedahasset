@@ -471,6 +471,8 @@ rebuild:
   fx_min_px: 120       # gumpalan efek lebih kecil dari ini dibuang (bintik)
   fx_from_smoothed: true  # efek dihitung dari gambar yang sudah dihaluskan: grain/bintik tidak ikut
   fx_min_total: 0.0005
+  canva_max_gradient: 0.18  # bidang bergradien kuat -> gambar (shape Canva hanya warna solid)
+  canva_max_split: 4        # objek yang melebihi batas shape Canva dipecah maksimal jadi 4 shape
   text_reread: true      # baca ulang tiap baris (diregangkan utk font condensed, hitam-putih) + perbaiki kata
   text_stretch: [0.7, 1.0, 1.6]   # dirapatkan (logo berspasi lebar), asli, diregangkan (font condensed)
   text_logo_max_h: 0.04 # ...dan hurufnya kecil (< 4% tinggi kanvas); headline besar tetap dikoreksi
