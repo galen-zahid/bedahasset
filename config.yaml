@@ -427,6 +427,10 @@ rebuild:
   photo_ui_min_px: 1500 # bidang polos berbentuk bersih (tombol/badge) di atas foto tetap vektor
   subject_flat_std: 0.035  # bidang polos (isi tombol) yang ikut terambil pemisah subjek tetap vektor
   subject_accent_chroma: 35  # bidang berwarna tegas & rata yang ikut terambil pemisah subjek tetap vektor
+  subject_hole_thr: 0.03 # area atlet yang dihapus dari foto background: termasuk rambut/bayangan tipis...
+  subject_hole_px: 22    # ...dan diperlebar 22px (tidak ada bekas atlet)
+  stripe_bg_reach_px: 90 # ...termasuk tinta pita yang pudar sampai 90px di luar bentuknya
+  stripe_bg_clear_px: 12 # pita lama dihapus dari foto background (+12px)
   photo_text_lama: true  # teks di atas foto dihapus pakai LaMa (lebih bersih)
   photo_subject: true   # foto: orang/produk dipisah dari background foto (rembg + LaMa)
   fill_holes: true      # bentuk ditutup penuh (tanpa bolong); isi lubang ditumpuk di atasnya

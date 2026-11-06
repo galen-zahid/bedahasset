@@ -352,10 +352,14 @@ def _run(path, out, models, cfg, c):
             # what stands IN FRONT of a stripe in the photo (rack posts, equipment) is cut out of
             # the photo as its own layer above the stripe, so the stripe can be a whole shape
             front = np.zeros((H, W), bool)
+            stripe_area = np.zeros((H, W), bool)
             for r in R:
                 if r.get("stripe") and r.get("ink") is not None:
                     full = np.zeros((H, W), bool)
                     full[r["sl"]] = r["m"]
+                    stripe_area |= full
+                    # faded / torn ink of the same stripe just past its clean edges and ends
+                    stripe_area |= r["ink"] & matting.dilate(full, int(c.stripe_bg_reach_px))
                     front |= full & photo & ~r["ink"] & (subj < 0.5)
                     r.pop("ink")
             front = cv2.morphologyEx(front.astype(np.uint8), cv2.MORPH_OPEN, np.ones((3, 3), np.uint8)).astype(bool)
@@ -364,6 +368,16 @@ def _run(path, out, models, cfg, c):
                 a_ = matting.feather(front.astype(np.float32), 0.7) * bgp["alpha"]
                 photos.insert([p_["name"] for p_ in photos].index("photo_subject"),
                               dict(name="photo_front", rgb=bgp["rgb"], alpha=a_, where="top"))
+            # the printed stripe is removed from the photo background: the vector stripe replaces
+            # it, so recolouring the stripe leaves no orange behind
+            if models is not None and stripe_area.any():
+                bgp = next(p_ for p_ in photos if p_["name"] == "photo_background")
+                # ONE inpaint of person + stripe from the original: a two-pass fill would copy the
+                # stripe's orange into the person's hole
+                hole = (matting.dilate(stripe_area, int(c.stripe_bg_clear_px)) |
+                        matting.dilate(subj > c.subject_hole_thr, int(c.subject_hole_px))) & photo
+                bgp["rgb"] = models.inpaint(to_u8(pimg), (hole * 255).astype(np.uint8)).astype(np.float32) / 255.0
+                log.info("  pita lama dihapus dari foto background")
 
     # ---------------------------------------------------------------- 5. objects
     objects = group_objects(R, H, W, c, photo)

@@ -43,7 +43,9 @@ def photo_layers(img, photo, models, cfg, sal=None):
                 sal = models.salient_mask(to_u8(img))
             subj = np.clip(sal, 0, 1) * photo
             if (subj > 0.5).sum() > 0.01 * H * W:
-                hole = matting.dilate(subj > 0.1, 8) & photo
+                # generous hole: hair wisps, soft shadow and chalk dust go too (no ghost of the person)
+                pc = cfg.rebuild
+                hole = matting.dilate(subj > pc.subject_hole_thr, int(pc.subject_hole_px)) & photo
                 bg = models.inpaint(to_u8(img), (hole * 255).astype(np.uint8)).astype(np.float32) / 255.0
                 rest = photo & ~(subj > 0.5)
                 if rest.sum() > 0.02 * H * W:
