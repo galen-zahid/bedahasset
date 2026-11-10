@@ -1,0 +1,7 @@
+{
+  "typecheck": "PASS",
+  "build": "PASS",
+  "bytes": 1306272,
+  "change": "read-only used-font catalogue weights in native inspector",
+  "publicPublish": false
+}

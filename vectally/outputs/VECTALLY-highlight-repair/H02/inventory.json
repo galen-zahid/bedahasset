@@ -1,0 +1,402 @@
+{
+  "source": "D:\\download\\VECTALLY\\Highlight\\VECTALLY_H02_Services.png",
+  "sha256": "4dbcb46cc435c837bb6364aef8cb8cb2239065b4966e4b52a7db45ef333add51",
+  "semantic_assets": [
+    {
+      "id": "PRINTER",
+      "parts": [
+        "whole housing",
+        "front body",
+        "three control panels",
+        "document icon",
+        "synchronization icon",
+        "chart icon",
+        "green slot"
+      ]
+    },
+    {
+      "id": "KERTAS",
+      "parts": [
+        "whole output sheet",
+        "three content lines",
+        "intact green badge",
+        "solid white checkmark"
+      ]
+    }
+  ],
+  "native_components": [
+    {
+      "path_bytes": 805,
+      "points": 151,
+      "holes": 0,
+      "epsilon": 0.7,
+      "single_move": true,
+      "body_tiling": false,
+      "background_counterfill": false,
+      "name": "Mesin: siluet utuh dan garis tepi",
+      "source_bbox": [
+        111,
+        557,
+        715,
+        664
+      ],
+      "color": "#b89afc",
+      "mask_iou": 0.9989264731174444,
+      "local_geometry_gate": "PASS",
+      "printed_ink_holes_filled_in_body": true
+    },
+    {
+      "path_bytes": 1204,
+      "points": 240,
+      "holes": 0,
+      "epsilon": 0.7,
+      "single_move": true,
+      "body_tiling": false,
+      "background_counterfill": false,
+      "name": "Mesin: bidang kontrol putih dengan tepi berkesinambungan",
+      "source_bbox": [
+        154,
+        560,
+        667,
+        341
+      ],
+      "color": "#f0f5f8",
+      "mask_iou": 0.9974426602162446,
+      "local_geometry_gate": "PASS",
+      "printed_ink_holes_filled_in_body": true
+    },
+    {
+      "path_bytes": 1258,
+      "points": 237,
+      "holes": 0,
+      "epsilon": 0.7,
+      "single_move": true,
+      "body_tiling": false,
+      "background_counterfill": false,
+      "name": "Mesin: badan depan dan pembatas kontrol",
+      "source_bbox": [
+        112,
+        593,
+        564,
+        627
+      ],
+      "color": "#141d2b",
+      "mask_iou": 0.9972593651950256,
+      "local_geometry_gate": "PASS",
+      "printed_ink_holes_filled_in_body": true
+    },
+    {
+      "path_bytes": 1699,
+      "points": 324,
+      "holes": 1,
+      "epsilon": 0.7,
+      "single_move": true,
+      "body_tiling": false,
+      "background_counterfill": false,
+      "sampling": 4,
+      "name": "Kontrol dokumen detail 1",
+      "source_bbox": [
+        248,
+        640,
+        120,
+        118
+      ],
+      "color": "#151e2c",
+      "mask_iou": 0.9899411187438666,
+      "local_geometry_gate": "PASS",
+      "printed_ink_holes_filled_in_body": false
+    },
+    {
+      "path_bytes": 470,
+      "points": 39,
+      "holes": 0,
+      "epsilon": 0,
+      "single_move": true,
+      "body_tiling": false,
+      "background_counterfill": false,
+      "sampling": 2,
+      "name": "Kontrol dokumen detail 2",
+      "source_bbox": [
+        288,
+        685,
+        51,
+        17
+      ],
+      "color": "#161f2c",
+      "mask_iou": 1.0,
+      "local_geometry_gate": "PASS",
+      "printed_ink_holes_filled_in_body": false
+    },
+    {
+      "path_bytes": 427,
+      "points": 33,
+      "holes": 0,
+      "epsilon": 0,
+      "single_move": true,
+      "body_tiling": false,
+      "background_counterfill": false,
+      "sampling": 2,
+      "name": "Kontrol dokumen detail 3",
+      "source_bbox": [
+        280,
+        710,
+        51,
+        16
+      ],
+      "color": "#161f2d",
+      "mask_iou": 1.0,
+      "local_geometry_gate": "PASS",
+      "printed_ink_holes_filled_in_body": false
+    },
+    {
+      "path_bytes": 1371,
+      "points": 146,
+      "holes": 0,
+      "epsilon": 0.3,
+      "single_move": true,
+      "body_tiling": false,
+      "background_counterfill": false,
+      "sampling": 2,
+      "name": "Kontrol sinkronisasi detail 1",
+      "source_bbox": [
+        444,
+        674,
+        99,
+        55
+      ],
+      "color": "#141d2b",
+      "mask_iou": 1.0,
+      "local_geometry_gate": "PASS",
+      "printed_ink_holes_filled_in_body": false
+    },
+    {
+      "path_bytes": 1370,
+      "points": 151,
+      "holes": 0,
+      "epsilon": 0.3,
+      "single_move": true,
+      "body_tiling": false,
+      "background_counterfill": false,
+      "sampling": 2,
+      "name": "Kontrol sinkronisasi detail 2",
+      "source_bbox": [
+        432,
+        725,
+        99,
+        55
+      ],
+      "color": "#141d2b",
+      "mask_iou": 1.0,
+      "local_geometry_gate": "PASS",
+      "printed_ink_holes_filled_in_body": false
+    },
+    {
+      "path_bytes": 338,
+      "points": 71,
+      "holes": 0,
+      "epsilon": 0.05,
+      "single_move": true,
+      "body_tiling": false,
+      "background_counterfill": false,
+      "name": "Kontrol grafik detail 1",
+      "source_bbox": [
+        690,
+        710,
+        39,
+        113
+      ],
+      "color": "#151d2b",
+      "mask_iou": 0.9940730984524202,
+      "local_geometry_gate": "PASS",
+      "printed_ink_holes_filled_in_body": false
+    },
+    {
+      "path_bytes": 252,
+      "points": 53,
+      "holes": 0,
+      "epsilon": 0.05,
+      "single_move": true,
+      "body_tiling": false,
+      "background_counterfill": false,
+      "name": "Kontrol grafik detail 2",
+      "source_bbox": [
+        649,
+        736,
+        35,
+        80
+      ],
+      "color": "#141d2a",
+      "mask_iou": 0.993876589731512,
+      "local_geometry_gate": "PASS",
+      "printed_ink_holes_filled_in_body": false
+    },
+    {
+      "path_bytes": 203,
+      "points": 43,
+      "holes": 0,
+      "epsilon": 0.05,
+      "single_move": true,
+      "body_tiling": false,
+      "background_counterfill": false,
+      "name": "Kontrol grafik detail 3",
+      "source_bbox": [
+        607,
+        761,
+        32,
+        48
+      ],
+      "color": "#151e2b",
+      "mask_iou": 0.9919614147909968,
+      "local_geometry_gate": "PASS",
+      "printed_ink_holes_filled_in_body": false
+    },
+    {
+      "path_bytes": 1732,
+      "points": 360,
+      "holes": 0,
+      "epsilon": 0.45,
+      "single_move": true,
+      "body_tiling": false,
+      "background_counterfill": false,
+      "name": "Mesin: bibir slot kertas hijau",
+      "source_bbox": [
+        195,
+        850,
+        437,
+        165
+      ],
+      "color": "#18dd9a",
+      "mask_iou": 0.9900734067400734,
+      "local_geometry_gate": "PASS",
+      "printed_ink_holes_filled_in_body": false
+    },
+    {
+      "path_bytes": 695,
+      "points": 136,
+      "holes": 0,
+      "epsilon": 0.7,
+      "single_move": true,
+      "body_tiling": false,
+      "background_counterfill": false,
+      "name": "Kertas keluaran: lembar utuh di bawah isi",
+      "source_bbox": [
+        114,
+        895,
+        483,
+        242
+      ],
+      "color": "#f0f5f9",
+      "mask_iou": 0.9960910253429435,
+      "local_geometry_gate": "PASS",
+      "printed_ink_holes_filled_in_body": true
+    },
+    {
+      "path_bytes": 1744,
+      "points": 150,
+      "holes": 0,
+      "epsilon": 0,
+      "single_move": true,
+      "body_tiling": false,
+      "background_counterfill": false,
+      "sampling": 2,
+      "name": "Kertas: garis isi 1",
+      "source_bbox": [
+        231,
+        943,
+        154,
+        44
+      ],
+      "color": "#151e2c",
+      "mask_iou": 1.0,
+      "local_geometry_gate": "PASS",
+      "printed_ink_holes_filled_in_body": false
+    },
+    {
+      "path_bytes": 1027,
+      "points": 149,
+      "holes": 0,
+      "epsilon": 0.3,
+      "single_move": true,
+      "body_tiling": false,
+      "background_counterfill": false,
+      "sampling": 2,
+      "name": "Kertas: garis isi 2",
+      "source_bbox": [
+        208,
+        976,
+        154,
+        45
+      ],
+      "color": "#151e2b",
+      "mask_iou": 1.0,
+      "local_geometry_gate": "PASS",
+      "printed_ink_holes_filled_in_body": false
+    },
+    {
+      "path_bytes": 1766,
+      "points": 149,
+      "holes": 0,
+      "epsilon": 0,
+      "single_move": true,
+      "body_tiling": false,
+      "background_counterfill": false,
+      "sampling": 2,
+      "name": "Kertas: garis isi 3",
+      "source_bbox": [
+        184,
+        1009,
+        155,
+        45
+      ],
+      "color": "#141d2b",
+      "mask_iou": 1.0,
+      "local_geometry_gate": "PASS",
+      "printed_ink_holes_filled_in_body": false
+    },
+    {
+      "path_bytes": 713,
+      "points": 148,
+      "holes": 0,
+      "epsilon": 0.05,
+      "single_move": true,
+      "body_tiling": false,
+      "background_counterfill": false,
+      "name": "Lencana pada kertas: bidang hijau utuh",
+      "source_bbox": [
+        407,
+        984,
+        109,
+        96
+      ],
+      "color": "#1bdd9e",
+      "mask_iou": 0.9927527330794743,
+      "local_geometry_gate": "PASS",
+      "printed_ink_holes_filled_in_body": true
+    },
+    {
+      "path_bytes": 1659,
+      "points": 116,
+      "holes": 0,
+      "epsilon": 0,
+      "single_move": true,
+      "body_tiling": false,
+      "background_counterfill": false,
+      "sampling": 2,
+      "name": "Lencana pada kertas: tinta centang putih",
+      "source_bbox": [
+        430,
+        1016,
+        67,
+        35
+      ],
+      "color": "#fafdfd",
+      "mask_iou": 1.0,
+      "local_geometry_gate": "PASS",
+      "printed_ink_holes_filled_in_body": false
+    }
+  ],
+  "top_plane_boundary_inset_pixels": 1,
+  "ownership": "explicit observed bounds and enclosed printer silhouette",
+  "nearest_object_assignment": false,
+  "body_tiling": false
+}

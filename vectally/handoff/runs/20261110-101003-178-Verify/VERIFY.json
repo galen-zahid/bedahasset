@@ -1,0 +1,16 @@
+[
+  {
+    "code": "S02",
+    "package": "ASSETS_PACKAGE.json",
+    "identicalBytes": false,
+    "identicalJson": false,
+    "renderEquivalent": true
+  },
+  {
+    "code": "S06",
+    "package": "ASSETS_PACKAGE.json",
+    "identicalBytes": false,
+    "identicalJson": false,
+    "renderEquivalent": true
+  }
+]

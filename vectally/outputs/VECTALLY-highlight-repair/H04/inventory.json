@@ -1,0 +1,53 @@
+{
+  "source": "D:\\download\\VECTALLY\\Highlight\\VECTALLY_H04_FAQ.png",
+  "sha256": "cb3f71595d2bdbb5460cbeb1f2937e498bc5c4a954916b48e20edf35c1013811",
+  "semantic_assets": [
+    "whole FAQ question symbol with integrated accent dot"
+  ],
+  "native_components": [
+    {
+      "path_bytes": 1177,
+      "points": 223,
+      "holes": 0,
+      "epsilon": 0.7,
+      "single_move": true,
+      "body_tiling": false,
+      "background_counterfill": false,
+      "name": "Simbol FAQ: badan tanda tanya utuh",
+      "source_bbox": [
+        162,
+        454,
+        611,
+        568
+      ],
+      "color": "#0f1723",
+      "mask_iou": 0.9970173746243999,
+      "local_geometry_gate": "PASS",
+      "printed_ink_holes_filled_in_body": false
+    },
+    {
+      "path_bytes": 1374,
+      "points": 288,
+      "holes": 0,
+      "epsilon": 0.05,
+      "single_move": true,
+      "body_tiling": false,
+      "background_counterfill": false,
+      "name": "Simbol FAQ: titik hijau utuh",
+      "source_bbox": [
+        359,
+        1042,
+        200,
+        199
+      ],
+      "color": "#16d78d",
+      "mask_iou": 0.9962897809051655,
+      "local_geometry_gate": "PASS",
+      "printed_ink_holes_filled_in_body": false
+    }
+  ],
+  "question_symbol": "vector icon candidate; native text scope remains open",
+  "ownership": "explicit source components belonging to the same symbol",
+  "nearest_object_assignment": false,
+  "body_tiling": false
+}

@@ -1,0 +1,138 @@
+[
+  {
+    "source_bbox": [
+      190,
+      544,
+      100,
+      178
+    ],
+    "fontFamily": "Asap",
+    "fontWeight": "normal",
+    "fontSize": 204.74192847068727,
+    "foregroundOffset": [
+      6.733798341373218,
+      2.396376401127561
+    ],
+    "glyph_iou": 0.5239105820655823,
+    "canva_export": "NOT_TESTED"
+  },
+  {
+    "source_bbox": [
+      190,
+      544,
+      100,
+      178
+    ],
+    "fontFamily": "Asap",
+    "fontWeight": "bold",
+    "fontSize": 206.02864584292234,
+    "foregroundOffset": [
+      1.7261342855194066,
+      2.0288773321003575
+    ],
+    "glyph_iou": 0.7124173641204834,
+    "canva_export": "NOT_TESTED"
+  },
+  {
+    "source_bbox": [
+      190,
+      544,
+      100,
+      178
+    ],
+    "fontFamily": "Archivo Black",
+    "fontWeight": "normal",
+    "fontSize": 219.5922452875486,
+    "foregroundOffset": [
+      -10.31058683457885,
+      -0.7959283135871954
+    ],
+    "glyph_iou": 0.6697136759757996,
+    "canva_export": "NOT_TESTED"
+  },
+  {
+    "source_bbox": [
+      190,
+      544,
+      100,
+      178
+    ],
+    "fontFamily": "League Gothic",
+    "fontWeight": "normal",
+    "fontSize": 264.56470644588745,
+    "foregroundOffset": [
+      13.027984960688936,
+      -14.999993913395306
+    ],
+    "glyph_iou": 0.5413966178894043,
+    "canva_export": "NOT_TESTED"
+  },
+  {
+    "source_bbox": [
+      482,
+      880,
+      57,
+      102
+    ],
+    "fontFamily": "Asap",
+    "fontWeight": "normal",
+    "fontSize": 119.25626651767837,
+    "foregroundOffset": [
+      3.1863262169788147,
+      0.41873056537700887
+    ],
+    "glyph_iou": 0.5216042399406433,
+    "canva_export": "NOT_TESTED"
+  },
+  {
+    "source_bbox": [
+      482,
+      880,
+      57,
+      102
+    ],
+    "fontFamily": "Asap",
+    "fontWeight": "bold",
+    "fontSize": 117.40699142573253,
+    "foregroundOffset": [
+      1.3003466406393067,
+      0.9879282857814295
+    ],
+    "glyph_iou": 0.7147465944290161,
+    "canva_export": "NOT_TESTED"
+  },
+  {
+    "source_bbox": [
+      482,
+      880,
+      57,
+      102
+    ],
+    "fontFamily": "Archivo Black",
+    "fontWeight": "normal",
+    "fontSize": 124.92850504830331,
+    "foregroundOffset": [
+      -6.235285554385008,
+      -0.4163788043607557
+    ],
+    "glyph_iou": 0.6690181493759155,
+    "canva_export": "NOT_TESTED"
+  },
+  {
+    "source_bbox": [
+      482,
+      880,
+      57,
+      102
+    ],
+    "fontFamily": "League Gothic",
+    "fontWeight": "normal",
+    "fontSize": 154.84252613717726,
+    "foregroundOffset": [
+      6.80399804447537,
+      -9.486018806289147
+    ],
+    "glyph_iou": 0.5392419695854187,
+    "canva_export": "NOT_TESTED"
+  }
+]

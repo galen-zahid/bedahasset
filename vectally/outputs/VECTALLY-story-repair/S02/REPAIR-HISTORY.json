@@ -1,0 +1,12 @@
+{
+  "stage": "NATIVE_GROUP_BOUNDS_REPAIR",
+  "reason": "Original analytic path viewBoxes were full canvas. This was rejected for oversized selection boxes; public page candidates removed.",
+  "fix": "Translate analytic path coordinates into tight own viewBox; native artwork pixels unchanged except optional round-corner precision.",
+  "currentExpected": {
+    "shape": 42,
+    "text": 6,
+    "group": 8,
+    "image": 0
+  },
+  "full84Complete": false
+}

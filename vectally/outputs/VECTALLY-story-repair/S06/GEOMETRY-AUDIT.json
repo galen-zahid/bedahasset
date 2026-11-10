@@ -1,0 +1,771 @@
+[
+  {
+    "path_bytes": 54,
+    "points": 11,
+    "holes": 0,
+    "epsilon": 0.05,
+    "single_move": true,
+    "body_tiling": false,
+    "background_counterfill": false,
+    "name": "Laporan - batang grafik 1",
+    "source_bbox": [
+      259,
+      719,
+      31,
+      89
+    ],
+    "color": "#9d7bee",
+    "mask_iou": 0.9988793425476279,
+    "local_geometry_gate": "PASS",
+    "printed_ink_holes_filled_in_body": true
+  },
+  {
+    "path_bytes": 63,
+    "points": 12,
+    "holes": 0,
+    "epsilon": 0.05,
+    "single_move": true,
+    "body_tiling": false,
+    "background_counterfill": false,
+    "name": "Laporan - batang grafik 2",
+    "source_bbox": [
+      218,
+      739,
+      31,
+      69
+    ],
+    "color": "#9d7bee",
+    "mask_iou": 0.9990342829550941,
+    "local_geometry_gate": "PASS",
+    "printed_ink_holes_filled_in_body": true
+  },
+  {
+    "path_bytes": 80,
+    "points": 15,
+    "holes": 0,
+    "epsilon": 0.05,
+    "single_move": true,
+    "body_tiling": false,
+    "background_counterfill": false,
+    "name": "Laporan - batang grafik 3",
+    "source_bbox": [
+      176,
+      758,
+      31,
+      50
+    ],
+    "color": "#9d7bee",
+    "mask_iou": 0.9993337774816788,
+    "local_geometry_gate": "PASS",
+    "printed_ink_holes_filled_in_body": true
+  },
+  {
+    "path_bytes": 58,
+    "points": 11,
+    "holes": 0,
+    "epsilon": 0.05,
+    "single_move": true,
+    "body_tiling": false,
+    "background_counterfill": false,
+    "name": "Laporan - batang grafik 4",
+    "source_bbox": [
+      134,
+      776,
+      31,
+      32
+    ],
+    "color": "#9d7bee",
+    "mask_iou": 0.9969135802469136,
+    "local_geometry_gate": "PASS",
+    "printed_ink_holes_filled_in_body": true
+  },
+  {
+    "path_bytes": 47,
+    "points": 9,
+    "holes": 0,
+    "epsilon": 0.05,
+    "single_move": true,
+    "body_tiling": false,
+    "background_counterfill": false,
+    "name": "Laporan - garis bawah grafik 1",
+    "source_bbox": [
+      123,
+      820,
+      236,
+      8
+    ],
+    "color": "#9d7bee",
+    "mask_iou": 0.9989389920424403,
+    "local_geometry_gate": "PASS",
+    "printed_ink_holes_filled_in_body": true
+  },
+  {
+    "path_bytes": 294,
+    "points": 56,
+    "holes": 0,
+    "epsilon": 0.05,
+    "single_move": true,
+    "body_tiling": false,
+    "background_counterfill": false,
+    "name": "Laporan - bidang baris 1",
+    "source_bbox": [
+      123,
+      844,
+      164,
+      35
+    ],
+    "color": "#d3c0fc",
+    "mask_iou": 0.9989295272078501,
+    "local_geometry_gate": "PASS",
+    "printed_ink_holes_filled_in_body": true
+  },
+  {
+    "path_bytes": 57,
+    "points": 11,
+    "holes": 0,
+    "epsilon": 0.05,
+    "single_move": true,
+    "body_tiling": false,
+    "background_counterfill": false,
+    "name": "Laporan - isi baris 1.1",
+    "source_bbox": [
+      135,
+      857,
+      126,
+      10
+    ],
+    "color": "#a17aeb",
+    "mask_iou": 0.996802557953637,
+    "local_geometry_gate": "PASS",
+    "printed_ink_holes_filled_in_body": false
+  },
+  {
+    "path_bytes": 56,
+    "points": 12,
+    "holes": 0,
+    "epsilon": 0.05,
+    "single_move": true,
+    "body_tiling": false,
+    "background_counterfill": false,
+    "name": "Laporan - bidang baris 2",
+    "source_bbox": [
+      123,
+      895,
+      164,
+      34
+    ],
+    "color": "#d3c0fc",
+    "mask_iou": 0.9996400287976962,
+    "local_geometry_gate": "PASS",
+    "printed_ink_holes_filled_in_body": true
+  },
+  {
+    "path_bytes": 91,
+    "points": 18,
+    "holes": 0,
+    "epsilon": 0.05,
+    "single_move": true,
+    "body_tiling": false,
+    "background_counterfill": false,
+    "name": "Laporan - isi baris 2.1",
+    "source_bbox": [
+      135,
+      907,
+      111,
+      10
+    ],
+    "color": "#a17aeb",
+    "mask_iou": 0.9966666666666667,
+    "local_geometry_gate": "PASS",
+    "printed_ink_holes_filled_in_body": false
+  },
+  {
+    "path_bytes": 52,
+    "points": 11,
+    "holes": 0,
+    "epsilon": 0.05,
+    "single_move": true,
+    "body_tiling": false,
+    "background_counterfill": false,
+    "name": "Laporan - bidang baris 3",
+    "source_bbox": [
+      123,
+      945,
+      164,
+      35
+    ],
+    "color": "#d3c0fc",
+    "mask_iou": 0.9996409980254891,
+    "local_geometry_gate": "PASS",
+    "printed_ink_holes_filled_in_body": true
+  },
+  {
+    "path_bytes": 214,
+    "points": 41,
+    "holes": 0,
+    "epsilon": 0.05,
+    "single_move": true,
+    "body_tiling": false,
+    "background_counterfill": false,
+    "name": "Laporan - isi baris 3.1",
+    "source_bbox": [
+      135,
+      957,
+      111,
+      10
+    ],
+    "color": "#a17aeb",
+    "mask_iou": 0.9884504331087585,
+    "local_geometry_gate": "PASS",
+    "printed_ink_holes_filled_in_body": false
+  },
+  {
+    "path_bytes": 59,
+    "points": 12,
+    "holes": 0,
+    "epsilon": 0.05,
+    "single_move": true,
+    "body_tiling": false,
+    "background_counterfill": false,
+    "name": "Laporan - bidang baris 4",
+    "source_bbox": [
+      123,
+      995,
+      164,
+      34
+    ],
+    "color": "#d3c0fc",
+    "mask_iou": 0.9996404817544491,
+    "local_geometry_gate": "PASS",
+    "printed_ink_holes_filled_in_body": true
+  },
+  {
+    "path_bytes": 36,
+    "points": 7,
+    "holes": 0,
+    "epsilon": 0.05,
+    "single_move": true,
+    "body_tiling": false,
+    "background_counterfill": false,
+    "name": "Laporan - isi baris 4.1",
+    "source_bbox": [
+      135,
+      1008,
+      118,
+      9
+    ],
+    "color": "#a17aeb",
+    "mask_iou": 0.999054820415879,
+    "local_geometry_gate": "PASS",
+    "printed_ink_holes_filled_in_body": false
+  },
+  {
+    "path_bytes": 809,
+    "points": 31,
+    "holes": 0,
+    "epsilon": 0.3,
+    "single_move": true,
+    "body_tiling": false,
+    "background_counterfill": false,
+    "sampling": 2,
+    "name": "Laporan - centang 1",
+    "source_bbox": [
+      309,
+      845,
+      39,
+      33
+    ],
+    "color": "#00b88d",
+    "mask_iou": 1.0,
+    "local_geometry_gate": "PASS",
+    "printed_ink_holes_filled_in_body": false
+  },
+  {
+    "path_bytes": 1547,
+    "points": 34,
+    "holes": 0,
+    "epsilon": 0,
+    "single_move": true,
+    "body_tiling": false,
+    "background_counterfill": false,
+    "sampling": 2,
+    "name": "Laporan - centang 2",
+    "source_bbox": [
+      309,
+      895,
+      39,
+      33
+    ],
+    "color": "#00b88d",
+    "mask_iou": 1.0,
+    "local_geometry_gate": "PASS",
+    "printed_ink_holes_filled_in_body": false
+  },
+  {
+    "path_bytes": 1525,
+    "points": 37,
+    "holes": 0,
+    "epsilon": 0,
+    "single_move": true,
+    "body_tiling": false,
+    "background_counterfill": false,
+    "sampling": 2,
+    "name": "Laporan - centang 3",
+    "source_bbox": [
+      309,
+      945,
+      39,
+      33
+    ],
+    "color": "#00b88d",
+    "mask_iou": 1.0,
+    "local_geometry_gate": "PASS",
+    "printed_ink_holes_filled_in_body": false
+  },
+  {
+    "path_bytes": 1569,
+    "points": 33,
+    "holes": 0,
+    "epsilon": 0,
+    "single_move": true,
+    "body_tiling": false,
+    "background_counterfill": false,
+    "sampling": 2,
+    "name": "Laporan - centang 4",
+    "source_bbox": [
+      309,
+      995,
+      39,
+      33
+    ],
+    "color": "#00b88d",
+    "mask_iou": 1.0,
+    "local_geometry_gate": "PASS",
+    "printed_ink_holes_filled_in_body": false
+  },
+  {
+    "path_bytes": 266,
+    "points": 49,
+    "holes": 0,
+    "epsilon": 0.05,
+    "single_move": true,
+    "body_tiling": false,
+    "background_counterfill": false,
+    "name": "Laporan - kisi tabel 1",
+    "source_bbox": [
+      297,
+      845,
+      61,
+      184
+    ],
+    "color": "#d1cee9",
+    "mask_iou": 0.9894736842105263,
+    "local_geometry_gate": "PASS",
+    "printed_ink_holes_filled_in_body": false
+  },
+  {
+    "path_bytes": 50,
+    "points": 11,
+    "holes": 0,
+    "epsilon": 0.05,
+    "single_move": true,
+    "body_tiling": false,
+    "background_counterfill": false,
+    "name": "Laporan - kisi tabel 2",
+    "source_bbox": [
+      356,
+      845,
+      2,
+      33
+    ],
+    "color": "#d1cee9",
+    "mask_iou": 1.0,
+    "local_geometry_gate": "PASS",
+    "printed_ink_holes_filled_in_body": false
+  },
+  {
+    "path_bytes": 37,
+    "points": 8,
+    "holes": 0,
+    "epsilon": 0.05,
+    "single_move": true,
+    "body_tiling": false,
+    "background_counterfill": false,
+    "name": "Laporan - kisi tabel 3",
+    "source_bbox": [
+      356,
+      895,
+      2,
+      34
+    ],
+    "color": "#d1cee9",
+    "mask_iou": 1.0,
+    "local_geometry_gate": "PASS",
+    "printed_ink_holes_filled_in_body": false
+  },
+  {
+    "path_bytes": 137,
+    "points": 7,
+    "holes": 0,
+    "epsilon": 0,
+    "single_move": true,
+    "body_tiling": false,
+    "background_counterfill": false,
+    "sampling": 4,
+    "name": "Laporan - kisi tabel 4",
+    "source_bbox": [
+      356,
+      945,
+      2,
+      34
+    ],
+    "color": "#d1cee9",
+    "mask_iou": 1.0,
+    "local_geometry_gate": "PASS",
+    "printed_ink_holes_filled_in_body": false
+  },
+  {
+    "path_bytes": 50,
+    "points": 11,
+    "holes": 0,
+    "epsilon": 0.05,
+    "single_move": true,
+    "body_tiling": false,
+    "background_counterfill": false,
+    "name": "Laporan - kisi tabel 5",
+    "source_bbox": [
+      356,
+      995,
+      2,
+      34
+    ],
+    "color": "#d1cee9",
+    "mask_iou": 1.0,
+    "local_geometry_gate": "PASS",
+    "printed_ink_holes_filled_in_body": false
+  },
+  {
+    "path_bytes": 1807,
+    "points": 372,
+    "holes": 0,
+    "epsilon": 0.45,
+    "single_move": true,
+    "body_tiling": false,
+    "background_counterfill": false,
+    "name": "Alur keputusan - tiga cabang dan panel depan utuh",
+    "source_bbox": [
+      385,
+      681,
+      526,
+      347
+    ],
+    "color": "#00d8a0",
+    "mask_iou": 0.9950175060597899,
+    "local_geometry_gate": "PASS",
+    "printed_ink_holes_filled_in_body": true
+  },
+  {
+    "path_bytes": 852,
+    "points": 27,
+    "holes": 0,
+    "epsilon": 0.3,
+    "single_move": true,
+    "body_tiling": false,
+    "background_counterfill": false,
+    "sampling": 2,
+    "name": "Panel sasaran - ikon 1",
+    "source_bbox": [
+      793,
+      692,
+      42,
+      41
+    ],
+    "color": "#091522",
+    "mask_iou": 1.0,
+    "local_geometry_gate": "PASS",
+    "printed_ink_holes_filled_in_body": false
+  },
+  {
+    "path_bytes": 1485,
+    "points": 158,
+    "holes": 0,
+    "epsilon": 0.3,
+    "single_move": true,
+    "body_tiling": false,
+    "background_counterfill": false,
+    "sampling": 2,
+    "name": "Panel sasaran - ikon 2",
+    "source_bbox": [
+      763,
+      696,
+      67,
+      67
+    ],
+    "color": "#091522",
+    "mask_iou": 1.0,
+    "local_geometry_gate": "PASS",
+    "printed_ink_holes_filled_in_body": false
+  },
+  {
+    "path_bytes": 1308,
+    "points": 76,
+    "holes": 0,
+    "epsilon": 0,
+    "single_move": true,
+    "body_tiling": false,
+    "background_counterfill": false,
+    "sampling": 2,
+    "name": "Panel sasaran - ikon 3",
+    "source_bbox": [
+      779,
+      712,
+      36,
+      35
+    ],
+    "color": "#091522",
+    "mask_iou": 1.0,
+    "local_geometry_gate": "PASS",
+    "printed_ink_holes_filled_in_body": false
+  },
+  {
+    "path_bytes": 1653,
+    "points": 272,
+    "holes": 2,
+    "epsilon": 0.5,
+    "single_move": true,
+    "body_tiling": false,
+    "background_counterfill": false,
+    "sampling": 2,
+    "name": "Panel timbangan - ikon 1",
+    "source_bbox": [
+      753,
+      814,
+      88,
+      72
+    ],
+    "color": "#091522",
+    "mask_iou": 0.994502977553825,
+    "local_geometry_gate": "PASS",
+    "printed_ink_holes_filled_in_body": false
+  },
+  {
+    "path_bytes": 471,
+    "points": 96,
+    "holes": 3,
+    "epsilon": 0.05,
+    "single_move": true,
+    "body_tiling": false,
+    "background_counterfill": false,
+    "name": "Panel kalender - ikon 1",
+    "source_bbox": [
+      758,
+      939,
+      78,
+      73
+    ],
+    "color": "#091522",
+    "mask_iou": 0.988759187202767,
+    "local_geometry_gate": "PASS",
+    "printed_ink_holes_filled_in_body": false
+  },
+  {
+    "path_bytes": 27,
+    "points": 6,
+    "holes": 0,
+    "epsilon": 0.05,
+    "single_move": true,
+    "body_tiling": false,
+    "background_counterfill": false,
+    "name": "Panel kalender - ikon 2",
+    "source_bbox": [
+      786,
+      970,
+      7,
+      6
+    ],
+    "color": "#091522",
+    "mask_iou": 1.0,
+    "local_geometry_gate": "PASS",
+    "printed_ink_holes_filled_in_body": false
+  },
+  {
+    "path_bytes": 18,
+    "points": 4,
+    "holes": 0,
+    "epsilon": 0.05,
+    "single_move": true,
+    "body_tiling": false,
+    "background_counterfill": false,
+    "name": "Panel kalender - ikon 3",
+    "source_bbox": [
+      800,
+      970,
+      7,
+      6
+    ],
+    "color": "#091522",
+    "mask_iou": 1.0,
+    "local_geometry_gate": "PASS",
+    "printed_ink_holes_filled_in_body": false
+  },
+  {
+    "path_bytes": 18,
+    "points": 4,
+    "holes": 0,
+    "epsilon": 0.05,
+    "single_move": true,
+    "body_tiling": false,
+    "background_counterfill": false,
+    "name": "Panel kalender - ikon 4",
+    "source_bbox": [
+      814,
+      970,
+      7,
+      6
+    ],
+    "color": "#091522",
+    "mask_iou": 1.0,
+    "local_geometry_gate": "PASS",
+    "printed_ink_holes_filled_in_body": false
+  },
+  {
+    "path_bytes": 18,
+    "points": 4,
+    "holes": 0,
+    "epsilon": 0.05,
+    "single_move": true,
+    "body_tiling": false,
+    "background_counterfill": false,
+    "name": "Panel kalender - ikon 5",
+    "source_bbox": [
+      773,
+      981,
+      7,
+      6
+    ],
+    "color": "#091522",
+    "mask_iou": 1.0,
+    "local_geometry_gate": "PASS",
+    "printed_ink_holes_filled_in_body": false
+  },
+  {
+    "path_bytes": 23,
+    "points": 5,
+    "holes": 0,
+    "epsilon": 0.05,
+    "single_move": true,
+    "body_tiling": false,
+    "background_counterfill": false,
+    "name": "Panel kalender - ikon 6",
+    "source_bbox": [
+      786,
+      981,
+      7,
+      6
+    ],
+    "color": "#091522",
+    "mask_iou": 1.0,
+    "local_geometry_gate": "PASS",
+    "printed_ink_holes_filled_in_body": false
+  },
+  {
+    "path_bytes": 18,
+    "points": 4,
+    "holes": 0,
+    "epsilon": 0.05,
+    "single_move": true,
+    "body_tiling": false,
+    "background_counterfill": false,
+    "name": "Panel kalender - ikon 7",
+    "source_bbox": [
+      800,
+      981,
+      7,
+      6
+    ],
+    "color": "#091522",
+    "mask_iou": 1.0,
+    "local_geometry_gate": "PASS",
+    "printed_ink_holes_filled_in_body": false
+  },
+  {
+    "path_bytes": 31,
+    "points": 7,
+    "holes": 0,
+    "epsilon": 0.05,
+    "single_move": true,
+    "body_tiling": false,
+    "background_counterfill": false,
+    "name": "Panel kalender - ikon 8",
+    "source_bbox": [
+      813,
+      981,
+      8,
+      6
+    ],
+    "color": "#091522",
+    "mask_iou": 1.0,
+    "local_geometry_gate": "PASS",
+    "printed_ink_holes_filled_in_body": false
+  },
+  {
+    "path_bytes": 18,
+    "points": 4,
+    "holes": 0,
+    "epsilon": 0.05,
+    "single_move": true,
+    "body_tiling": false,
+    "background_counterfill": false,
+    "name": "Panel kalender - ikon 9",
+    "source_bbox": [
+      773,
+      992,
+      7,
+      6
+    ],
+    "color": "#091522",
+    "mask_iou": 1.0,
+    "local_geometry_gate": "PASS",
+    "printed_ink_holes_filled_in_body": false
+  },
+  {
+    "path_bytes": 23,
+    "points": 5,
+    "holes": 0,
+    "epsilon": 0.05,
+    "single_move": true,
+    "body_tiling": false,
+    "background_counterfill": false,
+    "name": "Panel kalender - ikon 10",
+    "source_bbox": [
+      786,
+      992,
+      7,
+      6
+    ],
+    "color": "#091522",
+    "mask_iou": 1.0,
+    "local_geometry_gate": "PASS",
+    "printed_ink_holes_filled_in_body": false
+  },
+  {
+    "path_bytes": 23,
+    "points": 5,
+    "holes": 0,
+    "epsilon": 0.05,
+    "single_move": true,
+    "body_tiling": false,
+    "background_counterfill": false,
+    "name": "Panel kalender - ikon 11",
+    "source_bbox": [
+      800,
+      992,
+      7,
+      6
+    ],
+    "color": "#091522",
+    "mask_iou": 1.0,
+    "local_geometry_gate": "PASS",
+    "printed_ink_holes_filled_in_body": false
+  }
+]

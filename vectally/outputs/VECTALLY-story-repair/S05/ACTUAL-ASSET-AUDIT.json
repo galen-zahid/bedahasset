@@ -1,0 +1,38 @@
+{
+  "stage": "INCOMPLETE_PAGE_ASSETS_ONLY_VERIFIED",
+  "dimensions": [
+    941,
+    1672
+  ],
+  "native_shapes": 5,
+  "native_text": 1,
+  "displayHeadlines": "NOT_INSERTED",
+  "rows": [
+    {
+      "asset": "Bingkai kanan",
+      "geometry_iou": 1.0,
+      "kind": "whole_native_shape"
+    },
+    {
+      "asset": "Bingkai kiri",
+      "geometry_iou": 0.9731065394782209,
+      "kind": "whole_native_shape"
+    },
+    {
+      "asset": "Aksen logo",
+      "geometry_iou": 0.973026973026973,
+      "kind": "whole_native_shape"
+    },
+    {
+      "asset": "Aksen QUESTION",
+      "geometry_iou": 0.9807087013910042,
+      "kind": "whole_native_shape"
+    },
+    {
+      "asset": "Body native",
+      "geometry_iou": 0.4420124142437112,
+      "kind": "native_body_font_candidate"
+    }
+  ],
+  "all84_complete": false
+}

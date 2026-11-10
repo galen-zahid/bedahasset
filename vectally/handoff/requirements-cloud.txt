@@ -1,0 +1,6 @@
+Pillow
+numpy
+scipy
+opencv-python-headless
+resvg_py
+fonttools

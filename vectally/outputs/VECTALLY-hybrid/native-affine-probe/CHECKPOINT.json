@@ -1,0 +1,12 @@
+{
+  "createdAt": "2026-11-09T13:26:52.134Z",
+  "design": "https://www.canva.com/design/DAHabUK1x7c/XAKU7ev4LnkxUjedsUkoGw/edit",
+  "purpose": "Native affine text capability experiment; not delivery",
+  "currentPackage": "CANVA_PACKAGE.json",
+  "expectedNativeTexts": 6,
+  "expectedGroups": 3,
+  "result": "REJECTED_BY_ACTUAL_CANVA_SDK",
+  "observedError": "Invalid element state: Aspect ratio of the placement must match the aspect ratio of the group content.",
+  "details": "All three groups rejected including intended aspect-ratio probe. App fallback created emptyQApage2/12 in isolatedcopy, no native text was inserted. This rules out anisotropicgroupSVDroute via addElementAtPoint. Native ordinary text + rotation cannot satisfy requested perspective through this route.",
+  "next": "Use approved TypeCraft for warpedheadings, retain native ordinarycopy. Do not implementunsupportedgroupstretch."
+}

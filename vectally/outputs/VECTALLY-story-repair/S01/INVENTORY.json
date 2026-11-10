@@ -1,0 +1,54 @@
+[
+  {
+    "id": "DOC1",
+    "name": "Dokumen pendapatan utuh",
+    "wholeBody": true,
+    "children": 12,
+    "hiddenReconstruction": "whole paper edge restored under green connector",
+    "iconTextPolicy": "currency symbol is vector icon candidate; native-text scope remains open",
+    "shadowOwnership": "same physical sheet group"
+  },
+  {
+    "id": "DOC2",
+    "name": "Laporan grafik ungu utuh",
+    "wholeBody": true,
+    "children": 9,
+    "hiddenReconstruction": "whole paper edge restored under green connector",
+    "iconTextPolicy": "no bodycopy",
+    "shadowOwnership": "same physical sheet group"
+  },
+  {
+    "id": "DOC3",
+    "name": "Struk ungu utuh",
+    "wholeBody": true,
+    "children": 11,
+    "hiddenReconstruction": "whole paper edge restored under green connector",
+    "iconTextPolicy": "no bodycopy",
+    "shadowOwnership": "same physical sheet group"
+  },
+  {
+    "id": "DOC4",
+    "name": "Lembar diagram lingkaran utuh",
+    "wholeBody": true,
+    "children": 11,
+    "hiddenReconstruction": "none",
+    "iconTextPolicy": "no bodycopy",
+    "shadowOwnership": "same physical sheet group"
+  },
+  {
+    "id": "BOOK",
+    "name": "Buku terbuka - sampul lembar grafik dan sorot",
+    "wholeBody": true,
+    "children": 28,
+    "hiddenReconstruction": "top leaf contour restored under connector endpoint",
+    "nestedGroups": false,
+    "shadowOwnership": "within book group"
+  },
+  {
+    "id": "FLOW",
+    "wholeBody": true,
+    "children": 1,
+    "text": "TELL A not inserted; requires native or approved TypeCraft",
+    "noBodyTiling": true
+  }
+]

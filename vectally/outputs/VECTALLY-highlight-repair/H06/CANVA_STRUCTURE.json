@@ -1,0 +1,279 @@
+{
+  "version": 1,
+  "stage": "magic_layers_candidate",
+  "observedAt": "2026-11-09T13:17:53.515Z",
+  "scope": "current_page",
+  "addressing": "sibling order; group bounds relative to parent; IDs are snapshot-local",
+  "elements": [
+    {
+      "address": "0",
+      "type": "shape",
+      "locked": false,
+      "bboxInParent": [
+        0,
+        0,
+        941,
+        1672
+      ],
+      "rotation": 0,
+      "transparency": 0,
+      "classification": "native_shape",
+      "paths": [
+        {
+          "d": "M0 0 L941 0 L941 1672 L0 1672 Z",
+          "color": {
+            "type": "solid",
+            "color": "#f0f4f8"
+          },
+          "isMediaEditable": false
+        }
+      ],
+      "viewBox": {
+        "top": 0,
+        "left": 0,
+        "width": 941,
+        "height": 1672
+      }
+    },
+    {
+      "address": "1",
+      "type": "group",
+      "locked": false,
+      "bboxInParent": [
+        217,
+        759,
+        282,
+        293
+      ],
+      "rotation": 0,
+      "transparency": 0,
+      "classification": "group",
+      "children": [
+        {
+          "address": "1/0",
+          "type": "shape",
+          "locked": false,
+          "bboxInParent": [
+            65,
+            0,
+            151,
+            152
+          ],
+          "rotation": 0,
+          "transparency": 0,
+          "classification": "native_shape",
+          "paths": [
+            {
+              "d": "M346 759 L345 760 L341 760 L340 761 L337 761 L336 762 L331 763 L317 770 L315 772 L311 774 L299 786 L299 787 L296 790 L296 791 L292 796 L287 806 L287 808 L286 809 L286 811 L284 815 L284 818 L283 819 L283 824 L282 825 L282 845 L283 846 L283 850 L284 851 L284 854 L285 855 L285 857 L286 858 L287 863 L293 875 L295 877 L297 881 L301 885 L301 886 L313 897 L319 900 L321 902 L329 906 L331 906 L335 908 L338 908 L339 909 L342 909 L343 910 L347 910 L348 911 L365 911 L366 910 L371 910 L372 909 L376 909 L377 908 L382 907 L385 905 L387 905 L395 901 L397 899 L401 897 L405 893 L406 893 L414 885 L414 884 L418 880 L418 879 L422 874 L427 864 L427 862 L428 861 L428 859 L430 855 L430 852 L431 851 L431 847 L432 846 L432 838 L433 837 L433 832 L432 831 L432 824 L431 823 L431 819 L430 818 L429 811 L425 803 L425 801 L424 799 L422 797 L421 794 L419 792 L417 788 L411 782 L411 781 L410 781 L403 774 L402 774 L399 771 L396 770 L394 768 L386 764 L384 764 L383 763 L381 763 L377 761 L374 761 L373 760 L369 760 L368 759 Z",
+              "color": {
+                "type": "solid",
+                "color": "#111b27"
+              },
+              "isMediaEditable": false
+            }
+          ],
+          "viewBox": {
+            "top": 759,
+            "left": 282,
+            "width": 151,
+            "height": 152
+          }
+        },
+        {
+          "address": "1/1",
+          "type": "shape",
+          "locked": false,
+          "bboxInParent": [
+            0,
+            166,
+            282,
+            127
+          ],
+          "rotation": 0,
+          "transparency": 0,
+          "classification": "native_shape",
+          "paths": [
+            {
+              "d": "M217 1041 L217 1052 L499 1052 L499 1039 L498 1038 L498 1032 L497 1031 L497 1027 L496 1026 L496 1023 L495 1022 L495 1019 L494 1018 L494 1015 L493 1014 L492 1009 L490 1006 L490 1004 L482 988 L480 986 L480 985 L478 983 L476 979 L473 976 L473 975 L469 971 L469 970 L457 958 L456 958 L447 950 L446 950 L441 946 L438 945 L436 943 L420 935 L418 935 L417 934 L415 934 L414 933 L412 933 L411 932 L409 932 L405 930 L398 929 L397 928 L393 928 L392 927 L387 927 L386 926 L378 926 L377 925 L338 925 L337 926 L330 926 L329 927 L324 927 L323 928 L319 928 L318 929 L311 930 L310 931 L308 931 L307 932 L305 932 L304 933 L302 933 L301 934 L296 935 L289 939 L287 939 L285 941 L278 944 L276 946 L275 946 L273 948 L269 950 L261 957 L260 957 L248 969 L248 970 L240 979 L240 980 L236 985 L235 988 L233 990 L227 1002 L227 1004 L225 1007 L225 1009 L224 1010 L224 1012 L222 1016 L222 1019 L221 1020 L221 1023 L220 1024 L220 1027 L219 1028 L219 1033 L218 1034 L218 1040 Z",
+              "color": {
+                "type": "solid",
+                "color": "#111a26"
+              },
+              "isMediaEditable": false
+            }
+          ],
+          "viewBox": {
+            "top": 925,
+            "left": 217,
+            "width": 282,
+            "height": 127
+          }
+        }
+      ]
+    },
+    {
+      "address": "2",
+      "type": "group",
+      "locked": false,
+      "bboxInParent": [
+        501,
+        800,
+        214,
+        245
+      ],
+      "rotation": 0,
+      "transparency": 0,
+      "classification": "group",
+      "children": [
+        {
+          "address": "2/0",
+          "type": "shape",
+          "locked": false,
+          "bboxInParent": [
+            33,
+            0,
+            118,
+            119
+          ],
+          "rotation": 0,
+          "transparency": 0,
+          "classification": "native_shape",
+          "paths": [
+            {
+              "d": "M584 800 L583 801 L579 801 L578 802 L576 802 L575 803 L570 804 L562 808 L556 813 L555 813 L544 825 L543 828 L541 830 L538 836 L538 838 L537 839 L537 841 L535 845 L535 849 L534 850 L534 869 L535 870 L535 874 L536 875 L537 880 L543 892 L546 895 L546 896 L557 907 L558 907 L563 911 L571 915 L573 915 L577 917 L581 917 L582 918 L590 918 L591 919 L596 919 L597 918 L604 918 L605 917 L608 917 L609 916 L614 915 L624 910 L630 905 L631 905 L638 898 L638 897 L641 894 L641 893 L645 888 L647 884 L647 882 L649 879 L649 877 L650 876 L650 873 L651 872 L651 868 L652 867 L652 851 L651 850 L651 846 L650 845 L650 842 L649 841 L649 839 L643 827 L637 820 L637 819 L627 810 L626 810 L624 808 L618 805 L616 805 L613 803 L611 803 L607 801 L603 801 L602 800 Z",
+              "color": {
+                "type": "solid",
+                "color": "#1cd897"
+              },
+              "isMediaEditable": false
+            }
+          ],
+          "viewBox": {
+            "top": 800,
+            "left": 534,
+            "width": 118,
+            "height": 119
+          }
+        },
+        {
+          "address": "2/1",
+          "type": "shape",
+          "locked": false,
+          "bboxInParent": [
+            0,
+            130,
+            214,
+            115
+          ],
+          "rotation": 0,
+          "transparency": 0,
+          "classification": "native_shape",
+          "paths": [
+            {
+              "d": "M501 968 L502 971 L504 973 L507 979 L509 981 L516 995 L516 997 L518 1000 L518 1002 L519 1003 L519 1005 L520 1006 L520 1008 L522 1012 L522 1015 L523 1016 L523 1020 L524 1021 L524 1025 L525 1026 L525 1030 L526 1031 L526 1040 L527 1041 L527 1045 L715 1045 L715 1040 L714 1039 L714 1028 L713 1027 L713 1022 L712 1021 L712 1018 L711 1017 L710 1010 L709 1009 L708 1004 L706 1001 L706 999 L700 987 L698 985 L697 982 L695 980 L693 976 L684 966 L684 965 L682 964 L679 960 L678 960 L669 952 L668 952 L663 948 L658 946 L656 944 L650 941 L648 941 L645 939 L643 939 L640 937 L637 937 L636 936 L634 936 L630 934 L627 934 L626 933 L621 933 L620 932 L615 932 L614 931 L603 931 L602 930 L587 930 L586 931 L574 931 L573 932 L567 932 L566 933 L562 933 L561 934 L558 934 L557 935 L554 935 L553 936 L551 936 L550 937 L545 938 L542 940 L540 940 L526 947 L524 949 L521 950 L514 956 L513 956 Z",
+              "color": {
+                "type": "solid",
+                "color": "#1dd897"
+              },
+              "isMediaEditable": false
+            }
+          ],
+          "viewBox": {
+            "top": 930,
+            "left": 501,
+            "width": 214,
+            "height": 115
+          }
+        }
+      ]
+    },
+    {
+      "address": "3",
+      "type": "shape",
+      "locked": false,
+      "bboxInParent": [
+        125,
+        581,
+        689,
+        667
+      ],
+      "rotation": 0,
+      "transparency": 0,
+      "classification": "native_shape",
+      "paths": [
+        {
+          "d": "M150 626 L150 627 L147 630 L147 631 L141 639 L132 658 L132 660 L130 664 L130 667 L129 668 L129 671 L128 672 L128 675 L127 676 L127 680 L126 681 L126 688 L125 689 L125 1248 L126 1248 L131 1244 L134 1243 L140 1238 L155 1229 L158 1226 L161 1225 L196 1201 L199 1200 L202 1197 L205 1196 L228 1180 L231 1179 L234 1176 L235 1176 L243 1170 L246 1169 L248 1167 L279 1147 L709 1147 L710 1146 L718 1146 L719 1145 L723 1145 L724 1144 L727 1144 L731 1142 L734 1142 L754 1133 L756 1131 L762 1128 L765 1125 L770 1122 L776 1116 L777 1116 L783 1110 L783 1109 L788 1104 L788 1103 L794 1096 L794 1095 L798 1090 L807 1071 L807 1069 L809 1065 L809 1062 L810 1061 L810 1058 L811 1057 L811 1054 L812 1053 L812 1049 L813 1048 L813 1041 L814 1040 L814 745 L749 745 L749 1029 L748 1030 L748 1035 L747 1036 L747 1039 L746 1040 L746 1042 L745 1043 L745 1045 L743 1048 L742 1052 L735 1061 L735 1062 L722 1074 L708 1081 L706 1081 L705 1082 L701 1082 L700 1083 L694 1083 L693 1084 L266 1085 L244 1102 L243 1102 L239 1106 L238 1106 L235 1109 L230 1112 L212 1127 L211 1127 L208 1130 L207 1130 L204 1133 L199 1136 L195 1140 L194 1140 L191 1143 L188 1144 L187 1143 L187 700 L188 699 L188 693 L189 692 L189 689 L190 688 L191 683 L196 673 L199 670 L199 669 L212 656 L218 653 L220 651 L224 650 L227 648 L233 647 L234 646 L239 646 L240 645 L459 645 L459 581 L234 581 L233 582 L224 582 L223 583 L214 584 L210 586 L204 587 L183 597 L181 599 L171 605 L166 610 L165 610 Z",
+          "color": {
+            "type": "solid",
+            "color": "#111b27"
+          },
+          "isMediaEditable": false
+        }
+      ],
+      "viewBox": {
+        "top": 581,
+        "left": 125,
+        "width": 689,
+        "height": 667
+      }
+    },
+    {
+      "address": "4",
+      "type": "shape",
+      "locked": false,
+      "bboxInParent": [
+        490,
+        492,
+        326,
+        282
+      ],
+      "rotation": 0,
+      "transparency": 0,
+      "classification": "native_shape",
+      "paths": [
+        {
+          "d": "M497 520 L496 522 L496 524 L494 527 L494 530 L493 531 L493 534 L492 535 L492 584 L491 585 L491 652 L490 653 L490 667 L491 668 L491 672 L492 673 L492 675 L493 676 L494 681 L497 685 L497 686 L499 688 L499 689 L503 693 L504 693 L510 698 L514 700 L519 701 L520 702 L525 702 L526 703 L537 703 L538 704 L538 708 L537 709 L537 718 L536 719 L536 725 L535 726 L535 735 L534 736 L534 743 L533 744 L533 751 L532 752 L532 758 L531 759 L531 767 L530 768 L530 774 L604 702 L769 702 L770 703 L778 703 L779 702 L785 702 L786 701 L788 701 L789 700 L791 700 L792 699 L794 699 L798 697 L800 695 L801 695 L808 688 L808 687 L811 684 L814 678 L814 676 L815 675 L815 672 L816 671 L816 534 L815 533 L815 530 L812 524 L812 522 L809 518 L808 515 L805 512 L805 511 L797 503 L796 503 L791 499 L783 495 L780 495 L779 494 L776 494 L775 493 L769 493 L768 492 L538 492 L537 493 L533 493 L532 494 L529 494 L528 495 L523 496 L519 498 L517 500 L514 501 L511 504 L510 504 L503 511 L503 512 L500 515 L499 518 Z",
+          "color": {
+            "type": "solid",
+            "color": "#ad94fc"
+          },
+          "isMediaEditable": false
+        }
+      ],
+      "viewBox": {
+        "top": 492,
+        "left": 490,
+        "width": 326,
+        "height": 282
+      }
+    }
+  ],
+  "breakdown": {
+    "native_shape": 7,
+    "group": 2
+  },
+  "background": {
+    "color": {
+      "type": "solid",
+      "color": "#ffffff"
+    }
+  },
+  "qa": {
+    "structure": {
+      "verdict": "NOT_TESTED"
+    },
+    "fidelity": {
+      "verdict": "NOT_TESTED"
+    },
+    "buyer": {
+      "verdict": "NOT_TESTED"
+    }
+  },
+  "manualGates": [
+    "Match elements to source pixels and semantic manifest",
+    "Verify source wording and fonts",
+    "Review unsupported elements, gradients, occlusions and stacking",
+    "Compare aligned actual Canva export",
+    "Test promised buyer edits in a separate buyer-test copy"
+  ]
+}

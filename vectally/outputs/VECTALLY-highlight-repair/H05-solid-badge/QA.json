@@ -1,0 +1,19 @@
+{
+  "stage": "LOCAL_REPLACEMENT_READY_NOT_IN_CANVA",
+  "body_mask_iou": 0.996160921378869,
+  "ink_mask_iou": 1.0,
+  "green_family_iou": 0.9918290383406663,
+  "path_bytes": 468,
+  "native_paths": 2,
+  "native_colors": 2,
+  "source_bbox": [
+    701,
+    1203,
+    124,
+    128
+  ],
+  "ink_color": "#0b1320",
+  "semantics": "Solid ink on an intact badge, not a transparent counterhole",
+  "canva_replacement": "PENDING",
+  "buyer": "NOT_TESTED"
+}

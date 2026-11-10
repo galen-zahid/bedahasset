@@ -1,0 +1,215 @@
+{
+  "stage": "REJECTED_NATIVE_HEADLINES_KEEP_GRAPHIC_ASSETS",
+  "shapeAudit": [
+    {
+      "path_bytes": 51,
+      "points": 10,
+      "holes": 0,
+      "epsilon": 0.05,
+      "single_move": true,
+      "body_tiling": false,
+      "background_counterfill": false,
+      "name": "Bingkai sudut kanan atas utuh",
+      "source_bbox": [
+        396,
+        319,
+        498,
+        270
+      ],
+      "color": "#080f1a",
+      "mask_iou": 1,
+      "local_geometry_gate": "PASS",
+      "printed_ink_holes_filled_in_body": false
+    },
+    {
+      "path_bytes": 48,
+      "points": 8,
+      "holes": 0,
+      "epsilon": 0.05,
+      "single_move": true,
+      "body_tiling": false,
+      "background_counterfill": false,
+      "name": "Bingkai sudut kiri bawah utuh",
+      "source_bbox": [
+        37,
+        1150,
+        221,
+        233
+      ],
+      "color": "#b69afc",
+      "mask_iou": 1,
+      "local_geometry_gate": "PASS",
+      "printed_ink_holes_filled_in_body": false
+    },
+    {
+      "path_bytes": 261,
+      "points": 50,
+      "holes": 0,
+      "epsilon": 0.05,
+      "single_move": true,
+      "body_tiling": false,
+      "background_counterfill": false,
+      "name": "Aksen garis logo utuh",
+      "source_bbox": [
+        112,
+        132,
+        173,
+        23
+      ],
+      "color": "#15de9a",
+      "mask_iou": 0.994535519125683,
+      "local_geometry_gate": "PASS",
+      "printed_ink_holes_filled_in_body": false,
+      "regularization": {
+        "mask_iou": 0.9866071428571429,
+        "method": "whole_smooth_cubic_edges",
+        "path_bytes": 105
+      }
+    },
+    {
+      "path_bytes": 946,
+      "points": 191,
+      "holes": 0,
+      "epsilon": 0.05,
+      "single_move": true,
+      "body_tiling": false,
+      "background_counterfill": false,
+      "name": "Aksen garis QUESTION utuh",
+      "source_bbox": [
+        398,
+        1352,
+        481,
+        66
+      ],
+      "color": "#18dc9d",
+      "mask_iou": 0.995144157814871,
+      "local_geometry_gate": "PASS",
+      "printed_ink_holes_filled_in_body": false,
+      "regularization": {
+        "mask_iou": 0.9902883156297421,
+        "method": "whole_smooth_cubic_edges",
+        "path_bytes": 109
+      }
+    }
+  ],
+  "textGeometry": [
+    {
+      "text": "VECTALLY",
+      "element": {
+        "type": "text",
+        "name": "VECTALLY",
+        "text": "VECTALLY",
+        "fontName": "Archivo Black",
+        "fontFamily": "Archivo Black",
+        "fontSize": 58.71482359688309,
+        "fontWeight": "normal",
+        "fontStyle": "normal",
+        "letterSpacingEm": -0.1016262874358854,
+        "lineHeightEm": 1.2,
+        "left": 63.750884418093904,
+        "top": 70.85195140630697,
+        "width": 316.2572402870686,
+        "height": 70.45778831625971,
+        "rotation": -3.8264403403179017,
+        "color": "#091522"
+      },
+      "fontFitIoU": 0.7064592050209205,
+      "actualCanva": "PENDING"
+    },
+    {
+      "text": "GOT A",
+      "element": {
+        "type": "text",
+        "name": "GOT A",
+        "text": "GOT A",
+        "fontName": "Archivo Black",
+        "fontFamily": "Archivo Black",
+        "fontSize": 112.43580757671124,
+        "fontWeight": "normal",
+        "fontStyle": "normal",
+        "letterSpacingEm": -0.12950150016471462,
+        "lineHeightEm": 1.2,
+        "left": 36.33761523002802,
+        "top": 248.76735962052052,
+        "width": 347.2829035048282,
+        "height": 134.92296909205348,
+        "rotation": 0.11415590864737202,
+        "color": "#091522"
+      },
+      "fontFitIoU": 0.773352873709698,
+      "actualCanva": "PENDING"
+    },
+    {
+      "text": "BOOKKEEPING",
+      "element": {
+        "type": "text",
+        "name": "BOOKKEEPING",
+        "text": "BOOKKEEPING",
+        "fontName": "Archivo Black",
+        "fontFamily": "Archivo Black",
+        "fontSize": 107.08428208354238,
+        "fontWeight": "normal",
+        "fontStyle": "normal",
+        "letterSpacingEm": -0.14963109434996452,
+        "lineHeightEm": 1.2,
+        "left": -283.9985568971552,
+        "top": 687.4341969531527,
+        "width": 743.4237389905555,
+        "height": 128.50113850025085,
+        "rotation": -86.00319567032473,
+        "color": "#091522"
+      },
+      "fontFitIoU": 0.61201894359587,
+      "actualCanva": "PENDING"
+    },
+    {
+      "text": "QUESTION?",
+      "element": {
+        "type": "text",
+        "name": "QUESTION?",
+        "text": "QUESTION?",
+        "fontName": "Archivo Black",
+        "fontFamily": "Archivo Black",
+        "fontSize": 121.52107537853419,
+        "fontWeight": "normal",
+        "fontStyle": "normal",
+        "letterSpacingEm": -0.1495355816176052,
+        "lineHeightEm": 1.2,
+        "left": 275.48536436045913,
+        "top": 1241.9605195571417,
+        "width": 655.7030519737411,
+        "height": 145.825290454241,
+        "rotation": -5.285346318861505,
+        "color": "#091522"
+      },
+      "fontFitIoU": 0.6773922706506976,
+      "actualCanva": "PENDING"
+    },
+    {
+      "text": "Drop it here.",
+      "element": {
+        "type": "text",
+        "name": "Drop it here.",
+        "text": "Drop it here.",
+        "fontName": "Asap",
+        "fontFamily": "Asap",
+        "fontSize": 52.114881898551644,
+        "fontWeight": "normal",
+        "fontStyle": "normal",
+        "letterSpacingEm": 0.008781473166117465,
+        "lineHeightEm": 1.2,
+        "left": 602.1135725440714,
+        "top": 1415.4897095382864,
+        "width": 303.7761631394138,
+        "height": 62.53785827826197,
+        "rotation": -0.05742850599651683,
+        "color": "#091522"
+      },
+      "fontFitIoU": 0.5909698996655518,
+      "actualCanva": "PENDING"
+    }
+  ],
+  "gradients": "PENDING",
+  "all84complete": false,
+  "rejection": "Headlineletterscollide atnegative tracking. Nativeprototype notaccepted; do notimportfull CANVA_PACKAGE. Keep only graphicassets/body."
+}

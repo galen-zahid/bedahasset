@@ -1,0 +1,28 @@
+{
+  "stage": "ASSET_AND_NATIVE_NORMAL_COPY_PROTOTYPE_NOT_FINISHED_PAGE",
+  "actualNative": {
+    "native_shape": 42,
+    "group": 8,
+    "native_text": 6
+  },
+  "sourceGradients": "PENDING",
+  "headlines": [
+    "WHATS",
+    "HARDER",
+    "TO",
+    "TRACK?"
+  ],
+  "normalCopy": [
+    "VECTALLY",
+    "INVOICE",
+    "OPEN PAYMENT",
+    "EXPENSES",
+    "UNPAID",
+    "INVOICES"
+  ],
+  "normalCopyVisual": "white capsule label visibility checked in actual export; exact source font shape pending",
+  "groupBounds": "tight per physical asset verified against actual SDK inspection",
+  "wholePaper": "all three receipt bodies include reconstructed hidden edges; invoice complete below status",
+  "buyer": "NOT_TESTED_ON_FINAL_PAGE",
+  "all84Complete": false
+}

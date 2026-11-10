@@ -1,0 +1,32 @@
+[
+  {
+    "code": "S01",
+    "package": "ASSETS_PACKAGE.json",
+    "identicalBytes": true,
+    "identicalJson": true
+  },
+  {
+    "code": "S02",
+    "package": "ASSETS_PACKAGE.json",
+    "identicalBytes": false,
+    "identicalJson": false
+  },
+  {
+    "code": "S03",
+    "package": "ASSETS_PACKAGE.json",
+    "identicalBytes": true,
+    "identicalJson": true
+  },
+  {
+    "code": "S04",
+    "package": "ASSETS_PACKAGE.json",
+    "identicalBytes": true,
+    "identicalJson": true
+  },
+  {
+    "code": "S06",
+    "package": "ASSETS_PACKAGE.json",
+    "identicalBytes": false,
+    "identicalJson": false
+  }
+]

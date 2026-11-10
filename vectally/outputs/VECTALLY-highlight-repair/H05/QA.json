@@ -1,0 +1,30 @@
+{
+  "stage": "LOCAL_REPAIR_REQUIRES_CANVA_IMPORT_AND_EXPORT",
+  "structure": "LOCAL_SVG_TOPOLOGY_VERIFIED",
+  "visual": "NOT_1_TO_1_GRADIENTS_UNRESOLVED",
+  "buyer": "NOT_TESTED",
+  "geometry_gates": [
+    "PASS",
+    "PASS",
+    "PASS",
+    "PASS",
+    "PASS",
+    "PASS",
+    "PASS",
+    "PASS",
+    "PASS",
+    "PASS",
+    "PASS",
+    "PASS",
+    "PASS",
+    "PASS"
+  ],
+  "minimum_component_mask_iou": 0.9878603945371776,
+  "transparent_holes": 6,
+  "single_move_paths": true,
+  "body_tiling": false,
+  "shape": 15,
+  "group": 4,
+  "text": 0,
+  "image": 0
+}

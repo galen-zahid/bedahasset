@@ -1,0 +1,2337 @@
+{
+  "version": 1,
+  "stage": "magic_layers_candidate",
+  "observedAt": "2026-11-09T18:10:22.973Z",
+  "scope": "current_page",
+  "addressing": "sibling order; group bounds relative to parent; IDs are snapshot-local",
+  "elements": [
+    {
+      "address": "0",
+      "type": "shape",
+      "locked": false,
+      "bboxInParent": [
+        0,
+        0,
+        941,
+        1672
+      ],
+      "rotation": 0,
+      "transparency": 0,
+      "classification": "native_shape",
+      "paths": [
+        {
+          "d": "M0.000 0.000 L941.000 0.000 L941.000 1672.000 L0.000 1672.000Z",
+          "color": {
+            "type": "solid",
+            "color": "#091522"
+          },
+          "isMediaEditable": false
+        }
+      ],
+      "viewBox": {
+        "top": 0,
+        "left": 0,
+        "width": 941,
+        "height": 1672
+      }
+    },
+    {
+      "address": "1",
+      "type": "shape",
+      "locked": false,
+      "bboxInParent": [
+        254,
+        1098,
+        160,
+        205
+      ],
+      "rotation": 0,
+      "transparency": 0,
+      "classification": "native_shape",
+      "paths": [
+        {
+          "d": "M160 0C-51 0 -51 205 118 205L118 184C-24 184 -24 21 160 21Z",
+          "color": {
+            "type": "solid",
+            "color": "#00d49c"
+          },
+          "isMediaEditable": false
+        }
+      ],
+      "viewBox": {
+        "top": 0,
+        "left": 0,
+        "width": 160,
+        "height": 205
+      }
+    },
+    {
+      "address": "2",
+      "type": "group",
+      "locked": false,
+      "bboxInParent": [
+        0,
+        463.75,
+        271.625,
+        214
+      ],
+      "rotation": 0,
+      "transparency": 0,
+      "classification": "group",
+      "children": [
+        {
+          "address": "2/0",
+          "type": "shape",
+          "locked": false,
+          "bboxInParent": [
+            0,
+            96.25,
+            227,
+            79
+          ],
+          "rotation": 0,
+          "transparency": 0,
+          "classification": "native_shape",
+          "paths": [
+            {
+              "d": "M0.000 43.000 L227.000 0.000 L227.000 36.000 L0.000 79.000Z",
+              "color": {
+                "type": "solid",
+                "color": "#51456f"
+              },
+              "isMediaEditable": false
+            }
+          ],
+          "viewBox": {
+            "top": 0,
+            "left": 0,
+            "width": 227,
+            "height": 79
+          }
+        },
+        {
+          "address": "2/1",
+          "type": "shape",
+          "locked": false,
+          "bboxInParent": [
+            67.625,
+            0,
+            204,
+            214
+          ],
+          "rotation": 0,
+          "transparency": 0,
+          "classification": "native_shape",
+          "paths": [
+            {
+              "d": "M160 0l-3 0 -1 1 -5 0 -1 1 -6 0 -1 1 -5 0 -1 1 -5 0 -1 1 -5 0 -1 1 -5 0 -1 1 -6 0 -1 1 -5 0 -1 1 -5 0 -1 1 -5 0 -1 1 -5 0 -1 1 -5 0 -1 1 -6 0 -1 1 -5 0 -1 1 -5 0 -1 1 -5 0 -1 1 -5 0 -1 1 -5 0 -1 1 -6 0 -1 1 -5 0 -1 1 -5 0 -1 1 -5 0 -1 1 -5 0 -1 1 -5 0 -1 1 -5 0 -1 1 -2 0 0 188 6 0 1 -1 6 0 1 -1 6 0 1 -1 5 0 1 -1 5 0 1 -1 5 0 1 -1 6 0 1 -1 5 0 1 -1 6 0 1 -1 5 0 1 -1 5 0 1 -1 6 0 1 -1 5 0 1 -1 5 0 1 -1 6 0 1 -1 3 0 0 -3 -1 -1 0 -2 1 -1 0 -3 1 -1 0 -1 1 -1 0 -1 4 -4 1 0 1 -1 2 0 1 -1 6 0 1 1 1 0 1 1 1 0 4 4 0 1 1 1 0 1 1 1 0 6 2 0 1 -1 5 0 1 -1 6 0 1 -1 5 0 1 -1 5 0 1 -1 6 0 1 -1 5 0 1 -1 5 0 1 -1 6 0 1 -1 5 0 1 -1 6 0 1 -1 5 0 1 -1 3 0 0 -59 1 -1 0 -10 -1 -1 0 -67 1 -1 0 -2 -11 -11 -1 0 -16 -16 -1 0Z",
+              "color": {
+                "type": "solid",
+                "color": "#f4f7fa"
+              },
+              "isMediaEditable": false
+            }
+          ],
+          "viewBox": {
+            "top": 0,
+            "left": 0,
+            "width": 204,
+            "height": 214
+          }
+        },
+        {
+          "address": "2/2",
+          "type": "shape",
+          "locked": false,
+          "bboxInParent": [
+            94,
+            38.25,
+            92,
+            29
+          ],
+          "rotation": 0,
+          "transparency": 0,
+          "classification": "native_shape",
+          "paths": [
+            {
+              "d": "M0.000 14.000 L92.000 0.000 L92.000 12.000 L0.000 29.000Z",
+              "color": {
+                "type": "solid",
+                "color": "#ac8ded"
+              },
+              "isMediaEditable": false
+            }
+          ],
+          "viewBox": {
+            "top": 0,
+            "left": 0,
+            "width": 92,
+            "height": 29
+          }
+        },
+        {
+          "address": "2/3",
+          "type": "shape",
+          "locked": false,
+          "bboxInParent": [
+            225.625,
+            0,
+            46,
+            50
+          ],
+          "rotation": 0,
+          "transparency": 0,
+          "classification": "native_shape",
+          "paths": [
+            {
+              "d": "M1 0l0 16 -1 1 0 6 1 1 0 26 8 0 1 -1 4 0 1 -1 7 0 1 -1 3 0 1 -1 2 0 1 -1 5 0 1 -1 4 0 1 -1 5 0 0 -1 -11 -11 -1 0 -16 -16 -1 0 -15 -15Z",
+              "color": {
+                "type": "solid",
+                "color": "#bb9dfc"
+              },
+              "isMediaEditable": false
+            }
+          ],
+          "viewBox": {
+            "top": 0,
+            "left": 0,
+            "width": 46,
+            "height": 50
+          }
+        },
+        {
+          "address": "2/4",
+          "type": "shape",
+          "locked": false,
+          "bboxInParent": [
+            208.875,
+            70.125,
+            41,
+            85
+          ],
+          "rotation": 0,
+          "transparency": 0,
+          "classification": "native_shape",
+          "paths": [
+            {
+              "d": "M24.75 0.25l-3.5 0 -0.5 1 -4.5 0 0 5.5 -1 0.5 0 3.5 -0.5 0.5 -2.5 0 -0.5 1 -1.5 0 0 0.5 -1 0.5 -1.5 2 -1.5 0 0 0.5 -1 0.5 0 1.5 -2 1.5 0 1.5 -1 0.5 0 1.5 -1 0.5 0 3.5 -1 0.5 0 4.5 1 0.5 0 3.5 1 0.5 0 1.5 1 0.5 0 1.5 0.5 0 0.5 1 0.5 0 0.5 1 2 1.5 0 0.5 1.5 0 1.5 2 2.5 0 0.5 1 2.5 0 0.5 1 2.5 0 0.5 1 1.5 0 0.5 1 1.5 0 0.5 1 1.5 0 0.5 0.5 0 1.5 1 0.5 0 4.5 -1 0.5 0 1.5 -1 0.5 -0.5 1 -1.5 0 -0.5 1 -7.5 0 -0.5 -1 -0.5 0 -0.5 -1 -2 -1.5 0 -1.5 -0.5 0 -0.5 -1 -0.5 0 -0.5 1 -7.5 0 0 0.5 -1 0.5 0 9.5 0.5 0 0.5 1 2 1.5 0 0.5 1.5 0 1.5 2 1.5 0 0.5 1 1.5 0 0.5 1 4.5 0 0.5 0.5 0 8.5 0.5 0 0.5 1 1.5 0 0.5 -1 6.5 0 0 -9.5 0.5 -0.5 1.5 0 0.5 -1 2.5 0 1.5 -2 1.5 0 0 -0.5 1 -0.5 0 -0.5 1 -0.5 0 -0.5 1 -0.5 1.5 -2 0.5 0 0 -1.5 1 -0.5 0 -1.5 1 -0.5 0 -3.5 1 -0.5 0 -8.5 -1 -0.5 0 -2.5 -1 -0.5 0 -1.5 -2 -1.5 0 -1.5 -0.5 0 -1.5 -2 -1.5 0 -0.5 -1 -1.5 0 -0.5 -1 -2.5 0 -0.5 -1 -2.5 0 -0.5 -1 -2.5 0 -0.5 -1 -1.5 0 -0.5 -1 -1.5 0 -0.5 -1 -0.5 0 -0.5 -1 -2 -1.5 0 -3.5 1 -0.5 0 -1.5 1 -0.5 0.5 -1 1.5 0 0.5 -1 5.5 0 0.5 1 2 1.5 0 2.5 0.5 0 0.5 1 1.5 0 0.5 -1 7.5 0 0 -0.5 1 -0.5 0 -9.5 -0.5 0 -0.5 -1 -0.5 0 -0.5 -1 -2 -1.5 0 -0.5 -1.5 0 -0.5 -1 -1.5 0 -0.5 -1 -2.5 0 -0.5 -1 -2.5 0 -0.5 -0.5Z",
+              "color": {
+                "type": "solid",
+                "color": "#b99bfd"
+              },
+              "isMediaEditable": false
+            }
+          ],
+          "viewBox": {
+            "top": 0,
+            "left": 0,
+            "width": 41,
+            "height": 85
+          }
+        },
+        {
+          "address": "2/5",
+          "type": "shape",
+          "locked": false,
+          "bboxInParent": [
+            122.875,
+            81.125,
+            39,
+            11
+          ],
+          "rotation": 0,
+          "transparency": 0,
+          "classification": "native_shape",
+          "paths": [
+            {
+              "d": "M38.875 1.125l-2.75 0 -0.25 -0.25 0 -0.75 -2.75 0 0 0.75 -0.25 0.25 -6.75 0 0 0.75 -0.25 0.25 -6.75 0 0 0.75 -0.25 0.25 -5.75 0 0 0.75 -0.25 0.25 -4.75 0 0 0.75 -0.25 0.25 -5.75 0 0 0.75 0.75 0 0.25 0.25 0 0.75 -0.25 0.25 -2.75 0 0 0.75 0.75 0 0.25 0.25 0 0.75 -0.25 0.25 -0.75 0 0 0.75 2.75 0 0.25 0.25 0 0.75 5.75 0 0 -0.75 0.25 -0.25 7.75 0 0 -0.75 0.25 -0.25 5.75 0 0 -0.75 0.25 -0.25 4.75 0 0 -0.75 0.25 -0.25 6.75 0 0 -0.75 -0.75 0 -0.25 -0.25 0 -0.75 0.25 -0.25 1.75 0 0 -0.75 0.25 -0.25 1.75 0 0 -0.75 -0.75 0 -0.25 -0.25 0 -0.75 0.25 -0.25 1.75 0Z",
+              "color": {
+                "type": "solid",
+                "color": "#7b7a9a"
+              },
+              "isMediaEditable": false
+            }
+          ],
+          "viewBox": {
+            "top": 0,
+            "left": 0,
+            "width": 39,
+            "height": 11
+          }
+        },
+        {
+          "address": "2/6",
+          "type": "shape",
+          "locked": false,
+          "bboxInParent": [
+            124.875,
+            106.125,
+            37,
+            11
+          ],
+          "rotation": 0,
+          "transparency": 0,
+          "classification": "native_shape",
+          "paths": [
+            {
+              "d": "M36.875 1.125l-4.75 0 -0.25 -0.25 0 -0.75 -4.75 0 0 0.75 -0.25 0.25 -5.75 0 0 0.75 -0.25 0.25 -4.75 0 0 0.75 -0.25 0.25 -7.75 0 0 0.75 -0.25 0.25 -5.75 0 0 0.75 1.75 0 0.25 0.25 0 0.75 -0.25 0.25 -3.75 0 0 0.75 2.75 0 0.25 0.25 0 1.75 1.75 0 0.25 0.25 0 0.75 -0.25 0.25 -1.75 0 0 0.75 1.75 0 0 -0.75 0.25 -0.25 5.75 0 0 -0.75 0.25 -0.25 4.75 0 0 -0.75 0.25 -0.25 8.75 0 0 -0.75 0.25 -0.25 4.75 0 0 -0.75 0.25 -0.25 5.75 0 0 -0.75 -0.75 0 -0.25 -0.25 0 -0.75 0.25 -0.25 1.75 0Z",
+              "color": {
+                "type": "solid",
+                "color": "#777595"
+              },
+              "isMediaEditable": false
+            }
+          ],
+          "viewBox": {
+            "top": 0,
+            "left": 0,
+            "width": 37,
+            "height": 11
+          }
+        },
+        {
+          "address": "2/7",
+          "type": "shape",
+          "locked": false,
+          "bboxInParent": [
+            230.875,
+            46.125,
+            22,
+            5
+          ],
+          "rotation": 0,
+          "transparency": 0,
+          "classification": "native_shape",
+          "paths": [
+            {
+              "d": "M21.875 0.125l-3.75 0 0 0.75 -0.25 0.25 -6.75 0 0 0.75 -0.25 0.25 -5.75 0 0 0.75 -0.25 0.25 -4.75 0 0 0.75 4.75 0 0.25 0.25 0 0.75 10.75 0 0 -0.75 0.25 -0.25 1.75 0 0 -0.75 0.25 -0.25 1.75 0 0 -0.75 0.25 -0.25 0.75 0 0 -0.75 0.25 -0.25 0.75 0Z",
+              "color": {
+                "type": "solid",
+                "color": "#b2bcc0"
+              },
+              "isMediaEditable": false
+            }
+          ],
+          "viewBox": {
+            "top": 0,
+            "left": 0,
+            "width": 22,
+            "height": 5
+          }
+        },
+        {
+          "address": "2/8",
+          "type": "shape",
+          "locked": false,
+          "bboxInParent": [
+            93.875,
+            75.125,
+            93,
+            24
+          ],
+          "rotation": 0,
+          "transparency": 0,
+          "classification": "native_shape",
+          "paths": [
+            {
+              "d": "M92.75 1.25l-1.5 -1 -0.5 1 -5.5 0 -0.5 1 -5.5 0 -0.5 1 -5.5 0 -0.5 1 -5.5 0 -0.5 1 -4.5 0 -0.5 1 -6.5 0 -0.5 1 -5.5 0 -0.5 1 -5.5 0 -0.5 1 -4.5 0 -0.5 1 -6.5 0 -0.5 1 -7.5 0 -0.5 1 -5.5 0 -0.5 1 -5.5 0 -0.5 1 -5.5 0 -0.5 1 -3.5 0 0 0.5 -1 0.5 0 6.5 0.5 0 0.5 1 0.5 0 0.5 -1 6.5 0 0.5 -1 4.5 0 0.5 -1 6.5 0 0.5 -1 5.5 0 0.5 -1 4.5 0 0.5 -1 5.5 0 0.5 -1 6.5 0 0.5 -1 5.5 0 0.5 -1 4.5 0 0.5 -1 6.5 0 0.5 -1 6.5 0 0.5 -1 5.5 0 0.5 -1 6.5 0 0.5 -1 4.5 0 0.5 -1 3.5 0 0 -0.5 1 -0.5Z",
+              "color": {
+                "type": "solid",
+                "color": "#4b4e67"
+              },
+              "isMediaEditable": false
+            }
+          ],
+          "viewBox": {
+            "top": 0,
+            "left": 0,
+            "width": 93,
+            "height": 24
+          }
+        },
+        {
+          "address": "2/9",
+          "type": "shape",
+          "locked": false,
+          "bboxInParent": [
+            93.875,
+            100.125,
+            93,
+            23
+          ],
+          "rotation": 0,
+          "transparency": 0,
+          "classification": "native_shape",
+          "paths": [
+            {
+              "d": "M92.75 1.25l-0.5 0 -0.5 -0.5 0 -0.5 -2.5 0 0 0.5 -0.5 0.5 -5.5 0 0 0.5 -0.5 0.5 -6.5 0 0 0.5 -0.5 0.5 -3.5 0 0 0.5 -0.5 0.5 -5.5 0 0 0.5 -0.5 0.5 -6.5 0 0 0.5 -0.5 0.5 -5.5 0 0 0.5 -0.5 0.5 -4.5 0 0 0.5 -0.5 0.5 -6.5 0 0 0.5 -0.5 0.5 -7.5 0 0 0.5 -0.5 0.5 -3.5 0 0 0.5 -0.5 0.5 -5.5 0 0 0.5 -0.5 0.5 -6.5 0 0 0.5 -0.5 0.5 -6.5 0 0 0.5 -0.5 0.5 -4.5 0 0 0.5 -0.5 0.5 -3.5 0 0 7.5 5.5 0 0 -0.5 0.5 -0.5 5.5 0 0 -0.5 0.5 -0.5 5.5 0 0 -0.5 0.5 -0.5 5.5 0 0 -0.5 0.5 -0.5 5.5 0 0 -0.5 0.5 -0.5 5.5 0 0 -0.5 0.5 -0.5 5.5 0 0 -0.5 0.5 -0.5 4.5 0 0 -0.5 0.5 -0.5 7.5 0 0 -0.5 0.5 -0.5 5.5 0 0 -0.5 0.5 -0.5 4.5 0 0 -0.5 0.5 -0.5 6.5 0 0 -0.5 0.5 -0.5 6.5 0 0 -0.5 0.5 -0.5 4.5 0 0 -0.5 0.5 -0.5 6.5 0 0 -0.5 0.5 -0.5 0.5 0Z",
+              "color": {
+                "type": "solid",
+                "color": "#4b4f67"
+              },
+              "isMediaEditable": false
+            }
+          ],
+          "viewBox": {
+            "top": 0,
+            "left": 0,
+            "width": 93,
+            "height": 23
+          }
+        },
+        {
+          "address": "2/10",
+          "type": "shape",
+          "locked": false,
+          "bboxInParent": [
+            93.875,
+            128.125,
+            74,
+            19
+          ],
+          "rotation": 0,
+          "transparency": 0,
+          "classification": "native_shape",
+          "paths": [
+            {
+              "d": "M73.75 0.25l-5.5 0 0 0.5 -0.5 0.5 -6.5 0 0 0.5 -0.5 0.5 -4.5 0 0 0.5 -0.5 0.5 -6.5 0 0 0.5 -0.5 0.5 -4.5 0 0 0.5 -0.5 0.5 -5.5 0 0 0.5 -0.5 0.5 -7.5 0 0 0.5 -0.5 0.5 -4.5 0 0 0.5 -0.5 0.5 -5.5 0 0 0.5 -0.5 0.5 -5.5 0 0 0.5 -0.5 0.5 -5.5 0 0 0.5 -0.5 0.5 -5.5 0 0 0.5 -0.5 0.5 -0.5 0 0 6.5 7.5 0 0 -0.5 0.5 -0.5 5.5 0 0 -0.5 0.5 -0.5 5.5 0 0 -0.5 0.5 -0.5 5.5 0 0 -0.5 0.5 -0.5 5.5 0 0 -0.5 0.5 -0.5 5.5 0 0 -0.5 0.5 -0.5 4.5 0 0 -0.5 0.5 -0.5 6.5 0 0 -0.5 0.5 -0.5 5.5 0 0 -0.5 0.5 -0.5 5.5 0 0 -0.5 0.5 -0.5 6.5 0 0 -0.5 0.5 -0.5 4.5 0Z",
+              "color": {
+                "type": "solid",
+                "color": "#141d2e"
+              },
+              "isMediaEditable": false
+            }
+          ],
+          "viewBox": {
+            "top": 0,
+            "left": 0,
+            "width": 74,
+            "height": 19
+          }
+        },
+        {
+          "address": "2/11",
+          "type": "shape",
+          "locked": false,
+          "bboxInParent": [
+            93.875,
+            154.125,
+            61,
+            18
+          ],
+          "rotation": 0,
+          "transparency": 0,
+          "classification": "native_shape",
+          "paths": [
+            {
+              "d": "M60.75 0.25l-2.5 0 0 0.5 -0.5 0.5 -4.5 0 0 0.5 -0.5 0.5 -5.5 0 0 0.5 -0.5 0.5 -6.5 0 0 0.5 -0.5 0.5 -4.5 0 0 0.5 -0.5 0.5 -5.5 0 0 0.5 -0.5 0.5 -6.5 0 0 0.5 -0.5 0.5 -5.5 0 0 0.5 -0.5 0.5 -5.5 0 0 0.5 -0.5 0.5 -5.5 0 0 0.5 -0.5 0.5 -2.5 0 0 0.5 -0.5 0.5 -0.5 0 0 6.5 4.5 0 0 -0.5 0.5 -0.5 6.5 0 0 -0.5 0.5 -0.5 5.5 0 0 -0.5 0.5 -0.5 4.5 0 0 -0.5 0.5 -0.5 5.5 0 0 -0.5 0.5 -0.5 5.5 0 0 -0.5 0.5 -0.5 5.5 0 0 -0.5 0.5 -0.5 5.5 0 0 -0.5 0.5 -0.5 5.5 0 0 -0.5 0.5 -0.5 6.5 0 0 -0.5 0.5 -0.5 0.5 0Z",
+              "color": {
+                "type": "solid",
+                "color": "#0f1722"
+              },
+              "isMediaEditable": false
+            }
+          ],
+          "viewBox": {
+            "top": 0,
+            "left": 0,
+            "width": 61,
+            "height": 18
+          }
+        }
+      ]
+    },
+    {
+      "address": "3",
+      "type": "group",
+      "locked": false,
+      "bboxInParent": [
+        361.625,
+        473.75,
+        273.375,
+        226.25
+      ],
+      "rotation": 0,
+      "transparency": 0,
+      "classification": "group",
+      "children": [
+        {
+          "address": "3/0",
+          "type": "shape",
+          "locked": false,
+          "bboxInParent": [
+            17.375,
+            68.25,
+            256,
+            158
+          ],
+          "rotation": 0,
+          "transparency": 0,
+          "classification": "native_shape",
+          "paths": [
+            {
+              "d": "M0.000 46.000 L256.000 0.000 L229.000 114.000 L0.000 158.000Z",
+              "color": {
+                "type": "solid",
+                "color": "#302b4a"
+              },
+              "isMediaEditable": false
+            }
+          ],
+          "viewBox": {
+            "top": 0,
+            "left": 0,
+            "width": 256,
+            "height": 158
+          }
+        },
+        {
+          "address": "3/1",
+          "type": "shape",
+          "locked": false,
+          "bboxInParent": [
+            0,
+            0,
+            170,
+            184
+          ],
+          "rotation": 0,
+          "transparency": 0,
+          "classification": "native_shape",
+          "paths": [
+            {
+              "d": "M135 0l-3 0 -1 1 -6 0 -1 1 -5 0 -1 1 -5 0 -1 1 -6 0 -1 1 -4 0 -1 1 -6 0 -1 1 -5 0 -1 1 -6 0 -1 1 -5 0 -1 1 -5 0 -1 1 -5 0 -1 1 -6 0 -1 1 -5 0 -1 1 -5 0 -1 1 -5 0 -1 1 -5 0 -1 1 -6 0 -1 1 -5 0 -1 1 -5 0 -1 1 -6 0 -1 1 -4 0 -1 1 0 146 1 1 1 0 1 -1 3 0 1 -1 3 0 1 -1 3 0 1 -1 1 0 1 1 0 18 5 0 1 -1 6 0 1 -1 6 0 1 -1 6 0 1 -1 6 0 1 -1 6 0 1 -1 7 0 1 -1 5 0 1 -1 5 0 0 -10 1 -1 0 -1 6 -6 1 0 1 -1 1 0 1 -1 5 0 1 1 2 0 1 1 1 0 5 5 0 1 1 1 0 2 1 1 0 4 5 0 1 -1 6 0 1 -1 6 0 1 -1 6 0 1 -1 6 0 1 -1 6 0 1 -1 6 0 1 -1 6 0 1 -1 7 0 1 -1 2 0 0 -129 -21 -21 -1 0Z",
+              "color": {
+                "type": "solid",
+                "color": "#b99bfc"
+              },
+              "isMediaEditable": false
+            }
+          ],
+          "viewBox": {
+            "top": 0,
+            "left": 0,
+            "width": 170,
+            "height": 184
+          }
+        },
+        {
+          "address": "3/2",
+          "type": "shape",
+          "locked": false,
+          "bboxInParent": [
+            135,
+            1,
+            35,
+            40
+          ],
+          "rotation": 0,
+          "transparency": 0,
+          "classification": "native_shape",
+          "paths": [
+            {
+              "d": "M0 0l0 40 3 0 1 -1 5 0 1 -1 5 0 1 -1 5 0 1 -1 5 0 1 -1 5 0 1 -1 1 0 0 -1 -21 -21 -1 0 -12 -12Z",
+              "color": {
+                "type": "solid",
+                "color": "#8877c2"
+              },
+              "isMediaEditable": false
+            }
+          ],
+          "viewBox": {
+            "top": 0,
+            "left": 0,
+            "width": 35,
+            "height": 40
+          }
+        },
+        {
+          "address": "3/3",
+          "type": "shape",
+          "locked": false,
+          "bboxInParent": [
+            41.25,
+            31.125,
+            71,
+            20
+          ],
+          "rotation": 0,
+          "transparency": 0,
+          "classification": "native_shape",
+          "paths": [
+            {
+              "d": "M70.75 0.25l-6.5 0 0 0.5 -0.5 0.5 -7.5 0 0 0.5 -0.5 0.5 -3.5 0 0 0.5 -0.5 0.5 -5.5 0 0 0.5 -0.5 0.5 -5.5 0 0 0.5 -0.5 0.5 -3.5 0 0 0.5 -0.5 0.5 -5.5 0 0 0.5 -0.5 0.5 -7.5 0 0 0.5 -0.5 0.5 -5.5 0 0 0.5 -0.5 0.5 -5.5 0 0 0.5 -0.5 0.5 -4.5 0 0 0.5 -0.5 0.5 -4.5 0 0 8.5 4.5 0 0 -0.5 0.5 -0.5 6.5 0 0 -0.5 0.5 -0.5 5.5 0 0 -0.5 0.5 -0.5 5.5 0 0 -0.5 0.5 -0.5 5.5 0 0 -0.5 0.5 -0.5 6.5 0 0 -0.5 0.5 -0.5 6.5 0 0 -0.5 0.5 -0.5 6.5 0 0 -0.5 0.5 -0.5 6.5 0 0 -0.5 0.5 -0.5 6.5 0 0 -0.5 0.5 -0.5 4.5 0 0 -0.5 0.5 -0.5 0.5 0Z",
+              "color": {
+                "type": "solid",
+                "color": "#141c2d"
+              },
+              "isMediaEditable": false
+            }
+          ],
+          "viewBox": {
+            "top": 0,
+            "left": 0,
+            "width": 71,
+            "height": 20
+          }
+        },
+        {
+          "address": "3/4",
+          "type": "shape",
+          "locked": false,
+          "bboxInParent": [
+            129.375,
+            63.25,
+            20,
+            75
+          ],
+          "rotation": 0,
+          "transparency": 0,
+          "classification": "native_shape",
+          "paths": [
+            {
+              "d": "M19 0l-4 0 -1 1 -7 0 -1 1 -5 0 -1 1 0 2 1 1 -1 1 0 1 1 1 0 59 -1 1 0 2 1 1 0 3 3 0 1 -1 8 0 1 -1 5 0 0 -63 1 -1 0 -3 -1 -1 0 -2 1 -1 0 -1Z",
+              "color": {
+                "type": "solid",
+                "color": "#0d1523"
+              },
+              "isMediaEditable": false
+            }
+          ],
+          "viewBox": {
+            "top": 0,
+            "left": 0,
+            "width": 20,
+            "height": 75
+          }
+        },
+        {
+          "address": "3/5",
+          "type": "shape",
+          "locked": false,
+          "bboxInParent": [
+            101,
+            84.875,
+            19,
+            57
+          ],
+          "rotation": 0,
+          "transparency": 0,
+          "classification": "native_shape",
+          "paths": [
+            {
+              "d": "M18 0l-1 0 -1 1 -8 0 -1 1 -7 0 0 54 1 1 4 0 1 -1 6 0 1 -1 6 0 0 -54Z",
+              "color": {
+                "type": "solid",
+                "color": "#0f1625"
+              },
+              "isMediaEditable": false
+            }
+          ],
+          "viewBox": {
+            "top": 0,
+            "left": 0,
+            "width": 19,
+            "height": 57
+          }
+        },
+        {
+          "address": "3/6",
+          "type": "shape",
+          "locked": false,
+          "bboxInParent": [
+            73,
+            105.875,
+            19,
+            40
+          ],
+          "rotation": 0,
+          "transparency": 0,
+          "classification": "native_shape",
+          "paths": [
+            {
+              "d": "M18 0l-4 0 -1 1 -7 0 -1 1 -4 0 0 4 -1 1 0 26 1 1 0 6 1 0 1 -1 7 0 1 -1 7 0 1 -1 0 -36Z",
+              "color": {
+                "type": "solid",
+                "color": "#101727"
+              },
+              "isMediaEditable": false
+            }
+          ],
+          "viewBox": {
+            "top": 0,
+            "left": 0,
+            "width": 19,
+            "height": 40
+          }
+        },
+        {
+          "address": "3/7",
+          "type": "shape",
+          "locked": false,
+          "bboxInParent": [
+            45,
+            125.875,
+            19,
+            23
+          ],
+          "rotation": 0,
+          "transparency": 0,
+          "classification": "native_shape",
+          "paths": [
+            {
+              "d": "M19 0l-11 0 -1 1 -6 0 -1 1 0 21 7 0 1 -1 8 0 1 -1 2 0Z",
+              "color": {
+                "type": "solid",
+                "color": "#0f1826"
+              },
+              "isMediaEditable": false
+            }
+          ],
+          "viewBox": {
+            "top": 0,
+            "left": 0,
+            "width": 19,
+            "height": 23
+          }
+        }
+      ]
+    },
+    {
+      "address": "4",
+      "type": "group",
+      "locked": false,
+      "bboxInParent": [
+        0,
+        725.625,
+        201,
+        195
+      ],
+      "rotation": 0,
+      "transparency": 0,
+      "classification": "group",
+      "children": [
+        {
+          "address": "4/0",
+          "type": "shape",
+          "locked": false,
+          "bboxInParent": [
+            0,
+            57.375,
+            201,
+            134
+          ],
+          "rotation": 0,
+          "transparency": 0,
+          "classification": "native_shape",
+          "paths": [
+            {
+              "d": "M0.000 42.000 L201.000 0.000 L201.000 81.000 L0.000 134.000Z",
+              "color": {
+                "type": "solid",
+                "color": "#51456f"
+              },
+              "isMediaEditable": false
+            }
+          ],
+          "viewBox": {
+            "top": 0,
+            "left": 0,
+            "width": 201,
+            "height": 134
+          }
+        },
+        {
+          "address": "4/1",
+          "type": "shape",
+          "locked": false,
+          "bboxInParent": [
+            48.625,
+            0,
+            152,
+            195
+          ],
+          "rotation": 0,
+          "transparency": 0,
+          "classification": "native_shape",
+          "paths": [
+            {
+              "d": "M123 0l-2 0 -1 1 -5 0 -1 1 -5 0 -1 1 -5 0 -1 1 -5 0 -1 1 -5 0 -1 1 -5 0 -1 1 -4 0 -1 1 -5 0 -1 1 -5 0 -1 1 -5 0 -1 1 -5 0 -1 1 -4 0 -1 1 -6 0 -1 1 -4 0 -1 1 -5 0 -1 1 -5 0 -1 1 -5 0 -1 1 -5 0 -1 1 -4 0 -1 1 -5 0 -1 1 -3 0 0 169 1 0 2 2 1 0 3 3 4 0 11 -11 0 -1 1 -1 1 0 1 -1 3 0 2 2 1 0 2 2 1 0 2 2 1 0 1 1 1 0 1 1 2 0 1 -1 2 0 1 -1 0 -1 11 -11 3 0 3 3 1 0 2 2 1 0 3 3 4 0 1 -1 1 0 13 -13 3 0 3 3 1 0 2 2 1 0 2 2 1 0 1 1 5 0 13 -13 1 0 1 -1 1 1 1 0 3 3 1 0 2 2 1 0 1 1 1 0 1 1 5 0 3 -3 0 -1 9 -9 0 -2 -1 -1 1 -1 0 -127 -2 -2 -1 0 -22 -22 -1 0Z",
+              "color": {
+                "type": "solid",
+                "color": "#bb9dfc"
+              },
+              "isMediaEditable": false
+            }
+          ],
+          "viewBox": {
+            "top": 0,
+            "left": 0,
+            "width": 152,
+            "height": 195
+          }
+        },
+        {
+          "address": "4/2",
+          "type": "shape",
+          "locked": false,
+          "bboxInParent": [
+            72.875,
+            28.25,
+            79,
+            23
+          ],
+          "rotation": 0,
+          "transparency": 0,
+          "classification": "native_shape",
+          "paths": [
+            {
+              "d": "M78.75 1.25l-1.5 -1 -0.5 1 -5.5 0 -0.5 1 -5.5 0 -0.5 1 -5.5 0 -0.5 1 -5.5 0 -0.5 1 -3.5 0 -0.5 1 -6.5 0 -0.5 1 -4.5 0 -0.5 1 -6.5 0 -0.5 1 -3.5 0 -0.5 1 -4.5 0 -0.5 1 -4.5 0 -0.5 1 -6.5 0 -0.5 1 -4.5 0 -0.5 1 -3.5 0 0 8.5 1.5 0 0.5 -1 5.5 0 0.5 -1 5.5 0 0.5 -1 5.5 0 0.5 -1 4.5 0 0.5 -1 5.5 0 0.5 -1 6.5 0 0.5 -1 5.5 0 0.5 -1 5.5 0 0.5 -1 4.5 0 0.5 -1 5.5 0 0.5 -1 4.5 0 0.5 -1 5.5 0 0.5 -1 5.5 0 0 -0.5 1 -0.5Z",
+              "color": {
+                "type": "solid",
+                "color": "#0f1826"
+              },
+              "isMediaEditable": false
+            }
+          ],
+          "viewBox": {
+            "top": 0,
+            "left": 0,
+            "width": 79,
+            "height": 23
+          }
+        },
+        {
+          "address": "4/3",
+          "type": "shape",
+          "locked": false,
+          "bboxInParent": [
+            158.875,
+            59.25,
+            19,
+            9
+          ],
+          "rotation": 0,
+          "transparency": 0,
+          "classification": "native_shape",
+          "paths": [
+            {
+              "d": "M18.75 0.25l-2.5 0 0 0.5 -0.5 0.5 -5.5 0 0 0.5 -0.5 0.5 -4.5 0 0 0.5 -0.5 0.5 -4.5 0 0 5.5 5.5 0 0 -0.5 0.5 -0.5 4.5 0 0 -0.5 0.5 -0.5 7.5 0Z",
+              "color": {
+                "type": "solid",
+                "color": "#121829"
+              },
+              "isMediaEditable": false
+            }
+          ],
+          "viewBox": {
+            "top": 0,
+            "left": 0,
+            "width": 19,
+            "height": 9
+          }
+        },
+        {
+          "address": "4/4",
+          "type": "shape",
+          "locked": false,
+          "bboxInParent": [
+            72.875,
+            67.25,
+            58,
+            16
+          ],
+          "rotation": 0,
+          "transparency": 0,
+          "classification": "native_shape",
+          "paths": [
+            {
+              "d": "M57.75 0.25l-3.5 0 0 0.5 -0.5 0.5 -5.5 0 0 0.5 -0.5 0.5 -4.5 0 0 0.5 -0.5 0.5 -3.5 0 0 0.5 -0.5 0.5 -4.5 0 0 0.5 -0.5 0.5 -5.5 0 0 0.5 -0.5 0.5 -6.5 0 0 0.5 -0.5 0.5 -5.5 0 0 0.5 -0.5 0.5 -4.5 0 0 0.5 -0.5 0.5 -6.5 0 0 0.5 -0.5 0.5 -2.5 0 0 5.5 4.5 0 0 -0.5 0.5 -0.5 5.5 0 0 -0.5 0.5 -0.5 4.5 0 0 -0.5 0.5 -0.5 5.5 0 0 -0.5 0.5 -0.5 3.5 0 0 -0.5 0.5 -0.5 5.5 0 0 -0.5 0.5 -0.5 6.5 0 0 -0.5 0.5 -0.5 5.5 0 0 -0.5 0.5 -0.5 4.5 0 0 -0.5 0.5 -0.5 5.5 0 0 -0.5 0.5 -0.5 1.5 0Z",
+              "color": {
+                "type": "solid",
+                "color": "#131a2c"
+              },
+              "isMediaEditable": false
+            }
+          ],
+          "viewBox": {
+            "top": 0,
+            "left": 0,
+            "width": 58,
+            "height": 16
+          }
+        },
+        {
+          "address": "4/5",
+          "type": "shape",
+          "locked": false,
+          "bboxInParent": [
+            158.875,
+            80.25,
+            19,
+            9
+          ],
+          "rotation": 0,
+          "transparency": 0,
+          "classification": "native_shape",
+          "paths": [
+            {
+              "d": "M18.75 1.25l-0.5 0 -0.5 -0.5 0 -0.5 -1.5 0 0 0.5 -0.5 0.5 -4.5 0 0 0.5 -0.5 0.5 -3.5 0 0 0.5 -0.5 0.5 -6.5 0 0 5.5 5.5 0 0 -0.5 0.5 -0.5 4.5 0 0 -0.5 0.5 -0.5 5.5 0 0 -0.5 0.5 -0.5 1.5 0Z",
+              "color": {
+                "type": "solid",
+                "color": "#162031"
+              },
+              "isMediaEditable": false
+            }
+          ],
+          "viewBox": {
+            "top": 0,
+            "left": 0,
+            "width": 19,
+            "height": 9
+          }
+        },
+        {
+          "address": "4/6",
+          "type": "shape",
+          "locked": false,
+          "bboxInParent": [
+            73,
+            88.25,
+            58,
+            17
+          ],
+          "rotation": 0,
+          "transparency": 0,
+          "classification": "native_shape",
+          "paths": [
+            {
+              "d": "M57.75 1.25l-1.5 -1 -0.5 1 -4.5 0 -0.5 1 -5.5 0 -0.5 1 -4.5 0 -0.5 1 -5.5 0 -0.5 1 -4.5 0 -0.5 1 -3.5 0 -0.5 1 -5.5 0 -0.5 1 -3.5 0 -0.5 1 -7.5 0 -0.5 1 -5.5 0 0 0.5 -1 0.5 0 5.5 0.5 0 0.5 -1 5.5 0 0.5 -1 4.5 0 0.5 -1 4.5 0 0.5 -1 5.5 0 0.5 -1 5.5 0 0.5 -1 5.5 0 0.5 -1 5.5 0 0.5 -1 5.5 0 0.5 -1 5.5 0 0.5 -1 4.5 0Z",
+              "color": {
+                "type": "solid",
+                "color": "#141c2e"
+              },
+              "isMediaEditable": false
+            }
+          ],
+          "viewBox": {
+            "top": 0,
+            "left": 0,
+            "width": 58,
+            "height": 17
+          }
+        },
+        {
+          "address": "4/7",
+          "type": "shape",
+          "locked": false,
+          "bboxInParent": [
+            159,
+            101.25,
+            19,
+            10
+          ],
+          "rotation": 0,
+          "transparency": 0,
+          "classification": "native_shape",
+          "paths": [
+            {
+              "d": "M18.75 1.25l-1.5 -1 -0.5 1 -4.5 0 -0.5 1 -4.5 0 -0.5 1 -6.5 0 0 6.5 0.5 0 0.5 -1 6.5 0 0.5 -1 4.5 0 0.5 -1 4.5 0 0 -0.5 1 -0.5Z",
+              "color": {
+                "type": "solid",
+                "color": "#121a2a"
+              },
+              "isMediaEditable": false
+            }
+          ],
+          "viewBox": {
+            "top": 0,
+            "left": 0,
+            "width": 19,
+            "height": 10
+          }
+        },
+        {
+          "address": "4/8",
+          "type": "shape",
+          "locked": false,
+          "bboxInParent": [
+            72.875,
+            110.25,
+            58,
+            16
+          ],
+          "rotation": 0,
+          "transparency": 0,
+          "classification": "native_shape",
+          "paths": [
+            {
+              "d": "M57.75 0.25l-3.5 0 0 0.5 -0.5 0.5 -5.5 0 0 0.5 -0.5 0.5 -5.5 0 0 0.5 -0.5 0.5 -5.5 0 0 0.5 -0.5 0.5 -3.5 0 0 0.5 -0.5 0.5 -4.5 0 0 0.5 -0.5 0.5 -5.5 0 0 0.5 -0.5 0.5 -5.5 0 0 0.5 -0.5 0.5 -4.5 0 0 0.5 -0.5 0.5 -3.5 0 0 0.5 -0.5 0.5 -5.5 0 0 5.5 2.5 0 0 -0.5 0.5 -0.5 6.5 0 0 -0.5 0.5 -0.5 5.5 0 0 -0.5 0.5 -0.5 3.5 0 0 -0.5 0.5 -0.5 6.5 0 0 -0.5 0.5 -0.5 4.5 0 0 -0.5 0.5 -0.5 6.5 0 0 -0.5 0.5 -0.5 3.5 0 0 -0.5 0.5 -0.5 5.5 0 0 -0.5 0.5 -0.5 4.5 0 0 -0.5 0.5 -0.5 3.5 0Z",
+              "color": {
+                "type": "solid",
+                "color": "#12192b"
+              },
+              "isMediaEditable": false
+            }
+          ],
+          "viewBox": {
+            "top": 0,
+            "left": 0,
+            "width": 58,
+            "height": 16
+          }
+        },
+        {
+          "address": "4/9",
+          "type": "shape",
+          "locked": false,
+          "bboxInParent": [
+            158,
+            123.25,
+            20,
+            9
+          ],
+          "rotation": 0,
+          "transparency": 0,
+          "classification": "native_shape",
+          "paths": [
+            {
+              "d": "M19.75 0.25l-4.5 0 -0.5 1 -4.5 0 -0.5 1 -5.5 0 -0.5 1 -2.5 0 0 2.5 -1 0.5 0 0.5 1 0.5 0 1.5 0.5 0 0.5 -1 6.5 0 0.5 -1 6.5 0 0.5 -1 3.5 0Z",
+              "color": {
+                "type": "solid",
+                "color": "#1b2136"
+              },
+              "isMediaEditable": false
+            }
+          ],
+          "viewBox": {
+            "top": 0,
+            "left": 0,
+            "width": 20,
+            "height": 9
+          }
+        },
+        {
+          "address": "4/10",
+          "type": "shape",
+          "locked": false,
+          "bboxInParent": [
+            72.875,
+            132.25,
+            54,
+            15
+          ],
+          "rotation": 0,
+          "transparency": 0,
+          "classification": "native_shape",
+          "paths": [
+            {
+              "d": "M53.75 3.25l-0.5 0 -0.5 -0.5 0 -2.5 -2.5 0 0 0.5 -0.5 0.5 -5.5 0 0 0.5 -0.5 0.5 -3.5 0 0 0.5 -0.5 0.5 -3.5 0 0 0.5 -0.5 0.5 -4.5 0 0 0.5 -0.5 0.5 -6.5 0 0 0.5 -0.5 0.5 -4.5 0 0 0.5 -0.5 0.5 -6.5 0 0 0.5 -0.5 0.5 -5.5 0 0 0.5 -0.5 0.5 -5.5 0 0 5.5 4.5 0 0 -0.5 0.5 -0.5 6.5 0 0 -0.5 0.5 -0.5 4.5 0 0 -0.5 0.5 -0.5 4.5 0 0 -0.5 0.5 -0.5 5.5 0 0 -0.5 0.5 -0.5 4.5 0 0 -0.5 0.5 -0.5 4.5 0 0 -0.5 0.5 -0.5 6.5 0 0 -0.5 0.5 -0.5 4.5 0 0 -0.5 0.5 -0.5 3.5 0Z",
+              "color": {
+                "type": "solid",
+                "color": "#262b44"
+              },
+              "isMediaEditable": false
+            }
+          ],
+          "viewBox": {
+            "top": 0,
+            "left": 0,
+            "width": 54,
+            "height": 15
+          }
+        }
+      ]
+    },
+    {
+      "address": "5",
+      "type": "group",
+      "locked": false,
+      "bboxInParent": [
+        113,
+        842.75,
+        294.625,
+        192.25
+      ],
+      "rotation": 0,
+      "transparency": 0,
+      "classification": "group",
+      "children": [
+        {
+          "address": "5/0",
+          "type": "shape",
+          "locked": false,
+          "bboxInParent": [
+            0,
+            73.25,
+            294,
+            119
+          ],
+          "rotation": 0,
+          "transparency": 0,
+          "classification": "native_shape",
+          "paths": [
+            {
+              "d": "M0.000 64.000 L294.000 0.000 L294.000 46.000 L0.000 119.000Z",
+              "color": {
+                "type": "solid",
+                "color": "#65518f"
+              },
+              "isMediaEditable": false
+            }
+          ],
+          "viewBox": {
+            "top": 0,
+            "left": 0,
+            "width": 294,
+            "height": 119
+          }
+        },
+        {
+          "address": "5/1",
+          "type": "shape",
+          "locked": false,
+          "bboxInParent": [
+            110.625,
+            0,
+            184,
+            185
+          ],
+          "rotation": 0,
+          "transparency": 0,
+          "classification": "native_shape",
+          "paths": [
+            {
+              "d": "M184 28l-17 -17 -1 0 -10 -10 -1 0 -1 -1 -4 0 -1 1 -5 0 -1 1 -5 0 -1 1 -5 0 -1 1 -4 0 -1 1 -5 0 -1 1 -4 0 -1 1 -5 0 -1 1 -5 0 -1 1 -5 0 -1 1 -5 0 -1 1 -5 0 -1 1 -4 0 -1 1 -5 0 -1 1 -5 0 -1 1 -4 0 -1 1 -5 0 -1 1 -5 0 -1 1 -4 0 -1 1 -5 0 -1 1 -5 0 -1 1 -4 0 -1 1 -5 0 -1 1 -5 0 -1 1 -4 0 -1 1 -5 0 -1 1 -5 0 0 99 -1 1 0 37 1 1 0 21 2 0 1 -1 4 0 1 -1 5 0 1 -1 4 0 1 -1 4 0 1 -1 4 0 1 -1 5 0 1 -1 4 0 1 -1 4 0 1 -1 4 0 1 -1 4 0 1 -1 5 0 1 -1 4 0 1 -1 4 0 1 -1 4 0 1 -1 5 0 1 -1 4 0 1 -1 4 0 1 -1 4 0 1 -1 5 0 1 -1 4 0 1 -1 4 0 1 -1 5 0 1 -1 4 0 1 -1 5 0 1 -1 4 0 1 -1 5 0 1 -1 4 0 1 -1 4 0 1 -1 5 0 1 -1 5 0 1 -1 4 0 1 -1 5 0 1 -1 4 0 1 -1 3 0 1 -1Z",
+              "color": {
+                "type": "solid",
+                "color": "#f4f7fa"
+              },
+              "isMediaEditable": false
+            }
+          ],
+          "viewBox": {
+            "top": 0,
+            "left": 0,
+            "width": 184,
+            "height": 185
+          }
+        },
+        {
+          "address": "5/2",
+          "type": "shape",
+          "locked": false,
+          "bboxInParent": [
+            135,
+            28.25,
+            109,
+            30
+          ],
+          "rotation": 0,
+          "transparency": 0,
+          "classification": "native_shape",
+          "paths": [
+            {
+              "d": "M0.000 18.000 L109.000 0.000 L109.000 12.000 L0.000 30.000Z",
+              "color": {
+                "type": "solid",
+                "color": "#82789f"
+              },
+              "isMediaEditable": false
+            }
+          ],
+          "viewBox": {
+            "top": 0,
+            "left": 0,
+            "width": 109,
+            "height": 30
+          }
+        },
+        {
+          "address": "5/3",
+          "type": "shape",
+          "locked": false,
+          "bboxInParent": [
+            263.625,
+            1,
+            30,
+            33
+          ],
+          "rotation": 0,
+          "transparency": 0,
+          "classification": "native_shape",
+          "paths": [
+            {
+              "d": "M0 0l0 33 3 0 1 -1 5 0 1 -1 5 0 1 -1 6 0 1 -1 3 0 1 -1 3 0 0 -2 -16 -16 -1 0 -10 -10Z",
+              "color": {
+                "type": "solid",
+                "color": "#ba9dfc"
+              },
+              "isMediaEditable": false
+            }
+          ],
+          "viewBox": {
+            "top": 0,
+            "left": 0,
+            "width": 30,
+            "height": 33
+          }
+        },
+        {
+          "address": "5/4",
+          "type": "shape",
+          "locked": false,
+          "bboxInParent": [
+            133,
+            70.25,
+            67,
+            76
+          ],
+          "rotation": 0,
+          "transparency": 0,
+          "classification": "native_shape",
+          "paths": [
+            {
+              "d": "M35 0l-3 0 -1 1 -3 0 -1 1 -1 0 -1 1 -2 0 -2 2 -1 0 -2 2 -1 0 -9 9 0 1 -2 2 0 1 -1 1 0 1 -1 1 0 1 -1 1 0 2 -1 1 0 1 -1 1 0 3 -1 1 0 16 1 1 0 3 1 1 0 2 1 1 0 1 2 2 0 1 2 2 0 1 3 3 1 0 3 3 1 0 1 1 1 0 1 1 1 0 1 1 2 0 1 1 4 0 1 1 8 0 1 -1 0 -3 2 -2 3 0 1 -1 1 0 1 -1 1 0 1 -1 1 0 2 -2 1 0 9 -9 0 -1 1 -1 0 -1 2 -2 0 -1 1 -1 0 -1 1 -1 0 -1 1 -1 0 -2 1 -1 0 -1 -1 -1 -1 0 -1 1 -8 0 -1 1 -5 0 -1 1 -9 0 -2 -2 0 -2 -1 0 -1 -1 0 -5 -1 -1 0 -6 1 -1 0 -2 -1 -1 0 -1 1 -1 0 -9 -1 -1Z",
+              "color": {
+                "type": "solid",
+                "color": "#b99cfc"
+              },
+              "isMediaEditable": false
+            }
+          ],
+          "viewBox": {
+            "top": 0,
+            "left": 0,
+            "width": 67,
+            "height": 76
+          }
+        },
+        {
+          "address": "5/5",
+          "type": "shape",
+          "locked": false,
+          "bboxInParent": [
+            110.625,
+            125.875,
+            1,
+            37
+          ],
+          "rotation": 0,
+          "transparency": 0,
+          "classification": "native_shape",
+          "paths": [
+            {
+              "d": "M0 0l0 37 1 0 0 -37Z",
+              "color": {
+                "type": "solid",
+                "color": "#696787"
+              },
+              "isMediaEditable": false
+            }
+          ],
+          "viewBox": {
+            "top": 0,
+            "left": 0,
+            "width": 1,
+            "height": 37
+          }
+        },
+        {
+          "address": "5/6",
+          "type": "shape",
+          "locked": false,
+          "bboxInParent": [
+            221.875,
+            59.125,
+            52,
+            17
+          ],
+          "rotation": 0,
+          "transparency": 0,
+          "classification": "native_shape",
+          "paths": [
+            {
+              "d": "M51.75 0.25l-3.5 0 0 0.5 -0.5 0.5 -4.5 0 0 0.5 -0.5 0.5 -4.5 0 0 0.5 -0.5 0.5 -5.5 0 0 0.5 -0.5 0.5 -4.5 0 0 0.5 -0.5 0.5 -5.5 0 0 0.5 -0.5 0.5 -4.5 0 0 0.5 -0.5 0.5 -5.5 0 0 0.5 -0.5 0.5 -4.5 0 0 0.5 -0.5 0.5 -3.5 0 0 0.5 -0.5 0.5 -0.5 0 0 5.5 0.5 0 0.5 0.5 0 0.5 3.5 0 0 -0.5 0.5 -0.5 4.5 0 0 -0.5 0.5 -0.5 4.5 0 0 -0.5 0.5 -0.5 5.5 0 0 -0.5 0.5 -0.5 5.5 0 0 -0.5 0.5 -0.5 5.5 0 0 -0.5 0.5 -0.5 4.5 0 0 -0.5 0.5 -0.5 5.5 0 0 -0.5 0.5 -0.5 5.5 0 0 -0.5 0.5 -0.5 1.5 0Z",
+              "color": {
+                "type": "solid",
+                "color": "#182033"
+              },
+              "isMediaEditable": false
+            }
+          ],
+          "viewBox": {
+            "top": 0,
+            "left": 0,
+            "width": 52,
+            "height": 17
+          }
+        },
+        {
+          "address": "5/7",
+          "type": "shape",
+          "locked": false,
+          "bboxInParent": [
+            170.625,
+            69,
+            35,
+            37
+          ],
+          "rotation": 0,
+          "transparency": 0,
+          "classification": "native_shape",
+          "paths": [
+            {
+              "d": "M0 0l0 37 4 0 1 -1 5 0 1 -1 5 0 1 -1 4 0 1 -1 4 0 1 -1 5 0 1 -1 2 0 0 -6 -1 -1 0 -2 -1 -1 0 -2 -1 -1 0 -1 -1 -1 0 -1 -1 -1 0 -1 -8 -8 -1 0 -2 -2 -1 0 -1 -1 -1 0 -1 -1 -3 0 -1 -1Z",
+              "color": {
+                "type": "solid",
+                "color": "#181f2f"
+              },
+              "isMediaEditable": false
+            }
+          ],
+          "viewBox": {
+            "top": 0,
+            "left": 0,
+            "width": 35,
+            "height": 37
+          }
+        },
+        {
+          "address": "5/8",
+          "type": "shape",
+          "locked": false,
+          "bboxInParent": [
+            221.875,
+            82.125,
+            52,
+            17
+          ],
+          "rotation": 0,
+          "transparency": 0,
+          "classification": "native_shape",
+          "paths": [
+            {
+              "d": "M51.75 0.25l-2.5 0 0 0.5 -0.5 0.5 -4.5 0 0 0.5 -0.5 0.5 -5.5 0 0 0.5 -0.5 0.5 -4.5 0 0 0.5 -0.5 0.5 -4.5 0 0 0.5 -0.5 0.5 -5.5 0 0 0.5 -0.5 0.5 -4.5 0 0 0.5 -0.5 0.5 -4.5 0 0 0.5 -0.5 0.5 -4.5 0 0 0.5 -0.5 0.5 -5.5 0 0 0.5 -0.5 0.5 -0.5 0 0 6.5 5.5 0 0 -0.5 0.5 -0.5 5.5 0 0 -0.5 0.5 -0.5 5.5 0 0 -0.5 0.5 -0.5 4.5 0 0 -0.5 0.5 -0.5 4.5 0 0 -0.5 0.5 -0.5 5.5 0 0 -0.5 0.5 -0.5 4.5 0 0 -0.5 0.5 -0.5 4.5 0 0 -0.5 0.5 -0.5 5.5 0 0 -0.5 0.5 -0.5 1.5 0Z",
+              "color": {
+                "type": "solid",
+                "color": "#151d2c"
+              },
+              "isMediaEditable": false
+            }
+          ],
+          "viewBox": {
+            "top": 0,
+            "left": 0,
+            "width": 52,
+            "height": 17
+          }
+        },
+        {
+          "address": "5/9",
+          "type": "shape",
+          "locked": false,
+          "bboxInParent": [
+            168.875,
+            102.125,
+            37,
+            44
+          ],
+          "rotation": 0,
+          "transparency": 0,
+          "classification": "native_shape",
+          "paths": [
+            {
+              "d": "M36.875 0.125l-1.75 0 0 0.75 -0.25 0.25 -4.75 0 0 0.75 -0.25 0.25 -5.75 0 0 0.75 -0.25 0.25 -5.75 0 0 0.75 -0.25 0.25 -5.75 0 0 0.75 -0.25 0.25 -3.75 0 0 0.75 -0.25 0.25 -5.75 0 0 0.75 -0.25 0.25 -1.75 0 0 0.75 1.75 0 0.25 0.25 0 0.75 0.75 0 0.25 0.25 0 0.75 0.75 0 0.25 0.25 0 0.75 5.75 0 0 -0.75 0.25 -0.25 7.75 0 0 -0.75 0.25 -0.25 10.75 0 0 -0.75 0.25 -0.25 0.75 0 0.25 0.25 0 5.75 -0.25 0.25 -0.75 0 0 2.75 -0.25 0.25 -0.75 0 0 0.75 -0.25 0.25 -0.75 0 0 1.75 -0.25 0.25 -0.75 0 0 0.75 -0.25 0.25 -0.75 0 0 0.75 -0.25 0.25 -0.75 0 0 1.75 -0.25 0.25 -0.75 0 0 0.75 -0.25 0.25 -0.75 0 0 0.75 -0.25 0.25 -0.75 0 0 0.75 -0.25 0.25 -0.75 0 0 1.75 -0.25 0.25 -0.75 0 0 0.75 -0.25 0.25 -0.75 0 0 0.75 -0.25 0.25 -0.75 0 0 0.75 -0.25 0.25 -1.75 0 0 0.75 -0.25 0.25 -0.75 0 0 0.75 -0.25 0.25 -1.75 0 0 0.75 -0.25 0.25 -0.75 0 0 0.75 -0.25 0.25 -1.75 0 0 0.75 -0.25 0.25 -1.75 0 0 0.75 -0.25 0.25 -2.75 0 0 0.75 -0.25 0.25 -2.75 0 0 2.75 -0.25 0.25 -0.75 0 0 1.75 0.75 0 0 -0.75 0.25 -0.25 4.75 0 0 -0.75 0.25 -0.25 2.75 0 0 -0.75 0.25 -0.25 1.75 0 0 -0.75 0.25 -0.25 1.75 0 0 -0.75 0.25 -0.25 1.75 0 0 -0.75 0.25 -0.25 1.75 0 0 -0.75 0.25 -0.25 0.75 0 0 -0.75 0.25 -0.25 0.75 0 0 -0.75 0.25 -0.25 1.75 0 0 -0.75 0.25 -0.25 0.75 0 0 -0.75 0.25 -0.25 0.75 0 0 -0.75 0.25 -0.25 0.75 0 0 -0.75 0.25 -0.25 0.75 0 0 -0.75 0.25 -0.25 0.75 0 0 -0.75 0.25 -0.25 0.75 0 0 -0.75 0.25 -0.25 0.75 0 0 -1.75 0.25 -0.25 0.75 0 0 -0.75 0.25 -0.25 0.75 0 0 -1.75 0.25 -0.25 0.75 0 0 -0.75 0.25 -0.25 0.75 0 0 -1.75 0.25 -0.25 0.75 0 0 -1.75 0.25 -0.25 0.75 0 0 -1.75 0.25 -0.25 0.75 0 0 -2.75 0.25 -0.25 0.75 0 0 -3.75 0.25 -0.25 0.75 0Z",
+              "color": {
+                "type": "solid",
+                "color": "#0c1421"
+              },
+              "isMediaEditable": false
+            }
+          ],
+          "viewBox": {
+            "top": 0,
+            "left": 0,
+            "width": 37,
+            "height": 44
+          }
+        },
+        {
+          "address": "5/10",
+          "type": "shape",
+          "locked": false,
+          "bboxInParent": [
+            221.875,
+            106.125,
+            52,
+            17
+          ],
+          "rotation": 0,
+          "transparency": 0,
+          "classification": "native_shape",
+          "paths": [
+            {
+              "d": "M51.75 0.25l-4.5 0 0 0.5 -0.5 0.5 -5.5 0 0 0.5 -0.5 0.5 -5.5 0 0 0.5 -0.5 0.5 -4.5 0 0 0.5 -0.5 0.5 -4.5 0 0 0.5 -0.5 0.5 -5.5 0 0 0.5 -0.5 0.5 -4.5 0 0 0.5 -0.5 0.5 -4.5 0 0 0.5 -0.5 0.5 -4.5 0 0 0.5 -0.5 0.5 -2.5 0 0 0.5 -0.5 0.5 -0.5 0 0 5.5 0.5 0 0.5 0.5 0 0.5 2.5 0 0 -0.5 0.5 -0.5 5.5 0 0 -0.5 0.5 -0.5 4.5 0 0 -0.5 0.5 -0.5 4.5 0 0 -0.5 0.5 -0.5 5.5 0 0 -0.5 0.5 -0.5 4.5 0 0 -0.5 0.5 -0.5 5.5 0 0 -0.5 0.5 -0.5 4.5 0 0 -0.5 0.5 -0.5 5.5 0 0 -0.5 0.5 -0.5 3.5 0Z",
+              "color": {
+                "type": "solid",
+                "color": "#111827"
+              },
+              "isMediaEditable": false
+            }
+          ],
+          "viewBox": {
+            "top": 0,
+            "left": 0,
+            "width": 52,
+            "height": 17
+          }
+        }
+      ]
+    },
+    {
+      "address": "6",
+      "type": "group",
+      "locked": false,
+      "bboxInParent": [
+        349.125,
+        776.875,
+        561,
+        448
+      ],
+      "rotation": 0,
+      "transparency": 0,
+      "classification": "group",
+      "children": [
+        {
+          "address": "6/0",
+          "type": "shape",
+          "locked": false,
+          "bboxInParent": [
+            0,
+            153,
+            561,
+            295
+          ],
+          "rotation": 0,
+          "transparency": 0,
+          "classification": "native_shape",
+          "paths": [
+            {
+              "d": "M0 285l0 3 2 0 1 -1 22 -3 1 -1 10 -1 6 -2 6 0 1 -1 6 0 1 -1 20 -2 1 -1 7 0 1 -1 18 -1 1 -1 26 -1 1 -1 34 0 1 1 22 1 1 1 5 0 1 1 5 0 5 2 4 0 17 6 3 5 8 6 7 1 1 1 10 0 11 -4 3 -2 7 -8 21 -6 4 0 6 -2 6 0 1 -1 8 0 1 -1 12 0 1 -1 37 0 1 1 15 0 1 1 21 1 1 1 7 0 1 1 27 3 1 1 16 2 1 1 9 1 5 2 9 1 5 2 9 1 17 5 4 0 1 -1 0 -7 1 -1 0 -6 1 -1 0 -6 1 -1 0 -6 1 -1 0 -7 2 -7 1 -13 2 -7 1 -13 2 -7 0 -6 2 -7 0 -6 1 -1 0 -6 1 -1 0 -6 1 -1 3 -27 1 -1 1 -12 2 -7 1 -13 1 -1 1 -12 2 -7 0 -6 2 -7 2 -20 1 -1 1 -12 2 -7 0 -7 -19 -8 1 -12 1 -1 0 -8 -9 -5 -8 -2 0 19 -6 13 -1 6 -6 17 0 4 -1 1 0 4 -1 1 0 4 -2 6 0 5 -2 6 -1 11 -2 6 0 5 -2 6 0 5 -2 6 0 5 -2 6 0 5 -2 6 0 5 -2 6 0 5 -2 6 0 5 -1 1 -1 11 -2 6 -1 11 -1 1 -1 10 -2 6 0 5 -2 6 0 5 -2 6 0 5 -1 1 0 4 -2 3 -5 -2 -4 0 -1 -1 -4 0 -1 -1 -4 0 -6 -2 -19 -2 -1 -1 -7 0 -1 -1 -9 0 -1 -1 -40 -1 -1 1 -24 1 -1 1 -7 0 -1 1 -5 0 -1 1 -5 0 -5 2 -4 0 -23 7 -24 11 -11 7 -6 6 -12 0 -10 -10 -20 -11 -20 -7 -3 0 -9 -3 -4 0 -1 -1 -12 -1 -1 -1 -21 -1 -1 -1 -25 0 -1 1 -15 0 -1 1 -18 1 -1 1 -6 0 -1 1 -6 0 -1 1 -18 2 -1 1 -10 1 -1 1 -1 -1 1 -4 3 -5 15 -2 6 -2 21 -2 1 -1 7 0 1 -1 9 0 1 -1 15 0 1 -1 39 1 1 1 7 0 1 1 6 0 1 1 9 1 24 7 22 11 16 12 4 5 1 0 1 -2 3 -17 2 -5 0 -4 5 -17 0 -4 2 -5 2 -13 4 -13 0 -4 1 -1 2 -12 4 -13 2 -13 3 -9 0 -4 3 -9 0 -4 3 -9 3 -17 4 -13 0 -4 1 -1 2 -12 3 -9 0 -4 5 -18 0 -4 2 -3 0 -4 -4 -2 -7 -7 -2 -6 -4 -1 -5 -3 -9 -3 -3 0 -4 -2 -15 -2 -1 -1 -6 0 -1 -1 -10 0 -1 -1 -26 0 -1 1 -12 0 -1 1 -16 1 -1 1 -5 0 -1 1 -5 0 -1 1 -14 2 -1 1 -3 0 -1 1 -3 0 -1 1 -3 0 -1 1 -21 5 -4 9 -3 11 -2 3 -2 8 -6 3 -15 4 -2 3 -8 24 -2 3 -3 11 -2 3 -2 8 -2 3 -2 8 -2 3 -2 8 -2 3 -2 8 -2 3 -2 8 -2 3 -2 8 -2 3 -2 8 -2 3 -3 11 -2 3 -3 11 -5 11 -5 17 -2 3 -2 8 -6 14 -8 25Z",
+              "color": {
+                "type": "solid",
+                "color": "#b898f9"
+              },
+              "isMediaEditable": false
+            }
+          ],
+          "viewBox": {
+            "top": 0,
+            "left": 0,
+            "width": 561,
+            "height": 295
+          }
+        },
+        {
+          "address": "6/1",
+          "type": "shape",
+          "locked": false,
+          "bboxInParent": [
+            251.875,
+            120.125,
+            274,
+            309
+          ],
+          "rotation": 0,
+          "transparency": 0,
+          "classification": "native_shape",
+          "paths": [
+            {
+              "d": "M274 4l-2 0 -1 -1 -5 0 -1 -1 -7 0 -1 -1 -10 0 -1 -1 -43 0 -1 1 -10 0 -1 1 -7 0 -1 1 -7 0 -1 1 -5 0 -1 1 -4 0 -1 1 -4 0 -1 1 -3 0 -1 1 -3 0 -1 1 -3 0 -1 1 -3 0 -1 1 -2 0 -1 1 -3 0 -3 2 -2 0 -1 1 -2 0 -1 1 -2 0 -1 1 -2 0 -1 1 -1 0 -1 1 -2 0 -5 3 -2 0 -1 1 -1 0 -1 1 -1 0 -1 1 -1 0 -1 1 -1 0 -1 1 -1 0 -1 1 -3 1 -2 2 -1 0 -1 1 -3 1 -2 2 -1 0 -1 1 -3 0 -1 1 -1 0 -1 1 -1 0 -1 1 -3 1 -2 2 -1 0 -1 1 -3 1 -2 2 -3 1 -2 2 -1 0 -1 1 0 12 -1 1 -2 0 0 3 -1 1 0 4 -1 1 0 4 -1 1 0 3 -1 1 0 3 -1 1 0 3 -1 1 0 3 -1 1 0 4 -1 1 0 4 -1 1 0 3 -1 1 0 3 -1 1 0 4 -1 1 0 3 -1 1 0 3 -1 1 0 4 -1 1 0 3 -1 1 0 4 -1 1 0 3 -1 1 0 3 -1 1 0 4 -1 1 0 3 -1 1 0 3 -1 1 0 4 -1 1 0 3 -1 1 0 4 -1 1 0 3 -1 1 0 3 -1 1 0 4 -1 1 0 4 -1 1 0 3 -1 1 0 4 -1 1 0 3 -1 1 0 3 -1 1 0 3 -1 1 0 4 -1 1 0 3 -1 1 0 3 -1 1 0 4 -1 1 0 3 -1 1 0 3 -1 1 0 4 -1 1 0 3 -1 1 0 4 -1 1 0 3 -1 1 0 3 -1 1 0 3 -1 1 0 4 -1 1 0 3 -1 1 0 4 -1 1 0 3 -1 1 0 3 -1 1 0 3 -1 1 0 3 -1 1 0 3 -1 1 0 4 -1 1 0 3 -1 1 0 2 1 0 4 -4 1 0 3 -3 1 0 3 -3 1 0 5 -4 1 0 1 -1 1 0 2 -2 1 0 1 -1 1 0 1 -1 3 -1 2 -2 2 0 1 -1 1 0 5 -3 2 0 1 -1 2 0 3 -2 2 0 1 -1 2 0 1 -1 2 0 1 -1 2 0 1 -1 3 0 1 -1 3 0 1 -1 3 0 1 -1 3 0 1 -1 4 0 1 -1 5 0 1 -1 6 0 1 -1 7 0 1 -1 10 0 1 -1 41 0 1 1 11 0 1 1 8 0 1 1 7 0 1 1 6 0 1 1 5 0 1 1 4 0 1 1 4 0 1 1 4 0 1 1 4 0 1 1 3 0 1 1 3 0 0 -3 1 -1 0 -5 1 -1 0 -5 1 -1 0 -6 1 -1 0 -5 1 -1 0 -4 1 -1 0 -5 1 -1 0 -4 1 -1 0 -5 1 -1 0 -5 1 -1 0 -5 1 -1 0 -4 1 -1 0 -5 1 -1 0 -5 1 -1 0 -5 1 -1 0 -4 1 -1 0 -6 1 -1 0 -4 1 -1 0 -5 1 -1 0 -4 1 -1 0 -5 1 -1 0 -4 1 -1 0 -5 1 -1 0 -4 1 -1 0 -5 1 -1 0 -5 1 -1 0 -4 1 -1 0 -5 1 -1 0 -4 1 -1 0 -5 1 -1 0 -4 1 -1 0 -5 1 -1 0 -4 1 -1 0 -5 1 -1 0 -4 1 -1 0 -4 1 -1 0 -5 1 -1 0 -5 1 -1 0 -4 1 -1 0 -5 1 -1 0 -4 1 -1 0 -6 1 -1 0 -4 1 -1 0 -5 1 -1 0 -5 1 -1 0 -5 1 -1 0 -5 1 -1 0 -5 1 -1Z",
+              "color": {
+                "type": "solid",
+                "color": "#f4f6fa"
+              },
+              "isMediaEditable": false
+            }
+          ],
+          "viewBox": {
+            "top": 0,
+            "left": 0,
+            "width": 274,
+            "height": 309
+          }
+        },
+        {
+          "address": "6/2",
+          "type": "shape",
+          "locked": false,
+          "bboxInParent": [
+            36.125,
+            153.125,
+            275,
+            276
+          ],
+          "rotation": 0,
+          "transparency": 0,
+          "classification": "native_shape",
+          "paths": [
+            {
+              "d": "M275 18l-2 0 -6 -3 -2 0 -1 -1 -3 0 -1 -1 -2 0 -4 -2 -1 0 -1 2 -5 -3 -2 0 -1 -1 -2 0 -4 -2 -3 0 -4 -2 -4 0 -1 -1 -4 0 -1 -1 -5 0 -1 -1 -6 0 -1 -1 -10 0 -1 -1 -26 0 -1 1 -12 0 -1 1 -8 0 -1 1 -7 0 -1 1 -5 0 -1 1 -5 0 -1 1 -4 0 -1 1 -9 1 -1 1 -3 0 -1 1 -3 0 -1 1 -3 0 -1 1 -3 0 -1 1 -3 0 -4 2 -3 0 -1 1 -3 0 -1 1 -2 0 -1 1 -1 5 -2 3 0 2 -1 1 0 2 -1 1 -1 5 -2 3 0 2 -1 1 -1 5 -2 2 0 3 -1 1 0 2 -1 1 0 2 -1 1 0 2 -1 1 0 2 -1 1 0 2 -1 1 0 2 -1 1 0 2 -1 1 -1 5 -2 3 0 2 -1 1 0 2 -1 1 0 2 -1 1 0 2 -1 1 0 2 -1 1 0 2 -1 1 0 2 -1 1 -1 5 -2 3 0 2 -1 1 0 2 -1 1 0 2 -1 1 0 2 -1 1 -1 5 -2 3 0 2 -1 1 0 2 -1 1 0 2 -1 1 0 2 -1 1 0 2 -1 1 0 2 -1 1 0 2 -1 1 0 2 -1 1 0 2 -1 1 -1 5 -2 3 0 2 -1 1 0 2 -1 1 0 2 -1 1 0 2 -1 1 -1 5 -2 3 0 2 -1 1 0 2 -1 1 0 2 -1 1 0 2 -1 1 0 2 -1 1 -1 5 -2 3 0 2 -1 1 0 2 -1 1 0 2 -1 1 0 2 -1 1 0 2 -1 1 -1 5 -2 3 0 2 -1 1 0 2 -1 1 0 2 -1 1 -1 5 3 0 1 -1 4 0 1 -1 4 0 1 -1 5 0 1 -1 4 0 1 -1 6 0 1 -1 6 0 1 -1 7 0 1 -1 7 0 1 -1 9 0 1 -1 15 0 1 -1 26 0 1 1 12 0 1 1 7 0 1 1 6 0 1 1 4 0 1 1 4 0 1 1 3 0 1 1 7 1 1 1 2 0 1 1 2 0 1 1 5 1 3 2 2 0 12 6 2 2 3 1 2 2 4 2 9 8 1 0 4 4 0 1 1 0 1 -2 0 -3 1 -1 0 -4 1 -1 0 -3 1 -1 0 -4 1 -1 0 -3 1 -1 0 -4 1 -1 0 -3 1 -1 0 -3 1 -1 0 -3 1 -1 0 -3 1 -1 0 -4 1 -1 0 -3 1 -1 0 -4 1 -1 0 -3 1 -1 0 -4 1 -1 0 -3 1 -1 0 -3 1 -1 0 -3 1 -1 0 -4 1 -1 0 -3 1 -1 0 -3 1 -1 0 -4 1 -1 0 -3 1 -1 0 -3 1 -1 0 -3 1 -1 0 -4 1 -1 0 -3 1 -1 0 -4 1 -1 0 -3 1 -1 0 -3 1 -1 0 -4 1 -1 0 -3 1 -1 0 -3 1 -1 0 -4 1 -1 0 -3 1 -1 0 -3 1 -1 0 -4 1 -1 0 -3 1 -1 0 -3 1 -1 0 -4 1 -1 0 -3 1 -1 0 -3 1 -1 0 -3 1 -1 0 -4 1 -1 0 -3 1 -1 0 -3 1 -1 0 -4 1 -1 0 -3 1 -1 0 -3 1 -1 0 -4 1 -1 0 -3 1 -1 0 -4 2 -4 9 0Z",
+              "color": {
+                "type": "solid",
+                "color": "#f4f7fa"
+              },
+              "isMediaEditable": false
+            }
+          ],
+          "viewBox": {
+            "top": 0,
+            "left": 0,
+            "width": 275,
+            "height": 276
+          }
+        },
+        {
+          "address": "6/3",
+          "type": "shape",
+          "locked": false,
+          "bboxInParent": [
+            240.875,
+            183,
+            67,
+            249
+          ],
+          "rotation": 0,
+          "transparency": 0,
+          "classification": "native_shape",
+          "paths": [
+            {
+              "d": "M66.75 0.25l-2.5 0 0 3.5 -1 0.5 0 3.5 -1 0.5 0 3.5 -1 0.5 0 3.5 -1 0.5 0 4.5 -1 0.5 0 3.5 -1 0.5 0 4.5 -1 0.5 0 3.5 -1 0.5 0 3.5 -1 0.5 0 4.5 -1 0.5 0 3.5 -1 0.5 0 3.5 -1 0.5 0 4.5 -1 0.5 0 3.5 -1 0.5 0 3.5 -1 0.5 0 4.5 -1 0.5 0 3.5 -1 0.5 0 3.5 -1 0.5 0 3.5 -1 0.5 0 4.5 -1 0.5 0 3.5 -1 0.5 0 4.5 -1 0.5 0 3.5 -1 0.5 0 3.5 -1 0.5 0 4.5 -1 0.5 0 3.5 -1 0.5 0 3.5 -1 0.5 0 4.5 -1 0.5 0 3.5 -1 0.5 0 4.5 -1 0.5 0 3.5 -1 0.5 0 4.5 -1 0.5 0 3.5 -1 0.5 0 3.5 -1 0.5 0 3.5 -1 0.5 0 4.5 -1 0.5 0 3.5 -1 0.5 0 3.5 -1 0.5 0 4.5 -1 0.5 0 3.5 -1 0.5 0 3.5 -1 0.5 0 3.5 -1 0.5 0 4.5 -1 0.5 0 4.5 -1 0.5 0 3.5 -1 0.5 0 3.5 -1 0.5 0 4.5 -1 0.5 0 2.5 -1 0.5 0 4.5 -1 0.5 0 3.5 -1 0.5 0 3.5 -1 0.5 0 4.5 -1 0.5 0 3.5 -1 0.5 0 4.5 -1 0.5 0 3.5 -1 0.5 0 3.5 -1 0.5 0 3.5 -2 1.5 -0.5 -0.5 0 -1.5 -0.5 0 -0.5 -1 -0.5 0 -0.5 -1 -0.5 0 -0.5 -1 -1.5 -1 0 2.5 -1 0.5 0 3.5 0.5 0 0.5 1 14.5 0 0 -0.5 1 -0.5 0 -3.5 1 -0.5 0 -2.5 -0.5 0 0 0.5 -1 0.5 0 0.5 -1 0.5 0 0.5 -1 0.5 -1.5 2 -1.5 0 -0.5 -0.5 0 0 0.5 1 -1 0.5 -0.5 -1 1 -0.5 0 0 0 -3.5 1 -0.5 0 -4.5 1 -0.5 0 -3.5 1 -0.5 0 -3.5 1 -0.5 0 -3.5 1 -0.5 0 -4.5 1 -0.5 0 -3.5 1 -0.5 0 -3.5 1 -0.5 0 -4.5 1 -0.5 0 -3.5 1 -0.5 0 -3.5 1 -0.5 0 -4.5 1 -0.5 0 -3.5 1 -0.5 0 -3.5 1 -0.5 0 -4.5 1 -0.5 0 -3.5 1 -0.5 0 -4.5 1 -0.5 0 -3.5 1 -0.5 0 -3.5 1 -0.5 0 -3.5 1 -0.5 0 -3.5 1 -0.5 0 -4.5 1 -0.5 0 -3.5 1 -0.5 0 -4.5 1 -0.5 0 -3.5 1 -0.5 0 -3.5 1 -0.5 0 -4.5 1 -0.5 0 -3.5 1 -0.5 0 -4.5 1 -0.5 0 -3.5 1 -0.5 0 -3.5 1 -0.5 0 -4.5 1 -0.5 0 -3.5 1 -0.5 0 -4.5 1 -0.5 0 -3.5 1 -0.5 0 -4.5 1 -0.5 0 -3.5 1 -0.5 0 -3.5 1 -0.5 0 -3.5 1 -0.5 0 -4.5 1 -0.5 0 -3.5 1 -0.5 0 -4.5 1 -0.5 0 -3.5 1 -0.5 0 -3.5 1 -0.5 0 -4.5 1 -0.5 0 -3.5 1 -0.5 0 -3.5 1 -0.5 0 -4.5 1 -0.5 0 -3.5 1 -0.5 0 -4.5 1 -0.5 0 -3.5 1 -0.5 0 -3.5 1 -0.5 0 -3.5 1 -0.5 0 -4.5 1 -0.5 0 -4.5 1 -0.5 0 -3.5 1 -0.5Z",
+              "color": {
+                "type": "solid",
+                "color": "#091522"
+              },
+              "isMediaEditable": false
+            }
+          ],
+          "viewBox": {
+            "top": 0,
+            "left": 0,
+            "width": 67,
+            "height": 249
+          }
+        },
+        {
+          "address": "6/4",
+          "type": "shape",
+          "locked": false,
+          "bboxInParent": [
+            343.875,
+            165.125,
+            65,
+            105
+          ],
+          "rotation": 0,
+          "transparency": 0,
+          "classification": "native_shape",
+          "paths": [
+            {
+              "d": "M65 0l-7 0 -1 1 -3 0 -1 1 -3 0 -1 1 -2 0 -1 1 -1 0 -1 1 -1 0 -1 1 -2 0 -2 2 -1 0 -1 1 -1 0 -1 1 -1 0 -1 1 -1 0 -3 3 -1 0 -6 6 -1 0 -3 3 0 1 -5 5 0 1 -2 2 0 1 -1 1 0 1 -2 2 0 1 -1 1 0 1 -1 1 0 1 -1 1 0 2 -1 1 0 2 -1 1 0 2 -1 1 0 5 -1 1 0 12 1 1 0 4 1 1 0 3 1 1 0 1 1 1 0 2 2 2 0 1 2 2 0 1 7 7 1 0 2 2 1 0 1 1 1 0 1 1 1 0 1 1 2 0 1 1 2 0 1 1 2 0 1 1 9 0 0 -3 1 -1 0 -3 1 -1 0 -3 1 -1 0 -3 1 -1 0 -2 1 -1 0 -3 1 -1 0 -3 -2 0 -1 -1 -3 0 -1 -1 -1 0 -1 -1 -1 0 -1 -1 -1 0 -5 -5 0 -1 -1 -1 0 -1 -1 -1 0 -1 -1 -1 0 -10 1 -1 0 -3 1 -1 0 -1 1 -1 0 -1 1 -1 0 -1 1 -1 0 -1 9 -9 1 0 2 -2 1 0 1 -1 1 0 1 -1 2 0 1 -1 2 0 1 -1 3 0 2 -2 0 -3 1 -1 0 -4 1 -1 0 -4 1 -1 0 -3 1 -1 0 -4 1 -1Z",
+              "color": {
+                "type": "solid",
+                "color": "#ba9bfd"
+              },
+              "isMediaEditable": false
+            }
+          ],
+          "viewBox": {
+            "top": 0,
+            "left": 0,
+            "width": 65,
+            "height": 105
+          }
+        },
+        {
+          "address": "6/5",
+          "type": "shape",
+          "locked": false,
+          "bboxInParent": [
+            503.875,
+            181.125,
+            56,
+            265
+          ],
+          "rotation": 0,
+          "transparency": 0,
+          "classification": "native_shape",
+          "paths": [
+            {
+              "d": "M38.000 0.000 L56.000 7.000 L19.000 265.000 L0.000 258.000Z",
+              "color": {
+                "type": "solid",
+                "color": "#8a6ac3"
+              },
+              "isMediaEditable": false
+            }
+          ],
+          "viewBox": {
+            "top": 0,
+            "left": 0,
+            "width": 56,
+            "height": 265
+          }
+        },
+        {
+          "address": "6/6",
+          "type": "shape",
+          "locked": false,
+          "bboxInParent": [
+            389.5,
+            164.875,
+            66,
+            105
+          ],
+          "rotation": 0,
+          "transparency": 0,
+          "classification": "native_shape",
+          "paths": [
+            {
+              "d": "M45 4l-2 0 -1 -1 -1 0 -1 -1 -2 0 -1 -1 -4 0 -1 -1 -9 0 -1 1 0 3 -1 1 0 3 -1 1 0 4 -1 1 0 3 -1 1 0 4 -1 1 0 3 4 0 1 1 3 0 1 1 1 0 3 3 1 0 3 3 0 1 2 2 0 2 1 1 0 2 1 1 0 8 -1 1 0 2 -1 1 0 2 -1 1 0 1 -1 1 0 1 -2 2 0 1 -7 7 -1 0 -2 2 -1 0 -2 2 -1 0 -1 1 -1 0 -1 1 -1 0 -1 1 -3 0 -1 1 -4 0 0 1 -1 1 0 4 -1 1 0 4 -1 1 0 4 -1 1 0 4 -1 1 0 4 7 0 1 -1 4 0 1 -1 3 0 1 -1 2 0 1 -1 2 0 1 -1 2 0 1 -1 1 0 1 -1 1 0 2 -2 1 0 1 -1 1 0 2 -2 1 0 1 -1 0 -4 -1 -1 0 -1 1 -1 2 0 1 1 0 1 3 0 9 -9 0 -1 2 -2 0 -1 2 -2 0 -1 2 -2 0 -1 1 -1 0 -1 1 -1 0 -2 1 -1 0 -2 1 -1 0 -1 1 -1 0 -3 1 -1 0 -4 1 -1 0 -16 -1 -1 0 -3 -1 -1 0 -2 -1 -1 0 -2 -1 -1 0 -1 -2 -2 0 -1 -2 -2 0 -1 -5 -5 -1 0 -3 -3 -1 0 -1 -1 -1 0Z",
+              "color": {
+                "type": "solid",
+                "color": "#09da9a"
+              },
+              "isMediaEditable": false
+            }
+          ],
+          "viewBox": {
+            "top": 0,
+            "left": 0,
+            "width": 66,
+            "height": 105
+          }
+        },
+        {
+          "address": "6/7",
+          "type": "shape",
+          "locked": false,
+          "bboxInParent": [
+            218.625,
+            194.375,
+            48,
+            96
+          ],
+          "rotation": 0,
+          "transparency": 0,
+          "classification": "native_shape",
+          "paths": [
+            {
+              "d": "M48 0l-23 0 0 1 -1 1 0 2 -1 1 0 3 -1 1 0 3 -1 1 0 3 -1 1 0 3 -1 1 0 3 -1 1 0 3 -1 1 0 2 -1 1 0 3 -1 1 0 3 -1 1 0 3 -1 1 0 3 -1 1 0 3 -1 1 0 2 -1 1 0 3 -1 1 0 3 -1 1 0 3 -1 1 0 3 -1 1 0 3 -1 1 0 2 -1 1 0 3 -1 1 0 3 -1 1 0 3 -1 1 0 3 -1 1 0 2 24 0 0 -1 1 -1 0 -4 1 -1 0 -3 1 -1 0 -3 1 -1 0 -2 1 -1 0 -3 1 -1 0 -3 1 -1 0 -3 1 -1 0 -3 1 -1 0 -3 1 -1 0 -3 1 -1 0 -3 1 -1 0 -3 1 -1 0 -2 1 -1 0 -3 1 -1 0 -3 1 -1 0 -3 1 -1 0 -3 1 -1 0 -3 1 -1 0 -3 1 -1 0 -3 1 -1 0 -3 1 -1 0 -3 1 -1 0 -3 1 -1Z",
+              "color": {
+                "type": "solid",
+                "color": "#0ab987"
+              },
+              "isMediaEditable": false
+            }
+          ],
+          "viewBox": {
+            "top": 0,
+            "left": 0,
+            "width": 48,
+            "height": 96
+          }
+        },
+        {
+          "address": "6/8",
+          "type": "shape",
+          "locked": false,
+          "bboxInParent": [
+            182.625,
+            219.375,
+            42,
+            71
+          ],
+          "rotation": 0,
+          "transparency": 0,
+          "classification": "native_shape",
+          "paths": [
+            {
+              "d": "M42 0l-23 0 0 2 -1 1 0 3 -1 1 0 2 -1 1 0 3 -1 1 0 3 -1 1 0 3 -1 1 0 2 -1 1 0 3 -1 1 0 3 -1 1 0 2 -1 1 0 3 -1 1 0 2 -1 1 0 3 -1 1 0 3 -1 1 0 2 -1 1 0 3 -1 1 0 2 -1 1 0 3 -1 1 0 3 -1 1 0 2 24 0 0 -3 1 -1 0 -2 1 -1 0 -3 1 -1 0 -2 1 -1 0 -3 1 -1 0 -3 1 -1 0 -3 1 -1 0 -2 1 -1 0 -3 1 -1 0 -3 1 -1 0 -3 1 -1 0 -2 1 -1 0 -3 1 -1 0 -3 1 -1 0 -3 1 -1 0 -3 1 -1 0 -2 1 -1 0 -3 1 -1Z",
+              "color": {
+                "type": "solid",
+                "color": "#09c890"
+              },
+              "isMediaEditable": false
+            }
+          ],
+          "viewBox": {
+            "top": 0,
+            "left": 0,
+            "width": 42,
+            "height": 71
+          }
+        },
+        {
+          "address": "6/9",
+          "type": "shape",
+          "locked": false,
+          "bboxInParent": [
+            147.5,
+            240.75,
+            37,
+            49
+          ],
+          "rotation": 0,
+          "transparency": 0,
+          "classification": "native_shape",
+          "paths": [
+            {
+              "d": "M37 0l-23 0 -1 1 0 3 -1 1 0 2 -1 1 0 2 -1 1 0 3 -1 1 0 2 -1 1 0 2 -1 1 0 3 -1 1 0 2 -1 1 0 3 -1 1 0 2 -1 1 0 2 -1 1 0 3 -1 1 0 2 -1 1 0 4 23 0 0 -2 1 -1 0 -2 1 -1 0 -3 1 -1 0 -2 1 -1 0 -3 1 -1 0 -2 1 -1 0 -2 1 -1 0 -3 1 -1 0 -2 1 -1 0 -3 1 -1 0 -2 1 -1 0 -3 1 -1 0 -3 1 -1 0 -2 1 -1Z",
+              "color": {
+                "type": "solid",
+                "color": "#09d69a"
+              },
+              "isMediaEditable": false
+            }
+          ],
+          "viewBox": {
+            "top": 0,
+            "left": 0,
+            "width": 37,
+            "height": 49
+          }
+        },
+        {
+          "address": "6/10",
+          "type": "shape",
+          "locked": false,
+          "bboxInParent": [
+            111.625,
+            263.375,
+            32,
+            27
+          ],
+          "rotation": 0,
+          "transparency": 0,
+          "classification": "native_shape",
+          "paths": [
+            {
+              "d": "M9 0l0 1 -1 1 0 2 -1 1 0 2 -1 1 0 2 -1 1 0 2 -1 1 0 2 -1 1 0 2 -1 1 0 2 -1 1 0 2 -1 1 0 1 24 0 0 -2 1 -1 0 -2 1 -1 0 -3 1 -1 0 -2 1 -1 0 -2 1 -1 0 -3 1 -1 0 -2 1 -1 0 -2 1 -1 0 -1Z",
+              "color": {
+                "type": "solid",
+                "color": "#08d498"
+              },
+              "isMediaEditable": false
+            }
+          ],
+          "viewBox": {
+            "top": 0,
+            "left": 0,
+            "width": 32,
+            "height": 27
+          }
+        },
+        {
+          "address": "6/11",
+          "type": "shape",
+          "locked": false,
+          "bboxInParent": [
+            306.75,
+            282,
+            42,
+            35
+          ],
+          "rotation": 0,
+          "transparency": 0,
+          "classification": "native_shape",
+          "paths": [
+            {
+              "d": "M41.75 2.25l-0.5 0 -0.5 -0.5 0 -0.5 -0.5 0 -0.5 -0.5 0 -0.5 -3.5 0 0 0.5 -0.5 0.5 -0.5 0 0 0.5 -0.5 0.5 -0.5 0 0 0.5 -0.5 0.5 -0.5 0 0 0.5 -0.5 0.5 -0.5 0 0 0.5 -0.5 0.5 -0.5 0 0 0.5 -0.5 0.5 -0.5 0 0 0.5 -0.5 0.5 -1.5 0 0 1.5 -0.5 0.5 -0.5 0 0 0.5 -0.5 0.5 -0.5 0 0 0.5 -0.5 0.5 -1.5 0 -0.5 -0.5 0 -0.5 -0.5 0 -0.5 -0.5 0 -0.5 -1.5 0 -0.5 -0.5 0 -0.5 -9.5 0 0 0.5 -0.5 0.5 -1.5 0 0 0.5 -0.5 0.5 -1.5 0 0 0.5 -0.5 0.5 -1.5 0 0 0.5 -0.5 0.5 -0.5 0 0 0.5 -0.5 0.5 -0.5 0 0 1.5 -0.5 0.5 -0.5 0 0 0.5 -0.5 0.5 -0.5 0 0 2.5 -0.5 0.5 -0.5 0 0 7.5 0.5 0 0.5 0.5 0 1.5 0.5 0 0.5 0.5 0 1.5 0.5 0 0.5 0.5 0 0.5 0.5 0 0.5 0.5 0 0.5 1.5 0 0.5 0.5 0 0.5 1.5 0 0.5 0.5 0 0.5 9.5 0 0 -0.5 0.5 -0.5 1.5 0 0 -0.5 0.5 -0.5 1.5 0 0 -0.5 0.5 -0.5 0.5 0 0 -0.5 0.5 -0.5 1.5 0 0 -0.5 0.5 -0.5 0.5 0 0 -1.5 0.5 -0.5 0.5 0 0 -1.5 0.5 -0.5 0.5 0 0 -1.5 0.5 -0.5 0.5 0 0 -6.5 0.5 -0.5 0.5 0 0 -0.5 0.5 -0.5 0.5 0 0 -0.5 0.5 -0.5 0.5 0 0 -0.5 0.5 -0.5 0.5 0 0 -0.5 0.5 -0.5 0.5 0 0 -0.5 0.5 -0.5 0.5 0 0 -0.5 0.5 -0.5 1.5 0 0 -0.5 0.5 -0.5 0.5 0 0 -0.5 0.5 -0.5 0.5 0 0 -0.5 0.5 -0.5 0.5 0 0 -0.5 0.5 -0.5 0.5 0 0 -0.5 0.5 -0.5 0.5 0Z",
+              "color": {
+                "type": "solid",
+                "color": "#08e09f"
+              },
+              "isMediaEditable": false
+            }
+          ],
+          "viewBox": {
+            "top": 0,
+            "left": 0,
+            "width": 42,
+            "height": 35
+          }
+        },
+        {
+          "address": "6/12",
+          "type": "shape",
+          "locked": false,
+          "bboxInParent": [
+            298.75,
+            326,
+            42,
+            35
+          ],
+          "rotation": 0,
+          "transparency": 0,
+          "classification": "native_shape",
+          "paths": [
+            {
+              "d": "M41.75 3.25l-0.5 0 -0.5 -0.5 0 -0.5 -0.5 0 -0.5 -0.5 0 -0.5 -0.5 0 -0.5 -0.5 0 -0.5 -2.5 0 0 0.5 -0.5 0.5 -0.5 0 0 0.5 -0.5 0.5 -0.5 0 0 0.5 -0.5 0.5 -0.5 0 0 0.5 -0.5 0.5 -0.5 0 0 0.5 -0.5 0.5 -0.5 0 0 0.5 -0.5 0.5 -0.5 0 0 0.5 -0.5 0.5 -1.5 0 0 0.5 -0.5 0.5 -0.5 0 0 0.5 -0.5 0.5 -0.5 0 0 0.5 -0.5 0.5 -0.5 0 0 0.5 -0.5 0.5 -1.5 0 -0.5 -0.5 0 -0.5 -0.5 0 -0.5 -0.5 0 -0.5 -1.5 0 -0.5 -0.5 0 -0.5 -9.5 0 0 0.5 -0.5 0.5 -1.5 0 0 0.5 -0.5 0.5 -1.5 0 0 0.5 -0.5 0.5 -0.5 0 0 0.5 -0.5 0.5 -0.5 0 0 0.5 -0.5 0.5 -0.5 0 0 0.5 -0.5 0.5 -0.5 0 0 1.5 -0.5 0.5 -0.5 0 0 1.5 -0.5 0.5 -0.5 0 0 8.5 0.5 0 0.5 0.5 0 1.5 0.5 0 0.5 0.5 0 1.5 0.5 0 0.5 0.5 0 0.5 0.5 0 0.5 0.5 0 0.5 1.5 0 0.5 0.5 0 0.5 1.5 0 0.5 0.5 0 0.5 9.5 0 0 -0.5 0.5 -0.5 2.5 0 0 -0.5 0.5 -0.5 0.5 0 0 -0.5 0.5 -0.5 0.5 0 0 -0.5 0.5 -0.5 1.5 0 0 -1.5 0.5 -0.5 0.5 0 0 -0.5 0.5 -0.5 0.5 0 0 -1.5 0.5 -0.5 0.5 0 0 -2.5 0.5 -0.5 0.5 0 0 -6.5 0.5 -0.5 1.5 0 0 -0.5 0.5 -0.5 0.5 0 0 -0.5 0.5 -0.5 0.5 0 0 -0.5 0.5 -0.5 0.5 0 0 -0.5 0.5 -0.5 0.5 0 0 -0.5 0.5 -0.5 0.5 0 0 -0.5 0.5 -0.5 0.5 0 0 -0.5 0.5 -0.5 1.5 0 0 -0.5 0.5 -0.5 0.5 0 0 -0.5 0.5 -0.5 0.5 0 0 -0.5 0.5 -0.5 0.5 0Z",
+              "color": {
+                "type": "solid",
+                "color": "#06dd9e"
+              },
+              "isMediaEditable": false
+            }
+          ],
+          "viewBox": {
+            "top": 0,
+            "left": 0,
+            "width": 42,
+            "height": 35
+          }
+        },
+        {
+          "address": "6/13",
+          "type": "shape",
+          "locked": false,
+          "bboxInParent": [
+            300.75,
+            183.125,
+            8,
+            14
+          ],
+          "rotation": 0,
+          "transparency": 0,
+          "classification": "native_shape",
+          "paths": [
+            {
+              "d": "M7.75 0.25l-4.5 0 0 3.5 -1 0.5 0 4.5 -1 0.5 0 3.5 -1 0.5 0 0.5 4.5 0 0 -3.5 1 -0.5 0 -3.5 1 -0.5 0 -4.5 1 -0.5Z",
+              "color": {
+                "type": "solid",
+                "color": "#050e1e"
+              },
+              "isMediaEditable": false
+            }
+          ],
+          "viewBox": {
+            "top": 0,
+            "left": 0,
+            "width": 8,
+            "height": 14
+          }
+        },
+        {
+          "address": "6/14",
+          "type": "shape",
+          "locked": false,
+          "bboxInParent": [
+            360.5,
+            288.75,
+            101,
+            9
+          ],
+          "rotation": 0,
+          "transparency": 0,
+          "classification": "native_shape",
+          "paths": [
+            {
+              "d": "M101 0l-43 0 -1 1 -33 0 -1 1 -22 0 -1 1 0 6 30 0 1 -1 44 0 1 -1 24 0 1 -1Z",
+              "color": {
+                "type": "solid",
+                "color": "#1d2536"
+              },
+              "isMediaEditable": false
+            }
+          ],
+          "viewBox": {
+            "top": 0,
+            "left": 0,
+            "width": 101,
+            "height": 9
+          }
+        },
+        {
+          "address": "6/15",
+          "type": "shape",
+          "locked": false,
+          "bboxInParent": [
+            355.5,
+            307.75,
+            69,
+            9
+          ],
+          "rotation": 0,
+          "transparency": 0,
+          "classification": "native_shape",
+          "paths": [
+            {
+              "d": "M69 0l-25 0 -1 1 -40 0 -1 1 -1 0 0 4 -1 1 0 1 1 1 10 0 1 -1 52 0 1 -1 3 0 0 -3 1 -1Z",
+              "color": {
+                "type": "solid",
+                "color": "#363c50"
+              },
+              "isMediaEditable": false
+            }
+          ],
+          "viewBox": {
+            "top": 0,
+            "left": 0,
+            "width": 69,
+            "height": 9
+          }
+        },
+        {
+          "address": "6/16",
+          "type": "shape",
+          "locked": false,
+          "bboxInParent": [
+            102.5,
+            309.75,
+            136,
+            9
+          ],
+          "rotation": 0,
+          "transparency": 0,
+          "classification": "native_shape",
+          "paths": [
+            {
+              "d": "M0 9l35 0 1 -1 98 0 0 -2 1 -1 0 -2 1 -1 0 -2 -77 0 -1 1 -56 0 0 2 -1 1 0 2 -1 1Z",
+              "color": {
+                "type": "solid",
+                "color": "#121927"
+              },
+              "isMediaEditable": false
+            }
+          ],
+          "viewBox": {
+            "top": 0,
+            "left": 0,
+            "width": 136,
+            "height": 9
+          }
+        },
+        {
+          "address": "6/17",
+          "type": "shape",
+          "locked": false,
+          "bboxInParent": [
+            95.625,
+            332.375,
+            137,
+            9
+          ],
+          "rotation": 0,
+          "transparency": 0,
+          "classification": "native_shape",
+          "paths": [
+            {
+              "d": "M0 9l20 0 1 -1 115 0 0 -3 1 -1 0 -4 -93 0 -1 1 -41 0 0 2 -1 1 0 2 -1 1Z",
+              "color": {
+                "type": "solid",
+                "color": "#111622"
+              },
+              "isMediaEditable": false
+            }
+          ],
+          "viewBox": {
+            "top": 0,
+            "left": 0,
+            "width": 137,
+            "height": 9
+          }
+        },
+        {
+          "address": "6/18",
+          "type": "shape",
+          "locked": false,
+          "bboxInParent": [
+            350.625,
+            333.375,
+            104,
+            9
+          ],
+          "rotation": 0,
+          "transparency": 0,
+          "classification": "native_shape",
+          "paths": [
+            {
+              "d": "M104 1l-1 -1 -42 0 -1 1 -34 0 -1 1 -23 0 -1 1 0 3 -1 1 0 1 1 1 36 0 1 -1 64 0 1 -1 0 -4 1 -1Z",
+              "color": {
+                "type": "solid",
+                "color": "#283146"
+              },
+              "isMediaEditable": false
+            }
+          ],
+          "viewBox": {
+            "top": 0,
+            "left": 0,
+            "width": 104,
+            "height": 9
+          }
+        },
+        {
+          "address": "6/19",
+          "type": "shape",
+          "locked": false,
+          "bboxInParent": [
+            347.5,
+            351.875,
+            69,
+            9
+          ],
+          "rotation": 0,
+          "transparency": 0,
+          "classification": "native_shape",
+          "paths": [
+            {
+              "d": "M69 1l-1 -1 -18 0 -1 1 -35 0 -1 1 -12 0 0 1 -1 1 0 5 23 0 1 -1 43 0 1 -1 0 -2 1 -1Z",
+              "color": {
+                "type": "solid",
+                "color": "#20283b"
+              },
+              "isMediaEditable": false
+            }
+          ],
+          "viewBox": {
+            "top": 0,
+            "left": 0,
+            "width": 69,
+            "height": 9
+          }
+        },
+        {
+          "address": "6/20",
+          "type": "shape",
+          "locked": false,
+          "bboxInParent": [
+            88.625,
+            353.375,
+            99,
+            10
+          ],
+          "rotation": 0,
+          "transparency": 0,
+          "classification": "native_shape",
+          "paths": [
+            {
+              "d": "M99 1l-1 0 -1 -1 -9 0 -1 1 -64 0 -1 1 -20 0 0 1 -1 1 0 2 -1 1 0 3 8 0 1 -1 88 0 1 -1 0 -3 1 -1Z",
+              "color": {
+                "type": "solid",
+                "color": "#0d1624"
+              },
+              "isMediaEditable": false
+            }
+          ],
+          "viewBox": {
+            "top": 0,
+            "left": 0,
+            "width": 99,
+            "height": 10
+          }
+        },
+        {
+          "address": "6/21",
+          "type": "shape",
+          "locked": false,
+          "bboxInParent": [
+            310.75,
+            283,
+            37,
+            31
+          ],
+          "rotation": 0,
+          "transparency": 0,
+          "classification": "native_shape",
+          "paths": [
+            {
+              "d": "M35.875 0.125l-0.75 0 0 0.75 -0.25 0.25 -1.75 0 0 0.75 -0.25 0.25 -0.75 0 -0.25 -0.25 0 -0.75 -0.75 0 0 0.75 -0.25 0.25 -1.75 0 0 0.75 -0.25 0.25 -0.75 0 0 0.75 -0.25 0.25 -0.75 0 0 0.75 -0.25 0.25 -0.75 0 0 0.75 -0.25 0.25 -0.75 0 0 0.75 -0.25 0.25 -0.75 0 0 0.75 -0.25 0.25 -0.75 0 0 0.75 -0.25 0.25 -0.75 0 0 0.75 -0.25 0.25 -0.75 0 0 0.75 -0.25 0.25 -0.75 0 0 0.75 -0.25 0.25 -0.75 0 0 0.75 -0.25 0.25 -0.75 0 0 0.75 -0.25 0.25 -0.75 0 0 0.75 -0.25 0.25 -0.75 0 0 0.75 -0.25 0.25 -0.75 0 0 0.75 -0.25 0.25 -0.75 0 0 0.75 -0.25 0.25 -0.75 0 0 1.75 -0.25 0.25 -0.75 0 0 0.75 -0.25 0.25 -0.75 0 0 0.75 -0.25 0.25 -1.75 0 -0.25 -0.25 0 -0.75 -0.75 0 -0.25 -0.25 0 -1.75 -0.75 0 -0.25 -0.25 0 -0.75 -0.75 0 -0.25 -0.25 0 -0.75 -0.75 0 -0.25 -0.25 0 -0.75 -1.75 0 0 0.75 -0.25 0.25 -1.75 0 0 0.75 -0.25 0.25 -0.75 0 0 1.75 0.75 0 0.25 0.25 0 0.75 0.75 0 0.25 0.25 0 1.75 0.75 0 0.25 0.25 0 0.75 0.75 0 0.25 0.25 0 0.75 0.75 0 0.25 0.25 0 1.75 0.75 0 0.25 0.25 0 0.75 0.75 0 0.25 0.25 0 0.75 0.75 0 0.25 0.25 0 0.75 0.75 0 0.25 0.25 0 0.75 0.75 0 0 -0.75 0.25 -0.25 0.75 0 0 -0.75 0.25 -0.25 0.75 0 0 -1.75 0.25 -0.25 0.75 0 0 -0.75 0.25 -0.25 0.75 0 0 -0.75 0.25 -0.25 0.75 0 0 -0.75 0.25 -0.25 1.75 0 0 -0.75 0.25 -0.25 0.75 0 0 -0.75 0.25 -0.25 0.75 0 0 -0.75 0.25 -0.25 0.75 0 0 -0.75 0.25 -0.25 0.75 0 0 -0.75 0.25 -0.25 1.75 0 0 -0.75 0.25 -0.25 0.75 0 0 -0.75 0.25 -0.25 0.75 0 0 -0.75 0.25 -0.25 0.75 0 0 -0.75 0.25 -0.25 0.75 0 0 -0.75 0.25 -0.25 0.75 0 0 -0.75 0.25 -0.25 0.75 0 0 -0.75 0.25 -0.25 0.75 0 0 -0.75 0.25 -0.25 0.75 0 0 -0.75 0.25 -0.25 0.75 0 0 -0.75 0.25 -0.25 0.75 0 0 -0.75 0.25 -0.25 0.75 0 0 -0.75 0.25 -0.25 1.75 0 0 -1.75 0.25 -0.25 0.75 0 0 -3.75 -0.75 0 -0.25 -0.25Z",
+              "color": {
+                "type": "solid",
+                "color": "#074045"
+              },
+              "isMediaEditable": false
+            }
+          ],
+          "viewBox": {
+            "top": 0,
+            "left": 0,
+            "width": 37,
+            "height": 31
+          }
+        },
+        {
+          "address": "6/22",
+          "type": "shape",
+          "locked": false,
+          "bboxInParent": [
+            302.75,
+            328,
+            37,
+            29
+          ],
+          "rotation": 0,
+          "transparency": 0,
+          "classification": "native_shape",
+          "paths": [
+            {
+              "d": "M36.875 1.125l-0.75 0 -0.25 -0.25 0 -0.75 -2.75 0 0 0.75 -0.25 0.25 -0.75 0 -0.25 -0.25 0 -0.75 -0.75 0 0 0.75 0.75 0 0.25 0.25 0 2.75 1.75 0 0.25 0.25 0 1.75 -0.25 0.25 -0.75 0 0 0.75 -0.25 0.25 -0.75 0 0 0.75 -0.25 0.25 -1.75 0 0 0.75 -0.25 0.25 -0.75 0 -0.25 -0.25 0 -1.75 -0.75 0 -0.25 -0.25 0 -0.75 -1.75 0 -0.25 -0.25 0 -0.75 0.25 -0.25 0.75 0 0 -0.75 -0.75 0 0 0.75 -0.25 0.25 -0.75 0 0 0.75 -0.25 0.25 -0.75 0 0 0.75 -0.25 0.25 -0.75 0 0 0.75 -0.25 0.25 -0.75 0 0 0.75 -0.25 0.25 -0.75 0 0 0.75 -0.25 0.25 -0.75 0 0 0.75 -0.25 0.25 -1.75 0 0 0.75 -0.25 0.25 -0.75 0 0 0.75 -0.25 0.25 -0.75 0 0 1.75 -0.25 0.25 -0.75 0 0 0.75 -0.25 0.25 -1.75 0 0 0.75 -0.25 0.25 -0.75 0 0 0.75 -0.25 0.25 -0.75 0 0 0.75 -0.25 0.25 -0.75 0 0 0.75 -0.25 0.25 -0.75 0 -0.25 -0.25 0 -0.75 -0.75 0 -0.25 -0.25 0 -0.75 -0.75 0 -0.25 -0.25 0 -0.75 -0.75 0 -0.25 -0.25 0 -1.75 -2.75 0 0 0.75 -0.25 0.25 -1.75 0 0 0.75 -0.25 0.25 -0.75 0 0 1.75 0.75 0 0.25 0.25 0 0.75 0.75 0 0.25 0.25 0 0.75 0.75 0 0.25 0.25 0 0.75 0.75 0 0.25 0.25 0 1.75 0.75 0 0.25 0.25 0 0.75 0.75 0 0.25 0.25 0 1.75 0.75 0 0.25 0.25 0 0.75 0.75 0 0.25 0.25 0 0.75 1.75 0 0 -0.75 0.25 -0.25 0.75 0 0 -0.75 0.25 -0.25 0.75 0 0 -0.75 0.25 -0.25 0.75 0 0 -0.75 0.25 -0.25 0.75 0 0 -0.75 0.25 -0.25 0.75 0 0 -0.75 0.25 -0.25 0.75 0 0 -0.75 0.25 -0.25 0.75 0 0 -0.75 0.25 -0.25 0.75 0 0 -0.75 0.25 -0.25 0.75 0 0 -0.75 0.25 -0.25 1.75 0 0 -0.75 0.25 -0.25 0.75 0 0 -0.75 0.25 -0.25 0.75 0 0 -0.75 0.25 -0.25 0.75 0 0 -0.75 0.25 -0.25 0.75 0 0 -0.75 0.25 -0.25 0.75 0 0 -0.75 0.25 -0.25 0.75 0 0 -0.75 0.25 -0.25 0.75 0 0 -0.75 0.25 -0.25 1.75 0 0 -1.75 0.25 -0.25 1.75 0 0 -0.75 0.25 -0.25 0.75 0 0 -0.75 0.25 -0.25 0.75 0 0 -0.75 0.25 -0.25 0.75 0 0 -0.75 0.25 -0.25 0.75 0 0 -0.75 0.25 -0.25 0.75 0Z",
+              "color": {
+                "type": "solid",
+                "color": "#074847"
+              },
+              "isMediaEditable": false
+            }
+          ],
+          "viewBox": {
+            "top": 0,
+            "left": 0,
+            "width": 37,
+            "height": 29
+          }
+        },
+        {
+          "address": "6/23",
+          "type": "shape",
+          "locked": false,
+          "bboxInParent": [
+            348.625,
+            355.375,
+            5,
+            5
+          ],
+          "rotation": 0,
+          "transparency": 0,
+          "classification": "native_shape",
+          "paths": [
+            {
+              "d": "M1 0l-1 1 0 4 5 0 0 -5Z",
+              "color": {
+                "type": "solid",
+                "color": "#212a3e"
+              },
+              "isMediaEditable": false
+            }
+          ],
+          "viewBox": {
+            "top": 0,
+            "left": 0,
+            "width": 5,
+            "height": 5
+          }
+        },
+        {
+          "address": "6/24",
+          "type": "shape",
+          "locked": false,
+          "bboxInParent": [
+            432.75,
+            0,
+            33,
+            82
+          ],
+          "rotation": 0,
+          "transparency": 0,
+          "classification": "native_shape",
+          "paths": [
+            {
+              "d": "M27.75 0.25l-1.5 0 0 0.5 -0.5 0.5 -0.5 0 0 0.5 -0.5 0.5 -0.5 0 0 0.5 -0.5 0.5 -0.5 0 0 2.5 -0.5 0.5 -0.5 0 0 2.5 -0.5 0.5 -0.5 0 0 3.5 -0.5 0.5 -0.5 0 0 2.5 -0.5 0.5 -0.5 0 0 2.5 -0.5 0.5 -0.5 0 0 2.5 -0.5 0.5 -0.5 0 0 3.5 -0.5 0.5 -0.5 0 0 2.5 -0.5 0.5 -0.5 0 0 2.5 -0.5 0.5 -0.5 0 0 2.5 -0.5 0.5 -0.5 0 0 2.5 -0.5 0.5 -0.5 0 0 2.5 -0.5 0.5 -0.5 0 0 3.5 -0.5 0.5 -0.5 0 0 2.5 -0.5 0.5 -0.5 0 0 2.5 -0.5 0.5 -0.5 0 0 2.5 -0.5 0.5 -0.5 0 0 2.5 -0.5 0.5 -0.5 0 0 2.5 -0.5 0.5 -0.5 0 0 2.5 -0.5 0.5 -0.5 0 0 2.5 -0.5 0.5 -0.5 0 0 3.5 -0.5 0.5 -0.5 0 0 2.5 -0.5 0.5 -0.5 0 0 2.5 -0.5 0.5 -0.5 0 0 1.5 0.5 0 0.5 0.5 0 1.5 0.5 0 0.5 0.5 0 0.5 1.5 0 0.5 0.5 0 0.5 2.5 0 0 -0.5 0.5 -0.5 1.5 0 0 -1.5 0.5 -0.5 0.5 0 0 -2.5 0.5 -0.5 0.5 0 0 -3.5 0.5 -0.5 0.5 0 0 -2.5 0.5 -0.5 0.5 0 0 -2.5 0.5 -0.5 0.5 0 0 -2.5 0.5 -0.5 0.5 0 0 -2.5 0.5 -0.5 0.5 0 0 -2.5 0.5 -0.5 0.5 0 0 -2.5 0.5 -0.5 0.5 0 0 -3.5 0.5 -0.5 0.5 0 0 -2.5 0.5 -0.5 0.5 0 0 -2.5 0.5 -0.5 0.5 0 0 -2.5 0.5 -0.5 0.5 0 0 -2.5 0.5 -0.5 0.5 0 0 -2.5 0.5 -0.5 0.5 0 0 -2.5 0.5 -0.5 0.5 0 0 -3.5 0.5 -0.5 0.5 0 0 -2.5 0.5 -0.5 0.5 0 0 -2.5 0.5 -0.5 0.5 0 0 -2.5 0.5 -0.5 0.5 0 0 -2.5 0.5 -0.5 0.5 0 0 -3.5 0.5 -0.5 0.5 0 0 -2.5 0.5 -0.5 0.5 0 0 -2.5 0.5 -0.5 0.5 0 0 -2.5 -0.5 0 -0.5 -0.5 0 -0.5 -0.5 0 -0.5 -0.5 0 -0.5 -2.5 0 -0.5 -0.5Z",
+              "color": {
+                "type": "solid",
+                "color": "#04e29f"
+              },
+              "isMediaEditable": false
+            }
+          ],
+          "viewBox": {
+            "top": 0,
+            "left": 0,
+            "width": 33,
+            "height": 82
+          }
+        },
+        {
+          "address": "6/25",
+          "type": "shape",
+          "locked": false,
+          "bboxInParent": [
+            396.5,
+            30.875,
+            12,
+            50
+          ],
+          "rotation": 0,
+          "transparency": 0,
+          "classification": "native_shape",
+          "paths": [
+            {
+              "d": "M3 0l-1 1 -1 0 0 1 -1 1 0 13 1 1 0 16 1 1 0 14 2 2 6 0 1 -1 0 -1 1 -1 0 -3 -1 -1 0 -20 -1 -1 0 -19 -3 -3Z",
+              "color": {
+                "type": "solid",
+                "color": "#03e09c"
+              },
+              "isMediaEditable": false
+            }
+          ],
+          "viewBox": {
+            "top": 0,
+            "left": 0,
+            "width": 12,
+            "height": 50
+          }
+        },
+        {
+          "address": "6/26",
+          "type": "shape",
+          "locked": false,
+          "bboxInParent": [
+            464.75,
+            56,
+            28,
+            36
+          ],
+          "rotation": 0,
+          "transparency": 0,
+          "classification": "native_shape",
+          "paths": [
+            {
+              "d": "M27.875 0.125l-0.75 0 0 0.75 -0.25 0.25 -0.75 0 0 0.75 -0.25 0.25 -0.75 0 0 0.75 -0.25 0.25 -0.75 0 0 0.75 -0.25 0.25 -0.75 0 0 1.75 -0.25 0.25 -0.75 0 0 0.75 -0.25 0.25 -0.75 0 0 0.75 -0.25 0.25 -0.75 0 0 0.75 -0.25 0.25 -0.75 0 0 0.75 -0.25 0.25 -0.75 0 0 0.75 -0.25 0.25 -0.75 0 0 0.75 -0.25 0.25 -0.75 0 0 0.75 -0.25 0.25 -0.75 0 0 0.75 -0.25 0.25 -0.75 0 0 0.75 -0.25 0.25 -0.75 0 0 0.75 -0.25 0.25 -0.75 0 0 0.75 -0.25 0.25 -0.75 0 0 1.75 -0.25 0.25 -0.75 0 0 0.75 -0.25 0.25 -0.75 0 0 0.75 -0.25 0.25 -0.75 0 0 0.75 -0.25 0.25 -0.75 0 0 0.75 -0.25 0.25 -0.75 0 0 0.75 -0.25 0.25 -0.75 0 0 0.75 -0.25 0.25 -0.75 0 0 0.75 -0.25 0.25 -0.75 0 0 0.75 -0.25 0.25 -0.75 0 0 0.75 -0.25 0.25 -0.75 0 0 0.75 -0.25 0.25 -0.75 0 0 4.75 0.75 0 0.25 0.25 0 0.75 0.75 0 0.25 0.25 0 0.75 5.75 0 0 -0.75 0.25 -0.25 0.75 0 0 -0.75 0.25 -0.25 0.75 0 0 -0.75 0.25 -0.25 0.75 0 0 -1.75 0.25 -0.25 0.75 0 0 -0.75 0.25 -0.25 0.75 0 0 -0.75 0.25 -0.25 0.75 0 0 -0.75 0.25 -0.25 0.75 0 0 -0.75 0.25 -0.25 0.75 0 0 -0.75 0.25 -0.25 0.75 0 0 -0.75 0.25 -0.25 0.75 0 0 -0.75 0.25 -0.25 0.75 0 0 -0.75 0.25 -0.25 0.75 0 0 -1.75 0.25 -0.25 0.75 0 0 -0.75 0.25 -0.25 0.75 0 0 -0.75 0.25 -0.25 0.75 0 0 -0.75 0.25 -0.25 0.75 0 0 -0.75 0.25 -0.25 0.75 0 0 -0.75 0.25 -0.25 0.75 0 0 -0.75 0.25 -0.25 0.75 0 0 -0.75 0.25 -0.25 0.75 0Z",
+              "color": {
+                "type": "solid",
+                "color": "#03e099"
+              },
+              "isMediaEditable": false
+            }
+          ],
+          "viewBox": {
+            "top": 0,
+            "left": 0,
+            "width": 28,
+            "height": 36
+          }
+        }
+      ]
+    },
+    {
+      "address": "7",
+      "type": "shape",
+      "locked": false,
+      "bboxInParent": [
+        166.875,
+        577.875,
+        511,
+        382
+      ],
+      "rotation": 0,
+      "transparency": 0,
+      "classification": "native_shape",
+      "paths": [
+        {
+          "d": "M3 70l-2 4 -1 8 1 1 0 3 1 2 5 5 2 0 1 1 0 15 1 1 0 4 4 8 10 9 7 2 1 1 79 0 1 1 4 0 1 1 5 1 8 5 7 8 8 13 8 8 1 0 5 4 7 3 3 0 1 1 21 0 1 1 -1 1 0 3 -1 1 0 5 -1 1 0 3 -1 1 -4 0 -1 1 -15 0 -1 -1 -8 0 -1 1 -37 0 -1 1 -6 1 -4 2 -7 6 -1 0 0 1 -5 5 -4 7 -7 7 -7 4 -3 0 -1 1 -27 0 -2 -2 0 -1 -7 -6 -3 0 -1 -1 -7 1 -4 2 -3 3 -2 4 0 10 2 4 3 3 4 2 7 1 1 -1 3 0 2 -2 1 0 2 -2 3 -6 28 0 1 -1 4 0 1 -1 5 -1 7 -4 7 -7 6 -10 6 -6 7 -4 3 0 1 -1 48 0 1 -1 17 1 2 2 0 3 4 9 5 6 0 1 8 7 11 5 8 1 1 1 68 0 1 1 0 41 1 1 0 3 5 12 5 6 0 1 6 6 1 0 5 4 4 2 2 0 3 2 3 0 1 1 3 0 1 1 8 0 1 1 10 0 1 -1 13 0 1 1 14 0 1 -1 2 0 1 1 27 0 1 -1 18 0 1 1 25 0 1 1 3 0 6 3 8 8 3 7 0 5 -6 5 -3 5 -1 10 3 7 6 6 3 1 2 2 2 -1 8 0 3 -2 2 0 6 -6 3 -7 0 -8 -3 -7 -5 -4 0 -12 -1 -1 -1 -5 -5 -9 -6 -7 -1 0 -4 -4 -10 -5 -2 0 -4 -2 -5 0 -1 -1 -118 0 -1 -1 -5 0 -8 -4 -8 -8 -4 -9 0 -5 -1 -1 0 -5 1 -1 0 -8 -1 -1 0 -17 1 -1 131 0 1 -1 5 0 1 -1 6 -1 9 -5 9 -9 6 -10 1 -6 1 -1 0 -5 1 -1 0 -10 -1 -1 0 -5 -5 -12 -5 -6 0 -1 -11 -9 -4 -1 -6 -3 -3 0 -1 -1 -181 0 -1 -1 0 -13 1 -1 0 -2 3 -5 8 -9 3 -6 1 -6 1 -1 0 -24 9 -8 1 -2 0 -3 1 -1 0 -6 -1 -1 -1 -4 -4 -4 -4 -1 -1 -1 -7 0 -4 2 -6 7 0 12 1 2 8 7 0 20 -1 1 0 4 -4 8 -7 8 -4 7 -1 6 -1 1 0 13 -1 1 -14 0 -1 -1 0 -12 -1 -1 0 -2 -4 -7 -4 -4 -8 -5 -2 0 -1 -1 -4 0 -1 -1 -21 0 -1 -1 -3 0 -6 -3 -7 -7 -4 -9 0 -67 -1 -1 -1 -8 -3 -6 -7 -8 -9 -5 -2 0 -1 -1 -4 0 -1 -1 -22 0 -1 1 -7 0 0 1 3 0 1 1 -2 4 1 2 24 0 1 1 5 0 6 3 7 7 4 9 0 68 1 1 0 4 1 1 0 2 3 6 7 8 9 5 6 1 1 1 22 0 1 1 3 0 4 2 7 7 2 4 0 2 1 1 0 6 -2 2 -11 0 -1 1 -3 0 -1 1 -5 1 -11 7 -8 9 -24 0 -1 -1 -2 0 -7 -3 -10 -10 0 -1 -10 -13 0 -1 -8 -8 -12 -6 -3 0 -1 -1 -5 0 -1 -1 -77 0 -1 -1 -2 0 -4 -2 -7 -7 -3 -7 0 -14 8 -7 1 -4 1 -1 -1 -2 0 -6 -2 -4 -3 -3 -4 -2 -8 0 -1 1 -4 1Z",
+          "color": {
+            "type": "solid",
+            "color": "#06e29e"
+          },
+          "isMediaEditable": false
+        }
+      ],
+      "viewBox": {
+        "top": 0,
+        "left": 0,
+        "width": 511,
+        "height": 382
+      }
+    },
+    {
+      "address": "8",
+      "type": "shape",
+      "locked": false,
+      "bboxInParent": [
+        46,
+        157,
+        223,
+        10
+      ],
+      "rotation": 0,
+      "transparency": 0,
+      "classification": "native_shape",
+      "paths": [
+        {
+          "d": "M0.000 0.000 L223.000 0.000 L223.000 10.000 L0.000 10.000Z",
+          "color": {
+            "type": "solid",
+            "color": "#00dfa0"
+          },
+          "isMediaEditable": false
+        }
+      ],
+      "viewBox": {
+        "top": 0,
+        "left": 0,
+        "width": 223,
+        "height": 10
+      }
+    },
+    {
+      "address": "9",
+      "type": "shape",
+      "locked": false,
+      "bboxInParent": [
+        44,
+        1370,
+        9,
+        178
+      ],
+      "rotation": 0,
+      "transparency": 0,
+      "classification": "native_shape",
+      "paths": [
+        {
+          "d": "M0.000 0.000 L9.000 0.000 L9.000 178.000 L0.000 178.000Z",
+          "color": {
+            "type": "solid",
+            "color": "#00dfa0"
+          },
+          "isMediaEditable": false
+        }
+      ],
+      "viewBox": {
+        "top": 0,
+        "left": 0,
+        "width": 9,
+        "height": 178
+      }
+    }
+  ],
+  "breakdown": {
+    "native_shape": 74,
+    "group": 5
+  },
+  "background": {
+    "color": {
+      "type": "solid",
+      "color": "#ffffff"
+    }
+  },
+  "qa": {
+    "structure": {
+      "verdict": "NOT_TESTED"
+    },
+    "fidelity": {
+      "verdict": "NOT_TESTED"
+    },
+    "buyer": {
+      "verdict": "NOT_TESTED"
+    }
+  },
+  "manualGates": [
+    "Match elements to source pixels and semantic manifest",
+    "Verify source wording and fonts",
+    "Review unsupported elements, gradients, occlusions and stacking",
+    "Compare aligned actual Canva export",
+    "Test promised buyer edits in a separate buyer-test copy"
+  ]
+}

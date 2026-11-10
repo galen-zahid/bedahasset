@@ -1,0 +1,163 @@
+{
+  "schemaVersion": 1,
+  "scope": {
+    "Feed": 48,
+    "Story": 30,
+    "Highlight": 6,
+    "total": 84
+  },
+  "pythonDefault": "Lokal Windows: D:/bedahasset/.venv/Scripts/python.exe (Vectally.ps1 -PythonExe). Cloud/Linux/macOS: handoff/vectally.py memakai VECTALLY_PYTHON, lalu <repo>/.venv, lalu python yang menjalankan runner.",
+  "canvaAutomationImplemented": false,
+  "recipes": [
+    {
+      "code": "S01",
+      "outputDir": "outputs/VECTALLY-story-repair/S01",
+      "graphicsPackage": "ASSETS_PACKAGE.json",
+      "candidatePackage": "ASSETS_NORMAL_COPY_PACKAGE.json",
+      "build": [
+        {
+          "engine": "python",
+          "script": "work/vectally_story_s01_repair.py"
+        },
+        {
+          "engine": "python",
+          "script": "work/s01_normalize.py"
+        },
+        {
+          "engine": "python",
+          "script": "work/s01_whole_object_isolation.py"
+        }
+      ]
+    },
+    {
+      "code": "S02",
+      "outputDir": "outputs/VECTALLY-story-repair/S02",
+      "graphicsPackage": "ASSETS_PACKAGE.json",
+      "candidatePackage": "ASSETS_NORMAL_COPY_PACKAGE.json",
+      "build": [
+        {
+          "engine": "python",
+          "script": "work/vectally_story_s02_repair.py"
+        }
+      ],
+      "compose": [
+        {
+          "engine": "node",
+          "script": "work/s02_merge_normal_copy.cjs"
+        }
+      ]
+    },
+    {
+      "code": "S03",
+      "outputDir": "outputs/VECTALLY-story-repair/S03",
+      "graphicsPackage": "ASSETS_PACKAGE.json",
+      "candidatePackage": "ASSETS_PACKAGE.json",
+      "build": [
+        {
+          "engine": "python",
+          "script": "work/vectally_story_s03_s04_repair.py",
+          "args": [
+            "S03"
+          ]
+        }
+      ],
+      "compare": [
+        {
+          "engine": "python",
+          "script": "work/story_prototype19_export_audit.py"
+        }
+      ]
+    },
+    {
+      "code": "S04",
+      "outputDir": "outputs/VECTALLY-story-repair/S04",
+      "graphicsPackage": "ASSETS_PACKAGE.json",
+      "candidatePackage": "ASSETS_NORMAL_COPY_PACKAGE.json",
+      "build": [
+        {
+          "engine": "python",
+          "script": "work/vectally_story_s03_s04_repair.py",
+          "args": [
+            "S04"
+          ]
+        }
+      ],
+      "compose": [
+        {
+          "engine": "node",
+          "script": "work/s04_merge_normal_copy.cjs"
+        }
+      ],
+      "compare": [
+        {
+          "engine": "python",
+          "script": "work/story_prototype19_export_audit.py"
+        }
+      ]
+    },
+    {
+      "code": "S05",
+      "outputDir": "outputs/VECTALLY-story-repair/S05",
+      "candidatePackage": "ASSETS_AND_BODY_PACKAGE.json",
+      "disabledReason": "Builder lengkap juga memuat eksperimen teks yang ditolak. Jangan otomatis mengimpor CANVA_PACKAGE.json."
+    },
+    {
+      "code": "S06",
+      "outputDir": "outputs/VECTALLY-story-repair/S06",
+      "graphicsPackage": "ASSETS_PACKAGE.json",
+      "candidatePackage": "ASSETS_NATIVE_COPY_PACKAGE.json",
+      "build": [
+        {
+          "engine": "python",
+          "script": "work/vectally_story_s06_repair.py"
+        }
+      ],
+      "compose": [
+        {
+          "engine": "node",
+          "script": "work/s06_merge_native_copy.cjs"
+        }
+      ],
+      "compare": [
+        {
+          "engine": "python",
+          "script": "work/s06_actual_text_audit.py"
+        }
+      ],
+      "warning": "Copy memakai Asap heavy yang TIDAK tersedia di katalog Canva saat audit. Kandidat harus diblokir untuk impor sampai font diperbaiki.",
+      "composeNote": "Compose menghitung ulang tinggi teks (73.8/69); paket snapshot memakai tinggi AKTUAL Canva (73.3/68.5). Jangan timpa paket kurasi dengan hasil Compose; runner menyimpan backup."
+    },
+    {
+      "code": "H01",
+      "outputDir": "outputs/VECTALLY-highlight-repair/H01",
+      "candidatePackage": "CANVA_PACKAGE.json"
+    },
+    {
+      "code": "H02",
+      "outputDir": "outputs/VECTALLY-highlight-repair/H02",
+      "candidatePackage": "CANVA_PACKAGE.json"
+    },
+    {
+      "code": "H03",
+      "outputDir": "outputs/VECTALLY-highlight-repair/H03",
+      "candidatePackage": "CANVA_PACKAGE.json"
+    },
+    {
+      "code": "H04",
+      "outputDir": "outputs/VECTALLY-highlight-repair/H04",
+      "candidatePackage": "CANVA_PACKAGE.json"
+    },
+    {
+      "code": "H05",
+      "outputDir": "outputs/VECTALLY-highlight-repair/H05",
+      "candidatePackage": "CANVA_PACKAGE.json",
+      "warning": "Paket dasar ini mendahului perbaikan solid badge dan pemulihan EVALUATION di Canva; bukan paket final untuk diimpor ulang."
+    },
+    {
+      "code": "H06",
+      "outputDir": "outputs/VECTALLY-highlight-repair/H06",
+      "candidatePackage": "CANVA_PACKAGE.json"
+    }
+  ],
+  "paths": "Resep membaca VECTALLY_ROOT dan VECTALLY_SOURCES lewat work/vpaths.py. Default: root repo dan <root>/sources/VECTALLY."
+}

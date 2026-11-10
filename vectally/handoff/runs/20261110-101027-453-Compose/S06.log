@@ -1,0 +1,2 @@
+$ /opt/node22/bin/node /home/user/bedahasset/vectally/work/s06_merge_native_copy.cjs
+{"summary":{"shape":47,"group":3,"text":8,"image":0},"body":{"type":"text","name":"S06 - business needs.","text":"business needs.","fontFamily":"Asap","fontRef":"YAFdJr0OaFw:0","fontSize":57.5,"left":56,"top":1182.412,"width":600,"color":"#f4f7fa","fontWeight":"normal","fontStyle":"normal","letterSpacingEm":0.06000000000000001,"lineHeightEm":1,"height":69}}

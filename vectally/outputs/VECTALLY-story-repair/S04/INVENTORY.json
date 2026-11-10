@@ -1,0 +1,23 @@
+[
+  {
+    "id": "REV",
+    "name": "Tumpukan revenue - satu aset lengkap",
+    "wholeBody": true,
+    "children": 6,
+    "nativeCopy": "labels separate, native text pending"
+  },
+  {
+    "id": "EXP",
+    "name": "Tumpukan expenses - satu aset lengkap",
+    "wholeBody": true,
+    "children": 5,
+    "nativeCopy": "labels separate, native text pending"
+  },
+  {
+    "id": "RES",
+    "name": "Kantong hasil - satu aset lengkap",
+    "wholeBody": true,
+    "children": 4,
+    "nativeCopy": "no outlined label; currency symbol icon policy pending"
+  }
+]

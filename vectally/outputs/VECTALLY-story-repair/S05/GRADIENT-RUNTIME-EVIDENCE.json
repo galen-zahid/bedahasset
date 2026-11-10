@@ -1,0 +1,39 @@
+{
+  "stage": "ACTUAL_CANVA_CUSTOM_PATH_GRADIENT_VERIFIED_IN_UI_AND_STRUCTURE",
+  "design": "https://www.canva.com/design/DAHabUK1x7c/XAKU7ev4LnkxUjedsUkoGw/edit",
+  "page": 3,
+  "element": "purple L frame",
+  "nativeType": "shape",
+  "pathPreserved": true,
+  "bboxPreserved": true,
+  "gradient": {
+    "kind": "linear",
+    "angle": 180,
+    "stops": [
+      "#b69bfc",
+      "#b69afc"
+    ],
+    "stopAlpha": [
+      100,
+      100
+    ]
+  },
+  "sourceFit": {
+    "top": [
+      182,
+      155,
+      252
+    ],
+    "bottom": [
+      182,
+      154,
+      252
+    ],
+    "interiorMAE": 0.902646998344404
+  },
+  "actualSDKColor": {
+    "type": "unsupported"
+  },
+  "important": "SDK inspector reports gradient colors as unsupported but retains native_shape; do not misclassify gradient-filled native paths as raster. UIgradient and actualexport are evidence.",
+  "next": "Use nativeUIgradients for shadows/backgrounds after assetimport. SDKinitialaddpath remains solid only."
+}

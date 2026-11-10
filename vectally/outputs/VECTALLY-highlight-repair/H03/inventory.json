@@ -1,0 +1,430 @@
+{
+  "source": "D:\\download\\VECTALLY\\Highlight\\VECTALLY_H03_Tips.png",
+  "sha256": "6403c0f705021f46dbf6f4306b0d560b5924f40f3e2637eeefdd3f3156998f3b",
+  "semantic_assets": [
+    "whole document with integrated fold and data",
+    "whole magnifier with integrated handle, lens grid and highlight"
+  ],
+  "native_components": [
+    {
+      "path_bytes": 1228,
+      "points": 245,
+      "holes": 0,
+      "epsilon": 0.05,
+      "single_move": true,
+      "body_tiling": false,
+      "background_counterfill": false,
+      "name": "Dokumen: siluet badan utuh",
+      "source_bbox": [
+        104,
+        467,
+        655,
+        767
+      ],
+      "color": "#0b1724",
+      "mask_iou": 0.9997659887181929,
+      "local_geometry_gate": "PASS",
+      "printed_ink_holes_filled_in_body": true
+    },
+    {
+      "path_bytes": 1837,
+      "points": 328,
+      "holes": 49,
+      "epsilon": 0.85,
+      "single_move": true,
+      "body_tiling": false,
+      "background_counterfill": false,
+      "name": "Dokumen: lembar putih utuh",
+      "source_bbox": [
+        130,
+        494,
+        603,
+        714
+      ],
+      "color": "#f5f7fa",
+      "mask_iou": 0.9993536524755845,
+      "local_geometry_gate": "PASS",
+      "printed_ink_holes_filled_in_body": true
+    },
+    {
+      "path_bytes": 176,
+      "points": 36,
+      "holes": 0,
+      "epsilon": 0.05,
+      "single_move": true,
+      "body_tiling": false,
+      "background_counterfill": false,
+      "name": "Dokumen: bidang lipatan sudut",
+      "source_bbox": [
+        616,
+        513,
+        101,
+        104
+      ],
+      "color": "#f5f7fa",
+      "mask_iou": 0.9971461187214612,
+      "local_geometry_gate": "PASS",
+      "printed_ink_holes_filled_in_body": false
+    },
+    {
+      "path_bytes": 1584,
+      "points": 331,
+      "holes": 0,
+      "epsilon": 0.05,
+      "single_move": true,
+      "body_tiling": false,
+      "background_counterfill": false,
+      "name": "Dokumen: Piktogram mata uang 1",
+      "source_bbox": [
+        190,
+        544,
+        100,
+        178
+      ],
+      "color": "#0b1724",
+      "mask_iou": 0.9860811394044022,
+      "local_geometry_gate": "PASS",
+      "printed_ink_holes_filled_in_body": false
+    },
+    {
+      "path_bytes": 211,
+      "points": 44,
+      "holes": 0,
+      "epsilon": 0.05,
+      "single_move": true,
+      "body_tiling": false,
+      "background_counterfill": false,
+      "name": "Dokumen: Baris ringkasan 1",
+      "source_bbox": [
+        324,
+        581,
+        215,
+        32
+      ],
+      "color": "#0b1724",
+      "mask_iou": 0.9973029667365898,
+      "local_geometry_gate": "PASS",
+      "printed_ink_holes_filled_in_body": false
+    },
+    {
+      "path_bytes": 232,
+      "points": 48,
+      "holes": 0,
+      "epsilon": 0.05,
+      "single_move": true,
+      "body_tiling": false,
+      "background_counterfill": false,
+      "name": "Dokumen: Baris ringkasan 2",
+      "source_bbox": [
+        324,
+        647,
+        148,
+        31
+      ],
+      "color": "#0b1724",
+      "mask_iou": 0.9963685882886972,
+      "local_geometry_gate": "PASS",
+      "printed_ink_holes_filled_in_body": false
+    },
+    {
+      "path_bytes": 224,
+      "points": 46,
+      "holes": 0,
+      "epsilon": 0.05,
+      "single_move": true,
+      "body_tiling": false,
+      "background_counterfill": false,
+      "name": "Dokumen: Garis isi 1",
+      "source_bbox": [
+        168,
+        842,
+        155,
+        32
+      ],
+      "color": "#0b1724",
+      "mask_iou": 0.9964338158170757,
+      "local_geometry_gate": "PASS",
+      "printed_ink_holes_filled_in_body": false
+    },
+    {
+      "path_bytes": 235,
+      "points": 49,
+      "holes": 0,
+      "epsilon": 0.05,
+      "single_move": true,
+      "body_tiling": false,
+      "background_counterfill": false,
+      "name": "Dokumen: Garis isi 2",
+      "source_bbox": [
+        168,
+        971,
+        155,
+        32
+      ],
+      "color": "#0b1724",
+      "mask_iou": 0.9966414777497901,
+      "local_geometry_gate": "PASS",
+      "printed_ink_holes_filled_in_body": false
+    },
+    {
+      "path_bytes": 245,
+      "points": 50,
+      "holes": 0,
+      "epsilon": 0.05,
+      "single_move": true,
+      "body_tiling": false,
+      "background_counterfill": false,
+      "name": "Dokumen: Garis isi 3",
+      "source_bbox": [
+        168,
+        1099,
+        193,
+        32
+      ],
+      "color": "#0b1724",
+      "mask_iou": 0.9969829031176668,
+      "local_geometry_gate": "PASS",
+      "printed_ink_holes_filled_in_body": false
+    },
+    {
+      "path_bytes": 22,
+      "points": 4,
+      "holes": 0,
+      "epsilon": 0.05,
+      "single_move": true,
+      "body_tiling": false,
+      "background_counterfill": false,
+      "name": "Dokumen: baris tabel utuh 1",
+      "source_bbox": [
+        164,
+        784,
+        569,
+        17
+      ],
+      "color": "#0b1724",
+      "mask_iou": 1.0,
+      "local_geometry_gate": "PASS",
+      "printed_ink_holes_filled_in_body": false
+    },
+    {
+      "path_bytes": 22,
+      "points": 4,
+      "holes": 0,
+      "epsilon": 0.05,
+      "single_move": true,
+      "body_tiling": false,
+      "background_counterfill": false,
+      "name": "Dokumen: baris tabel utuh 2",
+      "source_bbox": [
+        164,
+        912,
+        569,
+        17
+      ],
+      "color": "#0b1724",
+      "mask_iou": 1.0,
+      "local_geometry_gate": "PASS",
+      "printed_ink_holes_filled_in_body": false
+    },
+    {
+      "path_bytes": 22,
+      "points": 4,
+      "holes": 0,
+      "epsilon": 0.05,
+      "single_move": true,
+      "body_tiling": false,
+      "background_counterfill": false,
+      "name": "Dokumen: baris tabel utuh 3",
+      "source_bbox": [
+        164,
+        1041,
+        569,
+        17
+      ],
+      "color": "#0b1724",
+      "mask_iou": 1.0,
+      "local_geometry_gate": "PASS",
+      "printed_ink_holes_filled_in_body": false
+    },
+    {
+      "path_bytes": 1467,
+      "points": 291,
+      "holes": 0,
+      "epsilon": 0.55,
+      "single_move": true,
+      "body_tiling": false,
+      "background_counterfill": false,
+      "name": "Kaca pembesar: lingkaran dan gagang tersambung",
+      "source_bbox": [
+        340,
+        703,
+        510,
+        556
+      ],
+      "color": "#0b1724",
+      "mask_iou": 0.9980330603664482,
+      "local_geometry_gate": "PASS",
+      "printed_ink_holes_filled_in_body": true
+    },
+    {
+      "path_bytes": 1364,
+      "points": 279,
+      "holes": 0,
+      "epsilon": 0.45,
+      "single_move": true,
+      "body_tiling": false,
+      "background_counterfill": false,
+      "name": "Kaca pembesar: bidang lensa putih utuh",
+      "source_bbox": [
+        373,
+        735,
+        382,
+        390
+      ],
+      "color": "#f5f7fa",
+      "mask_iou": 0.9978258618904648,
+      "local_geometry_gate": "PASS",
+      "printed_ink_holes_filled_in_body": true
+    },
+    {
+      "path_bytes": 375,
+      "points": 71,
+      "holes": 0,
+      "epsilon": 0.05,
+      "single_move": true,
+      "body_tiling": false,
+      "background_counterfill": false,
+      "name": "Kaca pembesar: sorotan nilai ungu utuh",
+      "source_bbox": [
+        448,
+        855,
+        307,
+        153
+      ],
+      "color": "#b499fd",
+      "mask_iou": 0.9999783291797595,
+      "local_geometry_gate": "PASS",
+      "printed_ink_holes_filled_in_body": true
+    },
+    {
+      "path_bytes": 744,
+      "points": 149,
+      "holes": 0,
+      "epsilon": 0.05,
+      "single_move": true,
+      "body_tiling": false,
+      "background_counterfill": false,
+      "name": "Kaca pembesar: kisi pembesaran tersambung",
+      "source_bbox": [
+        387,
+        774,
+        354,
+        311
+      ],
+      "color": "#0b1724",
+      "mask_iou": 0.9977383090534159,
+      "local_geometry_gate": "PASS",
+      "printed_ink_holes_filled_in_body": false
+    },
+    {
+      "path_bytes": 1762,
+      "points": 185,
+      "holes": 0,
+      "epsilon": 0.3,
+      "single_move": true,
+      "body_tiling": false,
+      "background_counterfill": false,
+      "sampling": 2,
+      "name": "Kaca pembesar: Piktogram mata uang 1",
+      "source_bbox": [
+        482,
+        880,
+        57,
+        102
+      ],
+      "color": "#0b1826",
+      "mask_iou": 1.0,
+      "local_geometry_gate": "PASS",
+      "printed_ink_holes_filled_in_body": false
+    },
+    {
+      "path_bytes": 141,
+      "points": 29,
+      "holes": 0,
+      "epsilon": 0.05,
+      "single_move": true,
+      "body_tiling": false,
+      "background_counterfill": false,
+      "name": "Kaca pembesar: Indikator nilai 1",
+      "source_bbox": [
+        555,
+        924,
+        52,
+        23
+      ],
+      "color": "#0b1725",
+      "mask_iou": 0.989100817438692,
+      "local_geometry_gate": "PASS",
+      "printed_ink_holes_filled_in_body": false
+    },
+    {
+      "path_bytes": 165,
+      "points": 34,
+      "holes": 0,
+      "epsilon": 0.05,
+      "single_move": true,
+      "body_tiling": false,
+      "background_counterfill": false,
+      "name": "Kaca pembesar: Indikator nilai 2",
+      "source_bbox": [
+        615,
+        924,
+        52,
+        23
+      ],
+      "color": "#0b1825",
+      "mask_iou": 0.989100817438692,
+      "local_geometry_gate": "PASS",
+      "printed_ink_holes_filled_in_body": false
+    },
+    {
+      "path_bytes": 150,
+      "points": 31,
+      "holes": 0,
+      "epsilon": 0.05,
+      "single_move": true,
+      "body_tiling": false,
+      "background_counterfill": false,
+      "name": "Kaca pembesar: Indikator nilai 3",
+      "source_bbox": [
+        675,
+        924,
+        52,
+        23
+      ],
+      "color": "#0b1825",
+      "mask_iou": 0.9891107078039928,
+      "local_geometry_gate": "PASS",
+      "printed_ink_holes_filled_in_body": false
+    }
+  ],
+  "ellipse_fits": {
+    "outer": [
+      564.4807428270639,
+      930.9205898564284,
+      224.5986131477402,
+      228.51056627979892
+    ],
+    "inner": [
+      563.9205088339988,
+      929.4742752631086,
+      190.84428989390048,
+      195.36956638376353
+    ]
+  },
+  "currency_symbols": "vector icon candidate; editable-text scope remains open",
+  "hidden_geometry": "reconstructed only under the magnifier; visible document silhouette source-derived",
+  "ownership": "explicit physical masks and observed component bounds",
+  "nearest_object_assignment": false,
+  "body_tiling": false
+}

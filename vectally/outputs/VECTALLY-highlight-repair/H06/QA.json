@@ -1,0 +1,16 @@
+{
+  "stage": "LOCAL_REPAIR_REQUIRES_CANVA_IMPORT_AND_EXPORT",
+  "structure": "LOCAL_NATIVE_PACKAGE_VALIDATED",
+  "visual": "NOT_1_TO_1_BACKGROUND_VARIATION_UNRESOLVED",
+  "buyer": "NOT_TESTED",
+  "per_asset_min_contour_iou": {
+    "FRAME": 0.9992376220661299,
+    "PERSON1": 0.9981362714465822,
+    "PERSON2": 0.9978657180969319,
+    "BUBBLE": 0.9997550326382985
+  },
+  "native_shapes": 7,
+  "native_groups": 4,
+  "raster_images": 0,
+  "body_tiling": false
+}

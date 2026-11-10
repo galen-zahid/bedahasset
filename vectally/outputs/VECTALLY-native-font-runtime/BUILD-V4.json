@@ -1,0 +1,7 @@
+{
+  "typecheck": "PASS",
+  "build": "PASS",
+  "bytes": 1306698,
+  "change": "all package versions validate referenced font weight/style before any design mutation; chosen-font metadata logged",
+  "publicPublish": false
+}

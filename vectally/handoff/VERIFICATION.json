@@ -1,0 +1,28 @@
+{
+  "observedUtc": "2026-11-10T09:27:28.640326+00:00",
+  "goalRemainsPaused": true,
+  "statusCommand": "PASS",
+  "doctorCommand": "PASS: existing Python dependencies and Node found",
+  "sourceFilesChecked": 84,
+  "sourceHashFailures": 0,
+  "candidatePackagesChecked": 12,
+  "candidatePackagesWithBlockers": 1,
+  "expectedAuditExitCode": 2,
+  "blockers": [
+    {
+      "path": "C:\\Users\\HP\\Documents\\Codex\\2026-11-07\\files-mentioned-by-the-user-training\\outputs\\VECTALLY-story-repair\\S06\\ASSETS_NATIVE_COPY_PACKAGE.json",
+      "errors": [
+        "5/1: FONT_VARIANT_UNAVAILABLE Asap heavy/normal",
+        "9: FONT_VARIANT_UNAVAILABLE Asap heavy/normal",
+        "10: FONT_VARIANT_UNAVAILABLE Asap heavy/normal",
+        "11: FONT_VARIANT_UNAVAILABLE Asap heavy/normal",
+        "12: FONT_VARIANT_UNAVAILABLE Asap heavy/normal"
+      ]
+    }
+  ],
+  "rebuildExecutedDuringHandoff": false,
+  "canvaMutatedDuringHandoff": false,
+  "buildComposeRunnerExecutedDuringHandoff": false,
+  "missingOriginalBriefs": [],
+  "finalVisualOrBuyerCertification": false
+}

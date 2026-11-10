@@ -1,0 +1,26 @@
+[
+  {
+    "id": "FOOD",
+    "name": "Struk makanan - badan ikon dan detail",
+    "wholeBody": true,
+    "hiddenEdge": "reconstructed continuous receipt silhouette",
+    "currencyPolicy": "vector icon candidate; native copy policy unresolved",
+    "children": 7
+  },
+  {
+    "id": "FUEL",
+    "name": "Struk bahan bakar - badan ikon dan detail",
+    "wholeBody": true,
+    "hiddenEdge": "reconstructed continuous receipt silhouette",
+    "currencyPolicy": "vector icon candidate; native copy policy unresolved",
+    "children": 6
+  },
+  {
+    "id": "SHOP",
+    "name": "Struk belanja - badan ikon dan detail",
+    "wholeBody": true,
+    "hiddenEdge": "reconstructed continuous receipt silhouette",
+    "currencyPolicy": "vector icon candidate; native copy policy unresolved",
+    "children": 8
+  }
+]

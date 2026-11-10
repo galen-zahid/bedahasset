@@ -1,0 +1,281 @@
+{
+  "source": "D:\\download\\VECTALLY\\Highlight\\VECTALLY_H01_About.png",
+  "sha256": "d81a1990cd0637f4b6582931a3598c62a3973e6ea87df9e8886cc7e96ac8cb09",
+  "semantic_asset": "folded/open report with integrated left panel, spine and right page",
+  "root_asset_count": 1,
+  "subgroups": [
+    "right page with its fold/chart/rows",
+    "left panel with its list"
+  ],
+  "native_components": [
+    {
+      "path_bytes": 1191,
+      "points": 243,
+      "holes": 0,
+      "epsilon": 0.05,
+      "single_move": true,
+      "body_tiling": false,
+      "background_counterfill": false,
+      "name": "Punggung hijau laporan",
+      "source_bbox": [
+        380,
+        644,
+        143,
+        426
+      ],
+      "mask_iou": 0.9991335322999904,
+      "local_geometry_gate": "PASS",
+      "ink_holes_filled_in_parent_body": false
+    },
+    {
+      "path_bytes": 1571,
+      "points": 346,
+      "holes": 0,
+      "epsilon": 0.45,
+      "single_move": true,
+      "body_tiling": false,
+      "background_counterfill": false,
+      "name": "Lembar kanan: badan utuh di bawah diagram",
+      "source_bbox": [
+        381,
+        533,
+        406,
+        598
+      ],
+      "mask_iou": 0.9988887022368098,
+      "local_geometry_gate": "PASS",
+      "ink_holes_filled_in_parent_body": true
+    },
+    {
+      "path_bytes": 87,
+      "points": 15,
+      "holes": 0,
+      "epsilon": 0.05,
+      "single_move": true,
+      "body_tiling": false,
+      "background_counterfill": false,
+      "name": "Lipatan sudut lembar kanan",
+      "source_bbox": [
+        665,
+        533,
+        121,
+        119
+      ],
+      "mask_iou": 0.9998624294951163,
+      "local_geometry_gate": "PASS",
+      "ink_holes_filled_in_parent_body": false
+    },
+    {
+      "path_bytes": 753,
+      "points": 164,
+      "holes": 0,
+      "epsilon": 0.05,
+      "single_move": true,
+      "body_tiling": false,
+      "background_counterfill": false,
+      "name": "Diagram lingkaran: bidang gelap",
+      "source_bbox": [
+        564,
+        728,
+        153,
+        155
+      ],
+      "mask_iou": 0.9966946899475462,
+      "local_geometry_gate": "PASS",
+      "ink_holes_filled_in_parent_body": false
+    },
+    {
+      "path_bytes": 293,
+      "points": 53,
+      "holes": 0,
+      "epsilon": 0.05,
+      "single_move": true,
+      "body_tiling": false,
+      "background_counterfill": false,
+      "name": "Diagram lingkaran: sektor hijau",
+      "source_bbox": [
+        655,
+        715,
+        76,
+        77
+      ],
+      "mask_iou": 1.0,
+      "local_geometry_gate": "PASS",
+      "ink_holes_filled_in_parent_body": false
+    },
+    {
+      "path_bytes": 22,
+      "points": 4,
+      "holes": 0,
+      "epsilon": 0.05,
+      "single_move": true,
+      "body_tiling": false,
+      "background_counterfill": false,
+      "name": "Baris laporan kanan 1",
+      "source_bbox": [
+        565,
+        921,
+        174,
+        25
+      ],
+      "mask_iou": 1.0,
+      "local_geometry_gate": "PASS",
+      "ink_holes_filled_in_parent_body": false
+    },
+    {
+      "path_bytes": 22,
+      "points": 4,
+      "holes": 0,
+      "epsilon": 0.05,
+      "single_move": true,
+      "body_tiling": false,
+      "background_counterfill": false,
+      "name": "Baris laporan kanan 2",
+      "source_bbox": [
+        565,
+        971,
+        174,
+        25
+      ],
+      "mask_iou": 1.0,
+      "local_geometry_gate": "PASS",
+      "ink_holes_filled_in_parent_body": false
+    },
+    {
+      "path_bytes": 1757,
+      "points": 356,
+      "holes": 0,
+      "epsilon": 0.35,
+      "single_move": true,
+      "body_tiling": false,
+      "background_counterfill": false,
+      "name": "Panel kiri ungu: badan utuh",
+      "source_bbox": [
+        154,
+        664,
+        294,
+        484
+      ],
+      "mask_iou": 0.9996851776674979,
+      "local_geometry_gate": "PASS",
+      "ink_holes_filled_in_parent_body": true
+    },
+    {
+      "path_bytes": 155,
+      "points": 32,
+      "holes": 0,
+      "epsilon": 0.05,
+      "single_move": true,
+      "body_tiling": false,
+      "background_counterfill": false,
+      "name": "Isi panel kiri 1",
+      "source_bbox": [
+        202,
+        807,
+        35,
+        41
+      ],
+      "mask_iou": 0.994991652754591,
+      "local_geometry_gate": "PASS",
+      "ink_holes_filled_in_parent_body": false
+    },
+    {
+      "path_bytes": 552,
+      "points": 116,
+      "holes": 0,
+      "epsilon": 0.05,
+      "single_move": true,
+      "body_tiling": false,
+      "background_counterfill": false,
+      "name": "Isi panel kiri 2",
+      "source_bbox": [
+        260,
+        819,
+        138,
+        54
+      ],
+      "mask_iou": 0.9923726505039498,
+      "local_geometry_gate": "PASS",
+      "ink_holes_filled_in_parent_body": false
+    },
+    {
+      "path_bytes": 154,
+      "points": 31,
+      "holes": 0,
+      "epsilon": 0.05,
+      "single_move": true,
+      "body_tiling": false,
+      "background_counterfill": false,
+      "name": "Isi panel kiri 3",
+      "source_bbox": [
+        202,
+        881,
+        35,
+        41
+      ],
+      "mask_iou": 0.9958745874587459,
+      "local_geometry_gate": "PASS",
+      "ink_holes_filled_in_parent_body": false
+    },
+    {
+      "path_bytes": 535,
+      "points": 112,
+      "holes": 0,
+      "epsilon": 0.05,
+      "single_move": true,
+      "body_tiling": false,
+      "background_counterfill": false,
+      "name": "Isi panel kiri 4",
+      "source_bbox": [
+        260,
+        893,
+        138,
+        53
+      ],
+      "mask_iou": 0.9926470588235294,
+      "local_geometry_gate": "PASS",
+      "ink_holes_filled_in_parent_body": false
+    },
+    {
+      "path_bytes": 137,
+      "points": 28,
+      "holes": 0,
+      "epsilon": 0.05,
+      "single_move": true,
+      "body_tiling": false,
+      "background_counterfill": false,
+      "name": "Isi panel kiri 5",
+      "source_bbox": [
+        202,
+        953,
+        34,
+        42
+      ],
+      "mask_iou": 0.9958847736625515,
+      "local_geometry_gate": "PASS",
+      "ink_holes_filled_in_parent_body": false
+    },
+    {
+      "path_bytes": 561,
+      "points": 118,
+      "holes": 0,
+      "epsilon": 0.05,
+      "single_move": true,
+      "body_tiling": false,
+      "background_counterfill": false,
+      "name": "Isi panel kiri 6",
+      "source_bbox": [
+        260,
+        965,
+        138,
+        55
+      ],
+      "mask_iou": 0.9924119241192412,
+      "local_geometry_gate": "PASS",
+      "ink_holes_filled_in_parent_body": false
+    }
+  ],
+  "ownership": "explicit observed source component bounds",
+  "nearest_object_assignment": false,
+  "body_tiling": false
+}

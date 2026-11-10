@@ -1,0 +1,4 @@
+from vpaths import VSRC_, REPORT_FONT_  # portable paths (was D:/ and C:/)
+from PIL import Image
+import numpy as np,cv2,json
+a=np.asarray(Image.open(VSRC_+'/Story/VECTALLY_S05_Got_A_Bookkeeping_Question.png').convert('RGB'));m=np.zeros(a.shape[:2],'uint8');m[1140:1400,25:270]=((a[1140:1400,25:270,2].astype(int)-a[1140:1400,25:270,0])>25).astype('uint8');m=cv2.erode(m,np.ones((5,5),'uint8'));ys,xs=np.where(m);A=np.column_stack([np.ones(len(ys)),(ys-1150)/233]);colors=a[ys,xs];fit=np.linalg.lstsq(A,colors,rcond=None)[0];print(json.dumps({'top':np.rint(fit[0]).astype(int).tolist(),'bottom':np.rint(fit[0]+fit[1]).astype(int).tolist(),'mae':float(np.abs(A@fit-colors).mean())}))

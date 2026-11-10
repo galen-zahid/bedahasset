@@ -1,0 +1,80 @@
+[
+  {
+    "text": "VECTALLY",
+    "localIoU": 0.7074670791625977,
+    "fontSize": 53.5,
+    "tracking": -0.02,
+    "sourceInk": [
+      52,
+      59,
+      305,
+      37
+    ],
+    "stage": "LOCAL_FIT_ACTUAL_CANVA_REQUIRED"
+  },
+  {
+    "text": "INVOICE",
+    "localIoU": 0.8407494425773621,
+    "fontSize": 45.5,
+    "tracking": 0.0050000000000000044,
+    "sourceInk": [
+      626,
+      1012,
+      172,
+      32
+    ],
+    "stage": "LOCAL_FIT_ACTUAL_CANVA_REQUIRED"
+  },
+  {
+    "text": "OPEN PAYMENT",
+    "localIoU": 0.8123222589492798,
+    "fontSize": 28.0,
+    "tracking": 0.0050000000000000044,
+    "sourceInk": [
+      675,
+      1255,
+      203,
+      21
+    ],
+    "stage": "LOCAL_FIT_ACTUAL_CANVA_REQUIRED"
+  },
+  {
+    "text": "EXPENSES",
+    "localIoU": 0.8358821272850037,
+    "fontSize": 55.0,
+    "tracking": 0.010000000000000005,
+    "sourceInk": [
+      135,
+      1532,
+      248,
+      40
+    ],
+    "stage": "LOCAL_FIT_ACTUAL_CANVA_REQUIRED"
+  },
+  {
+    "text": "UNPAID",
+    "localIoU": 0.8183638453483582,
+    "fontSize": 49.5,
+    "tracking": 0.020000000000000007,
+    "sourceInk": [
+      613,
+      1507,
+      176,
+      36
+    ],
+    "stage": "LOCAL_FIT_ACTUAL_CANVA_REQUIRED"
+  },
+  {
+    "text": "INVOICES",
+    "localIoU": 0.7874051928520203,
+    "fontSize": 51.0,
+    "tracking": 0.0050000000000000044,
+    "sourceInk": [
+      591,
+      1558,
+      220,
+      36
+    ],
+    "stage": "LOCAL_FIT_ACTUAL_CANVA_REQUIRED"
+  }
+]

@@ -1,0 +1,56 @@
+{
+  "packages": [
+    {
+      "path": "/home/user/bedahasset/vectally/outputs/VECTALLY-story-repair/S04/ASSETS_NORMAL_COPY_PACKAGE.json",
+      "source": "S04 - ASET DAN CAPTION BODY NATIVE - DISPLAY PENDING",
+      "counts": {
+        "shape": 24,
+        "group": 6,
+        "text": 4,
+        "image": 0
+      },
+      "errors": [],
+      "warnings": [],
+      "fonts": [
+        {
+          "address": "9/1",
+          "text": "REVENUE",
+          "ref": "YAFdJr0OaFw:0",
+          "family": "Asap",
+          "weight": "bold",
+          "style": "normal"
+        },
+        {
+          "address": "10/1",
+          "text": "EXPENSES",
+          "ref": "YAFdJr0OaFw:0",
+          "family": "Asap",
+          "weight": "bold",
+          "style": "normal"
+        },
+        {
+          "address": "11/1",
+          "text": "RESULT",
+          "ref": "YAFdJr0OaFw:0",
+          "family": "Asap",
+          "weight": "bold",
+          "style": "normal"
+        },
+        {
+          "address": "12",
+          "text": "A P&L summarizes revenue,\nexpenses, and profit or loss\nover a period.",
+          "ref": "YAFdJr0OaFw:0",
+          "family": "Asap",
+          "weight": "normal",
+          "style": "normal"
+        }
+      ],
+      "structuralAndKnownFontChecksPassed": true,
+      "sourceFidelity": "NOT_CERTIFIED",
+      "buyerQA": "NOT_CERTIFIED",
+      "finalVerified": false
+    }
+  ],
+  "finalVerified": false,
+  "notice": "PASS struktural bukan bukti 1:1, objek lengkap, atau buyer PASS."
+}

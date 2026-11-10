@@ -1,0 +1,154 @@
+[
+  {
+    "text": "VECTALLY",
+    "localIoU": 0.6999141573905945,
+    "fontSize": 49.5,
+    "tracking": -0.015,
+    "fitInkBox": [
+      113,
+      60,
+      284,
+      35
+    ],
+    "targetInkBox": [
+      110,
+      59,
+      282,
+      37
+    ],
+    "stage": "LOCAL_FONT_FIT_ACTUAL_CANVA_REQUIRED"
+  },
+  {
+    "text": "GOOD",
+    "localIoU": 0.8927201628684998,
+    "fontSize": 148.0,
+    "tracking": 0.0050000000000000044,
+    "fitInkBox": [
+      62,
+      178,
+      412,
+      105
+    ],
+    "targetInkBox": [
+      56,
+      178,
+      421,
+      106
+    ],
+    "stage": "LOCAL_FONT_FIT_ACTUAL_CANVA_REQUIRED"
+  },
+  {
+    "text": "RECORDS.",
+    "localIoU": 0.8697637915611267,
+    "fontSize": 146.0,
+    "tracking": 0.015000000000000003,
+    "fitInkBox": [
+      63,
+      297,
+      664,
+      104
+    ],
+    "targetInkBox": [
+      61,
+      296,
+      668,
+      107
+    ],
+    "stage": "LOCAL_FONT_FIT_ACTUAL_CANVA_REQUIRED"
+  },
+  {
+    "text": "BETTER",
+    "localIoU": 0.8503082394599915,
+    "fontSize": 73.5,
+    "tracking": 0.020000000000000007,
+    "fitInkBox": [
+      226,
+      439,
+      251,
+      51
+    ],
+    "targetInkBox": [
+      227,
+      439,
+      249,
+      50
+    ],
+    "stage": "LOCAL_FONT_FIT_ACTUAL_CANVA_REQUIRED"
+  },
+  {
+    "text": "DECISIONS.",
+    "localIoU": 0.8651759624481201,
+    "fontSize": 154.0,
+    "tracking": -0.0049999999999999975,
+    "fitInkBox": [
+      147,
+      513,
+      762,
+      110
+    ],
+    "targetInkBox": [
+      147,
+      511,
+      772,
+      114
+    ],
+    "stage": "LOCAL_FONT_FIT_ACTUAL_CANVA_REQUIRED"
+  },
+  {
+    "text": "Talk through what your",
+    "localIoU": 0.5392544865608215,
+    "fontSize": 61.5,
+    "tracking": 0.010000000000000005,
+    "fitInkBox": [
+      50,
+      1135,
+      648,
+      58
+    ],
+    "targetInkBox": [
+      57,
+      1136,
+      640,
+      56
+    ],
+    "stage": "LOCAL_FONT_FIT_ACTUAL_CANVA_REQUIRED"
+  },
+  {
+    "text": "business needs.",
+    "localIoU": 0.5220999121665955,
+    "fontSize": 57.5,
+    "tracking": 0.06000000000000001,
+    "fitInkBox": [
+      65,
+      1196,
+      429,
+      43
+    ],
+    "targetInkBox": [
+      61,
+      1196,
+      436,
+      44
+    ],
+    "stage": "LOCAL_FONT_FIT_ACTUAL_CANVA_REQUIRED"
+  },
+  {
+    "text": "LET\u2019S TALK BOOKS.",
+    "localIoU": 0.7741503119468689,
+    "fontSize": 76.5,
+    "tracking": 0.020000000000000007,
+    "fitInkBox": [
+      148,
+      1316,
+      659,
+      58
+    ],
+    "targetInkBox": [
+      142,
+      1321,
+      670,
+      53
+    ],
+    "stage": "LOCAL_FONT_FIT_ACTUAL_CANVA_REQUIRED"
+  }
+]

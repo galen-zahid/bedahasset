@@ -1,0 +1,557 @@
+[
+  {
+    "path_bytes": 1110,
+    "points": 242,
+    "holes": 0,
+    "epsilon": 0.05,
+    "single_move": true,
+    "body_tiling": false,
+    "background_counterfill": false,
+    "name": "Struk makanan - bidang kertas utuh",
+    "source_bbox": [
+      84,
+      222,
+      213,
+      168
+    ],
+    "color": "#f6f3ff",
+    "mask_iou": 0.9981155778894473,
+    "local_geometry_gate": "PASS",
+    "printed_ink_holes_filled_in_body": true
+  },
+  {
+    "path_bytes": 188,
+    "points": 40,
+    "holes": 0,
+    "epsilon": 0.05,
+    "single_move": true,
+    "body_tiling": false,
+    "background_counterfill": false,
+    "name": "Struk makanan - ikon atau detail 1.1",
+    "source_bbox": [
+      140,
+      259,
+      18,
+      54
+    ],
+    "color": "#a17afa",
+    "mask_iou": 0.9852941176470589,
+    "local_geometry_gate": "PASS",
+    "printed_ink_holes_filled_in_body": false
+  },
+  {
+    "path_bytes": 609,
+    "points": 72,
+    "holes": 0,
+    "epsilon": 0.3,
+    "single_move": true,
+    "body_tiling": false,
+    "background_counterfill": false,
+    "sampling": 2,
+    "name": "Struk makanan - ikon atau detail 1.2",
+    "source_bbox": [
+      114,
+      262,
+      23,
+      55
+    ],
+    "color": "#a17afa",
+    "mask_iou": 1.0,
+    "local_geometry_gate": "PASS",
+    "printed_ink_holes_filled_in_body": false
+  },
+  {
+    "path_bytes": 693,
+    "points": 51,
+    "holes": 0,
+    "epsilon": 0,
+    "single_move": true,
+    "body_tiling": false,
+    "background_counterfill": false,
+    "sampling": 2,
+    "name": "Struk makanan - ikon atau detail 2.1",
+    "source_bbox": [
+      175,
+      254,
+      88,
+      19
+    ],
+    "color": "#a17afa",
+    "mask_iou": 1.0,
+    "local_geometry_gate": "PASS",
+    "printed_ink_holes_filled_in_body": false
+  },
+  {
+    "path_bytes": 559,
+    "points": 46,
+    "holes": 0,
+    "epsilon": 0,
+    "single_move": true,
+    "body_tiling": false,
+    "background_counterfill": false,
+    "sampling": 2,
+    "name": "Struk makanan - ikon atau detail 2.2",
+    "source_bbox": [
+      178,
+      276,
+      71,
+      17
+    ],
+    "color": "#a17afa",
+    "mask_iou": 1.0,
+    "local_geometry_gate": "PASS",
+    "printed_ink_holes_filled_in_body": false
+  },
+  {
+    "path_bytes": 1242,
+    "points": 74,
+    "holes": 0,
+    "epsilon": 0,
+    "single_move": true,
+    "body_tiling": false,
+    "background_counterfill": false,
+    "sampling": 2,
+    "name": "Struk makanan - ikon atau detail 3.1",
+    "source_bbox": [
+      247,
+      307,
+      24,
+      41
+    ],
+    "color": "#a17afa",
+    "mask_iou": 1.0,
+    "local_geometry_gate": "PASS",
+    "printed_ink_holes_filled_in_body": false
+  },
+  {
+    "path_bytes": 1118,
+    "points": 238,
+    "holes": 0,
+    "epsilon": 0.05,
+    "single_move": true,
+    "body_tiling": false,
+    "background_counterfill": false,
+    "name": "Struk bahan bakar - bidang kertas utuh",
+    "source_bbox": [
+      35,
+      383,
+      214,
+      164
+    ],
+    "color": "#f6f3ff",
+    "mask_iou": 0.9980796759889669,
+    "local_geometry_gate": "PASS",
+    "printed_ink_holes_filled_in_body": true
+  },
+  {
+    "path_bytes": 1027,
+    "points": 122,
+    "holes": 1,
+    "epsilon": 0.3,
+    "single_move": true,
+    "body_tiling": false,
+    "background_counterfill": false,
+    "sampling": 2,
+    "name": "Struk bahan bakar - ikon atau detail 1.1",
+    "source_bbox": [
+      64,
+      407,
+      52,
+      56
+    ],
+    "color": "#a17afa",
+    "mask_iou": 1.0,
+    "local_geometry_gate": "PASS",
+    "printed_ink_holes_filled_in_body": false
+  },
+  {
+    "path_bytes": 643,
+    "points": 52,
+    "holes": 0,
+    "epsilon": 0,
+    "single_move": true,
+    "body_tiling": false,
+    "background_counterfill": false,
+    "sampling": 2,
+    "name": "Struk bahan bakar - ikon atau detail 2.1",
+    "source_bbox": [
+      136,
+      422,
+      89,
+      19
+    ],
+    "color": "#a17afa",
+    "mask_iou": 1.0,
+    "local_geometry_gate": "PASS",
+    "printed_ink_holes_filled_in_body": false
+  },
+  {
+    "path_bytes": 286,
+    "points": 36,
+    "holes": 0,
+    "epsilon": 0.3,
+    "single_move": true,
+    "body_tiling": false,
+    "background_counterfill": false,
+    "sampling": 2,
+    "name": "Struk bahan bakar - ikon atau detail 2.2",
+    "source_bbox": [
+      134,
+      442,
+      60,
+      16
+    ],
+    "color": "#a17afa",
+    "mask_iou": 1.0,
+    "local_geometry_gate": "PASS",
+    "printed_ink_holes_filled_in_body": false
+  },
+  {
+    "path_bytes": 960,
+    "points": 75,
+    "holes": 0,
+    "epsilon": 0.3,
+    "single_move": true,
+    "body_tiling": false,
+    "background_counterfill": false,
+    "sampling": 2,
+    "name": "Struk bahan bakar - ikon atau detail 3.1",
+    "source_bbox": [
+      192,
+      478,
+      23,
+      41
+    ],
+    "color": "#a17afa",
+    "mask_iou": 1.0,
+    "local_geometry_gate": "PASS",
+    "printed_ink_holes_filled_in_body": false
+  },
+  {
+    "path_bytes": 1286,
+    "points": 278,
+    "holes": 0,
+    "epsilon": 0.05,
+    "single_move": true,
+    "body_tiling": false,
+    "background_counterfill": false,
+    "name": "Struk belanja - bidang kertas utuh",
+    "source_bbox": [
+      80,
+      531,
+      224,
+      176
+    ],
+    "color": "#f6f3ff",
+    "mask_iou": 0.9974824294555754,
+    "local_geometry_gate": "PASS",
+    "printed_ink_holes_filled_in_body": true
+  },
+  {
+    "path_bytes": 338,
+    "points": 72,
+    "holes": 0,
+    "epsilon": 0.05,
+    "single_move": true,
+    "body_tiling": false,
+    "background_counterfill": false,
+    "name": "Struk belanja - ikon atau detail 1.1",
+    "source_bbox": [
+      101,
+      586,
+      53,
+      37
+    ],
+    "color": "#a17afa",
+    "mask_iou": 0.9878345498783455,
+    "local_geometry_gate": "PASS",
+    "printed_ink_holes_filled_in_body": false
+  },
+  {
+    "path_bytes": 252,
+    "points": 12,
+    "holes": 0,
+    "epsilon": 0,
+    "single_move": true,
+    "body_tiling": false,
+    "background_counterfill": false,
+    "sampling": 2,
+    "name": "Struk belanja - ikon atau detail 1.2",
+    "source_bbox": [
+      143,
+      621,
+      10,
+      10
+    ],
+    "color": "#a17afa",
+    "mask_iou": 1.0,
+    "local_geometry_gate": "PASS",
+    "printed_ink_holes_filled_in_body": false
+  },
+  {
+    "path_bytes": 252,
+    "points": 8,
+    "holes": 0,
+    "epsilon": 0,
+    "single_move": true,
+    "body_tiling": false,
+    "background_counterfill": false,
+    "sampling": 2,
+    "name": "Struk belanja - ikon atau detail 1.3",
+    "source_bbox": [
+      120,
+      625,
+      10,
+      10
+    ],
+    "color": "#a17afa",
+    "mask_iou": 1.0,
+    "local_geometry_gate": "PASS",
+    "printed_ink_holes_filled_in_body": false
+  },
+  {
+    "path_bytes": 542,
+    "points": 76,
+    "holes": 0,
+    "epsilon": 0.3,
+    "single_move": true,
+    "body_tiling": false,
+    "background_counterfill": false,
+    "sampling": 2,
+    "name": "Struk belanja - ikon atau detail 2.1",
+    "source_bbox": [
+      173,
+      563,
+      92,
+      25
+    ],
+    "color": "#a17afa",
+    "mask_iou": 1.0,
+    "local_geometry_gate": "PASS",
+    "printed_ink_holes_filled_in_body": false
+  },
+  {
+    "path_bytes": 647,
+    "points": 57,
+    "holes": 0,
+    "epsilon": 0,
+    "single_move": true,
+    "body_tiling": false,
+    "background_counterfill": false,
+    "sampling": 2,
+    "name": "Struk belanja - ikon atau detail 2.2",
+    "source_bbox": [
+      177,
+      589,
+      62,
+      19
+    ],
+    "color": "#a17afa",
+    "mask_iou": 1.0,
+    "local_geometry_gate": "PASS",
+    "printed_ink_holes_filled_in_body": false
+  },
+  {
+    "path_bytes": 1218,
+    "points": 83,
+    "holes": 0,
+    "epsilon": 0,
+    "single_move": true,
+    "body_tiling": false,
+    "background_counterfill": false,
+    "sampling": 2,
+    "name": "Struk belanja - ikon atau detail 3.1",
+    "source_bbox": [
+      251,
+      612,
+      25,
+      42
+    ],
+    "color": "#a17afa",
+    "mask_iou": 1.0,
+    "local_geometry_gate": "PASS",
+    "printed_ink_holes_filled_in_body": false
+  },
+  {
+    "path_bytes": 434,
+    "points": 90,
+    "holes": 0,
+    "epsilon": 0.05,
+    "single_move": true,
+    "body_tiling": false,
+    "background_counterfill": false,
+    "name": "Panel label klasifikasi utuh",
+    "source_bbox": [
+      410,
+      457,
+      210,
+      103
+    ],
+    "color": "#00d79e",
+    "mask_iou": 0.9982152332256041,
+    "local_geometry_gate": "PASS",
+    "printed_ink_holes_filled_in_body": true
+  },
+  {
+    "path_bytes": 1692,
+    "points": 39,
+    "holes": 1,
+    "epsilon": 0.5,
+    "single_move": true,
+    "body_tiling": false,
+    "background_counterfill": false,
+    "sampling": 4,
+    "name": "Label klasifikasi - ikon atau garis 1",
+    "source_bbox": [
+      437,
+      480,
+      57,
+      58
+    ],
+    "color": "#091522",
+    "mask_iou": 1.0,
+    "local_geometry_gate": "PASS",
+    "printed_ink_holes_filled_in_body": false
+  },
+  {
+    "path_bytes": 61,
+    "points": 12,
+    "holes": 0,
+    "epsilon": 0.05,
+    "single_move": true,
+    "body_tiling": false,
+    "background_counterfill": false,
+    "name": "Label klasifikasi - ikon atau garis 2",
+    "source_bbox": [
+      516,
+      489,
+      81,
+      9
+    ],
+    "color": "#091522",
+    "mask_iou": 0.9943899018232819,
+    "local_geometry_gate": "PASS",
+    "printed_ink_holes_filled_in_body": false
+  },
+  {
+    "path_bytes": 61,
+    "points": 12,
+    "holes": 0,
+    "epsilon": 0.05,
+    "single_move": true,
+    "body_tiling": false,
+    "background_counterfill": false,
+    "name": "Label klasifikasi - ikon atau garis 3",
+    "source_bbox": [
+      516,
+      511,
+      65,
+      9
+    ],
+    "color": "#091522",
+    "mask_iou": 0.9930434782608696,
+    "local_geometry_gate": "PASS",
+    "printed_ink_holes_filled_in_body": false
+  },
+  {
+    "path_bytes": 946,
+    "points": 200,
+    "holes": 0,
+    "epsilon": 0.05,
+    "single_move": true,
+    "body_tiling": false,
+    "background_counterfill": false,
+    "name": "Invoice - kertas lengkap di bawah status",
+    "source_bbox": [
+      559,
+      969,
+      329,
+      366
+    ],
+    "color": "#f3f7fa",
+    "mask_iou": 0.9994385176866929,
+    "local_geometry_gate": "PASS",
+    "printed_ink_holes_filled_in_body": true
+  },
+  {
+    "path_bytes": 103,
+    "points": 21,
+    "holes": 0,
+    "epsilon": 0.05,
+    "single_move": true,
+    "body_tiling": false,
+    "background_counterfill": false,
+    "name": "Invoice - garis isi 1",
+    "source_bbox": [
+      619,
+      1078,
+      229,
+      13
+    ],
+    "color": "#6c8199",
+    "mask_iou": 0.9976222826086957,
+    "local_geometry_gate": "PASS",
+    "printed_ink_holes_filled_in_body": false
+  },
+  {
+    "path_bytes": 80,
+    "points": 15,
+    "holes": 0,
+    "epsilon": 0.05,
+    "single_move": true,
+    "body_tiling": false,
+    "background_counterfill": false,
+    "name": "Invoice - garis isi 2",
+    "source_bbox": [
+      616,
+      1113,
+      138,
+      14
+    ],
+    "color": "#6c8199",
+    "mask_iou": 0.996822033898305,
+    "local_geometry_gate": "PASS",
+    "printed_ink_holes_filled_in_body": false
+  },
+  {
+    "path_bytes": 89,
+    "points": 18,
+    "holes": 0,
+    "epsilon": 0.05,
+    "single_move": true,
+    "body_tiling": false,
+    "background_counterfill": false,
+    "name": "Invoice - garis isi 3",
+    "source_bbox": [
+      611,
+      1150,
+      100,
+      14
+    ],
+    "color": "#6c8199",
+    "mask_iou": 0.9948755490483162,
+    "local_geometry_gate": "PASS",
+    "printed_ink_holes_filled_in_body": false
+  },
+  {
+    "path_bytes": 1167,
+    "points": 125,
+    "holes": 0,
+    "epsilon": 0.3,
+    "single_move": true,
+    "body_tiling": false,
+    "background_counterfill": false,
+    "sampling": 2,
+    "name": "Invoice - simbol mata uang 1",
+    "source_bbox": [
+      799,
+      1129,
+      41,
+      75
+    ],
+    "color": "#091522",
+    "mask_iou": 1.0,
+    "local_geometry_gate": "PASS",
+    "printed_ink_holes_filled_in_body": false
+  }
+]

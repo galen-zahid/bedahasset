@@ -1,0 +1,143 @@
+{
+  "version": 1,
+  "stage": "magic_layers_candidate",
+  "observedAt": "2026-11-09T13:17:17.457Z",
+  "scope": "current_page",
+  "addressing": "sibling order; group bounds relative to parent; IDs are snapshot-local",
+  "elements": [
+    {
+      "address": "0",
+      "type": "shape",
+      "locked": false,
+      "bboxInParent": [
+        0,
+        0,
+        941,
+        1672
+      ],
+      "rotation": 0,
+      "transparency": 0,
+      "classification": "native_shape",
+      "paths": [
+        {
+          "d": "M0 0H941V1672H0Z",
+          "color": {
+            "type": "solid",
+            "color": "#b595fb"
+          },
+          "isMediaEditable": false
+        }
+      ],
+      "viewBox": {
+        "top": 0,
+        "left": 0,
+        "width": 941,
+        "height": 1672
+      }
+    },
+    {
+      "address": "1",
+      "type": "group",
+      "locked": false,
+      "bboxInParent": [
+        162,
+        453.875,
+        611,
+        786.75
+      ],
+      "rotation": 0,
+      "transparency": 0,
+      "classification": "group",
+      "children": [
+        {
+          "address": "1/0",
+          "type": "shape",
+          "locked": false,
+          "bboxInParent": [
+            0,
+            0,
+            611,
+            568
+          ],
+          "rotation": 0,
+          "transparency": 0,
+          "classification": "native_shape",
+          "paths": [
+            {
+              "d": "M501 43l-23 -12 -2 0 -12 -6 -29 -10 -3 0 -21 -6 -22 -3 -1 -1 -6 0 -1 -1 -16 -1 -1 -1 -10 0 -1 -1 -50 -1 -1 1 -32 1 -1 1 -8 0 -1 1 -7 0 -1 1 -18 2 -1 1 -4 0 -1 1 -4 0 -1 1 -17 3 -4 2 -14 3 -9 4 -8 2 -15 7 -2 0 -34 18 -24 17 -24 22 -14 16 -20 29 -16 32 -11 31 -1 7 -4 12 -1 9 -1 1 0 5 -1 1 0 5 -2 7 -1 15 18 2 1 1 6 0 1 1 6 0 1 1 12 1 1 1 5 0 1 1 5 0 7 2 6 0 1 1 10 1 6 2 6 0 1 1 23 3 6 2 5 0 6 2 22 3 1 1 4 0 1 1 4 0 6 2 5 0 6 2 5 0 6 2 5 0 6 2 5 0 0 -50 1 -1 0 -8 1 -1 0 -6 1 -1 1 -10 6 -21 8 -17 6 -9 14 -15 11 -8 21 -9 3 0 4 -2 5 0 1 -1 6 0 1 -1 25 0 1 1 6 0 1 1 5 0 1 1 7 1 17 7 13 9 13 14 10 18 4 12 1 8 1 1 0 5 1 1 0 11 1 1 -1 21 -1 1 0 5 -1 1 -1 8 -4 12 -11 20 -7 9 -19 18 -36 25 -3 1 -35 23 -31 24 -26 27 -16 24 -7 15 -6 17 0 3 -3 9 0 4 -1 1 0 5 -1 1 -1 17 -1 1 0 37 1 1 0 14 4 0 1 -1 4 0 6 -2 5 0 6 -2 13 -1 1 -1 7 0 1 -1 7 0 1 -1 9 0 1 -1 12 0 1 -1 50 0 1 1 23 1 1 1 14 1 1 1 6 0 1 1 6 0 1 1 10 1 1 -28 1 -1 0 -6 3 -10 0 -4 5 -14 5 -10 11 -16 16 -16 18 -14 28 -18 31 -18 35 -25 9 -8 16 -17 17 -24 12 -24 1 -5 3 -6 0 -3 5 -15 1 -10 2 -6 0 -7 1 -1 0 -14 1 -1 -1 -30 -1 -1 0 -8 -1 -1 0 -6 -1 -1 -3 -19 -3 -7 0 -3 -4 -12 -8 -17 0 -2 -9 -17 -15 -22 -12 -14 -19 -18 -13 -10Z",
+              "color": {
+                "type": "solid",
+                "color": "#0f1723"
+              },
+              "isMediaEditable": false
+            }
+          ],
+          "viewBox": {
+            "top": 0,
+            "left": 0,
+            "width": 611,
+            "height": 568
+          }
+        },
+        {
+          "address": "1/1",
+          "type": "shape",
+          "locked": false,
+          "bboxInParent": [
+            196.625,
+            587.75,
+            200,
+            199
+          ],
+          "rotation": 0,
+          "transparency": 0,
+          "classification": "native_shape",
+          "paths": [
+            {
+              "d": "M84 1l-1 1 -4 0 -1 1 -3 0 -1 1 -3 0 -1 1 -2 0 -1 1 -2 0 -1 1 -1 0 -1 1 -2 0 -1 1 -1 0 -1 1 -1 0 -1 1 -1 0 -1 1 -1 0 -1 1 -1 0 -2 2 -1 0 -1 1 -1 0 -2 2 -1 0 -3 3 -1 0 -4 4 -1 0 -5 5 0 1 -7 7 0 1 -3 3 0 1 -1 1 0 1 -2 2 0 1 -1 1 0 1 -2 2 0 1 -1 1 0 1 -1 1 0 1 -1 1 0 2 -1 1 0 1 -1 1 0 1 -1 1 0 2 -1 1 0 3 -1 1 0 2 -1 1 0 3 -1 1 0 4 -1 1 0 8 -1 1 0 14 1 1 0 8 1 1 0 4 1 1 0 3 1 1 0 3 1 1 0 2 1 1 0 2 1 1 0 1 1 1 0 1 1 1 0 2 1 1 0 1 2 2 0 1 1 1 0 1 1 1 0 1 2 2 0 1 1 1 0 1 3 3 0 1 5 5 0 1 8 8 1 0 4 4 1 0 3 3 1 0 2 2 1 0 2 2 1 0 1 1 1 0 1 1 1 0 1 1 1 0 1 1 1 0 1 1 1 0 1 1 2 0 1 1 1 0 1 1 2 0 1 1 2 0 1 1 3 0 1 1 3 0 1 1 5 0 1 1 9 0 1 1 11 0 1 -1 9 0 1 -1 4 0 1 -1 3 0 1 -1 3 0 1 -1 2 0 1 -1 2 0 1 -1 1 0 1 -1 2 0 1 -1 1 0 1 -1 1 0 1 -1 1 0 1 -1 1 0 1 -1 1 0 2 -2 1 0 1 -1 1 0 2 -2 1 0 2 -2 1 0 4 -4 1 0 8 -8 0 -1 6 -6 0 -1 2 -2 0 -1 2 -2 0 -1 2 -2 0 -1 1 -1 0 -1 1 -1 0 -1 2 -2 0 -2 1 -1 0 -1 1 -1 0 -1 1 -1 0 -2 1 -1 0 -2 1 -1 0 -2 1 -1 0 -3 1 -1 0 -3 1 -1 0 -4 1 -1 0 -10 1 -1 0 -10 -1 -1 0 -9 -1 -1 0 -4 -1 -1 0 -4 -1 -1 0 -2 -1 -1 0 -3 -1 -1 0 -1 -1 -1 0 -2 -1 -1 0 -1 -1 -1 0 -2 -1 -1 0 -1 -1 -1 0 -1 -2 -2 0 -1 -1 -1 0 -1 -1 -1 0 -1 -2 -2 0 -1 -3 -3 0 -1 -3 -3 0 -1 -13 -13 -1 0 -3 -3 -1 0 -2 -2 -1 0 -3 -3 -1 0 -1 -1 -1 0 -1 -1 -1 0 -1 -1 -1 0 -1 -1 -1 0 -1 -1 -1 0 -1 -1 -1 0 -1 -1 -2 0 -1 -1 -1 0 -1 -1 -3 0 -1 -1 -2 0 -1 -1 -3 0 -1 -1 -4 0 -1 -1 -7 0 -1 -1 -19 0 -1 1Z",
+              "color": {
+                "type": "solid",
+                "color": "#16d78d"
+              },
+              "isMediaEditable": false
+            }
+          ],
+          "viewBox": {
+            "top": 0,
+            "left": 0,
+            "width": 200,
+            "height": 199
+          }
+        }
+      ]
+    }
+  ],
+  "breakdown": {
+    "native_shape": 3,
+    "group": 1
+  },
+  "background": {
+    "color": {
+      "type": "solid",
+      "color": "#ffffff"
+    }
+  },
+  "qa": {
+    "structure": {
+      "verdict": "NOT_TESTED"
+    },
+    "fidelity": {
+      "verdict": "NOT_TESTED"
+    },
+    "buyer": {
+      "verdict": "NOT_TESTED"
+    }
+  },
+  "manualGates": [
+    "Match elements to source pixels and semantic manifest",
+    "Verify source wording and fonts",
+    "Review unsupported elements, gradients, occlusions and stacking",
+    "Compare aligned actual Canva export",
+    "Test promised buyer edits in a separate buyer-test copy"
+  ]
+}

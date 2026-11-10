@@ -1,0 +1,676 @@
+{
+  "sources": [
+    {
+      "code": "A01",
+      "family": "Feed",
+      "path": "sources/VECTALLY/Feed/VECTALLY_A01_Close_The_Books_Without_The_Chaos.png",
+      "sha256": "b0b46968b1266a49aeda1e99263402bcdb012f42fe0b17ca4f374cf660c6f4fb",
+      "size": 1452810,
+      "originalSource": "D:\\download\\VECTALLY\\Feed\\VECTALLY_A01_Close_The_Books_Without_The_Chaos.png"
+    },
+    {
+      "code": "A02",
+      "family": "Feed",
+      "path": "sources/VECTALLY/Feed/VECTALLY_A02_Revenue_vs_Profit.png",
+      "sha256": "93ef288885968e0274bc01b81d941c910e899b4aa489cd8f766d596764f7ac1d",
+      "size": 1352392,
+      "originalSource": "D:\\download\\VECTALLY\\Feed\\VECTALLY_A02_Revenue_vs_Profit.png"
+    },
+    {
+      "code": "A03",
+      "family": "Feed",
+      "path": "sources/VECTALLY/Feed/VECTALLY_A03_Every_Entry_In_Its_Place.png",
+      "sha256": "bffc9871503f6e55d731dcf56bd0511938025f6bc3ee2c6f44eff57bb545f3dc",
+      "size": 1481298,
+      "originalSource": "D:\\download\\VECTALLY\\Feed\\VECTALLY_A03_Every_Entry_In_Its_Place.png"
+    },
+    {
+      "code": "A04",
+      "family": "Feed",
+      "path": "sources/VECTALLY/Feed/VECTALLY_A04_Make_The_Numbers_Match.png",
+      "sha256": "9883c2f3d096f7d321fc936f43740f2d04a3f6877735280d34aa816f52d993fd",
+      "size": 1642524,
+      "originalSource": "D:\\download\\VECTALLY\\Feed\\VECTALLY_A04_Make_The_Numbers_Match.png"
+    },
+    {
+      "code": "A05",
+      "family": "Feed",
+      "path": "sources/VECTALLY/Feed/VECTALLY_A05_The_Month_End_Reset.png",
+      "sha256": "7281e29634fdc707ddbcd17262870d31af637b45ef9fdd33858b7b6de639f15e",
+      "size": 1363622,
+      "originalSource": "D:\\download\\VECTALLY\\Feed\\VECTALLY_A05_The_Month_End_Reset.png"
+    },
+    {
+      "code": "A06",
+      "family": "Feed",
+      "path": "sources/VECTALLY/Feed/VECTALLY_A06_Your_Numbers_Finally_Clear.png",
+      "sha256": "67859b2f357122dc082a0397ac73aaa6fd4fe43dffac78d814d7867a93d2b01c",
+      "size": 1506527,
+      "originalSource": "D:\\download\\VECTALLY\\Feed\\VECTALLY_A06_Your_Numbers_Finally_Clear.png"
+    },
+    {
+      "code": "A07",
+      "family": "Feed",
+      "path": "sources/VECTALLY/Feed/VECTALLY_A07_Cash_Flow_Is_About_Timing.png",
+      "sha256": "e2efb85a9e7ef3ceedf7ff85c0d89b44333aecc0752b83562baebf50007f8724",
+      "size": 1458524,
+      "originalSource": "D:\\download\\VECTALLY\\Feed\\VECTALLY_A07_Cash_Flow_Is_About_Timing.png"
+    },
+    {
+      "code": "A08",
+      "family": "Feed",
+      "path": "sources/VECTALLY/Feed/VECTALLY_A08_Less_Admin_More_Focus.png",
+      "sha256": "db10503fb6592e3c7cdeafe4ecefea2dc096c36c27abf5babaff6dd8a6f423ef",
+      "size": 1572841,
+      "originalSource": "D:\\download\\VECTALLY\\Feed\\VECTALLY_A08_Less_Admin_More_Focus.png"
+    },
+    {
+      "code": "A09",
+      "family": "Feed",
+      "path": "sources/VECTALLY/Feed/VECTALLY_A09_Three_Signs_Your_Books_Need_Attention.png",
+      "sha256": "602e59b6d7f7788e9f0f68215938beb70fc2d004081d0d9b086bd7d50c133d71",
+      "size": 1469778,
+      "originalSource": "D:\\download\\VECTALLY\\Feed\\VECTALLY_A09_Three_Signs_Your_Books_Need_Attention.png"
+    },
+    {
+      "code": "A10",
+      "family": "Feed",
+      "path": "sources/VECTALLY/Feed/VECTALLY_A10_Expenses_Go_Untracked.png",
+      "sha256": "127e4b4f29c4e51f1c238268856155b62450f7c8d9f5c0b9c1390f73673f838c",
+      "size": 1519182,
+      "originalSource": "D:\\download\\VECTALLY\\Feed\\VECTALLY_A10_Expenses_Go_Untracked.png"
+    },
+    {
+      "code": "A11",
+      "family": "Feed",
+      "path": "sources/VECTALLY/Feed/VECTALLY_A11_Invoices_Stay_Open.png",
+      "sha256": "9eae993311f27cc02875cf86151ffbb420eecb08ecc4cd8eb27524a737be3c1d",
+      "size": 1307671,
+      "originalSource": "D:\\download\\VECTALLY\\Feed\\VECTALLY_A11_Invoices_Stay_Open.png"
+    },
+    {
+      "code": "A12",
+      "family": "Feed",
+      "path": "sources/VECTALLY/Feed/VECTALLY_A12_Reports_Arrive_Too_Late.png",
+      "sha256": "d4301a1db1983f8bf87b5192585cec0f1b37564bb3289c2292466677d1cfcd12",
+      "size": 1409213,
+      "originalSource": "D:\\download\\VECTALLY\\Feed\\VECTALLY_A12_Reports_Arrive_Too_Late.png"
+    },
+    {
+      "code": "A13",
+      "family": "Feed",
+      "path": "sources/VECTALLY/Feed/VECTALLY_A13_Dont_Mix_The_Money.png",
+      "sha256": "7b89d5d34fd6b49111d2a190f92a7aa136b8e1509d9e63d7029cfc562751760c",
+      "size": 1400899,
+      "originalSource": "D:\\download\\VECTALLY\\Feed\\VECTALLY_A13_Dont_Mix_The_Money.png"
+    },
+    {
+      "code": "A14",
+      "family": "Feed",
+      "path": "sources/VECTALLY/Feed/VECTALLY_A14_Beyond_The_Books.png",
+      "sha256": "78144f36a8bf3ee278a5bd2e08a9ef4a7d82346bc2ea963a2516bcf731bf753d",
+      "size": 1324388,
+      "originalSource": "D:\\download\\VECTALLY\\Feed\\VECTALLY_A14_Beyond_The_Books.png"
+    },
+    {
+      "code": "A15",
+      "family": "Feed",
+      "path": "sources/VECTALLY/Feed/VECTALLY_A15_Three_Reports_One_Bigger_Picture.png",
+      "sha256": "5ff8a115be066b61e6e3f063ebabd1ff3bce78b97c5917932423d9304aa7a3ce",
+      "size": 1449307,
+      "originalSource": "D:\\download\\VECTALLY\\Feed\\VECTALLY_A15_Three_Reports_One_Bigger_Picture.png"
+    },
+    {
+      "code": "A16",
+      "family": "Feed",
+      "path": "sources/VECTALLY/Feed/VECTALLY_A16_Profit_And_Loss.png",
+      "sha256": "c8d7c4cb981dadda7cc66733f6d1c9b2650b583e2d5879371ca1873500cee1d8",
+      "size": 1392597,
+      "originalSource": "D:\\download\\VECTALLY\\Feed\\VECTALLY_A16_Profit_And_Loss.png"
+    },
+    {
+      "code": "A17",
+      "family": "Feed",
+      "path": "sources/VECTALLY/Feed/VECTALLY_A17_Balance_Sheet.png",
+      "sha256": "e02658651b7fb04e0bf9183ebca63ccb70f4b83ae85bea61110b5c46d8b85c8b",
+      "size": 1329771,
+      "originalSource": "D:\\download\\VECTALLY\\Feed\\VECTALLY_A17_Balance_Sheet.png"
+    },
+    {
+      "code": "A18",
+      "family": "Feed",
+      "path": "sources/VECTALLY/Feed/VECTALLY_A18_Cash_Flow_Statement.png",
+      "sha256": "cf0a3e6a0ecffe29ac3e543cbd8ff517f4d94d83fbbb1e4170e23554eb4988a2",
+      "size": 1532499,
+      "originalSource": "D:\\download\\VECTALLY\\Feed\\VECTALLY_A18_Cash_Flow_Statement.png"
+    },
+    {
+      "code": "A19",
+      "family": "Feed",
+      "path": "sources/VECTALLY/Feed/VECTALLY_A19_What_Does_A_Bookkeeper_Actually_Do.png",
+      "sha256": "6e3c4f3b6e3e2ea58eefc080a0b908b8aabcf1ebf2aadb833e55b70a705e92e4",
+      "size": 1323099,
+      "originalSource": "D:\\download\\VECTALLY\\Feed\\VECTALLY_A19_What_Does_A_Bookkeeper_Actually_Do.png"
+    },
+    {
+      "code": "A20",
+      "family": "Feed",
+      "path": "sources/VECTALLY/Feed/VECTALLY_A20_Start_Where_You_Are.png",
+      "sha256": "5bf4bb43acc79dfc359a47d81bbd0692e951f8da8217896eebd1d2d9de44bc97",
+      "size": 1247748,
+      "originalSource": "D:\\download\\VECTALLY\\Feed\\VECTALLY_A20_Start_Where_You_Are.png"
+    },
+    {
+      "code": "A21",
+      "family": "Feed",
+      "path": "sources/VECTALLY/Feed/VECTALLY_A21_How_We_Get_Started.png",
+      "sha256": "2ab039324343633111a598b1754cf1f95addfe017997629016afb917e3f8caf6",
+      "size": 1334560,
+      "originalSource": "D:\\download\\VECTALLY\\Feed\\VECTALLY_A21_How_We_Get_Started.png"
+    },
+    {
+      "code": "A22",
+      "family": "Feed",
+      "path": "sources/VECTALLY/Feed/VECTALLY_A22_Understand_The_Business.png",
+      "sha256": "25dd445a29b93639a60376746b20508ef4ef3757289ca76ca6e43ca34f6c42af",
+      "size": 1328088,
+      "originalSource": "D:\\download\\VECTALLY\\Feed\\VECTALLY_A22_Understand_The_Business.png"
+    },
+    {
+      "code": "A23",
+      "family": "Feed",
+      "path": "sources/VECTALLY/Feed/VECTALLY_A23_Review_The_Records.png",
+      "sha256": "227b504942abca0e12fac6823ee3352d7e71b03c659950741d5b52600d684989",
+      "size": 1228925,
+      "originalSource": "D:\\download\\VECTALLY\\Feed\\VECTALLY_A23_Review_The_Records.png"
+    },
+    {
+      "code": "A24",
+      "family": "Feed",
+      "path": "sources/VECTALLY/Feed/VECTALLY_A24_Set_The_Rhythm.png",
+      "sha256": "de0f26849f26d4285ae12a0a5f4ac659617dff7664b6af80b0a9bd9f2d234abf",
+      "size": 1315115,
+      "originalSource": "D:\\download\\VECTALLY\\Feed\\VECTALLY_A24_Set_The_Rhythm.png"
+    },
+    {
+      "code": "A25",
+      "family": "Feed",
+      "path": "sources/VECTALLY/Feed/VECTALLY_A25_Spot_The_Pattern.png",
+      "sha256": "8e63a3d91b8dbd9d97784d0f78883ce1877fc209a30867e73ccef977682fa2e4",
+      "size": 1337310,
+      "originalSource": "D:\\download\\VECTALLY\\Feed\\VECTALLY_A25_Spot_The_Pattern.png"
+    },
+    {
+      "code": "A26",
+      "family": "Feed",
+      "path": "sources/VECTALLY/Feed/VECTALLY_A26_Good_Books_Arent_Seasonal.png",
+      "sha256": "d4e980ea526ed757c3708d8af2a5e10b6cad5d4c6688f7dcb5a5aad7be19bbec",
+      "size": 1407219,
+      "originalSource": "D:\\download\\VECTALLY\\Feed\\VECTALLY_A26_Good_Books_Arent_Seasonal.png"
+    },
+    {
+      "code": "A27",
+      "family": "Feed",
+      "path": "sources/VECTALLY/Feed/VECTALLY_A27_Three_Money_Checks_Worth_Making.png",
+      "sha256": "6a82ed52fdce7d52a86be491b40a0bacab445339084357bbff8ac20fbde030f3",
+      "size": 1575749,
+      "originalSource": "D:\\download\\VECTALLY\\Feed\\VECTALLY_A27_Three_Money_Checks_Worth_Making.png"
+    },
+    {
+      "code": "A28",
+      "family": "Feed",
+      "path": "sources/VECTALLY/Feed/VECTALLY_A28_Still_Using_That_Subscription.png",
+      "sha256": "9a61f889abe12a0d40c503f3626ce576dcb9173a47b1a34716eda067ffea928e",
+      "size": 1464009,
+      "originalSource": "D:\\download\\VECTALLY\\Feed\\VECTALLY_A28_Still_Using_That_Subscription.png"
+    },
+    {
+      "code": "A29",
+      "family": "Feed",
+      "path": "sources/VECTALLY/Feed/VECTALLY_A29_Every_Fee_Counts.png",
+      "sha256": "438b7b4547fd64537f32bb03517bc441d684d138f6c08c40b2dcd22f2adcd507",
+      "size": 1339105,
+      "originalSource": "D:\\download\\VECTALLY\\Feed\\VECTALLY_A29_Every_Fee_Counts.png"
+    },
+    {
+      "code": "A30",
+      "family": "Feed",
+      "path": "sources/VECTALLY/Feed/VECTALLY_A30_Know_Whats_Still_Due.png",
+      "sha256": "cd3d0df2bcc33d751e79fb5515dafc34ed402aa91a4d3194ec832369ef31b5cc",
+      "size": 1467364,
+      "originalSource": "D:\\download\\VECTALLY\\Feed\\VECTALLY_A30_Know_Whats_Still_Due.png"
+    },
+    {
+      "code": "A31",
+      "family": "Feed",
+      "path": "sources/VECTALLY/Feed/VECTALLY_A31_Every_Entry_Has_A_Source.png",
+      "sha256": "5c9f9435db5aabb2b023210197b232d12112f372a89b0dfc1ce0d7ff13204710",
+      "size": 1397743,
+      "originalSource": "D:\\download\\VECTALLY\\Feed\\VECTALLY_A31_Every_Entry_Has_A_Source.png"
+    },
+    {
+      "code": "A32",
+      "family": "Feed",
+      "path": "sources/VECTALLY/Feed/VECTALLY_A32_Fixed_Versus_Variable.png",
+      "sha256": "3b0190ea78bf80ad8a678e22c96b8ed76265b56dc0e050cef10223ebcf17a686",
+      "size": 1319393,
+      "originalSource": "D:\\download\\VECTALLY\\Feed\\VECTALLY_A32_Fixed_Versus_Variable.png"
+    },
+    {
+      "code": "A33",
+      "family": "Feed",
+      "path": "sources/VECTALLY/Feed/VECTALLY_A33_When_Does_Revenue_Count.png",
+      "sha256": "c4903f03a7f8b9167e712809cc2a542266c149a2881af8dbaa755bb50e67a538",
+      "size": 1499140,
+      "originalSource": "D:\\download\\VECTALLY\\Feed\\VECTALLY_A33_When_Does_Revenue_Count.png"
+    },
+    {
+      "code": "A34",
+      "family": "Feed",
+      "path": "sources/VECTALLY/Feed/VECTALLY_A34_Cash_Basis.png",
+      "sha256": "3c615bcb76b6392a03f1a8e909f3caeab7d97bdfb437bc5ccc6a4cac30cd223b",
+      "size": 1406195,
+      "originalSource": "D:\\download\\VECTALLY\\Feed\\VECTALLY_A34_Cash_Basis.png"
+    },
+    {
+      "code": "A35",
+      "family": "Feed",
+      "path": "sources/VECTALLY/Feed/VECTALLY_A35_Accrual_Basis.png",
+      "sha256": "468036cccba9c0f8a7a2eccbd312855a7e6323985ae2810954d86a4b35a71bba",
+      "size": 1320926,
+      "originalSource": "D:\\download\\VECTALLY\\Feed\\VECTALLY_A35_Accrual_Basis.png"
+    },
+    {
+      "code": "A36",
+      "family": "Feed",
+      "path": "sources/VECTALLY/Feed/VECTALLY_A36_Same_Work_Different_Timing.png",
+      "sha256": "0335cea9258d47a8e7ceb73e9df1b8f83baedc810d7a609267fff084e5707855",
+      "size": 1579224,
+      "originalSource": "D:\\download\\VECTALLY\\Feed\\VECTALLY_A36_Same_Work_Different_Timing.png"
+    },
+    {
+      "code": "A37",
+      "family": "Feed",
+      "path": "sources/VECTALLY/Feed/VECTALLY_A37_Wheres_Your_Break_Even_Point.png",
+      "sha256": "0d8051378f20d5aed22aaebeba5a2efa6e09526aad7f9a70ebc65a8abea6a40e",
+      "size": 1408436,
+      "originalSource": "D:\\download\\VECTALLY\\Feed\\VECTALLY_A37_Wheres_Your_Break_Even_Point.png"
+    },
+    {
+      "code": "A38",
+      "family": "Feed",
+      "path": "sources/VECTALLY/Feed/VECTALLY_A38_Stock_On_Hand_Books_In_Sync.png",
+      "sha256": "698ce12c7f8486a644d4d84d0a1a57338b03db280684a413a85d3377609481aa",
+      "size": 1417611,
+      "originalSource": "D:\\download\\VECTALLY\\Feed\\VECTALLY_A38_Stock_On_Hand_Books_In_Sync.png"
+    },
+    {
+      "code": "A39",
+      "family": "Feed",
+      "path": "sources/VECTALLY/Feed/VECTALLY_A39_Whats_Behind_The_Price.png",
+      "sha256": "b68920fe57c74a973aa54b7c335bdbb6095e220019761cbf1ce19a9297848798",
+      "size": 1457722,
+      "originalSource": "D:\\download\\VECTALLY\\Feed\\VECTALLY_A39_Whats_Behind_The_Price.png"
+    },
+    {
+      "code": "A40",
+      "family": "Feed",
+      "path": "sources/VECTALLY/Feed/VECTALLY_A40_Cost_To_Make.png",
+      "sha256": "f53884e95f9fdf446384ef3926ea6e18abeda0442057539cdbae0586dbb9a2fa",
+      "size": 1393076,
+      "originalSource": "D:\\download\\VECTALLY\\Feed\\VECTALLY_A40_Cost_To_Make.png"
+    },
+    {
+      "code": "A41",
+      "family": "Feed",
+      "path": "sources/VECTALLY/Feed/VECTALLY_A41_Cost_To_Sell.png",
+      "sha256": "224337c43b8654d95d99316839a84fa9831a3877261ea358cdad1979bb5f9ed2",
+      "size": 1375464,
+      "originalSource": "D:\\download\\VECTALLY\\Feed\\VECTALLY_A41_Cost_To_Sell.png"
+    },
+    {
+      "code": "A42",
+      "family": "Feed",
+      "path": "sources/VECTALLY/Feed/VECTALLY_A42_Cost_To_Run.png",
+      "sha256": "870039a91589670e8c736b45f195f9c2563a32fe535dba6efb2575bc69a6e458",
+      "size": 1368238,
+      "originalSource": "D:\\download\\VECTALLY\\Feed\\VECTALLY_A42_Cost_To_Run.png"
+    },
+    {
+      "code": "A43",
+      "family": "Feed",
+      "path": "sources/VECTALLY/Feed/VECTALLY_A43_What_Changed.png",
+      "sha256": "62322e13856b89e15176141bd9973a21447f0e6d68a46667ebb8adf59ea3aa47",
+      "size": 1376497,
+      "originalSource": "D:\\download\\VECTALLY\\Feed\\VECTALLY_A43_What_Changed.png"
+    },
+    {
+      "code": "A44",
+      "family": "Feed",
+      "path": "sources/VECTALLY/Feed/VECTALLY_A44_Keep_A_Buffer.png",
+      "sha256": "095929d94ab75b0419a1bd3d7549f4d65a5ead754fc9323734a586d3d0eff298",
+      "size": 1298137,
+      "originalSource": "D:\\download\\VECTALLY\\Feed\\VECTALLY_A44_Keep_A_Buffer.png"
+    },
+    {
+      "code": "A45",
+      "family": "Feed",
+      "path": "sources/VECTALLY/Feed/VECTALLY_A45_Can_We_Commit.png",
+      "sha256": "312f852cc78902c5a5ff243c1ca3dab0fa5900f036cf478e5473f27cb42e9095",
+      "size": 1461200,
+      "originalSource": "D:\\download\\VECTALLY\\Feed\\VECTALLY_A45_Can_We_Commit.png"
+    },
+    {
+      "code": "A46",
+      "family": "Feed",
+      "path": "sources/VECTALLY/Feed/VECTALLY_A46_What_If_Sales_Slow.png",
+      "sha256": "fe5db3eeaa8174d0359b3065cd1932560099dff8648816c6b539e405728d200e",
+      "size": 1463938,
+      "originalSource": "D:\\download\\VECTALLY\\Feed\\VECTALLY_A46_What_If_Sales_Slow.png"
+    },
+    {
+      "code": "A47",
+      "family": "Feed",
+      "path": "sources/VECTALLY/Feed/VECTALLY_A47_What_Moves_First.png",
+      "sha256": "6052ede0de8e731013b7fe735493e752b57d280115bbe658984d89a686e0c205",
+      "size": 1503880,
+      "originalSource": "D:\\download\\VECTALLY\\Feed\\VECTALLY_A47_What_Moves_First.png"
+    },
+    {
+      "code": "A48",
+      "family": "Feed",
+      "path": "sources/VECTALLY/Feed/VECTALLY_A48_Make_Your_Next_Move_Count.png",
+      "sha256": "763bdf6c0650890167532c22ba495bf37ed8c07af3bfd2966a8698d5076428e6",
+      "size": 1405818,
+      "originalSource": "D:\\download\\VECTALLY\\Feed\\VECTALLY_A48_Make_Your_Next_Move_Count.png"
+    },
+    {
+      "code": "S01",
+      "family": "Story",
+      "path": "sources/VECTALLY/Story/VECTALLY_S01_The_Books_Tell_A_Story.png",
+      "sha256": "75e043f944f841c2f8ccc29a31e4acfbbcb56848148334c9ef80c9732309ff97",
+      "size": 1369816,
+      "originalSource": "D:\\download\\VECTALLY\\Story\\VECTALLY_S01_The_Books_Tell_A_Story.png"
+    },
+    {
+      "code": "S02",
+      "family": "Story",
+      "path": "sources/VECTALLY/Story/VECTALLY_S02_Whats_Harder_To_Track.png",
+      "sha256": "11a9f120fd97c8eb8cf91d337d2c6103373ac5008803a1b75a915f40ec8c67c8",
+      "size": 1334673,
+      "originalSource": "D:\\download\\VECTALLY\\Story\\VECTALLY_S02_Whats_Harder_To_Track.png"
+    },
+    {
+      "code": "S03",
+      "family": "Story",
+      "path": "sources/VECTALLY/Story/VECTALLY_S03_Which_Report_Shows_Profit.png",
+      "sha256": "a8e3a499dda570d217f70cabbc9736cdf984b49a52f282d29331ab30a4420514",
+      "size": 1396886,
+      "originalSource": "D:\\download\\VECTALLY\\Story\\VECTALLY_S03_Which_Report_Shows_Profit.png"
+    },
+    {
+      "code": "S04",
+      "family": "Story",
+      "path": "sources/VECTALLY/Story/VECTALLY_S04_Its_The_Profit_And_Loss.png",
+      "sha256": "33ccf19910973142fd432cc672893e93b73c5ffa58163d19fbac1d03a30f2c62",
+      "size": 1433311,
+      "originalSource": "D:\\download\\VECTALLY\\Story\\VECTALLY_S04_Its_The_Profit_And_Loss.png"
+    },
+    {
+      "code": "S05",
+      "family": "Story",
+      "path": "sources/VECTALLY/Story/VECTALLY_S05_Got_A_Bookkeeping_Question.png",
+      "sha256": "6da35099c8ad6fc043dd681d6d7e17ac2b472fb8fd0f8ac77f7413a39bfec7a1",
+      "size": 1140719,
+      "originalSource": "D:\\download\\VECTALLY\\Story\\VECTALLY_S05_Got_A_Bookkeeping_Question.png"
+    },
+    {
+      "code": "S06",
+      "family": "Story",
+      "path": "sources/VECTALLY/Story/VECTALLY_S06_Good_Records_Better_Decisions.png",
+      "sha256": "be97f9464f5ecf308bbe681edddd3781bd34335e922499dd1db9686953ac56c5",
+      "size": 1385132,
+      "originalSource": "D:\\download\\VECTALLY\\Story\\VECTALLY_S06_Good_Records_Better_Decisions.png"
+    },
+    {
+      "code": "S07",
+      "family": "Story",
+      "path": "sources/VECTALLY/Story/VECTALLY_S07_Your_Week_Three_Signals.png",
+      "sha256": "59369cbe33204e6a9a382a1f76e8e6dc0abbb87b850e64614748ba7e07c45719",
+      "size": 1417237,
+      "originalSource": "D:\\download\\VECTALLY\\Story\\VECTALLY_S07_Your_Week_Three_Signals.png"
+    },
+    {
+      "code": "S08",
+      "family": "Story",
+      "path": "sources/VECTALLY/Story/VECTALLY_S08_What_Slows_Your_Close.png",
+      "sha256": "069fc2a2778077df91e85f662fff6d31d711c06f79795178c043d6b721753711",
+      "size": 1395045,
+      "originalSource": "D:\\download\\VECTALLY\\Story\\VECTALLY_S08_What_Slows_Your_Close.png"
+    },
+    {
+      "code": "S09",
+      "family": "Story",
+      "path": "sources/VECTALLY/Story/VECTALLY_S09_Sent_Not_Settled.png",
+      "sha256": "a71f391f2a8b6cc69f7a98514adefd58d60a71578a799a709427c4e2522dcfef",
+      "size": 1466595,
+      "originalSource": "D:\\download\\VECTALLY\\Story\\VECTALLY_S09_Sent_Not_Settled.png"
+    },
+    {
+      "code": "S10",
+      "family": "Story",
+      "path": "sources/VECTALLY/Story/VECTALLY_S10_Spot_The_Missing_Match.png",
+      "sha256": "52620d11c048141e956740296b74305514851753037c93f2ccbeac817de00eb5",
+      "size": 1402989,
+      "originalSource": "D:\\download\\VECTALLY\\Story\\VECTALLY_S10_Spot_The_Missing_Match.png"
+    },
+    {
+      "code": "S11",
+      "family": "Story",
+      "path": "sources/VECTALLY/Story/VECTALLY_S11_Before_You_Close.png",
+      "sha256": "ba910ccd371cc89afa6461dc21bb27cbbdde00f46c22d86bfd9d807aaebc067d",
+      "size": 1413727,
+      "originalSource": "D:\\download\\VECTALLY\\Story\\VECTALLY_S11_Before_You_Close.png"
+    },
+    {
+      "code": "S12",
+      "family": "Story",
+      "path": "sources/VECTALLY/Story/VECTALLY_S12_Make_Space_For_Clarity.png",
+      "sha256": "51679bdca8f1d66e23bc928abe8e7bcf87bca08754dfecd34108181cc8860afa",
+      "size": 1520892,
+      "originalSource": "D:\\download\\VECTALLY\\Story\\VECTALLY_S12_Make_Space_For_Clarity.png"
+    },
+    {
+      "code": "S13",
+      "family": "Story",
+      "path": "sources/VECTALLY/Story/VECTALLY_S13_A_Transfer_Isnt_A_Sale.png",
+      "sha256": "4c82df965edbf121de05d56d5130d3a2e75af6d686f8ecbf2bbffbbf9365b495",
+      "size": 1375087,
+      "originalSource": "D:\\download\\VECTALLY\\Story\\VECTALLY_S13_A_Transfer_Isnt_A_Sale.png"
+    },
+    {
+      "code": "S14",
+      "family": "Story",
+      "path": "sources/VECTALLY/Story/VECTALLY_S14_How_Clear_Is_Your_Cash_Picture.png",
+      "sha256": "9d761d6c9ee652bf8741267db9a0ce1de99450a159551afee480acd146f9b4ea",
+      "size": 1394632,
+      "originalSource": "D:\\download\\VECTALLY\\Story\\VECTALLY_S14_How_Clear_Is_Your_Cash_Picture.png"
+    },
+    {
+      "code": "S15",
+      "family": "Story",
+      "path": "sources/VECTALLY/Story/VECTALLY_S15_A_Refund_Changes_The_Record.png",
+      "sha256": "1acf8cee75dc1cfc1cc8dd260b80e8a3ade479b9cf303c193f39659552ee5ff9",
+      "size": 1403734,
+      "originalSource": "D:\\download\\VECTALLY\\Story\\VECTALLY_S15_A_Refund_Changes_The_Record.png"
+    },
+    {
+      "code": "S16",
+      "family": "Story",
+      "path": "sources/VECTALLY/Story/VECTALLY_S16_Spot_The_Duplicate.png",
+      "sha256": "4dbb2c5d89d475d3c1334d0f54694bfa4c83ddb81bbef66c0e08528b9d9d8f60",
+      "size": 1366460,
+      "originalSource": "D:\\download\\VECTALLY\\Story\\VECTALLY_S16_Spot_The_Duplicate.png"
+    },
+    {
+      "code": "S17",
+      "family": "Story",
+      "path": "sources/VECTALLY/Story/VECTALLY_S17_Paid_In_Parts.png",
+      "sha256": "885b1788757876af5d3a16a27a4e3993957bdb202b8e2208377a70345fb85aeb",
+      "size": 1404518,
+      "originalSource": "D:\\download\\VECTALLY\\Story\\VECTALLY_S17_Paid_In_Parts.png"
+    },
+    {
+      "code": "S18",
+      "family": "Story",
+      "path": "sources/VECTALLY/Story/VECTALLY_S18_Behind_Every_Balance.png",
+      "sha256": "8857694ae5aefe73b39a1b5b6b35ba0a1e24604d53d9f872b87dc51be5708b3d",
+      "size": 1501086,
+      "originalSource": "D:\\download\\VECTALLY\\Story\\VECTALLY_S18_Behind_Every_Balance.png"
+    },
+    {
+      "code": "S19",
+      "family": "Story",
+      "path": "sources/VECTALLY/Story/VECTALLY_S19_Many_Channels_One_Set_Of_Books.png",
+      "sha256": "b134061efc3cb11f85c4d229b049a60998d75b499a1c5098ed72abbcbd7e99e5",
+      "size": 1500551,
+      "originalSource": "D:\\download\\VECTALLY\\Story\\VECTALLY_S19_Many_Channels_One_Set_Of_Books.png"
+    },
+    {
+      "code": "S20",
+      "family": "Story",
+      "path": "sources/VECTALLY/Story/VECTALLY_S20_What_Eats_Your_Time.png",
+      "sha256": "9bffa6fb7e48677e2d1f2067df6f3f494c81a4e90da7ace4195131ec964a7847",
+      "size": 1472918,
+      "originalSource": "D:\\download\\VECTALLY\\Story\\VECTALLY_S20_What_Eats_Your_Time.png"
+    },
+    {
+      "code": "S21",
+      "family": "Story",
+      "path": "sources/VECTALLY/Story/VECTALLY_S21_Automated_Not_Reviewed.png",
+      "sha256": "f833ab956baf557ecdf21e82bddf80059b79e31f5d22b94c2cb448e4888e34e9",
+      "size": 1421619,
+      "originalSource": "D:\\download\\VECTALLY\\Story\\VECTALLY_S21_Automated_Not_Reviewed.png"
+    },
+    {
+      "code": "S22",
+      "family": "Story",
+      "path": "sources/VECTALLY/Story/VECTALLY_S22_Cash_In_Revenue.png",
+      "sha256": "a543b5c46b3c06f80e894bc7326f9eab3e19f6c85ac7757f6d179a8dd55fd768",
+      "size": 1576223,
+      "originalSource": "D:\\download\\VECTALLY\\Story\\VECTALLY_S22_Cash_In_Revenue.png"
+    },
+    {
+      "code": "S23",
+      "family": "Story",
+      "path": "sources/VECTALLY/Story/VECTALLY_S23_Ready_For_Handoff.png",
+      "sha256": "9d2f204377c39bf59b55cf6b3825ca19d4d30dd4eb8c64c0b12a5beea2657b63",
+      "size": 1510055,
+      "originalSource": "D:\\download\\VECTALLY\\Story\\VECTALLY_S23_Ready_For_Handoff.png"
+    },
+    {
+      "code": "S24",
+      "family": "Story",
+      "path": "sources/VECTALLY/Story/VECTALLY_S24_Lets_Review_The_Flow.png",
+      "sha256": "2db1a4e9a3e53bbd61a518e8c610e7c4363faa954ff80be2f6157a26ebee60bf",
+      "size": 1462711,
+      "originalSource": "D:\\download\\VECTALLY\\Story\\VECTALLY_S24_Lets_Review_The_Flow.png"
+    },
+    {
+      "code": "S25",
+      "family": "Story",
+      "path": "sources/VECTALLY/Story/VECTALLY_S25_Sales_Up_Margin_Down.png",
+      "sha256": "e92570b0a879989ff17c6f5c5a1708370e4a39cc1bc1b89ea6db26385e894427",
+      "size": 1378220,
+      "originalSource": "D:\\download\\VECTALLY\\Story\\VECTALLY_S25_Sales_Up_Margin_Down.png"
+    },
+    {
+      "code": "S26",
+      "family": "Story",
+      "path": "sources/VECTALLY/Story/VECTALLY_S26_What_Cost_Catches_You_Off_Guard.png",
+      "sha256": "071da6610555647c79b25eb799037aee13cfec80edd4d5b8f1af5b36eeb36d99",
+      "size": 1587412,
+      "originalSource": "D:\\download\\VECTALLY\\Story\\VECTALLY_S26_What_Cost_Catches_You_Off_Guard.png"
+    },
+    {
+      "code": "S27",
+      "family": "Story",
+      "path": "sources/VECTALLY/Story/VECTALLY_S27_Plan_Vs_Actual.png",
+      "sha256": "b80189cd888a61f6d0cbe3f0d266b3e080aaf8e51e795ec94d4cb7d9c262f6d8",
+      "size": 1286668,
+      "originalSource": "D:\\download\\VECTALLY\\Story\\VECTALLY_S27_Plan_Vs_Actual.png"
+    },
+    {
+      "code": "S28",
+      "family": "Story",
+      "path": "sources/VECTALLY/Story/VECTALLY_S28_Paid_First_Earned_Later.png",
+      "sha256": "9435eeae772d81a820e97b34391f4cda8dca33830bd19d94706e20542dba18ef",
+      "size": 1347496,
+      "originalSource": "D:\\download\\VECTALLY\\Story\\VECTALLY_S28_Paid_First_Earned_Later.png"
+    },
+    {
+      "code": "S29",
+      "family": "Story",
+      "path": "sources/VECTALLY/Story/VECTALLY_S29_One_Change_For_Next_Month.png",
+      "sha256": "12cce34445f58423527fa05054893a4ae6dd22559fad513e557bcd5e22644c18",
+      "size": 1226719,
+      "originalSource": "D:\\download\\VECTALLY\\Story\\VECTALLY_S29_One_Change_For_Next_Month.png"
+    },
+    {
+      "code": "S30",
+      "family": "Story",
+      "path": "sources/VECTALLY/Story/VECTALLY_S30_Less_Guesswork_More_Direction.png",
+      "sha256": "e34210a88281bc36f139d4a3266c235ab48d41eaff2043e8e4f071182c2a2614",
+      "size": 1439170,
+      "originalSource": "D:\\download\\VECTALLY\\Story\\VECTALLY_S30_Less_Guesswork_More_Direction.png"
+    },
+    {
+      "code": "H01",
+      "family": "Highlight",
+      "path": "sources/VECTALLY/Highlight/VECTALLY_H01_About.png",
+      "sha256": "d81a1990cd0637f4b6582931a3598c62a3973e6ea87df9e8886cc7e96ac8cb09",
+      "size": 1144457,
+      "originalSource": "D:\\download\\VECTALLY\\Highlight\\VECTALLY_H01_About.png"
+    },
+    {
+      "code": "H02",
+      "family": "Highlight",
+      "path": "sources/VECTALLY/Highlight/VECTALLY_H02_Services.png",
+      "sha256": "4dbcb46cc435c837bb6364aef8cb8cb2239065b4966e4b52a7db45ef333add51",
+      "size": 1130984,
+      "originalSource": "D:\\download\\VECTALLY\\Highlight\\VECTALLY_H02_Services.png"
+    },
+    {
+      "code": "H03",
+      "family": "Highlight",
+      "path": "sources/VECTALLY/Highlight/VECTALLY_H03_Tips.png",
+      "sha256": "6403c0f705021f46dbf6f4306b0d560b5924f40f3e2637eeefdd3f3156998f3b",
+      "size": 1217289,
+      "originalSource": "D:\\download\\VECTALLY\\Highlight\\VECTALLY_H03_Tips.png"
+    },
+    {
+      "code": "H04",
+      "family": "Highlight",
+      "path": "sources/VECTALLY/Highlight/VECTALLY_H04_FAQ.png",
+      "sha256": "cb3f71595d2bdbb5460cbeb1f2937e498bc5c4a954916b48e20edf35c1013811",
+      "size": 1166793,
+      "originalSource": "D:\\download\\VECTALLY\\Highlight\\VECTALLY_H04_FAQ.png"
+    },
+    {
+      "code": "H05",
+      "family": "Highlight",
+      "path": "sources/VECTALLY/Highlight/VECTALLY_H05_Process.png",
+      "sha256": "233c613e1caab73f05288547ef218b3466de0ce988c7c3373bed89b27b7d2746",
+      "size": 1165172,
+      "originalSource": "D:\\download\\VECTALLY\\Highlight\\VECTALLY_H05_Process.png"
+    },
+    {
+      "code": "H06",
+      "family": "Highlight",
+      "path": "sources/VECTALLY/Highlight/VECTALLY_H06_Contact.png",
+      "sha256": "fc567b93e3aac29a2aa634f05ef7f1ef3cba95c61039b022376043f82a05b6d1",
+      "size": 1040113,
+      "originalSource": "D:\\download\\VECTALLY\\Highlight\\VECTALLY_H06_Contact.png"
+    }
+  ]
+}

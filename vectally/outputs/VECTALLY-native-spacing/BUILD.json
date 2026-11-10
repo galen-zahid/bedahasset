@@ -1,0 +1,29 @@
+{
+  "date": "2026-11-10",
+  "sha256": "f18048c24ab3bfb22ee8bd96b9e2fa0830cbff4634514dd0413aeadd4371e5cc",
+  "bytes": 1305771,
+  "typecheck": "PASS",
+  "build": "PASS",
+  "canvaRuntime": "DEPLOYED_IN_DRAFT_AND_VERIFIED_ACTUAL_NATIVE_TEXT",
+  "newFeatures": [
+    "optional letterSpacingEm and lineHeightEm via native richtext",
+    "fontStyle preserved",
+    "group rotation preserved"
+  ],
+  "legacyTextMapping": "unchanged unless optional spacing is provided",
+  "runtimeEvidence": [
+    "CANVA_STRUCTURE.json",
+    "CANVA-PROBE.png",
+    "RUNTIME-VERIFICATION.json",
+    "FONT-METRICS-CALIBRATION.json"
+  ],
+  "draftOnly": true,
+  "fontReferenceResolverFix": {
+    "bytes": 1305968,
+    "build": "PASS",
+    "typecheck": "PASS",
+    "uploadedDraft": "SAVED",
+    "runtime": "NOT_YET_TESTED",
+    "file": "app-font-reference-fix.js.gz"
+  }
+}

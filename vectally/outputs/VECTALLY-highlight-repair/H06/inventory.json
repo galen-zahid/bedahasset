@@ -1,0 +1,151 @@
+{
+  "source": "D:\\download\\VECTALLY\\Highlight\\VECTALLY_H06_Contact.png",
+  "sha256": "fc567b93e3aac29a2aa634f05ef7f1ef3cba95c61039b022376043f82a05b6d1",
+  "observed_objects": 4,
+  "objects": [
+    {
+      "id": "FRAME",
+      "name": "Bingkai percakapan utuh",
+      "kind": "physical_asset",
+      "parts": [
+        {
+          "name": "Kontur bingkai",
+          "bbox": [
+            125,
+            581,
+            690,
+            668
+          ],
+          "source_component": 1,
+          "points": 148,
+          "path_bytes": 1428,
+          "contour_epsilon": 0.55,
+          "color": "#111b27",
+          "mask_iou": 0.9992376220661299,
+          "body_tiling": false,
+          "closed": true
+        }
+      ],
+      "grouping": "explicit_source_object",
+      "native_shapes": 1,
+      "text_copy": false
+    },
+    {
+      "id": "PERSON1",
+      "name": "Orang kiri: kepala dan badan",
+      "kind": "physical_asset",
+      "parts": [
+        {
+          "name": "Kepala kiri",
+          "bbox": [
+            282,
+            759,
+            152,
+            153
+          ],
+          "source_component": 2,
+          "points": 111,
+          "path_bytes": 1000,
+          "contour_epsilon": 0.45,
+          "color": "#111b27",
+          "mask_iou": 0.9981362714465822,
+          "body_tiling": false,
+          "closed": true
+        },
+        {
+          "name": "Badan kiri",
+          "bbox": [
+            217,
+            925,
+            283,
+            128
+          ],
+          "source_component": 3,
+          "points": 101,
+          "path_bytes": 944,
+          "contour_epsilon": 0.45,
+          "color": "#111a26",
+          "mask_iou": 0.9992775312209722,
+          "body_tiling": false,
+          "closed": true
+        }
+      ],
+      "grouping": "explicit_source_object",
+      "native_shapes": 2,
+      "text_copy": false
+    },
+    {
+      "id": "PERSON2",
+      "name": "Orang kanan: kepala dan badan",
+      "kind": "physical_asset",
+      "parts": [
+        {
+          "name": "Kepala kanan",
+          "bbox": [
+            534,
+            800,
+            119,
+            120
+          ],
+          "source_component": 1,
+          "points": 82,
+          "path_bytes": 739,
+          "contour_epsilon": 0.45,
+          "color": "#1cd897",
+          "mask_iou": 0.9978657180969319,
+          "body_tiling": false,
+          "closed": true
+        },
+        {
+          "name": "Badan kanan",
+          "bbox": [
+            501,
+            930,
+            215,
+            116
+          ],
+          "source_component": 2,
+          "points": 93,
+          "path_bytes": 869,
+          "contour_epsilon": 0.45,
+          "color": "#1dd897",
+          "mask_iou": 0.9993913572732805,
+          "body_tiling": false,
+          "closed": true
+        }
+      ],
+      "grouping": "explicit_source_object",
+      "native_shapes": 2,
+      "text_copy": false
+    },
+    {
+      "id": "BUBBLE",
+      "name": "Balon percakapan dan ekornya",
+      "kind": "physical_asset",
+      "parts": [
+        {
+          "name": "Balon utuh",
+          "bbox": [
+            490,
+            492,
+            327,
+            283
+          ],
+          "source_component": 1,
+          "points": 108,
+          "path_bytes": 973,
+          "contour_epsilon": 0.45,
+          "color": "#ad94fc",
+          "mask_iou": 0.9997550326382985,
+          "body_tiling": false,
+          "closed": true
+        }
+      ],
+      "grouping": "explicit_source_object",
+      "native_shapes": 1,
+      "text_copy": false
+    }
+  ],
+  "all_source_copy": "No text copy in this illustration",
+  "nearest_object_assignment": false
+}

@@ -1,0 +1,47 @@
+[
+  {
+    "id": "PAPER_BACK_2",
+    "wholeBody": true,
+    "hiddenBody": "reconstructed whole rear sheet, visible contour still requires final source alignment"
+  },
+  {
+    "id": "PAPER_BACK_1",
+    "wholeBody": true,
+    "hiddenBody": "reconstructed whole middle sheet, visible contour still requires final source alignment"
+  },
+  {
+    "id": "PAPER_FRONT",
+    "wholeBody": true,
+    "children": 24,
+    "contents": {
+      "batang grafik": 4,
+      "garis bawah grafik": 1
+    },
+    "checks": 4
+  },
+  {
+    "id": "DECISION_FLOW",
+    "wholeBody": true,
+    "children": 17,
+    "heads": 3,
+    "iconTypes": [
+      "target",
+      "scales",
+      "calendar"
+    ],
+    "reconstruction": "analytic hidden ribbon behind title; final visible contour comparison pending"
+  },
+  {
+    "id": "CTA",
+    "wholeBody": true,
+    "nativeCopy": "PENDING"
+  },
+  {
+    "id": "RESPONSE",
+    "wholeBody": true
+  },
+  {
+    "id": "BRAND_ACCENT",
+    "wholeBody": true
+  }
+]

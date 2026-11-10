@@ -1,0 +1,222 @@
+{
+  "version": 1,
+  "stage": "magic_layers_candidate",
+  "observedAt": "2026-11-09T17:50:55.004Z",
+  "scope": "current_page",
+  "addressing": "sibling order; group bounds relative to parent; IDs are snapshot-local",
+  "elements": [
+    {
+      "address": "0",
+      "type": "shape",
+      "locked": false,
+      "bboxInParent": [
+        0,
+        0,
+        941,
+        1672
+      ],
+      "rotation": 0,
+      "transparency": 0,
+      "classification": "native_shape",
+      "paths": [
+        {
+          "d": "M0 0H941V1672H0Z",
+          "color": {
+            "type": "solid",
+            "color": "#f1f5f9"
+          },
+          "isMediaEditable": false
+        }
+      ],
+      "viewBox": {
+        "top": 0,
+        "left": 0,
+        "width": 941,
+        "height": 1672
+      }
+    },
+    {
+      "address": "1",
+      "type": "shape",
+      "locked": false,
+      "bboxInParent": [
+        396,
+        319,
+        498,
+        270
+      ],
+      "rotation": 0,
+      "transparency": 0,
+      "classification": "native_shape",
+      "paths": [
+        {
+          "d": "M1 0l0 16 -1 1 0 1 1 1 478 0 1 1 0 250 18 0 0 -270Z",
+          "color": {
+            "type": "solid",
+            "color": "#080f1a"
+          },
+          "isMediaEditable": false
+        }
+      ],
+      "viewBox": {
+        "top": 0,
+        "left": 0,
+        "width": 498,
+        "height": 270
+      }
+    },
+    {
+      "address": "2",
+      "type": "shape",
+      "locked": false,
+      "bboxInParent": [
+        36.625,
+        1149.75,
+        221,
+        233
+      ],
+      "rotation": 0,
+      "transparency": 0,
+      "classification": "native_shape",
+      "paths": [
+        {
+          "d": "M0 0l0 233 220 0 1 -1 0 -19 -200 0 -2 -2 0 -211Z",
+          "color": {
+            "type": "unsupported"
+          },
+          "isMediaEditable": false
+        }
+      ],
+      "viewBox": {
+        "top": 0,
+        "left": 0,
+        "width": 221,
+        "height": 233
+      }
+    },
+    {
+      "address": "3",
+      "type": "shape",
+      "locked": false,
+      "bboxInParent": [
+        111.75,
+        132,
+        173,
+        23
+      ],
+      "rotation": 0,
+      "transparency": 0,
+      "classification": "native_shape",
+      "paths": [
+        {
+          "d": "M0 11.146C57.667 7.586 115.333 3.322 173.000 -0.296L173 11.135C115.333 15.223 57.667 18.730 0.000 22.958Z",
+          "color": {
+            "type": "solid",
+            "color": "#15de9a"
+          },
+          "isMediaEditable": false
+        }
+      ],
+      "viewBox": {
+        "top": 0,
+        "left": 0,
+        "width": 173,
+        "height": 23
+      }
+    },
+    {
+      "address": "4",
+      "type": "shape",
+      "locked": false,
+      "bboxInParent": [
+        397.75,
+        1352,
+        481,
+        66
+      ],
+      "rotation": 0,
+      "transparency": 0,
+      "classification": "native_shape",
+      "paths": [
+        {
+          "d": "M0 46.089C160.333 30.613 320.667 15.137 481.000 -0.338L481 20.131C320.667 35.596 160.333 51.061 0.000 66.526Z",
+          "color": {
+            "type": "solid",
+            "color": "#18dc9d"
+          },
+          "isMediaEditable": false
+        }
+      ],
+      "viewBox": {
+        "top": 0,
+        "left": 0,
+        "width": 481,
+        "height": 66
+      }
+    },
+    {
+      "address": "5",
+      "type": "text",
+      "locked": false,
+      "bboxInParent": [
+        602.114,
+        1415.49,
+        303.776,
+        62
+      ],
+      "rotation": -0.0574285,
+      "transparency": 0,
+      "classification": "native_text",
+      "text": "Drop it here.",
+      "textRegions": [
+        {
+          "text": "Drop it here.",
+          "formatting": {
+            "fontRef": "YAFdJr0OaFw:0",
+            "fontSize": 52.1149,
+            "textAlign": "start",
+            "color": "#091522",
+            "fontWeight": "normal",
+            "fontStyle": "normal",
+            "decoration": "none",
+            "strikethrough": "none",
+            "link": "",
+            "listLevel": 0,
+            "listMarker": "none",
+            "lineHeightEm": 1.2,
+            "letterSpacingEm": 0.008781470000000001
+          }
+        }
+      ],
+      "sourceTextVerification": "NOT_TESTED"
+    }
+  ],
+  "breakdown": {
+    "native_shape": 5,
+    "native_text": 1
+  },
+  "background": {
+    "color": {
+      "type": "solid",
+      "color": "#ffffff"
+    }
+  },
+  "qa": {
+    "structure": {
+      "verdict": "NOT_TESTED"
+    },
+    "fidelity": {
+      "verdict": "NOT_TESTED"
+    },
+    "buyer": {
+      "verdict": "NOT_TESTED"
+    }
+  },
+  "manualGates": [
+    "Match elements to source pixels and semantic manifest",
+    "Verify source wording and fonts",
+    "Review unsupported elements, gradients, occlusions and stacking",
+    "Compare aligned actual Canva export",
+    "Test promised buyer edits in a separate buyer-test copy"
+  ]
+}

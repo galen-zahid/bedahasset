@@ -1,0 +1,72 @@
+{
+  "packages": [
+    {
+      "path": "/home/user/bedahasset/vectally/outputs/VECTALLY-story-repair/S02/ASSETS_NORMAL_COPY_PACKAGE.json",
+      "source": "S02 - ASET DAN LABEL NATIVE - HEADLINE PENDING",
+      "counts": {
+        "shape": 42,
+        "group": 8,
+        "text": 6,
+        "image": 0
+      },
+      "errors": [],
+      "warnings": [],
+      "fonts": [
+        {
+          "address": "6/7",
+          "text": "INVOICE",
+          "ref": "YAFdJr0OaFw:0",
+          "family": "Asap",
+          "weight": "bold",
+          "style": "italic"
+        },
+        {
+          "address": "7/6",
+          "text": "OPEN PAYMENT",
+          "ref": "YAFdJr0OaFw:0",
+          "family": "Asap",
+          "weight": "bold",
+          "style": "normal"
+        },
+        {
+          "address": "8/1",
+          "text": "EXPENSES",
+          "ref": "YAFdJr0OaFw:0",
+          "family": "Asap",
+          "weight": "bold",
+          "style": "normal"
+        },
+        {
+          "address": "9/1",
+          "text": "UNPAID",
+          "ref": "YAFdJr0OaFw:0",
+          "family": "Asap",
+          "weight": "bold",
+          "style": "normal"
+        },
+        {
+          "address": "9/2",
+          "text": "INVOICES",
+          "ref": "YAFdJr0OaFw:0",
+          "family": "Asap",
+          "weight": "bold",
+          "style": "normal"
+        },
+        {
+          "address": "10",
+          "text": "VECTALLY",
+          "ref": "YACgEZulLoA:0",
+          "family": "Archivo Black",
+          "weight": "normal",
+          "style": "normal"
+        }
+      ],
+      "structuralAndKnownFontChecksPassed": true,
+      "sourceFidelity": "NOT_CERTIFIED",
+      "buyerQA": "NOT_CERTIFIED",
+      "finalVerified": false
+    }
+  ],
+  "finalVerified": false,
+  "notice": "PASS struktural bukan bukti 1:1, objek lengkap, atau buyer PASS."
+}

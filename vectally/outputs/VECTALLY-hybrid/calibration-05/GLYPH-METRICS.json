@@ -1,0 +1,16 @@
+[
+  {
+    "code": "A07",
+    "version": "baseline",
+    "iou": 0.6022222594647136,
+    "source_pixels": 101918,
+    "export_pixels": 89288
+  },
+  {
+    "code": "A07",
+    "version": "calibration",
+    "iou": 0.7121224727514768,
+    "source_pixels": 101918,
+    "export_pixels": 103862
+  }
+]

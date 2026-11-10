@@ -5,3 +5,6 @@ __pycache__/
 out/
 in/*
 !in/.gitkeep
+vectally/.venv/
+vectally/handoff/runs/*/backup/
+vectally/handoff/runs/*/workspace/

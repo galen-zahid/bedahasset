@@ -1,0 +1,130 @@
+[
+  {
+    "text": "VECTALLY",
+    "actualToSourceIoU": 0.692854665279223,
+    "actualInkBox": [
+      113,
+      60,
+      284,
+      36
+    ],
+    "bestTranslation": {
+      "iou": 0.6949123111651329,
+      "dx": 0,
+      "dy": -1
+    },
+    "gate": "NOT_1_TO_1"
+  },
+  {
+    "text": "GOOD",
+    "actualToSourceIoU": 0.7238271648915328,
+    "actualInkBox": [
+      64,
+      175,
+      407,
+      105
+    ],
+    "bestTranslation": {
+      "iou": 0.7771290073812934,
+      "dx": 0,
+      "dy": 3
+    },
+    "gate": "NOT_1_TO_1"
+  },
+  {
+    "text": "RECORDS.",
+    "actualToSourceIoU": 0.6851320321469575,
+    "actualInkBox": [
+      65,
+      294,
+      660,
+      104
+    ],
+    "bestTranslation": {
+      "iou": 0.7521349862258954,
+      "dx": 0,
+      "dy": 4
+    },
+    "gate": "NOT_1_TO_1"
+  },
+  {
+    "text": "BETTER",
+    "actualToSourceIoU": 0.6967577876668786,
+    "actualInkBox": [
+      229,
+      437,
+      250,
+      51
+    ],
+    "bestTranslation": {
+      "iou": 0.7982751650720927,
+      "dx": -1,
+      "dy": 2
+    },
+    "gate": "NOT_1_TO_1"
+  },
+  {
+    "text": "DECISIONS.",
+    "actualToSourceIoU": 0.6943436499466382,
+    "actualInkBox": [
+      151,
+      509,
+      759,
+      110
+    ],
+    "bestTranslation": {
+      "iou": 0.7676334687969716,
+      "dx": -2,
+      "dy": 4
+    },
+    "gate": "NOT_1_TO_1"
+  },
+  {
+    "text": "Talk through what your",
+    "actualToSourceIoU": 0.11242508989212945,
+    "actualInkBox": [
+      58,
+      1132,
+      643,
+      63
+    ],
+    "bestTranslation": {
+      "iou": 0.49500376061029333,
+      "dx": -6,
+      "dy": 3
+    },
+    "gate": "NOT_1_TO_1"
+  },
+  {
+    "text": "business needs.",
+    "actualToSourceIoU": 0.35005955926146515,
+    "actualInkBox": [
+      61,
+      1196,
+      430,
+      41
+    ],
+    "bestTranslation": {
+      "iou": 0.5195240489358136,
+      "dx": 3,
+      "dy": 1
+    },
+    "gate": "NOT_1_TO_1"
+  },
+  {
+    "text": "LET\u2019S TALK BOOKS.",
+    "actualToSourceIoU": 0.6214960058097313,
+    "actualInkBox": [
+      150,
+      1313,
+      653,
+      58
+    ],
+    "bestTranslation": {
+      "iou": 0.6970863947301749,
+      "dx": 0,
+      "dy": 3
+    },
+    "gate": "NOT_1_TO_1"
+  }
+]

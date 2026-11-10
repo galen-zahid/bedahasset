@@ -1,0 +1,72 @@
+{
+  "observedDate": "2026-11-10",
+  "notice": "Snapshot katalog akun saat audit, bukan daftar universal Canva.",
+  "fonts": [
+    {
+      "ref": "YAFdJr0OaFw:0",
+      "name": "Asap",
+      "weights": [
+        {
+          "weight": "normal",
+          "styles": [
+            "normal",
+            "italic"
+          ]
+        },
+        {
+          "weight": "medium",
+          "styles": [
+            "normal",
+            "italic"
+          ]
+        },
+        {
+          "weight": "semibold",
+          "styles": [
+            "normal",
+            "italic"
+          ]
+        },
+        {
+          "weight": "bold",
+          "styles": [
+            "normal",
+            "italic"
+          ]
+        }
+      ]
+    },
+    {
+      "ref": "YACgEZulLoA:0",
+      "name": "Archivo Black",
+      "weights": [
+        {
+          "weight": "normal",
+          "styles": [
+            "normal"
+          ]
+        }
+      ]
+    },
+    {
+      "ref": "YAD1fmY3NpE:0",
+      "name": "Asap Condensed",
+      "weights": [
+        {
+          "weight": "normal",
+          "styles": [
+            "normal",
+            "italic"
+          ]
+        },
+        {
+          "weight": "bold",
+          "styles": [
+            "normal"
+          ]
+        }
+      ],
+      "provenance": "Observed requestFontSelection response in importer v4; metadata only, never inserted."
+    }
+  ]
+}

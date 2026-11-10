@@ -1,0 +1,19 @@
+{
+  "scope": "VECTOR_COMPONENT_EDIT_ONLY, NOT FULL PAGE BUYER PASS",
+  "structure": "PASS",
+  "move_whole_group": "PASS: root X+20; all8children relative geometry unchanged including shadow",
+  "recolor": "PASS: bodyonly #b99bfc to #ffad33",
+  "export_layout": "PASS",
+  "outside_target_pixels_max_delta": 0,
+  "actual_orange_pixels": 21126,
+  "changed_pixels": 35094,
+  "expected_local_to_actual_export_MAE": 0.13453696312077654,
+  "restore": "PASS: every original element property and child restored exactly",
+  "full_page_buyer": "NOT_TESTED: headlines/bodycopy not inserted",
+  "different_account_access": "NOT_TESTED",
+  "actual_native_shapes": 74,
+  "actual_groups": 5,
+  "raster": 0,
+  "wholeBody": "FAIL: moving revealed connector-shaped bite in DOC1/DOC2 silhouette. Reconstruct hidden paper edges before acceptance.",
+  "status": "REJECTED_WHOLE_BODY_UNTIL_REPAIR"
+}

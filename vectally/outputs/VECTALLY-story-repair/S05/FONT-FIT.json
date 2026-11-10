@@ -1,0 +1,97 @@
+[
+  {
+    "text": "VECTALLY",
+    "font": "Archivo Black",
+    "roi": [
+      45,
+      60,
+      380,
+      140
+    ],
+    "fontSize": 58.71482359688309,
+    "letterSpacingEm": -0.1016262874358854,
+    "rotation": -3.8264403403179017,
+    "inkCenter": [
+      215.9788162775271,
+      105.69089054952369
+    ],
+    "iou": 0.7064592050209205,
+    "stage": "LOCAL_FONT_FIT_NOT_ACTUAL_CANVA"
+  },
+  {
+    "text": "GOT A",
+    "font": "Archivo Black",
+    "roi": [
+      20,
+      255,
+      380,
+      370
+    ],
+    "fontSize": 112.43580757671124,
+    "letterSpacingEm": -0.12950150016471462,
+    "rotation": 0.11415590864737202,
+    "inkCenter": [
+      205.7438939450461,
+      314.72125893502533
+    ],
+    "iou": 0.773352873709698,
+    "stage": "LOCAL_FONT_FIT_NOT_ACTUAL_CANVA"
+  },
+  {
+    "text": "BOOKKEEPING",
+    "font": "Archivo Black",
+    "roi": [
+      10,
+      385,
+      170,
+      1140
+    ],
+    "fontSize": 107.08428208354238,
+    "letterSpacingEm": -0.14963109434996452,
+    "rotation": -86.00319567032473,
+    "inkCenter": [
+      85.93166096661548,
+      756.6994567918703
+    ],
+    "iou": 0.61201894359587,
+    "stage": "LOCAL_FONT_FIT_NOT_ACTUAL_CANVA"
+  },
+  {
+    "text": "QUESTION?",
+    "font": "Archivo Black",
+    "roi": [
+      265,
+      1220,
+      930,
+      1400
+    ],
+    "fontSize": 121.52107537853419,
+    "letterSpacingEm": -0.1495355816176052,
+    "rotation": -5.285346318861505,
+    "inkCenter": [
+      598.0633498220942,
+      1321.0562138868106
+    ],
+    "iou": 0.6773922706506976,
+    "stage": "LOCAL_FONT_FIT_NOT_ACTUAL_CANVA"
+  },
+  {
+    "text": "Drop it here.",
+    "font": "Asap",
+    "roi": [
+      590,
+      1420,
+      910,
+      1490
+    ],
+    "fontSize": 52.114881898551644,
+    "letterSpacingEm": 0.008781473166117465,
+    "rotation": -0.05742850599651683,
+    "inkCenter": [
+      749.2570040729797,
+      1452.496034208555
+    ],
+    "iou": 0.5909698996655518,
+    "stage": "LOCAL_FONT_FIT_NOT_ACTUAL_CANVA"
+  }
+]

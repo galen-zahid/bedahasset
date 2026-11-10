@@ -1,0 +1,211 @@
+Gas. Kita pakai **solusi hybrid yang bener**, bukan maksa semua jadi native polos dan bukan juga SVG mati.
+
+## Problem solve yang bener
+
+### 1) Jangan samain semua teks
+Ada 3 jenis teks di VECTALLY:
+
+**A. Teks biasa**  
+Contoh: subcopy, body text, label kecil  
+→ **tetap native Canva**
+
+**B. Teks display tapi masih lurus / cuma rotate / italic / condensed**  
+Contoh: headline yang masih bisa dicapai dengan font + size + spacing + rotate  
+→ **tetap native Canva**
+
+**C. Teks display yang bentuknya udah “aneh”**  
+Contoh: warp, perspektif, masuk ke bidang miring, bentuk kayak SVG  
+→ **jangan pakai SVG statis biasa**  
+→ **pakai Canva app element seperti TypeCraft**
+
+Jadi buyer tetap bisa ganti tulisan.
+
+---
+
+## Jawaban buat pertanyaan lu
+
+### “Kalau buyer mau ganti tulisannya gimana?”
+Kalau elemen itu dibuat dengan **TypeCraft**, buyer bisa:
+
+1. klik elemen warped-nya  
+2. klik **Edit**
+3. ubah teks
+4. klik **Update / Perbarui elemen**
+
+Jadi **bukan edit SVG manual**.
+
+### “Kalau yang udah SVG gimana?”
+Kalau SVG biasa:
+- bisa resize
+- bisa recolor
+- **tapi tidak enak untuk ganti kata**
+
+Jadi SVG biasa itu **bukan solusi utama** untuk buyer test kalau copy harus bisa diganti.
+
+### “Kalau ingin bentuknya seperti SVG gimana?”
+Nah ini dia:
+- bentuk visualnya dibikin lewat **TypeCraft**
+- hasilnya tampil kayak teks warped / distorsi
+- tapi masih punya jalur **re-edit lewat app**
+
+Itu yang paling mendekati:
+**SVG look + editable workflow**
+
+---
+
+## Workflow final yang harus dipakai
+
+## RULE SYSTEM
+- **Native Canva** untuk teks normal
+- **TypeCraft** untuk headline aneh
+- **SVG biasa** hanya untuk elemen dekoratif non-copy
+
+---
+
+## Page-by-page strategy
+
+### A03 — Every Entry. In Its Place.
+Kemungkinan:
+- “EVERY ENTRY.” → native
+- “IN ITS PLACE.” → native  
+Kalau ternyata hanya condense + scale, **jangan TypeCraft**. Native lebih aman.
+
+### A07 — Cash Flow Is About Timing
+Biasanya masih bisa native:
+- League Gothic / condensed font
+- atur size
+- atur line break
+- rotate bila perlu
+
+Kalau tidak benar-benar warp, **tetap native**.
+
+### A20 — Start Where You Are
+Kalau headline ditempel di shape atau bidang agak sulit:
+- kalau cuma ditaruh di panel lurus → native
+- kalau ikut perspektif papan / sign → **TypeCraft**
+
+### A27 — 3 Money Checks Worth Making
+Tergantung layout:
+- kalau headline utama lurus → native
+- kalau ada angka / judul yang didistorsi editorial → TypeCraft hanya bagian itu
+
+### A45 — Can We Commit?
+Ini paling jelas:
+- **“CAN WE”** → kemungkinan native masih cukup
+- **“COMMIT?”** → ini kandidat kuat **TypeCraft**
+- body copy kanan bawah → native
+- label kecil di objek 3D → native atau grouped native, tergantung hasil
+
+---
+
+## Jadi target buyer test itu bukan:
+“semua teks native”
+
+## Tapi:
+“semua teks penting bisa diubah buyer lewat workflow yang masuk akal”
+
+Itu beda.
+
+---
+
+## Standard lolos buyer test
+
+Sebuah page dianggap **lolos** kalau:
+
+### PASS
+- buyer bisa ubah teks utama
+- layout masih stabil
+- bentuk visual masih kuat
+- tidak perlu keluar dari Canva
+- tidak perlu buka Illustrator/Figma
+
+### PARTIAL
+- buyer bisa ubah teks
+- tapi perlu sedikit resize / spacing manual
+
+### FAIL
+- buyer harus edit SVG manual
+- atau kalau ganti kata layout langsung rusak total
+- atau teks tidak bisa diganti sama sekali
+
+---
+
+## Solusi paling realistis
+
+### Untuk teks warped:
+Buat elemen dengan **TypeCraft**, lalu sisakan workflow ini:
+
+**Buyer flow**
+1. klik elemen
+2. Edit
+3. ubah kata
+4. sesuaikan spacing/font bila perlu
+5. Update element
+
+Itu udah jauh lebih acceptable daripada:
+- “nih SVG, lu bongkar sendiri”
+- atau “nih native text tapi kalau ganti langsung jebol”
+
+---
+
+## Best practice biar buyer nggak bingung
+
+Di file Canva, tambahin **1 halaman paling akhir**:
+### “EDIT GUIDE”
+Isi singkat:
+- teks biasa = double click langsung edit
+- teks warp = klik elemen > Edit > ubah text > Update
+- gunakan copy pendek agar layout tetap aman
+- bila kata lebih panjang, kecilkan size sedikit
+
+Ini penting banget. Buyer test sering lolos bukan karena semuanya otomatis sempurna, tapi karena:
+- editable
+- logis
+- gampang dipahami
+
+---
+
+## Copy-length rule
+Ini juga wajib.
+
+Misalnya:
+- `COMMIT?` aman
+- `COMMIT NOW?` mungkin masih aman
+- `SHOULD WE COMMIT NOW?` kemungkinan perlu resize
+
+Itu **normal**, bukan kegagalan template.
+
+Yang penting:
+- buyer **bisa** mengganti
+- ada jalur jelas
+- bentuk visual tetap terjaga
+
+---
+
+## Keputusan final yang gue sarankan
+Pakai ini:
+
+- **A03:** mostly native
+- **A07:** mostly native
+- **A20:** native + TypeCraft bila ada perspektif headline
+- **A27:** native + TypeCraft bila ada distorsi utama
+- **A45:** TypeCraft untuk “COMMIT?”, native untuk sisanya
+
+---
+
+## Intinya
+Bukan:
+- “semua native”
+- atau “semua SVG”
+
+Tapi:
+### **native untuk teks normal**
+### **TypeCraft untuk teks yang harus berbentuk seperti SVG tapi tetap editable**
+
+Itu solusi paling waras, paling buyer-friendly, dan paling dekat ke target lu.
+
+Kalau mau, next gue bisa bantuin **breakdown super konkret per 5 page**:
+- teks mana native
+- teks mana TypeCraft
+- font mana
+- mana yang PASS / PARTIAL / FAIL buyer test.

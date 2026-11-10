@@ -1,0 +1,33 @@
+[
+  {
+    "id": "PL",
+    "name": "Lembar Profit and Loss - kertas dan seluruh detail",
+    "wholeBody": true,
+    "hiddenReconstruction": "edge restored behind green OR badge",
+    "nativeCopy": "PENDING",
+    "children": 8
+  },
+  {
+    "id": "BS",
+    "name": "Lembar Balance Sheet - kertas dan seluruh detail",
+    "wholeBody": true,
+    "hiddenReconstruction": "edge restored behind green OR badge",
+    "nativeCopy": "PENDING",
+    "children": 10
+  },
+  {
+    "id": "Garis penegas SHOWS",
+    "wholeBody": true,
+    "nativeCopy": "non-copy ornament"
+  },
+  {
+    "id": "Garis penegas PROFIT",
+    "wholeBody": true,
+    "nativeCopy": "non-copy ornament"
+  },
+  {
+    "id": "Pilihan OR - lingkaran utuh",
+    "wholeBody": true,
+    "nativeCopy": "OR pending"
+  }
+]

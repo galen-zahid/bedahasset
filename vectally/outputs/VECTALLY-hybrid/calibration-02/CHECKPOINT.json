@@ -1,0 +1,189 @@
+{
+  "date": "2026-11-10",
+  "scope": "84 VECTALLY = 48 Feed +30 Story +6 Highlight, plus final EDIT GUIDE; unchanged and NOT COMPLETE",
+  "design": "https://www.canva.com/design/DAHaawX9Fm8/q-iGCT-epdpWj0UB7AXKGA/edit",
+  "results": {
+    "calibration02": "TIMING control adjustment, actual export IoU 0.6077001 vs baseline 0.6022223; clean but not 1:1",
+    "calibration03": "REJECTED: IoU 0.793988 but spacing -0.08 and stroke 4 merge letters; ink score insufficient visual gate",
+    "fontFit": "Per-character projective fit of original League Gothic yields 0.899-0.986 mask IoU. No modified fonts produced. Not actual Canva output."
+  },
+  "pending": "Clean TIMING actually saved via trusted browser clicks, exported all five Canva pages to calibration-04. Stroke 2, letter spacing -0.02. Actual A07 mask IoU 0.655188 (baseline .602222). Not 1:1. A45 unchanged. Rejected calibration03 blob no longer latest saved text.",
+  "constraints": [
+    "No OS computer use",
+    "Do not claim 100% or deliver unverified draft",
+    "Keep semantic asset groups intact",
+    "Ordinary text native; warped headings approved TypeCraft"
+  ],
+  "next": "Fetch newest page13 PNG download link, save S06/CANVA_ALL_NATIVE.png; inspect actualheadline andbody layout. SourceS07alreadyviewed; continue full84physicalassets andtypography. 100%notachieved; gradients, final buyerQA, EditGuide remain open.",
+  "highlightH05": {
+    "minimumLocalMaskIoU": 0.9878603945371776,
+    "localGeometryGates": [
+      "PASS",
+      "PASS",
+      "PASS",
+      "PASS",
+      "PASS",
+      "PASS",
+      "PASS",
+      "PASS",
+      "PASS",
+      "PASS",
+      "PASS",
+      "PASS",
+      "PASS",
+      "PASS"
+    ],
+    "transparentHoles": 6,
+    "canvaImport": "NOT_TESTED",
+    "gradients": "UNRESOLVED",
+    "shapes": 15,
+    "semanticAssemblies": 4
+  },
+  "browser": "Tab1 isolatedDAHabUK1x7c now20pages, page13=S06allcopycandidate selected. PosisiAtur panel open after widening bodytext; exportpage13inprogress. Maincollection11pagesunchanged.",
+  "newLocalH01": {
+    "semanticAsset": "open report, integrated left panel/spine/right page",
+    "nativeShapes": 15,
+    "groups": 3,
+    "minGeometryIoU": 0.9923726505039498,
+    "canvaImport": "NOT_TESTED",
+    "gradients": "UNRESOLVED"
+  },
+  "typography": "TIMINGofficialLeagueGothicCondensedRegularwdth75selectedandstroke1. UpdatedactualCanva viaTypeCraftUpdatefromwarpeditor. Exportinprogress, NOTyetaccepted. Priorclean04stillrecoverableinsalincopyDAHabUK1x7c (A07nowpage3;emptytestpage2).",
+  "actualDesignPages": 11,
+  "nativeHighlightPages": {
+    "H01": 6,
+    "H05": 7,
+    "H06": 8,
+    "H02": 9,
+    "H03": 10,
+    "H04": 11
+  },
+  "latestActualExport": "outputs/VECTALLY-highlight-repair/canva-export-eleven/canva-eleven-pages.zip",
+  "h05Followup": "Solid badge checklist replaced in-place. Missing EVALUATION was proven absent and restored. Final actual structure15shapes2groups5roots. Actual11page export saved; visual/buyer QA pending.",
+  "groupFix": "Canva SDK rejects nested groups and singleton groups. work/normalize_native_package.py flattens children within each semantic root, unwraps single-primitive assets, asserts exact absolute leaf geometry/color signatures. H01=15shapes1group;H05=15shapes2groups;H06=7shapes2groups. All3 actual SDK structure verified.",
+  "safeUiWorkflow": "Use page-counter button (e.g.6/8) to open spinbutton Buka halaman; fill target number and submit Enter. Verify counter before current-page import. Thumbnail synthetic clicks can leave page unchanged. File chooser setFiles unsupportedChrome(-32000Not allowed); generated packages were loaded as File/DataTransfer via the public HTML input change event, not internal state. That arbitrary JS method now requires unlocked CUSBE capability. Normal importer button click runs SDK even when browser hidden. Do not use Playwright-local stale tool. IMPORTANT: GoToPage type+submit samecall can silentlyleaveoldpage. Type slowlyWITHOUTsubmit, readvalue/active=true, separate Enter, thenverifycounter andactualpage. Uploadexportoldlinkselectionlastwasstale8pagezip; latestuniqueobservedlinkfetchedactual11pagezip afterquality/allradiosverified.",
+  "h05LocalFix": {
+    "path": "outputs/VECTALLY-highlight-repair/H05-solid-badge",
+    "nativeReplacement": "REPLACEMENT_CHECKLIST.json",
+    "bodyMaskIoU": 0.996160921378869,
+    "inkMaskIoU": 1,
+    "greenFamilyIoU": 0.9918290383406663,
+    "pathBytes": 468,
+    "canvaReplacement": "PENDING",
+    "instructions": "Replace only existing H05 CHECKLIST group on page7, not append another group over it. Full green badge disc + solid navy mark are 2 paths in the same native badge element. Current app repair UI only replaces raster accents, not native groups. Can use ordinary Canva Layers UI delete audited CHECKLIST group then current-page import replacement, or implement proper native-asset replacement in owned app if necessary."
+  },
+  "highlightActualQa": {
+    "H02": {
+      "shapes": 19,
+      "groups": 2,
+      "localToCanvaMAE": 0.05675737745484376
+    },
+    "H03": {
+      "shapes": 21,
+      "groups": 2,
+      "localToCanvaMAE": 0.10525595459036927
+    },
+    "H04": {
+      "shapes": 3,
+      "groups": 1,
+      "localToCanvaMAE": 0.01510088015904896
+    },
+    "H05": {
+      "shapes": 15,
+      "groups": 2,
+      "solidBadgeReplaced": true,
+      "missingEvaluationRestored": true
+    },
+    "H06": {
+      "shapes": 7,
+      "groups": 2,
+      "frameBubbleRestored": true
+    },
+    "visual": "Actualsourcecomparisoncontactsheetinspected. GeometrycleanenoughfornextQA, gradientsgrainnotrestored. H03dollar/H04questionmarknative-textpolicyOPEN.",
+    "sheets": [
+      "outputs/VECTALLY-highlight-repair/CONTACT-SHEET-CANVA-H02-H03-H04.png",
+      "outputs/VECTALLY-highlight-repair/CONTACT-SHEET-CANVA-H01-H05-H06-RESTORED.png"
+    ]
+  },
+  "nativeAffineProbe": "ActualSDK rejectsnonuniformgroupplacementwithaspectratioerror. Evidenceoutputs/VECTALLY-hybrid/native-affine-probe/CHECKPOINT.json",
+  "nativeSpacingFeature": {
+    "code": "D:/cusbe-importer/src/intents/design_editor/app.tsx",
+    "backup": "D:/cusbe-importer/src/intents/design_editor/app.before-native-spacing-20261110.tsx.bak",
+    "typecheck": "PASS",
+    "build": "PASS with local app-scripts; globalCLI appbuildtimedoutnooutput",
+    "draftUpload": "SAVED; not submitted or published",
+    "runtime": "8 actual native texts verified; spacing width reduction verified for ArchivoBlack Asap LeagueGothic in PNG",
+    "proof": "outputs/VECTALLY-native-spacing",
+    "buildCommand": "node D:/cusbe-importer/node_modules/@canva/app-scripts/bin/canva_app_scripts.js build",
+    "resolverFix": "SecondbundlefontRefqueryfix uploadedandshowsDisimpaninDevPortal; reloadedtab3. Typecheck/buildpassed; runtimeFontFamily+FontRefresolutionnotyettested. OriginalAsapfailurewasnotproofunavailablefont."
+  },
+  "s05": {
+    "status": "ASSETS_AND_BODY_NATIVE_IMPORTED_IN_ISOLATED_COPY; HEADLINES_UNFINISHED",
+    "source": "D:/download/VECTALLY/Story/VECTALLY_S05_Got_A_Bookkeeping_Question.png",
+    "files": "outputs/VECTALLY-story-repair/S05",
+    "geometry": "2Lframes2greenaccentswhole; minmaskIoU.9945355",
+    "text": "Native negative trackingfit made visiblelettercollisions, rejected. AffineTitlefit0.63-.74 alsofarfrom1:1, notpromoteasfinished. SourcefamilyandrequestedArchiveBlackglyphshapesappear different; noauthoritativefontidentityyet.",
+    "runtimePlan": "Keep native body; approved TypeCraft forwarpeddisplaytitles. Need actual fontmatch or settlefidelityscope; no silent font substitution.",
+    "structure": "5 native_shapes,1 native_text,6roots verified actualpage3/13 in DAHabUK1x7c",
+    "graphics": "Both green accents now smooth whole cubic paths (105/109bytes), actualsource maskIoU .986607/.990288. Frameswhole unchanged.",
+    "nativeFontResolver": "OriginalfindFonts() list didnotincludeAsap evenactualFontRefverified. Bodypackagenowversion1 withverifiedYAFdJr0OaFw:0. CodeupdatedfindFonts({fontRefs})forprovidedrefs; typecheck/buildpassed, resolverfixnotyetuploaded. Do notclaimAsapunavailable.",
+    "actualExport": "outputs/VECTALLY-story-repair/S05/CANVA_ASSETS_BODY.png",
+    "actualAudit": "outputs/VECTALLY-story-repair/S05/ACTUAL-ASSET-AUDIT.json",
+    "actualResults": "Actualnative5shapes1text. RightframeIoU1.0,leftframe.973107,logoaccent.973027,underline.980709. BodyIoU.442012; besttranslationdy+2would.58038, notapplied. Thereforevisualalignmentnotcomplete; noheadlineinserted."
+  },
+  "goalTurnClassification": "progress: actual native S01 hidden-body repair and normal copy; S02 semantic asset/native label assembly; S03/S04 semantic assets imported and SDK-inspected",
+  "storyNativePrototypes": {
+    "S01": {
+      "status": "NATIVE_ASSETS_AND_NORMAL_COPY_PROTOTYPE",
+      "asset_status": "NATIVE_76_SHAPES_6_GROUPS_WHOLE_PAPERS_AND_BOOK_REPAIRED",
+      "text_status": "6_NATIVE_NORMAL_COPY_ELEMENTS; THE_BOOKS_AND_STORY_HEADLINES_PENDING",
+      "prototype_page": 9
+    },
+    "S02": {
+      "status": "NATIVE_ASSETS_AND_NORMAL_COPY_PROTOTYPE",
+      "asset_status": "NATIVE_42_SHAPES_8_GROUPS_TIGHT_ASSET_BOUNDS",
+      "text_status": "6_NATIVE_NORMAL_COPY_ELEMENTS; DISPLAY_HEADLINES_PENDING",
+      "prototype_page": 8
+    },
+    "S03": {
+      "status": "NATIVE_ASSET_PROTOTYPE",
+      "asset_status": "22_NATIVE_SHAPES_2_GROUPS; GREEN_TOTAL_ROW_RESTORED",
+      "text_status": "NO_OUTLINED_COPY; NATIVE_AND_TYPECRAFT_COPY_PENDING",
+      "prototype_page": 10
+    },
+    "S04": {
+      "status": "NATIVE_ASSETS_CAPTIONS_AND_BODY_PROTOTYPE",
+      "asset_status": "24_NATIVE_SHAPES_6_SEMANTIC_GROUPS",
+      "text_status": "3_NATIVE_CAPTIONS_AND_1_NATIVE_PARAGRAPH; BRAND_AND_DISPLAY_PENDING",
+      "prototype_page": 11
+    }
+  },
+  "s01WholeBody": "Four papers repaired under connector endpoints, including hidden edge/fold. Book body gap between cover and right white leaf fixed by combining both source leaves before column filling. Source gradient restoration pending. Old whole-body buyer test rejection retained; repeat final buyer test after candidate is complete.",
+  "s01Flow": "Replaced native group on page9; actual latest PNG is CANVA_FLOW_REPAIRED_NORMAL_COPY.png from19pageZIP. New left-side bridge attaches to paper. Still prototype; source gradients and final pixel-level layer/edge review pending.",
+  "s02Repair": "Q commands rejected by native SDK; replaced exact curves with C. Full-canvas analytic viewBoxes rejected for oversized asset selection; path coordinates translated into tight viewBoxes. Old rejected test pages deleted, actual group bounds now verified. Wrong dark UNPAID labels replaced as white native copy and actual export visually verified.",
+  "s05NativeGradient": "Native Canva UI gradient on custom native shape proven; SDK inspector returns unsupported color ref, but shape remains native. Actual evidence outputs/VECTALLY-story-repair/S05/CANVA_NATIVE_GRADIENT_STRUCTURE.json. Not all gradients restored.",
+  "nativeFontUpload": "Existing Merek UI asks admin to configure Brand Kit; no native condensed custom-font upload route found. Official League Gothic wdth75 custom font already in TypeCraft only. Do not silently substitute an unrelated font or claim native upload is impossible universally.",
+  "editGuide": "REQUIRED_LAST_PAGE_NOT_YET_CREATED",
+  "s04NormalCopy": "Actual SDK: 24native_shapes,6groups,4native_text. Caption is grouped with its capsule. Description is one Asap55 native paragraph, explicit3lines,lineHeightEm54/55,source-alignedleft60. Font fit around0.50 forlonglines: exact source typeform NOT accepted; no family substitution. Actual export pending. Actual PNG exported and visually inspected; paragraph is coherent 3lines, captions stayinsidecapsules. Typeface still not1:1; no visual PASS.",
+  "latestPrototypeExport": "outputs/VECTALLY-story-repair/canva-prototype-19/PROTOTYPE-19.zip",
+  "contactSheets": [
+    "outputs/VECTALLY-story-repair/CONTACT-SOURCE-CANVA-S01-S02.png",
+    "outputs/VECTALLY-story-repair/CONTACT-SOURCE-CANVA-S03-S04.png"
+  ],
+  "actualS03S04": "S03 actual22shape2group/no raster, local to actual asset-render MAE0.0320901. S04 actual24shape6group4nativeText/no raster, shape area MAE0.0980075 excludingcopyROIs. These are renderer agreement, NOT source fidelity scores. Pink isolated group sheet viewed; paper/illustration bodies whole.",
+  "s06": {
+    "status": "ACTUAL_NATIVE_47_SHAPES_3_GROUPS_8_TEXT; EXPORT_REQUESTED",
+    "prototype_page": 13,
+    "source": "D:/download/VECTALLY/Story/VECTALLY_S06_Good_Records_Better_Decisions.png",
+    "assets": "3wholepapers(2rearwholeprimitives+frontreportgroup24children), connecteddecisionflowgroup17children(target/scales/calendar),CTAgroup,emptyresponsecapsule,brandtick; no primary raster",
+    "fonts": "Archivo Black brand; Asapheavy for GOOD/RECORDS/BETTER/DECISIONS/CTA actualfontWeightheavy verified SDK. Local headlineIoU .85-.893 vssource. BodyAsapnormal; exactfidelitynotpassed.",
+    "bodyFix": "Two-text group rejected because second line wrapped. Width-only group documented type was also rejected by runtime(allboxpropsrequired). Imported2nativebody roots; actualsecondtext125.5high(wrapped)thenpublicPositionwidth441→600, verifiedheight68.5. Keepactualboxmetrics, do notrepeatautoheightguess.",
+    "files": "outputs/VECTALLY-story-repair/S06",
+    "pending": [
+      "actual export inspect",
+      "source-visible S ribbon contour alignment",
+      "native source gradients",
+      "final buyer native-text edit test"
+    ]
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "stage": "ASSET_PROTOTYPE_NOT_FINISHED_PAGE",
+  "actualNative": {
+    "native_shape": 22,
+    "group": 2
+  },
+  "localToNativeCanvaShapeAreaMAE": 0.03209008537186847,
+  "maskScope": "all non-copy pixels; S04 captions/body excluded",
+  "sourceVisualFidelity": "NOT_PASSED: headlines, gradients, exact requested typeform and final buyer QA pending",
+  "wholeBody": "visually inspected on contrasting pink per-group isolation sheet; no connector-shaped paper bites or transparent internal gaps",
+  "all84Complete": false
+}

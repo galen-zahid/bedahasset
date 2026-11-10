@@ -1,0 +1,1057 @@
+[
+  {
+    "path": "handoff/app-source/.nvmrc",
+    "size": 12,
+    "sha256": "99d924cba0f1108bda49db624f2532cdd75ecba5a5f151dff62b32878179e037"
+  },
+  {
+    "path": "handoff/app-source/AGENTS.md",
+    "size": 6568,
+    "sha256": "026e938860dff60d9466c8019c181ea6fc9a0943fb64156b975ad631e383b0df"
+  },
+  {
+    "path": "handoff/app-source/package.json",
+    "size": 2295,
+    "sha256": "536f3d95ea575b9e1335ef6d2df51a3974bed4c0e83a8d7478fbf910832f51a4"
+  },
+  {
+    "path": "handoff/app-source/README.md",
+    "size": 241,
+    "sha256": "4057edcbbfea066a640f88f4385d49ed7ae54cb49b9d45ce46fae123438c16c1"
+  },
+  {
+    "path": "handoff/app-source/src/index.tsx",
+    "size": 149,
+    "sha256": "df535ca199f62cc7b52d4e246af51240cd4af79d19c26fc1b72bb7950d11e3c0"
+  },
+  {
+    "path": "handoff/app-source/src/intents/design_editor/app.tsx",
+    "size": 13593,
+    "sha256": "b242adc3501b6c4a1486ceb3c2863b53edd4d5314c7efe11e0afd41a63ac4985"
+  },
+  {
+    "path": "handoff/app-source/src/intents/design_editor/index.tsx",
+    "size": 656,
+    "sha256": "2d5f82aa8a53b4bdadfb16bbe02450144a3a46ef33ef8c351934233bc375b954"
+  },
+  {
+    "path": "handoff/app-source/src/intents/design_editor/inspection.ts",
+    "size": 3975,
+    "sha256": "17bae241988b1254568883825e903ae07a0097b5c9a11877a7e29891f675f49b"
+  },
+  {
+    "path": "handoff/app-source/src/intents/design_editor/native_repair.ts",
+    "size": 3567,
+    "sha256": "eff17188b1cfc75ed76119d384958c890ef68bef82f66e6666a58a2a8fcaf05a"
+  },
+  {
+    "path": "handoff/app-source/tsconfig.json",
+    "size": 1303,
+    "sha256": "a8d73aa35f33a6a8ad136a6c75c0e90269ae8666cc42bb5fdf53085c2a6fcd33"
+  },
+  {
+    "path": "handoff/audit_package.py",
+    "size": 6442,
+    "sha256": "721e63d04daf51df2a3e1abe4bb8284a4c14b657eaa3b48893d2d812ad94690e"
+  },
+  {
+    "path": "handoff/briefs/HYBRID_APPROVED.txt",
+    "size": 5395,
+    "sha256": "2a5fb319459d3ca5667faeaef706f412d943168a090260764b8bd0a119880281"
+  },
+  {
+    "path": "handoff/briefs/INITIAL_REQUEST.txt",
+    "size": 16626,
+    "sha256": "c4c5d5c0f383ec17c127ed01a23a4453baa4fe02e52949e78f7b52847479518d"
+  },
+  {
+    "path": "handoff/build_state.py",
+    "size": 5922,
+    "sha256": "fc73dbe8a836b265e4a68bf1768bc4fb38f3871d4d6186ea1eb5daf415a8c378"
+  },
+  {
+    "path": "handoff/CLAUDE_START.md",
+    "size": 4670,
+    "sha256": "ae270b66667e8f3e15a7ad7f321c151b5e868a8a9034ede7712a1d318c1995e9"
+  },
+  {
+    "path": "handoff/FONT_CATALOGUE.json",
+    "size": 1452,
+    "sha256": "d8ac6ca74256e23ad0c372416cc38de1e6994f6f49dd58eebfe2baac65c44c1a"
+  },
+  {
+    "path": "handoff/jobs.json",
+    "size": 3182,
+    "sha256": "c2bafc61778491ff2717c634e635172f3b1f895e98a5fee0cebf3aa611a383f2"
+  },
+  {
+    "path": "handoff/pack_handoff.py",
+    "size": 7943,
+    "sha256": "5e565eba42766826a75d86380f2d56fa73b2721750802e16b7b6166d8727087b"
+  },
+  {
+    "path": "handoff/POWERSHELL.md",
+    "size": 4533,
+    "sha256": "a617639dfdf169cfe627ddd1f126b821d1416485cda594cd86d331196cfb7a07"
+  },
+  {
+    "path": "handoff/REPORT_VECTALLY.md",
+    "size": 21927,
+    "sha256": "220c93ccc22cdcf2cb67c30e28c7d51cf4e054529fcc118a29216322478c9cad"
+  },
+  {
+    "path": "handoff/runs/20261110-123413-005-Audit/PACKAGE_AUDIT.json",
+    "size": 12667,
+    "sha256": "c76682f5391b4d016bf5d727e0346c9fd3063d688405a9149612fe7ccf851227"
+  },
+  {
+    "path": "handoff/runs/20261110-123413-005-Audit/SOURCE_AUDIT.json",
+    "size": 23675,
+    "sha256": "23f56884ad47c4f78e0b00c9ba939ab49f79e322fcf0847ef9f5360f652afce1"
+  },
+  {
+    "path": "handoff/runs/20261110-123530-781-Audit/PACKAGE_AUDIT.json",
+    "size": 12667,
+    "sha256": "c76682f5391b4d016bf5d727e0346c9fd3063d688405a9149612fe7ccf851227"
+  },
+  {
+    "path": "handoff/runs/20261110-123530-781-Audit/SOURCE_AUDIT.json",
+    "size": 23675,
+    "sha256": "23f56884ad47c4f78e0b00c9ba939ab49f79e322fcf0847ef9f5360f652afce1"
+  },
+  {
+    "path": "handoff/STATE.json",
+    "size": 45529,
+    "sha256": "9a7598c441ff4c0669782b485ed4ec27fcaee692e1c1e8e98d94358319c032cc"
+  },
+  {
+    "path": "handoff/Vectally.ps1",
+    "size": 6718,
+    "sha256": "cbf64f30c265eb882e4576adbbbf71fd591a7572ffdb391f7d5261279dfb1fb1"
+  },
+  {
+    "path": "handoff/VECTALLY_STATUS.csv",
+    "size": 24529,
+    "sha256": "13104e7ddee1fb2894b1d021e8686429d3a9d5f88e2fd1fc70ba6c25bf9e427a"
+  },
+  {
+    "path": "handoff/VERIFICATION.json",
+    "size": 1090,
+    "sha256": "490819ec99644d0e869463c250d215e6aa992ef23ff397dc7b415862bb93fed2"
+  },
+  {
+    "path": "outputs/VECTALLY-4-aset-utuh/A07/CANVA_PACKAGE.json",
+    "size": 142233,
+    "sha256": "6a8a24bf65e1619d2ad89213f6b253fd4a1bf7f8cf11c96a3234ffa729b0e3c2"
+  },
+  {
+    "path": "outputs/VECTALLY-4-aset-utuh/A20/CANVA_PACKAGE.json",
+    "size": 52364,
+    "sha256": "7f2e3b53519de5e04b703806b7c86386e57af942e7d76f6c129d7609e464c287"
+  },
+  {
+    "path": "outputs/VECTALLY-4-aset-utuh/A27/CANVA_PACKAGE.json",
+    "size": 118623,
+    "sha256": "1614019992f4e93a95b15729433485e0ce23cbeb21237ea6153752bba6a2bb2a"
+  },
+  {
+    "path": "outputs/VECTALLY-4-aset-utuh/A45/CANVA_PACKAGE.json",
+    "size": 99843,
+    "sha256": "9ac4bcbdb7aa7323436e1858820a32fb3e271ab0757b970d4574f81d12fdb00a"
+  },
+  {
+    "path": "outputs/VECTALLY-highlight-repair/H01/CANVA_PACKAGE.json",
+    "size": 11887,
+    "sha256": "26dea0dc8c522611c6dd6c874ba7a3ff5b95abe421b11b330b577d0b634a2061"
+  },
+  {
+    "path": "outputs/VECTALLY-highlight-repair/H01/CANVA_STRUCTURE.json",
+    "size": 18999,
+    "sha256": "b2e7bd3e6552d658eda4b555c60ce071710d3e281ae5fd189a98390acd7c027b"
+  },
+  {
+    "path": "outputs/VECTALLY-highlight-repair/H01/inventory.json",
+    "size": 6882,
+    "sha256": "a1bfd46e97ea8a4858e8c09faa9df5c48edeff154ba1d0dcf3062546b4336de8"
+  },
+  {
+    "path": "outputs/VECTALLY-highlight-repair/H01/QA.json",
+    "size": 443,
+    "sha256": "05aa556c10d86ace5a131be9a8847609b084d5f4b7363ae42b171655e3cf6445"
+  },
+  {
+    "path": "outputs/VECTALLY-highlight-repair/H01/REPAIR_MISSING_NATIVE.json",
+    "size": 11643,
+    "sha256": "c96a6f92833abab7960ef5719b8d64c218f8f26c000c1beb340b23eeb41b2ac2"
+  },
+  {
+    "path": "outputs/VECTALLY-highlight-repair/H02/CANVA_PACKAGE.json",
+    "size": 23987,
+    "sha256": "6eed739a2c716a3d8f650c6b72e2dd367476eb80ff1ac64a7cce4d61bc9ce206"
+  },
+  {
+    "path": "outputs/VECTALLY-highlight-repair/H02/CANVA_STRUCTURE.json",
+    "size": 32899,
+    "sha256": "eb59356ee11a23803b2cd3d671e5ac77d00fd43c842b7d0aaafdcf42a8933107"
+  },
+  {
+    "path": "outputs/VECTALLY-highlight-repair/H02/inventory.json",
+    "size": 9768,
+    "sha256": "924a427a06c4dfff7b76e15e2de15ff426ec537ca7bdaac8cff11fea250542af"
+  },
+  {
+    "path": "outputs/VECTALLY-highlight-repair/H02/QA.json",
+    "size": 495,
+    "sha256": "b7f70fb328625c226d8b57e8ce762c5cb19e83ce95054f2dc610d3075ca2923e"
+  },
+  {
+    "path": "outputs/VECTALLY-highlight-repair/H03/CANVA_PACKAGE.json",
+    "size": 18057,
+    "sha256": "dab7e36534b7bdabac5d1c7c292bae47eeb9c707c1ab3231a35052a3440b326c"
+  },
+  {
+    "path": "outputs/VECTALLY-highlight-repair/H03/CANVA_STRUCTURE.json",
+    "size": 27736,
+    "sha256": "73c6ee3ff1ab1eeb557d63ac797857b7fde3d4ed01d76963a47782458a4ea839"
+  },
+  {
+    "path": "outputs/VECTALLY-highlight-repair/H03/CURRENCY-FONT-FIT.json",
+    "size": 2758,
+    "sha256": "d0e7c0324ea7a86152b3075df2475de902f0de1bfaa2ca74fc030401e6696bd3"
+  },
+  {
+    "path": "outputs/VECTALLY-highlight-repair/H03/inventory.json",
+    "size": 10760,
+    "sha256": "6121fe7415d70c57528c9b32b5936c2f09b453057a489ff5eaa14186d705ec80"
+  },
+  {
+    "path": "outputs/VECTALLY-highlight-repair/H03/QA.json",
+    "size": 649,
+    "sha256": "4cfd823cbfba50f115ff55e2bff7980d1730d4a14436739ad900fdd9d440b636"
+  },
+  {
+    "path": "outputs/VECTALLY-highlight-repair/H04/CANVA_PACKAGE.json",
+    "size": 4047,
+    "sha256": "77efe72d3ccbc6c7307394626e36299baab43e3c3778720f1154a09324e2da2f"
+  },
+  {
+    "path": "outputs/VECTALLY-highlight-repair/H04/CANVA_STRUCTURE.json",
+    "size": 5614,
+    "sha256": "67c0b56375d196d06d9964adb07197104991fb7eb9e2dc955a8789b77b74d54f"
+  },
+  {
+    "path": "outputs/VECTALLY-highlight-repair/H04/inventory.json",
+    "size": 1487,
+    "sha256": "09a8104b1b57395807f00af7a447a4e6a08d1b00c0401134d832e0536b620eb4"
+  },
+  {
+    "path": "outputs/VECTALLY-highlight-repair/H04/QA.json",
+    "size": 358,
+    "sha256": "9d86e71ea1e68085c3bd27e07761db50cf685b1357fd75e3f7a1a3c631a7d316"
+  },
+  {
+    "path": "outputs/VECTALLY-highlight-repair/H05/CANVA_PACKAGE.json",
+    "size": 14541,
+    "sha256": "983d3685bc798744d44a48478ce3c77f93f913b74a4e8c005046eb5140bce8b8"
+  },
+  {
+    "path": "outputs/VECTALLY-highlight-repair/H05/CANVA_STRUCTURE.json",
+    "size": 21361,
+    "sha256": "e2b45e669d05b8a14ad871592e905bb36a08b4332472e95fe23b67b914caa5ac"
+  },
+  {
+    "path": "outputs/VECTALLY-highlight-repair/H05/inventory.json",
+    "size": 9673,
+    "sha256": "fa2f44a5cc371c1683c437b37c83aeea7b3bc08ae8db50e3701c73bed36f24c5"
+  },
+  {
+    "path": "outputs/VECTALLY-highlight-repair/H05/QA.json",
+    "size": 590,
+    "sha256": "1b2eb21e2ca996532b37feb19110057c3d2db22fd359cd00bec4e2e7ac910d5c"
+  },
+  {
+    "path": "outputs/VECTALLY-highlight-repair/H05/REPAIR_MISSING_NATIVE.json",
+    "size": 3153,
+    "sha256": "0f5a01180c202de68d0a5cc83e704288c291fa9e804e0c72415eb9064cb8a367"
+  },
+  {
+    "path": "outputs/VECTALLY-highlight-repair/H05/SMALL-COMPONENT-REPAIR.json",
+    "size": 8069,
+    "sha256": "e588727903669e9e2114510204f80ae9879ae92450da66c090c1a982a719633a"
+  },
+  {
+    "path": "outputs/VECTALLY-highlight-repair/H05-solid-badge/CANVA_PACKAGE.json",
+    "size": 14104,
+    "sha256": "54ea9ef044ddcb8bbe3ac9c53754baccbb78d1a75ae3fd448f5b358ade0bddb2"
+  },
+  {
+    "path": "outputs/VECTALLY-highlight-repair/H05-solid-badge/CANVA_STRUCTURE.json",
+    "size": 21246,
+    "sha256": "7f97796cfdd6a4bf134ebb53a5a2ce03524c24110b984656f552e407c4718732"
+  },
+  {
+    "path": "outputs/VECTALLY-highlight-repair/H05-solid-badge/QA.json",
+    "size": 461,
+    "sha256": "32c1cbe77fa280986121fb93e940203cc6cdf194eff264284705fb8133a863a3"
+  },
+  {
+    "path": "outputs/VECTALLY-highlight-repair/H05-solid-badge/REPLACEMENT_CHECKLIST.json",
+    "size": 6861,
+    "sha256": "d9d68f83d2404dc6dcaf5cd10c8e0781da2e4b8421e98fae6f1d1c5a253df0b6"
+  },
+  {
+    "path": "outputs/VECTALLY-highlight-repair/H05-solid-badge/RESTORE_EVALUATION.json",
+    "size": 2443,
+    "sha256": "8496bf1bc58f0c139119cc5e14997e17790d8af79ce3a9ee438af3cd347c89f3"
+  },
+  {
+    "path": "outputs/VECTALLY-highlight-repair/H06/CANVA_PACKAGE.json",
+    "size": 8480,
+    "sha256": "b86b68c48853041ec33d5d83e1e3072b64ca6858ab230205ac89af55950b9cad"
+  },
+  {
+    "path": "outputs/VECTALLY-highlight-repair/H06/CANVA_STRUCTURE.json",
+    "size": 11762,
+    "sha256": "3fff10b657b51c42342bdbbc9e3e868de35621b317c3cba9c1217d15cf5c4d5f"
+  },
+  {
+    "path": "outputs/VECTALLY-highlight-repair/H06/inventory.json",
+    "size": 3808,
+    "sha256": "b3a41961d4d0beb9b2b4f3fc0d864d7f49c031bb198f79f44bf9ee9ff7b1a367"
+  },
+  {
+    "path": "outputs/VECTALLY-highlight-repair/H06/QA.json",
+    "size": 473,
+    "sha256": "ba5acb28938dfff1be50d9a6351611e4d573221c8d969f2cc10242cbfcf3c4b7"
+  },
+  {
+    "path": "outputs/VECTALLY-highlight-repair/H06/REPAIR_MISSING_NATIVE.json",
+    "size": 3438,
+    "sha256": "ad96720fae745c41e0027754358bd12afd31f19d6cd98489e7d025cae0036489"
+  },
+  {
+    "path": "outputs/VECTALLY-hybrid/calibration-02/CHECKPOINT.json",
+    "size": 13495,
+    "sha256": "ffeea9b8d54c033862c05c2afd1b7d9becdcbad4aab36c035ff5b5b875370803"
+  },
+  {
+    "path": "outputs/VECTALLY-hybrid/calibration-02/GLYPH-METRICS.json",
+    "size": 607,
+    "sha256": "c544c269258c30ed263a273c21af644e55ad47ae10ba2a29bd2361c0b7dd870e"
+  },
+  {
+    "path": "outputs/VECTALLY-hybrid/calibration-03/GLYPH-METRICS.json",
+    "size": 608,
+    "sha256": "14a42fa25dc438f4f5321ea08a42303829f4d1a8e1fbca09f60394f4ba1b51c1"
+  },
+  {
+    "path": "outputs/VECTALLY-hybrid/calibration-04/GLYPH-METRICS.json",
+    "size": 607,
+    "sha256": "6eabfdf8e3aec30523f562451c1980e9e0211ace6deac263a5c95acadb4dca33"
+  },
+  {
+    "path": "outputs/VECTALLY-hybrid/calibration-05/GLYPH-METRICS.json",
+    "size": 305,
+    "sha256": "1795c41a904ff0ee6e9ba408b61edda16c5f199bc7effaef47cac8b28c619736"
+  },
+  {
+    "path": "outputs/VECTALLY-hybrid/font-identification/LeagueGothic-variable.ttf",
+    "size": 65972,
+    "sha256": "3b0e998c9a0034222394ffecdd383e6948259ad037b95555b139a217629ce1d0"
+  },
+  {
+    "path": "outputs/VECTALLY-hybrid/font-identification/LeagueGothic-wdth75-named.ttf",
+    "size": 41448,
+    "sha256": "ecb005e8478891863025b28c885dd728cf4ba37bf82ba693028bd3deaf4dc277"
+  },
+  {
+    "path": "outputs/VECTALLY-hybrid/font-identification/LeagueGothic-wdth75.ttf",
+    "size": 41260,
+    "sha256": "633cee0b7a1c3c64f6a61631a92524d895cd69711460746848808b8996e0efa3"
+  },
+  {
+    "path": "outputs/VECTALLY-hybrid/font-identification/LeagueGothic-wdth87.5-named.ttf",
+    "size": 41880,
+    "sha256": "8dfb23039e0f05ff79dda94631f75de8994111fae1e4bbd9b16f9f4d38e79819"
+  },
+  {
+    "path": "outputs/VECTALLY-hybrid/font-identification/LeagueGothic-wdth87.5.ttf",
+    "size": 41652,
+    "sha256": "2cc0de7055b69f7840398203b7c8ee1cda5ca045f8db9f0cbec1ca0e1484db31"
+  },
+  {
+    "path": "outputs/VECTALLY-hybrid/native-affine-probe/CHECKPOINT.json",
+    "size": 903,
+    "sha256": "fc14e4d89b38a0a697724a58296026f481f28c282e5d43ef8ff83642fb1f2b9d"
+  },
+  {
+    "path": "outputs/VECTALLY-lengkap/progress.json",
+    "size": 51398,
+    "sha256": "73cedde4c580b0c6cb5515ef00043a8a026fc7ea795a87ec10b797473f07bbd0"
+  },
+  {
+    "path": "outputs/VECTALLY-native-font-runtime/app-font-audit.js.gz",
+    "size": 325243,
+    "sha256": "322e574dd45ec281850a4a6db1e517c89631e389471240691dd25d6ac1a6968e"
+  },
+  {
+    "path": "outputs/VECTALLY-native-font-runtime/app-font-validator-v4.js.gz",
+    "size": 325386,
+    "sha256": "94ae64023e7330895a434188a8e59e39af4ed34e4a67f4dc2c3a296be32c1ab8"
+  },
+  {
+    "path": "outputs/VECTALLY-native-font-runtime/BUILD-V4.json",
+    "size": 220,
+    "sha256": "addf47dbf63d22d2caef0c61986e4be6566eda2be1f20d9cdb1bcba7ea81c2ab"
+  },
+  {
+    "path": "outputs/VECTALLY-native-font-runtime/BUILD.json",
+    "size": 163,
+    "sha256": "9ecab1da3537548fef7138d57988d30488128bbf5a3b0128422591179107505d"
+  },
+  {
+    "path": "outputs/VECTALLY-native-font-runtime/FONT_PICKER_PROBE.json",
+    "size": 544,
+    "sha256": "7635b986de40a62c4944113cde6416b080774eae5d973885682bbe6aded122c4"
+  },
+  {
+    "path": "outputs/VECTALLY-native-font-runtime/S06_FONT_CATALOGUE.json",
+    "size": 56709,
+    "sha256": "807b0c810641182094a6965849167973212af09a46911ddb8f4771ab145ae288"
+  },
+  {
+    "path": "outputs/VECTALLY-native-font-runtime/UNSUPPORTED_WEIGHT_V1_PROBE.json",
+    "size": 540,
+    "sha256": "0a8974ed2867c85954f8897938ba0f2ad5197ff3a10f4d93621e1b9144845d6f"
+  },
+  {
+    "path": "outputs/VECTALLY-native-spacing/BUILD.json",
+    "size": 842,
+    "sha256": "5b5a4b1216744f46a0bb8a6ad7a7f470ac6dc8c412c6ff99ebf8ec50d3b12ad7"
+  },
+  {
+    "path": "outputs/VECTALLY-native-spacing/CANVA_STRUCTURE.json",
+    "size": 7804,
+    "sha256": "df178697b2df230895fbfad76f489d3cdfabb28ffa7f19f0ea6f13410d985a16"
+  },
+  {
+    "path": "outputs/VECTALLY-native-spacing/FONT-METRICS-CALIBRATION.json",
+    "size": 1278,
+    "sha256": "d257a0f04000ab2397af201d45f5a2e1a457b4411c22b6ce5a4780b3e1092293"
+  },
+  {
+    "path": "outputs/VECTALLY-native-spacing/PROBE.json",
+    "size": 1668,
+    "sha256": "0106adecb83a42ee922426f5aad0e284ce1cbc7ada98025c77b5e68ccc725448"
+  },
+  {
+    "path": "outputs/VECTALLY-native-spacing/RUNTIME-VERIFICATION.json",
+    "size": 1118,
+    "sha256": "e672c123d1c118fcecd4fb028cb4dd508b26cd1070e9ee5357025213b7ba3fd9"
+  },
+  {
+    "path": "outputs/VECTALLY-story-repair/CONTACT-SOURCE-CANVA-S01-S02.png",
+    "size": 993226,
+    "sha256": "a86f4ac2dc27381448c601651014549162b80d65052398f0b5213392715606f4"
+  },
+  {
+    "path": "outputs/VECTALLY-story-repair/CONTACT-SOURCE-CANVA-S03-S04.png",
+    "size": 965053,
+    "sha256": "853c32e596e260340db9003a802364b7c46a911f7e719445e38129952039f110"
+  },
+  {
+    "path": "outputs/VECTALLY-story-repair/S01/ASSETS_NORMAL_COPY_PACKAGE.json",
+    "size": 53016,
+    "sha256": "49c6aadc163c9ff2fc0e9cd0d3aedbc8cd4f697c58d627e7ed10d490ed50f737"
+  },
+  {
+    "path": "outputs/VECTALLY-story-repair/S01/ASSETS_PACKAGE.json",
+    "size": 53508,
+    "sha256": "b6fafcbaae29b8acdd45aa57adcbe588456bafef0f6ea04c00d787761078f307"
+  },
+  {
+    "path": "outputs/VECTALLY-story-repair/S01/BUYER_VECTOR_EXPECTED_PACKAGE.json",
+    "size": 51562,
+    "sha256": "7590e01ba9fe0d1c906bf175659f44716dc279a32b42945bd7bb8b05bdc12d24"
+  },
+  {
+    "path": "outputs/VECTALLY-story-repair/S01/BUYER_VECTOR_MOVED_STRUCTURE.json",
+    "size": 87365,
+    "sha256": "a51d715d0470a3423cf35e45a74de2baedd9c387530d48bfa8e3fdfb82803595"
+  },
+  {
+    "path": "outputs/VECTALLY-story-repair/S01/BUYER_VECTOR_RECOLORED_STRUCTURE.json",
+    "size": 87365,
+    "sha256": "6ede4482c0680f8e11e12b52024f44b680b3b2def9e1989c96282f6e7b591d63"
+  },
+  {
+    "path": "outputs/VECTALLY-story-repair/S01/BUYER_VECTOR_RESTORED_STRUCTURE.json",
+    "size": 87365,
+    "sha256": "c076fe93f86c855cb1e14b6c8b8a163dcab029dd595615a2f094ac453caf2827"
+  },
+  {
+    "path": "outputs/VECTALLY-story-repair/S01/BUYER_VECTOR_TEST.json",
+    "size": 876,
+    "sha256": "9d2ed251dc706e19953dc829086719378cad71bb0a9b9265b47a531c8dd72201"
+  },
+  {
+    "path": "outputs/VECTALLY-story-repair/S01/CANVA-EXPORT-AUDIT.json",
+    "size": 355,
+    "sha256": "f4aacbf6b255f0238f89337d87811ba9a14a6d091dc35fc86b5f5761e7e14ba4"
+  },
+  {
+    "path": "outputs/VECTALLY-story-repair/S01/CANVA-REPAIRED-EXPORT-AUDIT.json",
+    "size": 355,
+    "sha256": "d7c0c5e53f899cf270aec4a38d51081f3f13c2c51f54ddc020f5dcbaf46f8b39"
+  },
+  {
+    "path": "outputs/VECTALLY-story-repair/S01/CANVA_ASSETS.png",
+    "size": 55922,
+    "sha256": "f2a5c84bc3f04d8da11ee27dfa826fdbd8b001659f7f00575996fa7a0d35b1d5"
+  },
+  {
+    "path": "outputs/VECTALLY-story-repair/S01/CANVA_FLOW_REPAIRED_NORMAL_COPY.png",
+    "size": 76818,
+    "sha256": "c7d52729082453a78b38900088a06721c6bd51f02d47092fe03ded4e3b68d7a6"
+  },
+  {
+    "path": "outputs/VECTALLY-story-repair/S01/CANVA_NORMAL_COPY.png",
+    "size": 76701,
+    "sha256": "3221a8a6e3c956abe774a6d5ac3a74d00a6c3a4c421f1fa9a4e7d2a51d2ef4a6"
+  },
+  {
+    "path": "outputs/VECTALLY-story-repair/S01/CANVA_NORMAL_COPY_STRUCTURE.json",
+    "size": 93863,
+    "sha256": "19583217999f0b2d0bb4470b2cbe3c7f118a8a0be233db6903e222f7bd8b88ce"
+  },
+  {
+    "path": "outputs/VECTALLY-story-repair/S01/CANVA_REPAIRED_STRUCTURE.json",
+    "size": 88035,
+    "sha256": "47c1e75a12553329f8cf3d3244ff9e804910cdd7663447671bfbf2e08e637957"
+  },
+  {
+    "path": "outputs/VECTALLY-story-repair/S01/CANVA_STRUCTURE.json",
+    "size": 87365,
+    "sha256": "93cd97078f2a10916c2c28805253999afae0e11522508e0e5196e77905de410d"
+  },
+  {
+    "path": "outputs/VECTALLY-story-repair/S01/FLOW_REPLACEMENT.json",
+    "size": 2852,
+    "sha256": "7d1f5fe759ce02d68cd51e7261a3db4ab68b241f81541f020e156bc00b4f8c1d"
+  },
+  {
+    "path": "outputs/VECTALLY-story-repair/S01/GEOMETRY-AUDIT.json",
+    "size": 28565,
+    "sha256": "51f82970384b6eacdfa41795c99b5c0a633b5eb0b08eb9d99761e0f8a2d61639"
+  },
+  {
+    "path": "outputs/VECTALLY-story-repair/S01/HEADLINE_FONT_PROBE.json",
+    "size": 474,
+    "sha256": "1f9122bb7860906b0995bf0e910b69c065c897cbe71c801f0abe90805d9c76d0"
+  },
+  {
+    "path": "outputs/VECTALLY-story-repair/S01/INVENTORY.json",
+    "size": 1626,
+    "sha256": "001ec79d3733864d21df57464ce388aa00fb9340594d6f385d20128ff89a2675"
+  },
+  {
+    "path": "outputs/VECTALLY-story-repair/S01/NATIVE_NORMAL_COPY.json",
+    "size": 2142,
+    "sha256": "695f955676391d4e2c649e1a87f8eb7ec011e4e65662c5f37baf08aff6f820a5"
+  },
+  {
+    "path": "outputs/VECTALLY-story-repair/S01/NORMAL-COPY-LOCAL-FIT.json",
+    "size": 1511,
+    "sha256": "2dc589db000a9ef379ec0881bfcfe24da7e870d7f64d319e709263dcd864df2b"
+  },
+  {
+    "path": "outputs/VECTALLY-story-repair/S01/WHOLE-OBJECT-ISOLATION.png",
+    "size": 70910,
+    "sha256": "37840cab1f8d9f846555b3dfc0b91b4d6741250c16067474095de0d86ed9aafe"
+  },
+  {
+    "path": "outputs/VECTALLY-story-repair/S02/ACTUAL-NATIVE-AUDIT.json",
+    "size": 755,
+    "sha256": "7f8519f875b94ca2a0e69f803aaafb1e56d7e8bef1dc732aebbeb260b51aa9de"
+  },
+  {
+    "path": "outputs/VECTALLY-story-repair/S02/ASSETS_NORMAL_COPY_PACKAGE.json",
+    "size": 31898,
+    "sha256": "9df99a4e6f5567bac86a73447b28c6b8d9672ff8daf99dc8efe50e8e0196937e"
+  },
+  {
+    "path": "outputs/VECTALLY-story-repair/S02/ASSETS_PACKAGE.json",
+    "size": 31342,
+    "sha256": "8c915258dd862f0a2913ca2994597225be159e13a168ebb3c0326c08830df8c8"
+  },
+  {
+    "path": "outputs/VECTALLY-story-repair/S02/CANVA_LABELS_STRUCTURE.json",
+    "size": 57412,
+    "sha256": "01fa0403cb70f71c4ffd7364447080a3f549a5f6d829b88929dfac4553ec384b"
+  },
+  {
+    "path": "outputs/VECTALLY-story-repair/S02/CANVA_STRUCTURE.json",
+    "size": 50591,
+    "sha256": "d7418e74a9e532116f4638f8bff26a217ea31fe48938a8040de27963e4f48526"
+  },
+  {
+    "path": "outputs/VECTALLY-story-repair/S02/CANVA_TIGHT_STRUCTURE.json",
+    "size": 57226,
+    "sha256": "85fb6b527e2f4e5360b9bafbdb5159b8214ca4094b7f94f76dcad885836e4593"
+  },
+  {
+    "path": "outputs/VECTALLY-story-repair/S02/CANVA_WHITE_NATIVE.png",
+    "size": 69018,
+    "sha256": "17e06cdf33b2829a08690f7a2f1a020d7751edbd4f2e31b361e0bf149ebff498"
+  },
+  {
+    "path": "outputs/VECTALLY-story-repair/S02/CANVA_WHITE_STRUCTURE.json",
+    "size": 57229,
+    "sha256": "71446d826f8f41d59243f52e4ccb1224864a2870304b8aa258ba23bb5aaa7a7b"
+  },
+  {
+    "path": "outputs/VECTALLY-story-repair/S02/GEOMETRY-AUDIT.json",
+    "size": 12360,
+    "sha256": "903deb9166adf27f5e7974deaabd06c446735da1e03ec3d3f2b7fa8d2697b2a7"
+  },
+  {
+    "path": "outputs/VECTALLY-story-repair/S02/INVENTORY.json",
+    "size": 823,
+    "sha256": "535e4a9b149200211eeeadad580aa644e6f994fe6dce8e1ae679f82e7d946112"
+  },
+  {
+    "path": "outputs/VECTALLY-story-repair/S02/NATIVE_NORMAL_COPY.json",
+    "size": 2151,
+    "sha256": "1062f83353b555b367d2e43956a0bb980745ee748c7e8da2e991553d4545d5fc"
+  },
+  {
+    "path": "outputs/VECTALLY-story-repair/S02/NORMAL-COPY-LOCAL-FIT.json",
+    "size": 1537,
+    "sha256": "a45e8a114acecec8a26fafbe78945083f92d825685c222a2ef61f0665ee556dc"
+  },
+  {
+    "path": "outputs/VECTALLY-story-repair/S02/REPAIR-HISTORY.json",
+    "size": 452,
+    "sha256": "932c55995bbbbdf041be8cbc4374cb73c88759963435ada9049b0ba3ed1b4254"
+  },
+  {
+    "path": "outputs/VECTALLY-story-repair/S02/STATUS_NATIVE_REPAIR.json",
+    "size": 3117,
+    "sha256": "8ccbcf784d2409eecb1bb04646f5634b4ff0c8d41259f988ffd19fdbe975686a"
+  },
+  {
+    "path": "outputs/VECTALLY-story-repair/S02/UNPAID_WHITE_REPLACEMENT.json",
+    "size": 1619,
+    "sha256": "e43bc8f19afeaba779e764271af9e1bec435251f8f17946c17f5242b05d0ce89"
+  },
+  {
+    "path": "outputs/VECTALLY-story-repair/S03/ACTUAL-EXPORT-AUDIT.json",
+    "size": 534,
+    "sha256": "88b33edab0ed4a74ba292cf7331e165e405851828e4739257209f571a6ae950a"
+  },
+  {
+    "path": "outputs/VECTALLY-story-repair/S03/ASSETS_PACKAGE.json",
+    "size": 22363,
+    "sha256": "7281fd62f58472181874d5b3cce785e25b5f677d9aef615b68195131a9b7c43f"
+  },
+  {
+    "path": "outputs/VECTALLY-story-repair/S03/CANVA_ASSETS.png",
+    "size": 25203,
+    "sha256": "199a6d6a48dbe3f4d94885527f0bafc80a8fe4c629d71a2a93b3d9b0443b8a10"
+  },
+  {
+    "path": "outputs/VECTALLY-story-repair/S03/CANVA_STRUCTURE.json",
+    "size": 32046,
+    "sha256": "ce7771ae5775d266439665fab05a4f48c1e038aade0745e85a5112552a6a030c"
+  },
+  {
+    "path": "outputs/VECTALLY-story-repair/S03/GEOMETRY-AUDIT.json",
+    "size": 9665,
+    "sha256": "66671cacc27d80919cded34fe04db786fafc655f37ffd17e360547e9c80b8eb8"
+  },
+  {
+    "path": "outputs/VECTALLY-story-repair/S03/INVENTORY.json",
+    "size": 800,
+    "sha256": "77d7a09d3b5b31564b49cfddf58d2a55007d60563d7f60c3f3a4e32ad1b28c48"
+  },
+  {
+    "path": "outputs/VECTALLY-story-repair/S04/ACTUAL-EXPORT-AUDIT.json",
+    "size": 556,
+    "sha256": "40f943b9aacdeaecd32bf70a543d0a78afcb50396b1e679cc131f6993083678e"
+  },
+  {
+    "path": "outputs/VECTALLY-story-repair/S04/ASSETS_NORMAL_COPY_PACKAGE.json",
+    "size": 26458,
+    "sha256": "705fcec68e780f9998bb06b6decf652692794ca10637bbbfda5ea5822655bdfd"
+  },
+  {
+    "path": "outputs/VECTALLY-story-repair/S04/ASSETS_PACKAGE.json",
+    "size": 25552,
+    "sha256": "809c8f63c7824578b9ba4cdc7cd070365d4d76f56d9cb495d501e710232cc225"
+  },
+  {
+    "path": "outputs/VECTALLY-story-repair/S04/CANVA_NORMAL_COPY.png",
+    "size": 64887,
+    "sha256": "c0bb5bf5e565ce21cf8041ce7e58dcac59eb8f70da14565de0d929851ad0dc3f"
+  },
+  {
+    "path": "outputs/VECTALLY-story-repair/S04/CANVA_NORMAL_COPY_STRUCTURE.json",
+    "size": 41174,
+    "sha256": "96cf9c010ef62cf5eb141c71d3bb2137b67ea367f2e67c924e8782dcb59033a1"
+  },
+  {
+    "path": "outputs/VECTALLY-story-repair/S04/CANVA_STRUCTURE.json",
+    "size": 35888,
+    "sha256": "9f0d7a30c4e2376894fe2206eee6d89559bf8b1b72ac51ed6a3da86365f82cf3"
+  },
+  {
+    "path": "outputs/VECTALLY-story-repair/S04/GEOMETRY-AUDIT.json",
+    "size": 7700,
+    "sha256": "747b99217ab0f6231a0b0617fc71dedd36a759a1c522c3ce5116a258635fdd89"
+  },
+  {
+    "path": "outputs/VECTALLY-story-repair/S04/INVENTORY.json",
+    "size": 571,
+    "sha256": "10215de8af473cfa6440e20132d34c80203852e2eb91293eb3a5b27b60402d0b"
+  },
+  {
+    "path": "outputs/VECTALLY-story-repair/S04/NATIVE_NORMAL_COPY.json",
+    "size": 2190,
+    "sha256": "db474d4f126eef0d3495cfba749cebd860c8e43c2c4754e2044cc5490d1840b6"
+  },
+  {
+    "path": "outputs/VECTALLY-story-repair/S04/NORMAL-COPY-LOCAL-FIT.json",
+    "size": 1539,
+    "sha256": "b8c6c3fd01822aec4ff3c5200a68de416dc817e9b9c8fe1667549fb3b8d9bfec"
+  },
+  {
+    "path": "outputs/VECTALLY-story-repair/S05/ACTUAL-ASSET-AUDIT.json",
+    "size": 851,
+    "sha256": "037778fdd2421cda758ac45ca7e6e6e1bafb33b3622b382ba8020f7c62826caf"
+  },
+  {
+    "path": "outputs/VECTALLY-story-repair/S05/AFFINE-FIT.json",
+    "size": 3371,
+    "sha256": "2b321458fa4fba262e0d4adeca9be38fa8e3912c975c2b27b2a442d3183fd083"
+  },
+  {
+    "path": "outputs/VECTALLY-story-repair/S05/ASSETS_AND_BODY_PACKAGE.json",
+    "size": 1994,
+    "sha256": "4b4daf4fd880045496fdeb19ef7da969190224501e62fb93149b5b14c7d2fa59"
+  },
+  {
+    "path": "outputs/VECTALLY-story-repair/S05/BODY-ALIGNMENT.json",
+    "size": 79,
+    "sha256": "c7e266defa654903aee2da56049a17296e20aaaf55354db8f2ee06267d931d3a"
+  },
+  {
+    "path": "outputs/VECTALLY-story-repair/S05/CANVA_ASSETS_BODY.png",
+    "size": 20610,
+    "sha256": "81cf309a9f791c272e9333f92fa05ef4228e24def3448cc3cf90316f74889f47"
+  },
+  {
+    "path": "outputs/VECTALLY-story-repair/S05/CANVA_ASSETS_BODY_STRUCTURE.json",
+    "size": 4895,
+    "sha256": "c405bc08250fff69c4f3dc9a59353c6fb0596da79d2334aa25f5c536e1da43f8"
+  },
+  {
+    "path": "outputs/VECTALLY-story-repair/S05/CANVA_NATIVE_GRADIENT.png",
+    "size": 20623,
+    "sha256": "df7cc02fd365a3705b7456e18be0e0dfc92ba5fa6767142c9bf3011e19356833"
+  },
+  {
+    "path": "outputs/VECTALLY-story-repair/S05/CANVA_NATIVE_GRADIENT_STRUCTURE.json",
+    "size": 4869,
+    "sha256": "ceaec9dcd30fcadc7b90607612d3a4ab8da0e7b0cf354f90e2176be2afd4848d"
+  },
+  {
+    "path": "outputs/VECTALLY-story-repair/S05/CANVA_PACKAGE.json",
+    "size": 3944,
+    "sha256": "e7504721008e487ff1486e0620594343325be2ead7e9aa3f410b8bc6a229680d"
+  },
+  {
+    "path": "outputs/VECTALLY-story-repair/S05/FONT-FIT.json",
+    "size": 2072,
+    "sha256": "9972c573501d45dee781859b48ee400372fd2071d7595b3a78174dccacfef0d5"
+  },
+  {
+    "path": "outputs/VECTALLY-story-repair/S05/GRADIENT-RUNTIME-EVIDENCE.json",
+    "size": 977,
+    "sha256": "2b8860bc5efb9c113e4ad12606b1ed73384e3339d65f6501bef9a14b4b8ee7d2"
+  },
+  {
+    "path": "outputs/VECTALLY-story-repair/S05/QA.json",
+    "size": 5869,
+    "sha256": "c78dd412c6fc664db7acfa78d0215919741b838f5930a6bc5fcfc2cfb66b2633"
+  },
+  {
+    "path": "outputs/VECTALLY-story-repair/S06/ACTUAL-TEXT-AUDIT.json",
+    "size": 2313,
+    "sha256": "1a8c875a357f38c44f85b7710ee927536eee67cca9b2f506eff69106735ea348"
+  },
+  {
+    "path": "outputs/VECTALLY-story-repair/S06/ASSETS_NATIVE_COPY_PACKAGE.json",
+    "size": 28493,
+    "sha256": "1ceaf5bbb386758ae723c5808d5c77610ebd14edd2ec3d41044276adc0810c02"
+  },
+  {
+    "path": "outputs/VECTALLY-story-repair/S06/ASSETS_PACKAGE.json",
+    "size": 27311,
+    "sha256": "3ca6fa57a2ae8aae01a1666a7145afccd9d36caa84e740752677828a69141d45"
+  },
+  {
+    "path": "outputs/VECTALLY-story-repair/S06/BODY_GROUP_REPAIR.json",
+    "size": 1400,
+    "sha256": "2f4dc2ee14bab0c49a3af8a84f0cd2bc88f789a9ed91c8265cd0baed546fb894"
+  },
+  {
+    "path": "outputs/VECTALLY-story-repair/S06/BODY_TEXT_REPAIR.json",
+    "size": 1268,
+    "sha256": "0d8a6ed8a4659e34b74fcdf597ff983085cb0a4f1fe287473c0923e34b99b246"
+  },
+  {
+    "path": "outputs/VECTALLY-story-repair/S06/CANVA_ALL_COPY_STRUCTURE.json",
+    "size": 55884,
+    "sha256": "95a14cc5771e05040a9ea8c90323ebb87c8ea1d0674ea0ce8b17a8dd0b59d5f7"
+  },
+  {
+    "path": "outputs/VECTALLY-story-repair/S06/CANVA_ALL_NATIVE.png",
+    "size": 112951,
+    "sha256": "fb87cc3857e0c4692be84f3e4065ee3607aed800fdd9076580f6f00b8ac2080e"
+  },
+  {
+    "path": "outputs/VECTALLY-story-repair/S06/CANVA_BEFORE_BODY_STRUCTURE.json",
+    "size": 54089,
+    "sha256": "1660d354a0bdd252c6650542d1582f9051c2c69c902fe241eada2bb98fdd1c49"
+  },
+  {
+    "path": "outputs/VECTALLY-story-repair/S06/CONTACT-SOURCE-CANVA.png",
+    "size": 1411975,
+    "sha256": "374d0de75dcab5aa1eccf8357964ea25a13edcfa1aa4edafa7a0e1e7f882f2e7"
+  },
+  {
+    "path": "outputs/VECTALLY-story-repair/S06/GEOMETRY-AUDIT.json",
+    "size": 16690,
+    "sha256": "7f2721d9cfcaa493b75543fdc61a130224993cc5f5079b741f306c2b8b92f2ac"
+  },
+  {
+    "path": "outputs/VECTALLY-story-repair/S06/INVENTORY.json",
+    "size": 1011,
+    "sha256": "d5edf7b5d939a6ddcd34e9fac00c13646b0aef9c52f6296ada16fcc28ac19705"
+  },
+  {
+    "path": "outputs/VECTALLY-story-repair/S06/NATIVE-COPY-LOCAL-FIT.json",
+    "size": 2739,
+    "sha256": "beb2fa57a6397a93fea2a1cfcbdfbeef2991d426e1fcd179dc7d55ab8e3e313f"
+  },
+  {
+    "path": "outputs/VECTALLY-story-repair/S06/NATIVE_COPY_PACKAGE.json",
+    "size": 2769,
+    "sha256": "8d3a607c4ca1a786ad03805d5e28601bd842172cc38193bd3328127e20f801f8"
+  },
+  {
+    "path": "outputs/VECTALLY-story-repair/WHOLE-OBJECT-S03-S04.png",
+    "size": 43960,
+    "sha256": "8f11fc0bebae398dd277ea40395e80fd782df3122d62b3e85cce9366d4d3a5cc"
+  },
+  {
+    "path": "outputs/VECTALLY-teks-native/fonts/archivoblack-ArchivoBlack-Regular.ttf",
+    "size": 90988,
+    "sha256": "dd9a89a019b4849f66ab75455fe7bdf931311042cbb0f0f97acc061539703180"
+  },
+  {
+    "path": "outputs/VECTALLY-teks-native/fonts/archivoblack-OFL.txt",
+    "size": 4492,
+    "sha256": "3173acd82f8c6159b5b1037b539fcbd4edff68e65c2ea8b9412b5a5ca97b08ff"
+  },
+  {
+    "path": "outputs/VECTALLY-teks-native/fonts/asap-Asap-Italic[wdth,wght].ttf",
+    "size": 426484,
+    "sha256": "a21e12f9babf2d02526003b27dff884b6d1cd0fed883ffe7740725626a11dd59"
+  },
+  {
+    "path": "outputs/VECTALLY-teks-native/fonts/asap-Asap[wdth,wght].ttf",
+    "size": 376764,
+    "sha256": "7bf29bcab72f7d00de600e964a3fc206620050d8448ddd976822378d0fe18028"
+  },
+  {
+    "path": "outputs/VECTALLY-teks-native/fonts/asap-OFL.txt",
+    "size": 4383,
+    "sha256": "a6f4d778db0d2a87c2c6e560f71eb018b4253505b2f23c108724dea5d4d74ed0"
+  },
+  {
+    "path": "outputs/VECTALLY-teks-native/fonts/leaguegothic-LeagueGothic[wdth].ttf",
+    "size": 65972,
+    "sha256": "3b0e998c9a0034222394ffecdd383e6948259ad037b95555b139a217629ce1d0"
+  },
+  {
+    "path": "outputs/VECTALLY-teks-native/fonts/leaguegothic-OFL.txt",
+    "size": 4400,
+    "sha256": "44778c339892f79188c60b7471485dd5af92c59351c7f9629a00fc625c6cae5d"
+  },
+  {
+    "path": "work/league_width_instances.py",
+    "size": 430,
+    "sha256": "9c3d8ba7aff0ee73fe1c59c1b9f64df9f99a4b098be23f3f7f6485fffdb6808c"
+  },
+  {
+    "path": "work/league_width_names.py",
+    "size": 518,
+    "sha256": "1077c68b44b84e207b050925436c375324d097e7dd9823783878f7cea8a1211a"
+  },
+  {
+    "path": "work/native_clean_quad.py",
+    "size": 1555,
+    "sha256": "e3a9ab19e4e0d9f294225c48fddbf02caca80454d678eb687e4151e25deeb1bc"
+  },
+  {
+    "path": "work/native_component_builder.py",
+    "size": 3652,
+    "sha256": "9d6344dfb5eab88ff9e8b84a7089c057f7515e4cfc1d45e847e859c03b46f522"
+  },
+  {
+    "path": "work/native_contour_path.py",
+    "size": 3511,
+    "sha256": "ade0a8d1efd52a34a291083572104267620e68b080c2668ccbfad27ba2f1ce20"
+  },
+  {
+    "path": "work/normalize_native_package.py",
+    "size": 2014,
+    "sha256": "cc9494d659d7eb089539f218b836f70e4e92067bb2400246462668bb87864e1d"
+  },
+  {
+    "path": "work/s01_actual_export_audit.py",
+    "size": 1151,
+    "sha256": "6f64ac4fbecd3d7bebf79558dd08a570bceccb787960f1ebffe12e0d9805e6e5"
+  },
+  {
+    "path": "work/s01_buyer_vector_test_verify.py",
+    "size": 2289,
+    "sha256": "4b0b3751a9ac80c5ca2e63ec081be110a2b5d95015c7c4b0c255e39fa66e609c"
+  },
+  {
+    "path": "work/s01_normalize.py",
+    "size": 705,
+    "sha256": "1b7f6fccd9f8c97f8dd666fc9e4cdf5a0be056051fcd313f0b2a367292277143"
+  },
+  {
+    "path": "work/s01_repaired_export_audit.py",
+    "size": 1178,
+    "sha256": "8295e572b8faac7c936d37da0a781df6aba43f296de35fc4ad9fda57fe9c83b0"
+  },
+  {
+    "path": "work/s01_whole_object_isolation.py",
+    "size": 1057,
+    "sha256": "14812b9c578a142c38e037e5707af37b92275966137d293d7c1558ef3051c8fb"
+  },
+  {
+    "path": "work/s02_merge_normal_copy.cjs",
+    "size": 1526,
+    "sha256": "cb0bfee6989072a9b43f02c0957a3c6af51e22a7360d5def01c595595e6fa213"
+  },
+  {
+    "path": "work/s04_merge_normal_copy.cjs",
+    "size": 1484,
+    "sha256": "7d795b25de6a93c40a6ba1c38d66b37c2c4ecf9b169daf6c5758414f3b7000cf"
+  },
+  {
+    "path": "work/s05_actual_assets_audit.py",
+    "size": 1747,
+    "sha256": "fd0140fb2bfa475b4a97f35942c46494d6a748daa214abb0db10530d9351a606"
+  },
+  {
+    "path": "work/s05_purple_gradient_fit.py",
+    "size": 620,
+    "sha256": "77b562be381ae3942d35babf6482350fbff721920081628d48b77adf7f42ff7d"
+  },
+  {
+    "path": "work/s06_actual_text_audit.py",
+    "size": 1888,
+    "sha256": "28b22ed9dbec7751c4341d208638d215454cca7403e793776e42954c94c18a67"
+  },
+  {
+    "path": "work/s06_merge_native_copy.cjs",
+    "size": 1847,
+    "sha256": "8312639b30de34bc317c8736d2fc2a98b005955453498b2de0760ce38ee5b333"
+  },
+  {
+    "path": "work/story_normal_copy_fit.py",
+    "size": 3809,
+    "sha256": "bab4d424d9c7ff6568e44f6f97c2ace693ad892592c10ea9a23324a9bd6773f6"
+  },
+  {
+    "path": "work/story_normal_copy_fit_s04.py",
+    "size": 4357,
+    "sha256": "a7150024611169673f4de6a9344262e270cb175be3049a307d7d09aace4ac859"
+  },
+  {
+    "path": "work/story_prototype19_export_audit.py",
+    "size": 2143,
+    "sha256": "6e94ff43ae0382f3222d5acbb3f7770101ba1b7e646641520e0e2d91e595ea20"
+  },
+  {
+    "path": "work/story_s03_s04_isolation.py",
+    "size": 965,
+    "sha256": "9f5e311fc0b30a008051f4abe9fe8ca38e0adee23c3915e906aa960ed7464371"
+  },
+  {
+    "path": "work/story_s06_native_copy_fit.py",
+    "size": 3570,
+    "sha256": "4eb5b63bc3eee1699d2bd0de48d0cbe29457529b4d1c491f97ef40595e96c156"
+  },
+  {
+    "path": "work/vectally_highlight_h01_repair.py",
+    "size": 6398,
+    "sha256": "215e615b0f78990894034fd039bac9965ec70ed0129d9851dd4bc2eda2b2eafe"
+  },
+  {
+    "path": "work/vectally_highlight_h02_repair.py",
+    "size": 5957,
+    "sha256": "271f7b0ce1b7b36ac72c2078565fdcc20a222620b003349fe3e94689af535ffe"
+  },
+  {
+    "path": "work/vectally_highlight_h03_repair.py",
+    "size": 8872,
+    "sha256": "20cdfd3e5cc9994eb928787de3711254d95cc2ee1bf03f8587af8c21354c687e"
+  },
+  {
+    "path": "work/vectally_highlight_h04_repair.py",
+    "size": 3300,
+    "sha256": "2d8ed421368eed8d95737fd8b4841e4ecd1a37f8ffaa2e594a9739ce33ec6b3d"
+  },
+  {
+    "path": "work/vectally_highlight_h05_repair.py",
+    "size": 7668,
+    "sha256": "d00732c2c67c6e47e2711fe9264220d21399965c5db64232386ffbd2b717719f"
+  },
+  {
+    "path": "work/vectally_highlight_h06_repair.py",
+    "size": 6204,
+    "sha256": "18a64d372c759af191ea0d53dba39c8f8ebab878857a977a96c914883e60df84"
+  },
+  {
+    "path": "work/vectally_story_s01_repair.py",
+    "size": 10428,
+    "sha256": "1e65f2234b709962f66178cb2984af3c6c419e965faa4fd90f5b179dda4c092d"
+  },
+  {
+    "path": "work/vectally_story_s02_repair.py",
+    "size": 7562,
+    "sha256": "4745940ac71e9d857b607b08ab84e0f34c333cea9b974e99cbaab7b25e9c52d8"
+  },
+  {
+    "path": "work/vectally_story_s03_s04_repair.py",
+    "size": 6995,
+    "sha256": "0757f19878e4dd9f26031c1c5a1dd31a1e460dc6acfc802865bf9ba39072dc24"
+  },
+  {
+    "path": "work/vectally_story_s05_repair.py",
+    "size": 4691,
+    "sha256": "42e2abb90455b4bf0ff172257c8b0485cdf57a17dca84206349b96af98fb03c4"
+  },
+  {
+    "path": "work/vectally_story_s06_repair.py",
+    "size": 5900,
+    "sha256": "ccda8acf48993bb563358b1f48d4ce1d5bd6f195a69f55b620046d987ea85cf4"
+  }
+]

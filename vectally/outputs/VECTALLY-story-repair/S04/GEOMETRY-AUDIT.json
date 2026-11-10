@@ -1,0 +1,345 @@
+[
+  {
+    "path_bytes": 1243,
+    "points": 258,
+    "holes": 0,
+    "epsilon": 0.05,
+    "single_move": true,
+    "body_tiling": false,
+    "background_counterfill": false,
+    "name": "Tumpukan revenue - badan luar lengkap",
+    "source_bbox": [
+      45,
+      594,
+      219,
+      290
+    ],
+    "color": "#091522",
+    "mask_iou": 0.9983797909407666,
+    "local_geometry_gate": "PASS",
+    "printed_ink_holes_filled_in_body": true
+  },
+  {
+    "path_bytes": 1001,
+    "points": 210,
+    "holes": 0,
+    "epsilon": 0.05,
+    "single_move": true,
+    "body_tiling": false,
+    "background_counterfill": false,
+    "name": "Tumpukan revenue - bidang isi 1",
+    "source_bbox": [
+      58,
+      608,
+      192,
+      106
+    ],
+    "color": "#f4f7fa",
+    "mask_iou": 0.9952830188679245,
+    "local_geometry_gate": "PASS",
+    "printed_ink_holes_filled_in_body": true
+  },
+  {
+    "path_bytes": 922,
+    "points": 193,
+    "holes": 0,
+    "epsilon": 0.05,
+    "single_move": true,
+    "body_tiling": false,
+    "background_counterfill": false,
+    "name": "Tumpukan revenue - bidang isi 2",
+    "source_bbox": [
+      58,
+      694,
+      192,
+      72
+    ],
+    "color": "#f4f7fa",
+    "mask_iou": 0.9905179733937164,
+    "local_geometry_gate": "PASS",
+    "printed_ink_holes_filled_in_body": true
+  },
+  {
+    "path_bytes": 918,
+    "points": 192,
+    "holes": 0,
+    "epsilon": 0.05,
+    "single_move": true,
+    "body_tiling": false,
+    "background_counterfill": false,
+    "name": "Tumpukan revenue - bidang isi 3",
+    "source_bbox": [
+      58,
+      747,
+      192,
+      71
+    ],
+    "color": "#f4f7fa",
+    "mask_iou": 0.9907316388147732,
+    "local_geometry_gate": "PASS",
+    "printed_ink_holes_filled_in_body": true
+  },
+  {
+    "path_bytes": 951,
+    "points": 199,
+    "holes": 0,
+    "epsilon": 0.05,
+    "single_move": true,
+    "body_tiling": false,
+    "background_counterfill": false,
+    "name": "Tumpukan revenue - bidang isi 4",
+    "source_bbox": [
+      58,
+      799,
+      192,
+      71
+    ],
+    "color": "#f4f7fa",
+    "mask_iou": 0.990507225843015,
+    "local_geometry_gate": "PASS",
+    "printed_ink_holes_filled_in_body": true
+  },
+  {
+    "path_bytes": 1508,
+    "points": 38,
+    "holes": 0,
+    "epsilon": 0.3,
+    "single_move": true,
+    "body_tiling": false,
+    "background_counterfill": false,
+    "sampling": 2,
+    "name": "Tumpukan revenue - simbol 1",
+    "source_bbox": [
+      121,
+      623,
+      67,
+      74
+    ],
+    "color": "#091522",
+    "mask_iou": 1.0,
+    "local_geometry_gate": "PASS",
+    "printed_ink_holes_filled_in_body": false
+  },
+  {
+    "path_bytes": 1152,
+    "points": 240,
+    "holes": 0,
+    "epsilon": 0.05,
+    "single_move": true,
+    "body_tiling": false,
+    "background_counterfill": false,
+    "name": "Tumpukan expenses - badan luar lengkap",
+    "source_bbox": [
+      360,
+      632,
+      214,
+      250
+    ],
+    "color": "#091522",
+    "mask_iou": 0.9980432587106548,
+    "local_geometry_gate": "PASS",
+    "printed_ink_holes_filled_in_body": true
+  },
+  {
+    "path_bytes": 1037,
+    "points": 216,
+    "holes": 0,
+    "epsilon": 0.05,
+    "single_move": true,
+    "body_tiling": false,
+    "background_counterfill": false,
+    "name": "Tumpukan expenses - bidang isi 1",
+    "source_bbox": [
+      373,
+      645,
+      189,
+      113
+    ],
+    "color": "#b99bfc",
+    "mask_iou": 0.9951531833413116,
+    "local_geometry_gate": "PASS",
+    "printed_ink_holes_filled_in_body": true
+  },
+  {
+    "path_bytes": 910,
+    "points": 190,
+    "holes": 0,
+    "epsilon": 0.05,
+    "single_move": true,
+    "body_tiling": false,
+    "background_counterfill": false,
+    "name": "Tumpukan expenses - bidang isi 2",
+    "source_bbox": [
+      373,
+      735,
+      189,
+      78
+    ],
+    "color": "#b99bfc",
+    "mask_iou": 0.9908434356461181,
+    "local_geometry_gate": "PASS",
+    "printed_ink_holes_filled_in_body": true
+  },
+  {
+    "path_bytes": 938,
+    "points": 196,
+    "holes": 0,
+    "epsilon": 0.05,
+    "single_move": true,
+    "body_tiling": false,
+    "background_counterfill": false,
+    "name": "Tumpukan expenses - bidang isi 3",
+    "source_bbox": [
+      373,
+      792,
+      189,
+      77
+    ],
+    "color": "#b99bfc",
+    "mask_iou": 0.9910910264686895,
+    "local_geometry_gate": "PASS",
+    "printed_ink_holes_filled_in_body": true
+  },
+  {
+    "path_bytes": 1432,
+    "points": 31,
+    "holes": 0,
+    "epsilon": 0.3,
+    "single_move": true,
+    "body_tiling": false,
+    "background_counterfill": false,
+    "sampling": 2,
+    "name": "Tumpukan expenses - simbol 1",
+    "source_bbox": [
+      434,
+      662,
+      66,
+      78
+    ],
+    "color": "#091522",
+    "mask_iou": 1.0,
+    "local_geometry_gate": "PASS",
+    "printed_ink_holes_filled_in_body": false
+  },
+  {
+    "path_bytes": 1765,
+    "points": 367,
+    "holes": 0,
+    "epsilon": 0.35,
+    "single_move": true,
+    "body_tiling": false,
+    "background_counterfill": false,
+    "name": "Kantong hasil - badan luar lengkap",
+    "source_bbox": [
+      664,
+      571,
+      244,
+      310
+    ],
+    "color": "#091522",
+    "mask_iou": 0.9972098316720818,
+    "local_geometry_gate": "PASS",
+    "printed_ink_holes_filled_in_body": true
+  },
+  {
+    "path_bytes": 604,
+    "points": 126,
+    "holes": 0,
+    "epsilon": 0.05,
+    "single_move": true,
+    "body_tiling": false,
+    "background_counterfill": false,
+    "name": "Kantong hasil - bidang isi 1",
+    "source_bbox": [
+      735,
+      585,
+      103,
+      54
+    ],
+    "color": "#f4f7fa",
+    "mask_iou": 0.995125348189415,
+    "local_geometry_gate": "PASS",
+    "printed_ink_holes_filled_in_body": true
+  },
+  {
+    "path_bytes": 1159,
+    "points": 244,
+    "holes": 0,
+    "epsilon": 0.05,
+    "single_move": true,
+    "body_tiling": false,
+    "background_counterfill": false,
+    "name": "Kantong hasil - bidang isi 2",
+    "source_bbox": [
+      678,
+      653,
+      216,
+      215
+    ],
+    "color": "#f4f7fa",
+    "mask_iou": 0.9977243789450871,
+    "local_geometry_gate": "PASS",
+    "printed_ink_holes_filled_in_body": true
+  },
+  {
+    "path_bytes": 1263,
+    "points": 227,
+    "holes": 0,
+    "epsilon": 0.5,
+    "single_move": true,
+    "body_tiling": false,
+    "background_counterfill": false,
+    "sampling": 2,
+    "name": "Kantong hasil - simbol 1",
+    "source_bbox": [
+      747,
+      697,
+      77,
+      127
+    ],
+    "color": "#091522",
+    "mask_iou": 0.9949545913218971,
+    "local_geometry_gate": "PASS",
+    "printed_ink_holes_filled_in_body": false
+  },
+  {
+    "path_bytes": 256,
+    "points": 51,
+    "holes": 0,
+    "epsilon": 0.05,
+    "single_move": true,
+    "body_tiling": false,
+    "background_counterfill": false,
+    "name": "Pita IT\u2019S THE",
+    "source_bbox": [
+      47,
+      292,
+      316,
+      34
+    ],
+    "color": "#b897fc",
+    "mask_iou": 0.9986604152712659,
+    "local_geometry_gate": "PASS",
+    "printed_ink_holes_filled_in_body": true
+  },
+  {
+    "path_bytes": 931,
+    "points": 180,
+    "holes": 0,
+    "epsilon": 0.05,
+    "single_move": true,
+    "body_tiling": false,
+    "background_counterfill": false,
+    "name": "Pita LOSS",
+    "source_bbox": [
+      47,
+      1332,
+      844,
+      75
+    ],
+    "color": "#b896fc",
+    "mask_iou": 0.9986164063460828,
+    "local_geometry_gate": "PASS",
+    "printed_ink_holes_filled_in_body": true
+  }
+]

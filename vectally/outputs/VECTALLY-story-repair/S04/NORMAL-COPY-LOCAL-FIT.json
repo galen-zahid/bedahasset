@@ -1,0 +1,80 @@
+[
+  {
+    "text": "REVENUE",
+    "localIoU": 0.7637057304382324,
+    "fontSize": 41.0,
+    "tracking": 0.0050000000000000044,
+    "sourceInk": [
+      77,
+      919,
+      173,
+      30
+    ],
+    "stage": "LOCAL_FIT_ACTUAL_CANVA_REQUIRED"
+  },
+  {
+    "text": "EXPENSES",
+    "localIoU": 0.763229489326477,
+    "fontSize": 42.5,
+    "tracking": 0.015000000000000003,
+    "sourceInk": [
+      380,
+      919,
+      195,
+      30
+    ],
+    "stage": "LOCAL_FIT_ACTUAL_CANVA_REQUIRED"
+  },
+  {
+    "text": "RESULT",
+    "localIoU": 0.684503436088562,
+    "fontSize": 41.0,
+    "tracking": 0.015000000000000003,
+    "sourceInk": [
+      719,
+      919,
+      141,
+      30
+    ],
+    "stage": "LOCAL_FIT_ACTUAL_CANVA_REQUIRED"
+  },
+  {
+    "text": "A P&L summarizes revenue,",
+    "localIoU": 0.5144400596618652,
+    "fontSize": 55.0,
+    "tracking": -0.02,
+    "sourceInk": [
+      74,
+      1449,
+      633,
+      45
+    ],
+    "stage": "LOCAL_FIT_ACTUAL_CANVA_REQUIRED"
+  },
+  {
+    "text": "expenses, and profit or loss",
+    "localIoU": 0.5060055255889893,
+    "fontSize": 55.0,
+    "tracking": -0.015,
+    "sourceInk": [
+      64,
+      1502,
+      630,
+      52
+    ],
+    "stage": "LOCAL_FIT_ACTUAL_CANVA_REQUIRED"
+  },
+  {
+    "text": "over a period.",
+    "localIoU": 0.7394534349441528,
+    "fontSize": 54.0,
+    "tracking": -0.02,
+    "sourceInk": [
+      64,
+      1556,
+      308,
+      52
+    ],
+    "stage": "LOCAL_FIT_ACTUAL_CANVA_REQUIRED"
+  }
+]

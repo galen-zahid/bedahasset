@@ -1,0 +1,13 @@
+Baca README_CLOUD.md terlebih dahulu, lalu handoff/REPORT_VECTALLY.md, handoff/STATE.json, dan handoff/VECTALLY_STATUS.csv.
+
+Saya meminta melanjutkan VECTALLY dari snapshot ini, bukan mengulang dari nol. Target tetap 84 sumber:48 Feed,30 Story,6 Highlight, ditambah EDIT GUIDE. Jangan menyatakan100% sebelum struktur, fidelity sumber, dan buyer edit-test semuanya terbukti.
+
+Ini cloud workspace. Abaikan path C:/D: sebagai lokasi runtime. Semua84 PNG sumber ada di sources/VECTALLY, manifest hash di handoff/CLOUD_SOURCES.json. Font, resep Python/Node, package kandidat, bukti, serta source app berada di repo ini. Source app lengkap ada di app-source; handoff/app-source hanya snapshot lama.
+
+Mulai dengan python3 handoff/cloud_audit.py. S06 Asap heavy memang harus diblokir; jangan menurunkan guard atau diam-diam mengganti font.
+
+Port path input/output builder ke parameter atau environment variable yang menggunakan root repo. Pertahankan PowerShell sebagai runner lokal; jika pwsh tidak tersedia di cloud, buat runner Python lintas platform yang menjalankan jobs.json yang sama. Jalankan pekerjaan deterministik lewat script batch, bukan AI mengulang operasi per objek.
+
+Pertahankan grup per aset, badan benda utuh termasuk bagian tertutup, shadow/highlight milik aset, dan copy editable sesuai kebijakan native/TypeCraft yang telah disetujui. Jangan mengimpor paket eksperimen atau rasterisasi copy untuk mengejar log sukses.
+
+Koneksi Canva/CUSBE dari sesi sebelumnya tidak tersedia otomatis. Periksa tool/koneksi yang benar-benar tersedia di sesi ini sebelum menulis ke Canva. Link draft ada di STATE.json. Tanpa koneksi yang sesuai, lanjutkan pekerjaan file lokal dan jelaskan batas impor aktual; jangan mengklaim Canva sudah diperbarui.

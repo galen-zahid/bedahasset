@@ -1,0 +1,426 @@
+[
+  {
+    "path_bytes": 1561,
+    "points": 328,
+    "holes": 0,
+    "epsilon": 0.05,
+    "single_move": true,
+    "body_tiling": false,
+    "background_counterfill": false,
+    "name": "Lembar Profit and Loss - kertas utuh di bawah pilihan OR",
+    "source_bbox": [
+      67,
+      614,
+      340,
+      436
+    ],
+    "color": "#f3f5fa",
+    "mask_iou": 0.9994410375638959,
+    "local_geometry_gate": "PASS",
+    "printed_ink_holes_filled_in_body": true
+  },
+  {
+    "path_bytes": 557,
+    "points": 117,
+    "holes": 0,
+    "epsilon": 0.05,
+    "single_move": true,
+    "body_tiling": false,
+    "background_counterfill": false,
+    "name": "Lembar Profit and Loss - baris laporan 1",
+    "source_bbox": [
+      130,
+      790,
+      167,
+      48
+    ],
+    "color": "#c9baf7",
+    "mask_iou": 0.9928943628612033,
+    "local_geometry_gate": "PASS",
+    "printed_ink_holes_filled_in_body": true
+  },
+  {
+    "path_bytes": 543,
+    "points": 114,
+    "holes": 0,
+    "epsilon": 0.05,
+    "single_move": true,
+    "body_tiling": false,
+    "background_counterfill": false,
+    "name": "Lembar Profit and Loss - baris laporan 2",
+    "source_bbox": [
+      124,
+      840,
+      170,
+      49
+    ],
+    "color": "#c9baf7",
+    "mask_iou": 0.9926857142857143,
+    "local_geometry_gate": "PASS",
+    "printed_ink_holes_filled_in_body": true
+  },
+  {
+    "path_bytes": 521,
+    "points": 108,
+    "holes": 0,
+    "epsilon": 0.05,
+    "single_move": true,
+    "body_tiling": false,
+    "background_counterfill": false,
+    "name": "Lembar Profit and Loss - baris laporan 3",
+    "source_bbox": [
+      118,
+      892,
+      173,
+      48
+    ],
+    "color": "#c8b9f7",
+    "mask_iou": 0.9934368847079413,
+    "local_geometry_gate": "PASS",
+    "printed_ink_holes_filled_in_body": true
+  },
+  {
+    "path_bytes": 733,
+    "points": 154,
+    "holes": 0,
+    "epsilon": 0.05,
+    "single_move": true,
+    "body_tiling": false,
+    "background_counterfill": false,
+    "name": "Lembar Profit and Loss - total hijau 1",
+    "source_bbox": [
+      108,
+      956,
+      253,
+      59
+    ],
+    "color": "#7ce8bf",
+    "mask_iou": 0.9942799942799943,
+    "local_geometry_gate": "PASS",
+    "printed_ink_holes_filled_in_body": true
+  },
+  {
+    "path_bytes": 383,
+    "points": 29,
+    "holes": 0,
+    "epsilon": 0,
+    "single_move": true,
+    "body_tiling": false,
+    "background_counterfill": false,
+    "sampling": 2,
+    "name": "Lembar Profit and Loss - tanda aritmetika 1",
+    "source_bbox": [
+      342,
+      781,
+      24,
+      24
+    ],
+    "color": "#091522",
+    "mask_iou": 1.0,
+    "local_geometry_gate": "PASS",
+    "printed_ink_holes_filled_in_body": false
+  },
+  {
+    "path_bytes": 209,
+    "points": 15,
+    "holes": 0,
+    "epsilon": 0,
+    "single_move": true,
+    "body_tiling": false,
+    "background_counterfill": false,
+    "sampling": 2,
+    "name": "Lembar Profit and Loss - tanda aritmetika 2",
+    "source_bbox": [
+      341,
+      841,
+      23,
+      7
+    ],
+    "color": "#091522",
+    "mask_iou": 1.0,
+    "local_geometry_gate": "PASS",
+    "printed_ink_holes_filled_in_body": false
+  },
+  {
+    "path_bytes": 1484,
+    "points": 135,
+    "holes": 0,
+    "epsilon": 0,
+    "single_move": true,
+    "body_tiling": false,
+    "background_counterfill": false,
+    "sampling": 2,
+    "name": "Lembar Profit and Loss - garis total 1",
+    "source_bbox": [
+      115,
+      930,
+      247,
+      36
+    ],
+    "color": "#091522",
+    "mask_iou": 1.0,
+    "local_geometry_gate": "PASS",
+    "printed_ink_holes_filled_in_body": false
+  },
+  {
+    "path_bytes": 1158,
+    "points": 237,
+    "holes": 0,
+    "epsilon": 0.7,
+    "single_move": true,
+    "body_tiling": false,
+    "background_counterfill": false,
+    "name": "Lembar Balance Sheet - kertas utuh di bawah pilihan OR",
+    "source_bbox": [
+      491,
+      623,
+      379,
+      433
+    ],
+    "color": "#f3f5fa",
+    "mask_iou": 0.9981832213254446,
+    "local_geometry_gate": "PASS",
+    "printed_ink_holes_filled_in_body": true
+  },
+  {
+    "path_bytes": 326,
+    "points": 69,
+    "holes": 0,
+    "epsilon": 0.05,
+    "single_move": true,
+    "body_tiling": false,
+    "background_counterfill": false,
+    "name": "Lembar Balance Sheet - baris laporan 1",
+    "source_bbox": [
+      569,
+      788,
+      95,
+      29
+    ],
+    "color": "#6f639f",
+    "mask_iou": 0.9893805309734514,
+    "local_geometry_gate": "PASS",
+    "printed_ink_holes_filled_in_body": true
+  },
+  {
+    "path_bytes": 366,
+    "points": 77,
+    "holes": 0,
+    "epsilon": 0.05,
+    "single_move": true,
+    "body_tiling": false,
+    "background_counterfill": false,
+    "name": "Lembar Balance Sheet - baris laporan 2",
+    "source_bbox": [
+      719,
+      808,
+      96,
+      30
+    ],
+    "color": "#7065a0",
+    "mask_iou": 0.9889982628836133,
+    "local_geometry_gate": "PASS",
+    "printed_ink_holes_filled_in_body": true
+  },
+  {
+    "path_bytes": 351,
+    "points": 74,
+    "holes": 0,
+    "epsilon": 0.05,
+    "single_move": true,
+    "body_tiling": false,
+    "background_counterfill": false,
+    "name": "Lembar Balance Sheet - baris laporan 3",
+    "source_bbox": [
+      558,
+      828,
+      98,
+      38
+    ],
+    "color": "#c9baf7",
+    "mask_iou": 0.991466252909232,
+    "local_geometry_gate": "PASS",
+    "printed_ink_holes_filled_in_body": true
+  },
+  {
+    "path_bytes": 379,
+    "points": 80,
+    "holes": 0,
+    "epsilon": 0.05,
+    "single_move": true,
+    "body_tiling": false,
+    "background_counterfill": false,
+    "name": "Lembar Balance Sheet - baris laporan 4",
+    "source_bbox": [
+      710,
+      849,
+      98,
+      39
+    ],
+    "color": "#c9b9f7",
+    "mask_iou": 0.9919786096256684,
+    "local_geometry_gate": "PASS",
+    "printed_ink_holes_filled_in_body": true
+  },
+  {
+    "path_bytes": 386,
+    "points": 81,
+    "holes": 0,
+    "epsilon": 0.05,
+    "single_move": true,
+    "body_tiling": false,
+    "background_counterfill": false,
+    "name": "Lembar Balance Sheet - baris laporan 5",
+    "source_bbox": [
+      547,
+      873,
+      99,
+      39
+    ],
+    "color": "#c8b9f7",
+    "mask_iou": 0.9917106254709872,
+    "local_geometry_gate": "PASS",
+    "printed_ink_holes_filled_in_body": true
+  },
+  {
+    "path_bytes": 381,
+    "points": 80,
+    "holes": 0,
+    "epsilon": 0.05,
+    "single_move": true,
+    "body_tiling": false,
+    "background_counterfill": false,
+    "name": "Lembar Balance Sheet - baris laporan 6",
+    "source_bbox": [
+      701,
+      895,
+      99,
+      39
+    ],
+    "color": "#c8b9f7",
+    "mask_iou": 0.9925456578456952,
+    "local_geometry_gate": "PASS",
+    "printed_ink_holes_filled_in_body": true
+  },
+  {
+    "path_bytes": 391,
+    "points": 82,
+    "holes": 0,
+    "epsilon": 0.05,
+    "single_move": true,
+    "body_tiling": false,
+    "background_counterfill": false,
+    "name": "Lembar Balance Sheet - baris laporan 7",
+    "source_bbox": [
+      537,
+      919,
+      100,
+      40
+    ],
+    "color": "#c9baf7",
+    "mask_iou": 0.9915378955114055,
+    "local_geometry_gate": "PASS",
+    "printed_ink_holes_filled_in_body": true
+  },
+  {
+    "path_bytes": 381,
+    "points": 80,
+    "holes": 0,
+    "epsilon": 0.05,
+    "single_move": true,
+    "body_tiling": false,
+    "background_counterfill": false,
+    "name": "Lembar Balance Sheet - baris laporan 8",
+    "source_bbox": [
+      693,
+      941,
+      100,
+      41
+    ],
+    "color": "#c9b9f7",
+    "mask_iou": 0.9920749279538905,
+    "local_geometry_gate": "PASS",
+    "printed_ink_holes_filled_in_body": true
+  },
+  {
+    "path_bytes": 1725,
+    "points": 158,
+    "holes": 0,
+    "epsilon": 0,
+    "single_move": true,
+    "body_tiling": false,
+    "background_counterfill": false,
+    "sampling": 2,
+    "name": "Lembar Balance Sheet - pemisah kolom 1",
+    "source_bbox": [
+      654,
+      794,
+      41,
+      204
+    ],
+    "color": "#091522",
+    "mask_iou": 1.0,
+    "local_geometry_gate": "PASS",
+    "printed_ink_holes_filled_in_body": false
+  },
+  {
+    "path_bytes": 1534,
+    "points": 321,
+    "holes": 0,
+    "epsilon": 0.05,
+    "single_move": true,
+    "body_tiling": false,
+    "background_counterfill": false,
+    "name": "Garis penegas SHOWS",
+    "source_bbox": [
+      430,
+      519,
+      451,
+      94
+    ],
+    "color": "#0ae28b",
+    "mask_iou": 0.9927776105928378,
+    "local_geometry_gate": "PASS",
+    "printed_ink_holes_filled_in_body": true
+  },
+  {
+    "path_bytes": 1850,
+    "points": 380,
+    "holes": 0,
+    "epsilon": 0.35,
+    "single_move": true,
+    "body_tiling": false,
+    "background_counterfill": false,
+    "name": "Garis penegas PROFIT",
+    "source_bbox": [
+      95,
+      1301,
+      695,
+      103
+    ],
+    "color": "#0be28c",
+    "mask_iou": 0.9941134148734384,
+    "local_geometry_gate": "PASS",
+    "printed_ink_holes_filled_in_body": true
+  },
+  {
+    "path_bytes": 907,
+    "points": 190,
+    "holes": 0,
+    "epsilon": 0.05,
+    "single_move": true,
+    "body_tiling": false,
+    "background_counterfill": false,
+    "name": "Pilihan OR - lingkaran utuh",
+    "source_bbox": [
+      398,
+      756,
+      133,
+      138
+    ],
+    "color": "#0be18b",
+    "mask_iou": 0.9946307788857123,
+    "local_geometry_gate": "PASS",
+    "printed_ink_holes_filled_in_body": true
+  }
+]

@@ -1,0 +1,80 @@
+[
+  {
+    "text": "VECTALLY",
+    "localIoU": 0.8600807785987854,
+    "fontSize": 50.0,
+    "tracking": -0.02,
+    "sourceInk": [
+      48,
+      103,
+      286,
+      35
+    ],
+    "stage": "LOCAL_FIT_ACTUAL_CANVA_REQUIRED"
+  },
+  {
+    "text": "TELL A",
+    "localIoU": 0.823218047618866,
+    "fontSize": 76.0,
+    "tracking": -0.0049999999999999975,
+    "sourceInk": [
+      399,
+      745,
+      218,
+      54
+    ],
+    "stage": "LOCAL_FIT_ACTUAL_CANVA_REQUIRED"
+  },
+  {
+    "text": "Make sense of",
+    "localIoU": 0.6728832721710205,
+    "fontSize": 43.0,
+    "tracking": -0.02,
+    "sourceInk": [
+      85,
+      1369,
+      255,
+      33
+    ],
+    "stage": "LOCAL_FIT_ACTUAL_CANVA_REQUIRED"
+  },
+  {
+    "text": "the numbers",
+    "localIoU": 0.7314311861991882,
+    "fontSize": 44.5,
+    "tracking": -0.02,
+    "sourceInk": [
+      83,
+      1417,
+      233,
+      33
+    ],
+    "stage": "LOCAL_FIT_ACTUAL_CANVA_REQUIRED"
+  },
+  {
+    "text": "behind your",
+    "localIoU": 0.6456621289253235,
+    "fontSize": 41.5,
+    "tracking": 0.010000000000000005,
+    "sourceInk": [
+      85,
+      1466,
+      220,
+      39
+    ],
+    "stage": "LOCAL_FIT_ACTUAL_CANVA_REQUIRED"
+  },
+  {
+    "text": "business.",
+    "localIoU": 0.7533606290817261,
+    "fontSize": 45.5,
+    "tracking": -0.009999999999999998,
+    "sourceInk": [
+      85,
+      1512,
+      169,
+      34
+    ],
+    "stage": "LOCAL_FIT_ACTUAL_CANVA_REQUIRED"
+  }
+]

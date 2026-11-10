@@ -1,0 +1,373 @@
+{
+  "source": "D:\\download\\VECTALLY\\Highlight\\VECTALLY_H05_Process.png",
+  "sha256": "233c613e1caab73f05288547ef218b3466de0ce988c7c3373bed89b27b7d2746",
+  "objects": [
+    {
+      "id": "IMPORT",
+      "name": "Dokumen impor, isi dan tanda unduh",
+      "kind": "semantic_assembly",
+      "roles": [
+        "document",
+        "download_symbol"
+      ],
+      "parts": [
+        {
+          "path_bytes": 657,
+          "points": 135,
+          "holes": 1,
+          "epsilon": 0.05,
+          "single_move": true,
+          "body_tiling": false,
+          "background_counterfill": false,
+          "mask_iou": 0.9954117063492064,
+          "subpixel_translation": [
+            -0.25,
+            0.25
+          ],
+          "local_geometry_gate": "PASS",
+          "source_bbox": [
+            109,
+            379,
+            232,
+            274
+          ],
+          "color": "#bb9dfc"
+        },
+        {
+          "path_bytes": 132,
+          "points": 27,
+          "holes": 0,
+          "epsilon": 0.05,
+          "single_move": true,
+          "body_tiling": false,
+          "background_counterfill": false,
+          "mask_iou": 0.9942408376963351,
+          "subpixel_translation": [
+            -0.375,
+            -0.25
+          ],
+          "local_geometry_gate": "PASS",
+          "source_bbox": [
+            151,
+            462,
+            95,
+            21
+          ],
+          "color": "#bb9dfb"
+        },
+        {
+          "path_bytes": 116,
+          "points": 24,
+          "holes": 0,
+          "epsilon": 0.05,
+          "single_move": true,
+          "body_tiling": false,
+          "background_counterfill": false,
+          "mask_iou": 0.9957428693060877,
+          "subpixel_translation": [
+            -0.375,
+            -0.375
+          ],
+          "local_geometry_gate": "PASS",
+          "source_bbox": [
+            151,
+            505,
+            115,
+            21
+          ],
+          "color": "#bb9efc"
+        },
+        {
+          "path_bytes": 1590,
+          "points": 468,
+          "holes": 0,
+          "epsilon": 0.3,
+          "single_move": true,
+          "body_tiling": false,
+          "background_counterfill": false,
+          "contour_sampling": 2,
+          "refinement": "subpixel contour boundary fit, whole component",
+          "mask_iou": 1.0,
+          "subpixel_translation": [
+            0.0,
+            0.0
+          ],
+          "local_geometry_gate": "PASS",
+          "source_bbox": [
+            253,
+            512,
+            77,
+            98
+          ],
+          "color": "#ba9cfc"
+        },
+        {
+          "path_bytes": 151,
+          "points": 31,
+          "holes": 0,
+          "epsilon": 0.05,
+          "single_move": true,
+          "body_tiling": false,
+          "background_counterfill": false,
+          "mask_iou": 0.9916550764951322,
+          "subpixel_translation": [
+            -0.375,
+            -0.25
+          ],
+          "local_geometry_gate": "PASS",
+          "source_bbox": [
+            151,
+            547,
+            70,
+            22
+          ],
+          "color": "#bb9dfc"
+        },
+        {
+          "path_bytes": 331,
+          "points": 68,
+          "holes": 0,
+          "epsilon": 0.05,
+          "single_move": true,
+          "body_tiling": false,
+          "background_counterfill": false,
+          "mask_iou": 0.9944946047126184,
+          "subpixel_translation": [
+            -0.25,
+            0.25
+          ],
+          "local_geometry_gate": "PASS",
+          "source_bbox": [
+            221,
+            589,
+            140,
+            64
+          ],
+          "color": "#ba9cfc"
+        }
+      ],
+      "ownership": "explicit_observed_source_component_bounds",
+      "joined_strokes_not_split": true
+    },
+    {
+      "id": "ARROW1",
+      "name": "Konektor proses atas utuh",
+      "kind": "semantic_assembly",
+      "roles": [
+        "connector"
+      ],
+      "parts": [
+        {
+          "path_bytes": 502,
+          "points": 103,
+          "holes": 0,
+          "epsilon": 0.05,
+          "single_move": true,
+          "body_tiling": false,
+          "background_counterfill": false,
+          "mask_iou": 0.9937953995157385,
+          "subpixel_translation": [
+            -0.375,
+            -0.375
+          ],
+          "local_geometry_gate": "PASS",
+          "source_bbox": [
+            354,
+            541,
+            159,
+            173
+          ],
+          "color": "#bb9dfd"
+        }
+      ],
+      "ownership": "explicit_observed_source_component_bounds",
+      "joined_strokes_not_split": true
+    },
+    {
+      "id": "EVALUATION",
+      "name": "Neraca dan konektor tindak lanjut yang tersambung",
+      "kind": "semantic_assembly",
+      "roles": [
+        "scale",
+        "attached_connector"
+      ],
+      "parts": [
+        {
+          "path_bytes": 1508,
+          "points": 299,
+          "holes": 3,
+          "epsilon": 0.55,
+          "single_move": true,
+          "body_tiling": false,
+          "background_counterfill": false,
+          "mask_iou": 0.9883649724433557,
+          "subpixel_translation": [
+            0.0,
+            -0.125
+          ],
+          "local_geometry_gate": "PASS",
+          "source_bbox": [
+            307,
+            730,
+            339,
+            470
+          ],
+          "color": "#f4f6f8"
+        }
+      ],
+      "ownership": "explicit_observed_source_component_bounds",
+      "joined_strokes_not_split": true
+    },
+    {
+      "id": "CHECKLIST",
+      "name": "Clipboard, daftar dan lencana verifikasi",
+      "kind": "semantic_assembly",
+      "roles": [
+        "clipboard",
+        "status_badge"
+      ],
+      "parts": [
+        {
+          "path_bytes": 1251,
+          "points": 256,
+          "holes": 1,
+          "epsilon": 0.05,
+          "single_move": true,
+          "body_tiling": false,
+          "background_counterfill": false,
+          "mask_iou": 0.9959706353148976,
+          "subpixel_translation": [
+            -0.25,
+            0.25
+          ],
+          "local_geometry_gate": "PASS",
+          "source_bbox": [
+            564,
+            1012,
+            235,
+            283
+          ],
+          "color": "#0edc98"
+        },
+        {
+          "path_bytes": 1205,
+          "points": 356,
+          "holes": 0,
+          "epsilon": 0.3,
+          "single_move": true,
+          "body_tiling": false,
+          "background_counterfill": false,
+          "contour_sampling": 2,
+          "refinement": "subpixel contour boundary fit, whole component",
+          "mask_iou": 1.0,
+          "subpixel_translation": [
+            0.0,
+            0.0
+          ],
+          "local_geometry_gate": "PASS",
+          "source_bbox": [
+            605,
+            1111,
+            59,
+            47
+          ],
+          "color": "#0cdb98"
+        },
+        {
+          "path_bytes": 204,
+          "points": 41,
+          "holes": 0,
+          "epsilon": 0.05,
+          "single_move": true,
+          "body_tiling": false,
+          "background_counterfill": false,
+          "mask_iou": 0.9921000658327848,
+          "subpixel_translation": [
+            -0.25,
+            0.25
+          ],
+          "local_geometry_gate": "PASS",
+          "source_bbox": [
+            679,
+            1123,
+            80,
+            21
+          ],
+          "color": "#0ddd99"
+        },
+        {
+          "path_bytes": 1227,
+          "points": 362,
+          "holes": 0,
+          "epsilon": 0.3,
+          "single_move": true,
+          "body_tiling": false,
+          "background_counterfill": false,
+          "contour_sampling": 2,
+          "refinement": "subpixel contour boundary fit, whole component",
+          "mask_iou": 1.0,
+          "subpixel_translation": [
+            0.0,
+            0.0
+          ],
+          "local_geometry_gate": "PASS",
+          "source_bbox": [
+            605,
+            1170,
+            59,
+            46
+          ],
+          "color": "#0fdc99"
+        },
+        {
+          "path_bytes": 184,
+          "points": 39,
+          "holes": 0,
+          "epsilon": 0.05,
+          "single_move": true,
+          "body_tiling": false,
+          "background_counterfill": false,
+          "mask_iou": 0.9915708812260536,
+          "subpixel_translation": [
+            -0.375,
+            -0.375
+          ],
+          "local_geometry_gate": "PASS",
+          "source_bbox": [
+            679,
+            1180,
+            79,
+            20
+          ],
+          "color": "#0fde98"
+        },
+        {
+          "path_bytes": 1080,
+          "points": 224,
+          "holes": 1,
+          "epsilon": 0.05,
+          "single_move": true,
+          "body_tiling": false,
+          "background_counterfill": false,
+          "mask_iou": 0.9878603945371776,
+          "subpixel_translation": [
+            -0.375,
+            -0.25
+          ],
+          "local_geometry_gate": "PASS",
+          "source_bbox": [
+            701,
+            1203,
+            124,
+            128
+          ],
+          "color": "#0edb98"
+        }
+      ],
+      "ownership": "explicit_observed_source_component_bounds",
+      "joined_strokes_not_split": true
+    }
+  ],
+  "group_count_is_not_claimed_as_physical_object_count": true,
+  "nearest_object_assignment": false
+}

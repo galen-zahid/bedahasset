@@ -1,0 +1,86 @@
+[
+  {
+    "font": "archivoblack-ArchivoBlack-Regular.ttf",
+    "text": "GOT A",
+    "fontSize": 90,
+    "pilInkBox": [
+      4,
+      17,
+      310,
+      64
+    ],
+    "actualInkBox": [
+      4,
+      21,
+      310,
+      64
+    ],
+    "offsetEm": [
+      0.0,
+      0.044444444444444446
+    ]
+  },
+  {
+    "font": "archivoblack-ArchivoBlack-Regular.ttf",
+    "text": "QUESTION?",
+    "fontSize": 75,
+    "pilInkBox": [
+      3,
+      13,
+      478,
+      63
+    ],
+    "actualInkBox": [
+      4,
+      17,
+      480,
+      63
+    ],
+    "offsetEm": [
+      0.013333333333333334,
+      0.05333333333333334
+    ]
+  },
+  {
+    "font": "asap-Asap[wdth,wght].ttf",
+    "text": "Drop it here.",
+    "fontSize": 50,
+    "pilInkBox": [
+      5,
+      9,
+      265,
+      49
+    ],
+    "actualInkBox": [
+      5,
+      11,
+      267,
+      47
+    ],
+    "offsetEm": [
+      0.0,
+      0.04
+    ]
+  },
+  {
+    "font": "leaguegothic-LeagueGothic[wdth].ttf",
+    "text": "TIMING",
+    "fontSize": 110,
+    "pilInkBox": [
+      1,
+      26,
+      206,
+      83
+    ],
+    "actualInkBox": [
+      1,
+      21,
+      207,
+      83
+    ],
+    "offsetEm": [
+      0.0,
+      -0.045454545454545456
+    ]
+  }
+]

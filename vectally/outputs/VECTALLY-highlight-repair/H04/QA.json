@@ -1,0 +1,15 @@
+{
+  "stage": "LOCAL_GEOMETRY_CANDIDATE_REQUIRES_TEXT_POLICY_AND_CANVA_QA",
+  "minimum_component_mask_iou": 0.9962897809051655,
+  "geometry_gates": [
+    "PASS",
+    "PASS"
+  ],
+  "native_text_policy": "QUESTION_ICON_SCOPE_UNRESOLVED",
+  "gradients": "UNRESOLVED",
+  "buyer": "NOT_TESTED",
+  "shape": 3,
+  "group": 1,
+  "text": 0,
+  "image": 0
+}

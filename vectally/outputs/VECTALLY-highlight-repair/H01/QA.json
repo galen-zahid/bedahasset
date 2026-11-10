@@ -1,0 +1,26 @@
+{
+  "stage": "LOCAL_REPAIR_REQUIRES_CANVA_IMPORT_AND_EXPORT",
+  "minimum_component_mask_iou": 0.9923726505039498,
+  "geometry_gates": [
+    "PASS",
+    "PASS",
+    "PASS",
+    "PASS",
+    "PASS",
+    "PASS",
+    "PASS",
+    "PASS",
+    "PASS",
+    "PASS",
+    "PASS",
+    "PASS",
+    "PASS",
+    "PASS"
+  ],
+  "gradients": "UNRESOLVED",
+  "buyer": "NOT_TESTED",
+  "shape": 15,
+  "group": 3,
+  "text": 0,
+  "image": 0
+}

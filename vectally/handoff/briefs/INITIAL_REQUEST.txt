@@ -1,0 +1,529 @@
+# CUSBE DESIGN® — ADAPTIVE REBUILD V3.1
+## Canva Magic Layers × Semantic Reconstruction × Native Buyer-Test
+
+### ROLE
+
+Act as a Principal Computer Vision Engineer, Canva Platform Engineer, Computational Graphics Architect, and Production QA Engineer.
+
+You are taking over an existing project previously developed using Claude Code.
+
+**Do not restart the project. Do not rebuild its existing algorithms. Do not replace working infrastructure with speculative implementations.**
+
+Your mission is to integrate Canva Magic Layers into the current system as a semantic layer-decomposition engine, then use the existing reconstruction pipeline and Canva Apps SDK to repair and validate its results.
+
+The resulting system must run without Claude Code or Codex as a runtime dependency.
+
+---
+
+## 1. EXISTING ENVIRONMENT
+
+Windows project:
+
+- Python pipeline: `D:\bedahasset`
+- Canva Apps SDK project: `D:\cusbe-importer`
+- Input designs: `D:\bedahasset\in`
+- Existing outputs: `D:\bedahasset\out`
+- Source collections: `D:\download\kinrava  fitnes`, `D:\download\VECTALLY`, `D:\download\dorvan`
+
+The existing pipeline implements:
+
+- BiRefNet foreground extraction.
+- LaMa localized inpainting.
+- EasyOCR and text verification heuristics.
+- Watershed and region merging.
+- Polygon and Bézier reconstruction.
+- Ribbon geometry estimation.
+- Occlusion-aware layers.
+- SVG / PNG asset generation.
+- `manifest.json` and `CANVA_PACKAGE.json`.
+- Native Canva text and shape insertion using Apps SDK.
+- Canva export and visual QA.
+
+**Preserve all existing working functionality.**
+
+Before implementing anything:
+
+1. Inspect the actual repository and current branch.
+2. Identify which features are operational versus only claimed to work.
+3. Inspect current Canva App entrypoints and package schemas.
+4. Confirm the local Python interpreter and dependencies actually work.
+5. Preserve a rollback to the previous pipeline.
+
+Do not globally reinstall libraries or change model environments without necessity and authorization.
+
+---
+
+## 2. TRAINING AND BENCHMARK DATA
+
+A `training.zip` archive is provided separately.
+
+Inspect its actual contents before assuming its structure.
+
+- List ZIP entries and file formats before extraction.
+- Avoid unnecessary extraction of large files.
+- Prevent path traversal and ZIP extraction bombs.
+- Identify original PNGs, reconstructed assets, JSON manifests, previews, Canva exports, and any existing labels.
+- Build a source-to-export pairing index.
+- Identify incomplete or mismatched samples.
+- Preserve all source files.
+
+Use the dataset as a **regression and calibration corpus**, not as an excuse to train another large neural network.
+
+Do not attempt to fine-tune Canva Magic Layers, which is a proprietary hosted service.
+
+If `training.zip` isn't accessible in the Codex environment, use the existing 18-design benchmark in the repository and clearly report the missing dataset. Do not fabricate dataset contents.
+
+### Known previous baseline
+
+The previous batch failed visual QA:
+
+- KINRAVA: mean export SSIM approximately 0.794.
+- VECTALLY: mean export SSIM approximately 0.732.
+- DORVAN: mean export SSIM approximately 0.432.
+
+These values are baseline evidence. Recompute them if source images and exports are available.
+
+Known failure classes:
+
+- OCR hallucination.
+- Font and typographic proportion mismatch.
+- Large inpainting blur.
+- Human-subject separation artifacts.
+- Fragmented vector illustrations.
+- Destruction of glossy reflections.
+- Remaining raster illustrations in supposedly editable designs.
+- Repeated or missing graphic elements.
+
+---
+
+## 3. NEW CORE ARCHITECTURE
+
+Implement a hybrid system:
+
+**ORIGINAL IMAGE → MAGIC LAYERS → SEMANTIC AUDIT → SELECTIVE NATIVE REPAIR → CANVA QA → BUYER TEST.**
+
+Existing Python reconstruction remains an optional repair engine and fallback.
+
+### A. Canva Magic Layers
+
+Magic Layers is the preferred first-pass decomposition for suitable flat designs, especially vector-oriented posters.
+
+Use the official Canva image-to-design import capability where authorized and available.
+
+Official documentation:
+
+https://www.canva.dev/docs/apps/rest-apis/reference/design-imports/create-image-to-design-import-job/
+
+API:
+
+`POST /rest/v1/image-to-design-imports`
+
+It accepts the `asset_id` of an image already uploaded to Canva and produces a **new editable Canva design** asynchronously.
+
+Required authorization includes `design:content:write` and the user's `image_to_design_imports` capability.
+
+**IMPORTANT:**
+
+- The API is preview and may change.
+- It consumes Canva AI credits.
+- Check quota, eligibility, and authorization first.
+- Do not initiate chargeable jobs without explicit user approval.
+- Do not process the full batch automatically.
+- Do not claim the API accepts custom scene JSON or instructions for individual output layers.
+- Do not invent a Magic Layers prompt API if none is documented.
+
+If the REST API isn't accessible in the current account or environment, support the officially available Canva Magic Layers UI workflow and import its resulting design for subsequent inspection.
+
+### B. Semantic inspection
+
+Treat Magic Layers as an initial candidate, not an infallible solution.
+
+Inspect its resulting Canva design:
+
+- Native text objects.
+- Native shapes and paths.
+- Raster image layers.
+- Background modules.
+- Bounding boxes.
+- Z-order.
+- Typography and wording.
+- Color properties.
+- Occlusion artifacts.
+
+Use official supported SDK/API read operations where available.
+
+If the API cannot expose an element property, use an explicit manual QA gate rather than guessing.
+
+### C. Reconstruction repair
+
+Match the Magic Layers output to the source image and existing `manifest.json`.
+
+Identify:
+
+- Incorrect text.
+- Missing objects.
+- Raster graphics that should be native.
+- Duplicated graphics.
+- Damaged backgrounds.
+- Lost gradients.
+- Incorrect path geometry.
+- Mismatched fonts.
+- Z-order errors.
+
+Repair **only failing elements** using the existing Python pipeline or Canva Apps SDK.
+
+Do not delete successful Magic Layers elements merely to recreate them.
+
+---
+
+## 4. BRAND-ADAPTIVE POLICIES
+
+Determine reconstruction strategy per semantic element.
+
+### KINRAVA — PHOTO PRESERVE
+
+Goal: preserve photographic integrity while allowing meaningful text and graphic editing.
+
+- Keep original humans, equipment, gym lighting, and photographic details intact.
+- Do not remove entire athletes to manufacture a clean gym background.
+- Do not run broad LaMa inpainting on human regions.
+- Prefer a faithful photo module with separately editable typography and simple geometric accents.
+- Use Magic Layers only when the design and image regions are suitable.
+- If a native stripe would expose baked-in graphics, flag this limitation.
+- Never conceal damaged backgrounds with blur.
+- Native text must retain correct wording and typography.
+
+**Visual preservation takes precedence over unnecessary photo-layer separation.**
+
+### VECTALLY — VECTOR FIRST
+
+Goal: fully editable native Canva illustrations and typography.
+
+This is the primary target for Magic Layers integration.
+
+- Treat icons, charts, financial documents, connectors, ribbons, boxes, and decorative shapes as semantic vector objects.
+- Inspect whether Magic Layers produced actual editable shapes or merely independently movable raster images.
+- Reconstruct remaining rasterized primary illustrations using native Canva paths where feasible.
+- Group related components meaningfully.
+- Preserve independently editable fill colors.
+- Verify every text string against the original.
+- Use brand-aware font mapping.
+- Avoid flattening gradients silently.
+- Reject `FULLY_EDITABLE` status if primary vector illustrations remain rasterized.
+
+The target is not maximum layer count; it is **meaningful native editability**.
+
+### DORVAN — RENDER PRESERVE
+
+Goal: retain automotive and glossy render detail.
+
+- Preserve cars, material texture, reflections, specular highlights, and realistic lighting as raster hero modules.
+- Do not aggressively trace glossy details into polygon fragments.
+- Reconstruct native text and geometric accents separately.
+- Support controlled recolor where technically feasible.
+- Differentiate:
+  - Native shape recoloring.
+  - Canva image color effects.
+  - External raster recoloring.
+- For selective raster recolor, preserve luminance and protect neutral highlights and unrelated regions.
+- Provide alternative tested raster color variants if independent buyer recoloring is not feasible.
+- Do not advertise a feature that requires an unpublished developer app as universally accessible to template buyers.
+
+---
+
+## 5. ADAPTIVE ORCHESTRATION
+
+Build a reusable decision engine rather than a fixed global reconstruction recipe.
+
+Each element should be assigned one strategy:
+
+- `MAGIC_LAYERS_NATIVE_ACCEPT`
+- `MAGIC_LAYERS_RASTER_ACCEPT`
+- `RECONSTRUCT_NATIVE_VECTOR`
+- `RECONSTRUCT_NATIVE_TEXT`
+- `PRESERVE_RASTER_MODULE`
+- `LOCAL_REPAIR`
+- `REJECT_AND_REVIEW`
+
+Each decision must record:
+
+- Semantic role.
+- Desired buyer editability.
+- Original location and dimensions.
+- Evidence in original pixels.
+- Output element type.
+- Visual reconstruction error.
+- Editability verification state.
+- Confidence and risk.
+- Reason for accepting or rejecting the output.
+
+Do not create unrelated schemas if the existing manifest can be extended.
+
+### Non-destructive workflow
+
+Never modify original Canva masters.
+
+Keep separate versions:
+
+1. Original reference.
+2. Magic Layers candidate.
+3. Corrected hybrid candidate.
+4. Buyer-test copy.
+5. Approved final design.
+
+A failed repair must support rollback to its previous candidate.
+
+---
+
+## 6. CANVA APPS SDK INTEGRATION
+
+Reuse `D:\cusbe-importer`.
+
+The app should support two modes:
+
+**MODE A — ASSEMBLE FROM LOCAL PACKAGE**
+
+Existing functionality: load a validated local package and create editable Canva elements.
+
+**MODE B — REPAIR MAGIC LAYERS RESULT**
+
+New functionality:
+
+- Open or work with the Magic Layers-generated design.
+- Inspect supported element metadata.
+- Compare against the semantic manifest.
+- Show detected errors and unsupported editability claims.
+- Apply native corrections where supported by the SDK.
+- Preserve already-correct native elements.
+- Provide undo or safe copy-based rollback.
+- Save a machine-readable QA report.
+
+Before coding MODE B, verify whether the official Canva Apps SDK can inspect and modify the needed properties of existing elements.
+
+Do not invent SDK methods.
+
+If an operation is unsupported, report it and implement a documented alternative or manual repair step.
+
+---
+
+## 7. ACCURATE TEXT AND FONT SYSTEM
+
+Implement source-text verification as a mandatory gate.
+
+The pipeline must distinguish:
+
+- OCR prediction.
+- Verified source copy.
+- Brand vocabulary.
+- Corrected output text.
+
+Never silently replace uncertain text with dictionary guesses.
+
+Use exact text from source material when available.
+
+Compare font candidates by rendering:
+
+- Letter width.
+- Glyph shapes.
+- Line height.
+- Kerning.
+- Tracking.
+- Text block bounds.
+
+For known brands, prioritize existing approved font specifications.
+
+A text object is not correct simply because it is editable.
+
+---
+
+## 8. QUALITY ASSURANCE
+
+Implement three separate QA verdicts.
+
+### PASS-STRUCTURE
+
+- Correct native element types.
+- Correct object relationships.
+- No duplicates.
+- Correct z-order and position.
+- No critical missing elements.
+
+### PASS-FIDELITY
+
+Compare source PNG against actual Canva export.
+
+Measure:
+
+- Global and regional SSIM.
+- MAE / color difference.
+- Edge alignment.
+- Text accuracy.
+- Protected image-region preservation.
+- Missing or duplicated design objects.
+
+Use aligned, same-size images.
+
+Do not accept visually catastrophic results based on a high overall metric alone.
+
+### PASS-BUYER
+
+Perform meaningful editing tests:
+
+- Change headline.
+- Change accent color.
+- Edit illustrative vectors.
+- Replace photo module where promised.
+- Export again.
+- Verify layout integrity.
+- Confirm buyer access to the advertised editing features.
+
+Every result must be `PASS`, `FAIL`, or `NOT_TESTED` with evidence.
+
+**Successful Magic Layers conversion is NOT equivalent to buyer-test PASS.**
+
+---
+
+## 9. EXPERIMENT DESIGN — SMALL PILOT FIRST
+
+Do not process 18 or 84 designs yet.
+
+Run a controlled comparison using:
+
+### Pilot 1 — VECTALLY A20
+
+A simpler vector-first design.
+
+Compare:
+
+- Existing local reconstruction.
+- Magic Layers conversion.
+- Magic Layers + targeted native repair.
+
+Target: correct text and independently recolorable native shapes.
+
+### Pilot 2 — VECTALLY A03
+
+A complex document illustration.
+
+Target:
+
+- No hallucinated headline.
+- Semantic document/icon groups.
+- Primary illustrations as native editable shapes.
+- Visual consistency after Canva export.
+
+Only after these pilots demonstrate improvement:
+
+### Pilot 3 — KINRAVA A25
+
+Validate photo preservation with multiple people.
+
+### Pilot 4 — DORVAN 21
+
+Validate glossy render preservation and selective editability.
+
+Magic Layers may be bypassed for a pilot if it is demonstrably unsuitable, particularly for photorealistic content.
+
+Report the reason for that decision.
+
+---
+
+## 10. COST, LIMITS, AND RUNTIME
+
+Development environment:
+
+- Windows.
+- 16 GB RAM.
+- CPU-first local reconstruction.
+- Internet for Canva.
+- Canva Apps SDK.
+- Existing Python/TypeScript repositories.
+
+Rules:
+
+- No mandatory Claude or Codex at runtime.
+- No Qwen-Image-Layered requirement.
+- No mandatory paid vision API.
+- No large model installation without approval.
+- No bulk Magic Layers jobs without explicit approval.
+- Cache completed Magic Layers results by source hash.
+- Never charge AI credits again for an unchanged source unless the user requests regeneration.
+- Limit corrections to two bounded iterations per pilot.
+- Protect credentials and OAuth tokens.
+- Do not store Canva tokens in logs or public repositories.
+
+Magic Layers costs, access conditions, and API status must be confirmed against current official documentation.
+
+Keep a fallback path for manual Magic Layers use when the API is not authorized.
+
+---
+
+## 11. IMPLEMENTATION ORDER
+
+**PHASE 1 — AUDIT**
+
+Inspect repository, datasets, Canva application, and previous failure evidence.
+
+Deliver a concise technical audit.
+
+**PHASE 2 — MAGIC LAYERS FEASIBILITY**
+
+Verify actual API capabilities, access permissions, account capability, cost, and resulting design editability.
+
+No chargeable job without authorization.
+
+**PHASE 3 — SINGLE VECTOR PILOT**
+
+Run VECTALLY A20 through the verified workflow, compare against the existing rebuild, and perform actual Canva editability checks.
+
+**PHASE 4 — TARGETED REPAIR**
+
+Implement reusable repair operations for the specific observed failures.
+
+**PHASE 5 — COMPLEX VECTOR PILOT**
+
+Run VECTALLY A03 and demonstrate semantic group reconstruction.
+
+**PHASE 6 — PHOTO AND RENDER VALIDATION**
+
+Test KINRAVA A25 and DORVAN 21.
+
+**PHASE 7 — REGRESSION**
+
+Only when pilot evidence supports improvement, re-evaluate the previous 18-design benchmark.
+
+Do not expand to the full collection prematurely.
+
+---
+
+## 12. REQUIRED OUTPUT
+
+Produce a working integration, not a theoretical architecture.
+
+Deliver:
+
+1. Existing repository audit.
+2. Working Magic Layers integration or verified manual fallback.
+3. Updated semantic manifest adapter.
+4. Native-element inspection and repair logic.
+5. Brand-aware reconstruction policy.
+6. Visual and buyer-test QA reports.
+7. VECTALLY A20 comparison.
+8. VECTALLY A03 comparison when the first pilot passes.
+9. Rollback and standalone operation instructions.
+10. Honest description of remaining blockers.
+
+Final report format:
+
+- What was implemented.
+- What was actually executed.
+- What was verified inside Canva.
+- Comparison metrics.
+- Native versus raster element breakdown.
+- Credit usage, if any.
+- Remaining failures.
+- Next independent runtime commands.
+
+**SUCCESS IS NOT MORE LAYERS. SUCCESS IS A DESIGN THAT LOOKS LIKE ITS REFERENCE AND CAN BE EDITED BY THE BUYER AS ADVERTISED.**
+
+START WITH PHASE 1 AND PHASE 2. Implement the smallest working improvement before expanding.

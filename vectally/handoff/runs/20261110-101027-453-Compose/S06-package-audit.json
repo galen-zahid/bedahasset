@@ -1,0 +1,94 @@
+{
+  "packages": [
+    {
+      "path": "/home/user/bedahasset/vectally/outputs/VECTALLY-story-repair/S06/ASSETS_NATIVE_COPY_PACKAGE.json",
+      "source": "S06 - ASET UTUH DAN SELURUH COPY NATIVE - FIDELITY PENDING",
+      "counts": {
+        "shape": 47,
+        "group": 3,
+        "text": 8,
+        "image": 0
+      },
+      "errors": [
+        "5/1: FONT_VARIANT_UNAVAILABLE Asap heavy/normal",
+        "9: FONT_VARIANT_UNAVAILABLE Asap heavy/normal",
+        "10: FONT_VARIANT_UNAVAILABLE Asap heavy/normal",
+        "11: FONT_VARIANT_UNAVAILABLE Asap heavy/normal",
+        "12: FONT_VARIANT_UNAVAILABLE Asap heavy/normal"
+      ],
+      "warnings": [],
+      "fonts": [
+        {
+          "address": "5/1",
+          "text": "LET’S TALK BOOKS.",
+          "ref": "YAFdJr0OaFw:0",
+          "family": "Asap",
+          "weight": "heavy",
+          "style": "normal"
+        },
+        {
+          "address": "8",
+          "text": "VECTALLY",
+          "ref": "YACgEZulLoA:0",
+          "family": "Archivo Black",
+          "weight": "normal",
+          "style": "normal"
+        },
+        {
+          "address": "9",
+          "text": "GOOD",
+          "ref": "YAFdJr0OaFw:0",
+          "family": "Asap",
+          "weight": "heavy",
+          "style": "normal"
+        },
+        {
+          "address": "10",
+          "text": "RECORDS.",
+          "ref": "YAFdJr0OaFw:0",
+          "family": "Asap",
+          "weight": "heavy",
+          "style": "normal"
+        },
+        {
+          "address": "11",
+          "text": "BETTER",
+          "ref": "YAFdJr0OaFw:0",
+          "family": "Asap",
+          "weight": "heavy",
+          "style": "normal"
+        },
+        {
+          "address": "12",
+          "text": "DECISIONS.",
+          "ref": "YAFdJr0OaFw:0",
+          "family": "Asap",
+          "weight": "heavy",
+          "style": "normal"
+        },
+        {
+          "address": "13",
+          "text": "Talk through what your",
+          "ref": "YAFdJr0OaFw:0",
+          "family": "Asap",
+          "weight": "normal",
+          "style": "normal"
+        },
+        {
+          "address": "14",
+          "text": "business needs.",
+          "ref": "YAFdJr0OaFw:0",
+          "family": "Asap",
+          "weight": "normal",
+          "style": "normal"
+        }
+      ],
+      "structuralAndKnownFontChecksPassed": false,
+      "sourceFidelity": "NOT_CERTIFIED",
+      "buyerQA": "NOT_CERTIFIED",
+      "finalVerified": false
+    }
+  ],
+  "finalVerified": false,
+  "notice": "PASS struktural bukan bukti 1:1, objek lengkap, atau buyer PASS."
+}

@@ -1,0 +1,30 @@
+[
+  {
+    "code": "A07",
+    "version": "baseline",
+    "iou": 0.6022222594647136,
+    "source_pixels": 101918,
+    "export_pixels": 89288
+  },
+  {
+    "code": "A07",
+    "version": "calibration",
+    "iou": 0.6551881761389609,
+    "source_pixels": 101918,
+    "export_pixels": 93616
+  },
+  {
+    "code": "A45",
+    "version": "baseline",
+    "iou": 0.6061293550580165,
+    "source_pixels": 108708,
+    "export_pixels": 101552
+  },
+  {
+    "code": "A45",
+    "version": "calibration",
+    "iou": 0.6061446326129967,
+    "source_pixels": 108708,
+    "export_pixels": 101554
+  }
+]

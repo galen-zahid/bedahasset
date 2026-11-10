@@ -1,0 +1,421 @@
+{
+  "packages": [
+    {
+      "path": "/home/user/bedahasset/vectally/outputs/VECTALLY-story-repair/S01/ASSETS_NORMAL_COPY_PACKAGE.json",
+      "source": "S01 - ASET UTUH DAN TEKS NORMAL NATIVE - HEADLINE PENDING",
+      "counts": {
+        "shape": 76,
+        "group": 6,
+        "text": 6,
+        "image": 0
+      },
+      "errors": [],
+      "warnings": [],
+      "fonts": [
+        {
+          "address": "7/1",
+          "text": "TELL A",
+          "ref": "YAFdJr0OaFw:0",
+          "family": "Asap",
+          "weight": "bold",
+          "style": "normal"
+        },
+        {
+          "address": "10",
+          "text": "VECTALLY",
+          "ref": "YACgEZulLoA:0",
+          "family": "Archivo Black",
+          "weight": "normal",
+          "style": "normal"
+        },
+        {
+          "address": "11",
+          "text": "Make sense of",
+          "ref": "YAFdJr0OaFw:0",
+          "family": "Asap",
+          "weight": "normal",
+          "style": "normal"
+        },
+        {
+          "address": "12",
+          "text": "the numbers",
+          "ref": "YAFdJr0OaFw:0",
+          "family": "Asap",
+          "weight": "normal",
+          "style": "normal"
+        },
+        {
+          "address": "13",
+          "text": "behind your",
+          "ref": "YAFdJr0OaFw:0",
+          "family": "Asap",
+          "weight": "normal",
+          "style": "normal"
+        },
+        {
+          "address": "14",
+          "text": "business.",
+          "ref": "YAFdJr0OaFw:0",
+          "family": "Asap",
+          "weight": "normal",
+          "style": "normal"
+        }
+      ],
+      "structuralAndKnownFontChecksPassed": true,
+      "sourceFidelity": "NOT_CERTIFIED",
+      "buyerQA": "NOT_CERTIFIED",
+      "finalVerified": false
+    },
+    {
+      "path": "/home/user/bedahasset/vectally/outputs/VECTALLY-story-repair/S02/ASSETS_NORMAL_COPY_PACKAGE.json",
+      "source": "S02 - ASET DAN LABEL NATIVE - HEADLINE PENDING",
+      "counts": {
+        "shape": 42,
+        "group": 8,
+        "text": 6,
+        "image": 0
+      },
+      "errors": [],
+      "warnings": [],
+      "fonts": [
+        {
+          "address": "6/7",
+          "text": "INVOICE",
+          "ref": "YAFdJr0OaFw:0",
+          "family": "Asap",
+          "weight": "bold",
+          "style": "italic"
+        },
+        {
+          "address": "7/6",
+          "text": "OPEN PAYMENT",
+          "ref": "YAFdJr0OaFw:0",
+          "family": "Asap",
+          "weight": "bold",
+          "style": "normal"
+        },
+        {
+          "address": "8/1",
+          "text": "EXPENSES",
+          "ref": "YAFdJr0OaFw:0",
+          "family": "Asap",
+          "weight": "bold",
+          "style": "normal"
+        },
+        {
+          "address": "9/1",
+          "text": "UNPAID",
+          "ref": "YAFdJr0OaFw:0",
+          "family": "Asap",
+          "weight": "bold",
+          "style": "normal"
+        },
+        {
+          "address": "9/2",
+          "text": "INVOICES",
+          "ref": "YAFdJr0OaFw:0",
+          "family": "Asap",
+          "weight": "bold",
+          "style": "normal"
+        },
+        {
+          "address": "10",
+          "text": "VECTALLY",
+          "ref": "YACgEZulLoA:0",
+          "family": "Archivo Black",
+          "weight": "normal",
+          "style": "normal"
+        }
+      ],
+      "structuralAndKnownFontChecksPassed": true,
+      "sourceFidelity": "NOT_CERTIFIED",
+      "buyerQA": "NOT_CERTIFIED",
+      "finalVerified": false
+    },
+    {
+      "path": "/home/user/bedahasset/vectally/outputs/VECTALLY-story-repair/S03/ASSETS_PACKAGE.json",
+      "source": "S03 - DUA LAPORAN UTUH - TYPOGRAPHY PENDING",
+      "counts": {
+        "shape": 22,
+        "group": 2,
+        "text": 0,
+        "image": 0
+      },
+      "errors": [],
+      "warnings": [],
+      "fonts": [],
+      "structuralAndKnownFontChecksPassed": true,
+      "sourceFidelity": "NOT_CERTIFIED",
+      "buyerQA": "NOT_CERTIFIED",
+      "finalVerified": false
+    },
+    {
+      "path": "/home/user/bedahasset/vectally/outputs/VECTALLY-story-repair/S04/ASSETS_NORMAL_COPY_PACKAGE.json",
+      "source": "S04 - ASET DAN CAPTION BODY NATIVE - DISPLAY PENDING",
+      "counts": {
+        "shape": 24,
+        "group": 6,
+        "text": 4,
+        "image": 0
+      },
+      "errors": [],
+      "warnings": [],
+      "fonts": [
+        {
+          "address": "9/1",
+          "text": "REVENUE",
+          "ref": "YAFdJr0OaFw:0",
+          "family": "Asap",
+          "weight": "bold",
+          "style": "normal"
+        },
+        {
+          "address": "10/1",
+          "text": "EXPENSES",
+          "ref": "YAFdJr0OaFw:0",
+          "family": "Asap",
+          "weight": "bold",
+          "style": "normal"
+        },
+        {
+          "address": "11/1",
+          "text": "RESULT",
+          "ref": "YAFdJr0OaFw:0",
+          "family": "Asap",
+          "weight": "bold",
+          "style": "normal"
+        },
+        {
+          "address": "12",
+          "text": "A P&L summarizes revenue,\nexpenses, and profit or loss\nover a period.",
+          "ref": "YAFdJr0OaFw:0",
+          "family": "Asap",
+          "weight": "normal",
+          "style": "normal"
+        }
+      ],
+      "structuralAndKnownFontChecksPassed": true,
+      "sourceFidelity": "NOT_CERTIFIED",
+      "buyerQA": "NOT_CERTIFIED",
+      "finalVerified": false
+    },
+    {
+      "path": "/home/user/bedahasset/vectally/outputs/VECTALLY-story-repair/S05/ASSETS_AND_BODY_PACKAGE.json",
+      "source": "S05 - UJI HYBRID - ASET UTUH DAN BODY NATIVE",
+      "counts": {
+        "shape": 5,
+        "group": 0,
+        "text": 1,
+        "image": 0
+      },
+      "errors": [],
+      "warnings": [],
+      "fonts": [
+        {
+          "address": "5",
+          "text": "Drop it here.",
+          "ref": "YAFdJr0OaFw:0",
+          "family": null,
+          "weight": "normal",
+          "style": "normal"
+        }
+      ],
+      "structuralAndKnownFontChecksPassed": true,
+      "sourceFidelity": "NOT_CERTIFIED",
+      "buyerQA": "NOT_CERTIFIED",
+      "finalVerified": false
+    },
+    {
+      "path": "/home/user/bedahasset/vectally/outputs/VECTALLY-story-repair/S06/ASSETS_NATIVE_COPY_PACKAGE.json",
+      "source": "S06 - ASET UTUH DAN SELURUH COPY NATIVE - FIDELITY PENDING",
+      "counts": {
+        "shape": 47,
+        "group": 3,
+        "text": 8,
+        "image": 0
+      },
+      "errors": [
+        "5/1: FONT_VARIANT_UNAVAILABLE Asap heavy/normal",
+        "9: FONT_VARIANT_UNAVAILABLE Asap heavy/normal",
+        "10: FONT_VARIANT_UNAVAILABLE Asap heavy/normal",
+        "11: FONT_VARIANT_UNAVAILABLE Asap heavy/normal",
+        "12: FONT_VARIANT_UNAVAILABLE Asap heavy/normal"
+      ],
+      "warnings": [],
+      "fonts": [
+        {
+          "address": "5/1",
+          "text": "LET’S TALK BOOKS.",
+          "ref": "YAFdJr0OaFw:0",
+          "family": "Asap",
+          "weight": "heavy",
+          "style": "normal"
+        },
+        {
+          "address": "8",
+          "text": "VECTALLY",
+          "ref": "YACgEZulLoA:0",
+          "family": "Archivo Black",
+          "weight": "normal",
+          "style": "normal"
+        },
+        {
+          "address": "9",
+          "text": "GOOD",
+          "ref": "YAFdJr0OaFw:0",
+          "family": "Asap",
+          "weight": "heavy",
+          "style": "normal"
+        },
+        {
+          "address": "10",
+          "text": "RECORDS.",
+          "ref": "YAFdJr0OaFw:0",
+          "family": "Asap",
+          "weight": "heavy",
+          "style": "normal"
+        },
+        {
+          "address": "11",
+          "text": "BETTER",
+          "ref": "YAFdJr0OaFw:0",
+          "family": "Asap",
+          "weight": "heavy",
+          "style": "normal"
+        },
+        {
+          "address": "12",
+          "text": "DECISIONS.",
+          "ref": "YAFdJr0OaFw:0",
+          "family": "Asap",
+          "weight": "heavy",
+          "style": "normal"
+        },
+        {
+          "address": "13",
+          "text": "Talk through what your",
+          "ref": "YAFdJr0OaFw:0",
+          "family": "Asap",
+          "weight": "normal",
+          "style": "normal"
+        },
+        {
+          "address": "14",
+          "text": "business needs.",
+          "ref": "YAFdJr0OaFw:0",
+          "family": "Asap",
+          "weight": "normal",
+          "style": "normal"
+        }
+      ],
+      "structuralAndKnownFontChecksPassed": false,
+      "sourceFidelity": "NOT_CERTIFIED",
+      "buyerQA": "NOT_CERTIFIED",
+      "finalVerified": false
+    },
+    {
+      "path": "/home/user/bedahasset/vectally/outputs/VECTALLY-highlight-repair/H01/CANVA_PACKAGE.json",
+      "source": "H01 - LAPORAN TERBUKA UTUH",
+      "counts": {
+        "shape": 15,
+        "group": 1,
+        "text": 0,
+        "image": 0
+      },
+      "errors": [],
+      "warnings": [],
+      "fonts": [],
+      "structuralAndKnownFontChecksPassed": true,
+      "sourceFidelity": "NOT_CERTIFIED",
+      "buyerQA": "NOT_CERTIFIED",
+      "finalVerified": false
+    },
+    {
+      "path": "/home/user/bedahasset/vectally/outputs/VECTALLY-highlight-repair/H02/CANVA_PACKAGE.json",
+      "source": "H02 - MESIN DAN KERTAS UTUH",
+      "counts": {
+        "shape": 19,
+        "group": 2,
+        "text": 0,
+        "image": 0
+      },
+      "errors": [],
+      "warnings": [],
+      "fonts": [],
+      "structuralAndKnownFontChecksPassed": true,
+      "sourceFidelity": "NOT_CERTIFIED",
+      "buyerQA": "NOT_CERTIFIED",
+      "finalVerified": false
+    },
+    {
+      "path": "/home/user/bedahasset/vectally/outputs/VECTALLY-highlight-repair/H03/CANVA_PACKAGE.json",
+      "source": "H03 - DOKUMEN DAN KACA PEMBESAR UTUH",
+      "counts": {
+        "shape": 21,
+        "group": 2,
+        "text": 0,
+        "image": 0
+      },
+      "errors": [],
+      "warnings": [],
+      "fonts": [],
+      "structuralAndKnownFontChecksPassed": true,
+      "sourceFidelity": "NOT_CERTIFIED",
+      "buyerQA": "NOT_CERTIFIED",
+      "finalVerified": false
+    },
+    {
+      "path": "/home/user/bedahasset/vectally/outputs/VECTALLY-highlight-repair/H04/CANVA_PACKAGE.json",
+      "source": "H04 - SIMBOL FAQ UTUH",
+      "counts": {
+        "shape": 3,
+        "group": 1,
+        "text": 0,
+        "image": 0
+      },
+      "errors": [],
+      "warnings": [],
+      "fonts": [],
+      "structuralAndKnownFontChecksPassed": true,
+      "sourceFidelity": "NOT_CERTIFIED",
+      "buyerQA": "NOT_CERTIFIED",
+      "finalVerified": false
+    },
+    {
+      "path": "/home/user/bedahasset/vectally/outputs/VECTALLY-highlight-repair/H05/CANVA_PACKAGE.json",
+      "source": "H05 - KONTUR UTUH PER UNIT PROSES",
+      "counts": {
+        "shape": 15,
+        "group": 2,
+        "text": 0,
+        "image": 0
+      },
+      "errors": [],
+      "warnings": [],
+      "fonts": [],
+      "structuralAndKnownFontChecksPassed": true,
+      "sourceFidelity": "NOT_CERTIFIED",
+      "buyerQA": "NOT_CERTIFIED",
+      "finalVerified": false
+    },
+    {
+      "path": "/home/user/bedahasset/vectally/outputs/VECTALLY-highlight-repair/H06/CANVA_PACKAGE.json",
+      "source": "H06 - KOREKSI KONTUR PER ASET",
+      "counts": {
+        "shape": 7,
+        "group": 2,
+        "text": 0,
+        "image": 0
+      },
+      "errors": [],
+      "warnings": [],
+      "fonts": [],
+      "structuralAndKnownFontChecksPassed": true,
+      "sourceFidelity": "NOT_CERTIFIED",
+      "buyerQA": "NOT_CERTIFIED",
+      "finalVerified": false
+    }
+  ],
+  "finalVerified": false,
+  "notice": "PASS struktural bukan bukti 1:1, objek lengkap, atau buyer PASS."
+}

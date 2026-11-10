@@ -1,0 +1,324 @@
+{
+  "version": 1,
+  "stage": "magic_layers_candidate",
+  "observedAt": "2026-11-09T17:26:53.290Z",
+  "scope": "current_page",
+  "addressing": "sibling order; group bounds relative to parent; IDs are snapshot-local",
+  "elements": [
+    {
+      "address": "0",
+      "type": "text",
+      "locked": false,
+      "bboxInParent": [
+        50,
+        80,
+        525,
+        108
+      ],
+      "rotation": 0,
+      "transparency": 0,
+      "classification": "native_text",
+      "text": "GOT A",
+      "textRegions": [
+        {
+          "text": "GOT A",
+          "formatting": {
+            "fontRef": "YACgEZulLoA:0",
+            "fontSize": 90,
+            "textAlign": "start",
+            "color": "#091522",
+            "fontWeight": "normal",
+            "fontStyle": "normal",
+            "decoration": "none",
+            "strikethrough": "none",
+            "link": "",
+            "listLevel": 0,
+            "listMarker": "none",
+            "lineHeightEm": 1.2,
+            "letterSpacingEm": 0
+          }
+        }
+      ],
+      "sourceTextVerification": "NOT_TESTED"
+    },
+    {
+      "address": "1",
+      "type": "text",
+      "locked": false,
+      "bboxInParent": [
+        625,
+        80,
+        525,
+        108
+      ],
+      "rotation": 0,
+      "transparency": 0,
+      "classification": "native_text",
+      "text": "GOT A",
+      "textRegions": [
+        {
+          "text": "GOT A",
+          "formatting": {
+            "fontRef": "YACgEZulLoA:0",
+            "fontSize": 90,
+            "textAlign": "start",
+            "color": "#091522",
+            "fontWeight": "normal",
+            "fontStyle": "normal",
+            "decoration": "none",
+            "strikethrough": "none",
+            "link": "",
+            "listLevel": 0,
+            "listMarker": "none",
+            "lineHeightEm": 1.2,
+            "letterSpacingEm": -0.08
+          }
+        }
+      ],
+      "sourceTextVerification": "NOT_TESTED"
+    },
+    {
+      "address": "2",
+      "type": "text",
+      "locked": false,
+      "bboxInParent": [
+        50,
+        330,
+        525,
+        90
+      ],
+      "rotation": 0,
+      "transparency": 0,
+      "classification": "native_text",
+      "text": "QUESTION?",
+      "textRegions": [
+        {
+          "text": "QUESTION?",
+          "formatting": {
+            "fontRef": "YACgEZulLoA:0",
+            "fontSize": 75,
+            "textAlign": "start",
+            "color": "#091522",
+            "fontWeight": "normal",
+            "fontStyle": "normal",
+            "decoration": "none",
+            "strikethrough": "none",
+            "link": "",
+            "listLevel": 0,
+            "listMarker": "none",
+            "lineHeightEm": 1.2,
+            "letterSpacingEm": 0
+          }
+        }
+      ],
+      "sourceTextVerification": "NOT_TESTED"
+    },
+    {
+      "address": "3",
+      "type": "text",
+      "locked": false,
+      "bboxInParent": [
+        625,
+        330,
+        525,
+        90
+      ],
+      "rotation": 0,
+      "transparency": 0,
+      "classification": "native_text",
+      "text": "QUESTION?",
+      "textRegions": [
+        {
+          "text": "QUESTION?",
+          "formatting": {
+            "fontRef": "YACgEZulLoA:0",
+            "fontSize": 75,
+            "textAlign": "start",
+            "color": "#091522",
+            "fontWeight": "normal",
+            "fontStyle": "normal",
+            "decoration": "none",
+            "strikethrough": "none",
+            "link": "",
+            "listLevel": 0,
+            "listMarker": "none",
+            "lineHeightEm": 1.2,
+            "letterSpacingEm": -0.08
+          }
+        }
+      ],
+      "sourceTextVerification": "NOT_TESTED"
+    },
+    {
+      "address": "4",
+      "type": "text",
+      "locked": false,
+      "bboxInParent": [
+        50,
+        580,
+        525,
+        60
+      ],
+      "rotation": 0,
+      "transparency": 0,
+      "classification": "native_text",
+      "text": "Drop it here.",
+      "textRegions": [
+        {
+          "text": "Drop it here.",
+          "formatting": {
+            "fontRef": "YAFdJr0OaFw:0",
+            "fontSize": 50,
+            "textAlign": "start",
+            "color": "#091522",
+            "fontWeight": "normal",
+            "fontStyle": "normal",
+            "decoration": "none",
+            "strikethrough": "none",
+            "link": "",
+            "listLevel": 0,
+            "listMarker": "none",
+            "lineHeightEm": 1.2,
+            "letterSpacingEm": 0
+          }
+        }
+      ],
+      "sourceTextVerification": "NOT_TESTED"
+    },
+    {
+      "address": "5",
+      "type": "text",
+      "locked": false,
+      "bboxInParent": [
+        625,
+        580,
+        525,
+        60
+      ],
+      "rotation": 0,
+      "transparency": 0,
+      "classification": "native_text",
+      "text": "Drop it here.",
+      "textRegions": [
+        {
+          "text": "Drop it here.",
+          "formatting": {
+            "fontRef": "YAFdJr0OaFw:0",
+            "fontSize": 50,
+            "textAlign": "start",
+            "color": "#091522",
+            "fontWeight": "normal",
+            "fontStyle": "normal",
+            "decoration": "none",
+            "strikethrough": "none",
+            "link": "",
+            "listLevel": 0,
+            "listMarker": "none",
+            "lineHeightEm": 1.2,
+            "letterSpacingEm": -0.08
+          }
+        }
+      ],
+      "sourceTextVerification": "NOT_TESTED"
+    },
+    {
+      "address": "6",
+      "type": "text",
+      "locked": false,
+      "bboxInParent": [
+        50,
+        830,
+        525,
+        132
+      ],
+      "rotation": 0,
+      "transparency": 0,
+      "classification": "native_text",
+      "text": "TIMING",
+      "textRegions": [
+        {
+          "text": "TIMING",
+          "formatting": {
+            "fontRef": "YACgEZ1OEPI:0",
+            "fontSize": 110,
+            "textAlign": "start",
+            "color": "#091522",
+            "fontWeight": "normal",
+            "fontStyle": "normal",
+            "decoration": "none",
+            "strikethrough": "none",
+            "link": "",
+            "listLevel": 0,
+            "listMarker": "none",
+            "lineHeightEm": 1.2,
+            "letterSpacingEm": 0
+          }
+        }
+      ],
+      "sourceTextVerification": "NOT_TESTED"
+    },
+    {
+      "address": "7",
+      "type": "text",
+      "locked": false,
+      "bboxInParent": [
+        625,
+        830,
+        525,
+        132
+      ],
+      "rotation": 0,
+      "transparency": 0,
+      "classification": "native_text",
+      "text": "TIMING",
+      "textRegions": [
+        {
+          "text": "TIMING",
+          "formatting": {
+            "fontRef": "YACgEZ1OEPI:0",
+            "fontSize": 110,
+            "textAlign": "start",
+            "color": "#091522",
+            "fontWeight": "normal",
+            "fontStyle": "normal",
+            "decoration": "none",
+            "strikethrough": "none",
+            "link": "",
+            "listLevel": 0,
+            "listMarker": "none",
+            "lineHeightEm": 1.2,
+            "letterSpacingEm": -0.08
+          }
+        }
+      ],
+      "sourceTextVerification": "NOT_TESTED"
+    }
+  ],
+  "breakdown": {
+    "native_text": 8
+  },
+  "background": {
+    "color": {
+      "type": "solid",
+      "color": "#ffffff"
+    }
+  },
+  "qa": {
+    "structure": {
+      "verdict": "NOT_TESTED"
+    },
+    "fidelity": {
+      "verdict": "NOT_TESTED"
+    },
+    "buyer": {
+      "verdict": "NOT_TESTED"
+    }
+  },
+  "manualGates": [
+    "Match elements to source pixels and semantic manifest",
+    "Verify source wording and fonts",
+    "Review unsupported elements, gradients, occlusions and stacking",
+    "Compare aligned actual Canva export",
+    "Test promised buyer edits in a separate buyer-test copy"
+  ]
+}

@@ -1,0 +1,70 @@
+{
+  "stage": "NATIVE_SPACING_EXPORTED_AND_STRUCTURALLY_VERIFIED",
+  "textCount": 8,
+  "rows": [
+    {
+      "text": "GOT A",
+      "normalInkBox": [
+        4,
+        21,
+        310,
+        64
+      ],
+      "spacedInkBox": [
+        4,
+        21,
+        281,
+        64
+      ],
+      "trackingActuallyChanged": true
+    },
+    {
+      "text": "QUESTION?",
+      "normalInkBox": [
+        4,
+        17,
+        480,
+        63
+      ],
+      "spacedInkBox": [
+        4,
+        17,
+        432,
+        63
+      ],
+      "trackingActuallyChanged": true
+    },
+    {
+      "text": "Drop it here.",
+      "normalInkBox": [
+        5,
+        11,
+        267,
+        47
+      ],
+      "spacedInkBox": [
+        5,
+        11,
+        219,
+        47
+      ],
+      "trackingActuallyChanged": true
+    },
+    {
+      "text": "TIMING",
+      "normalInkBox": [
+        1,
+        21,
+        207,
+        83
+      ],
+      "spacedInkBox": [
+        1,
+        21,
+        163,
+        83
+      ],
+      "trackingActuallyChanged": true
+    }
+  ]
+}
