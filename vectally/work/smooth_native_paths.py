@@ -136,11 +136,20 @@ def fit_loop(pts, tol, win):
         prev_ok = turn(i) >= 22 or length[i] >= 2.2 * length[i - 1]
         next_ok = turn((i + 1) % m) >= 22 or length[i] >= 2.2 * length[(i + 1) % m]
         straight.append(length[i] >= 10 and prev_ok and next_ok)
-    if not any(straight):
-        return fit_loop_curve(pts, tol, win)
-
     def span(a, b):
         return pts[np.arange(a, b + 1 if b >= a else b + n + 1) % n]
+
+    for i in range(m):
+        if straight[i]:
+            seg = span(verts[i], verts[(i + 1) % m])
+            c0, v0 = _line(seg)
+            r = (seg - c0) @ np.array([-v0[1], v0[0]])
+            third = max(1, len(r) // 3)
+            bow = abs(r[third:-third].mean() - np.r_[r[:third], r[-third:]].mean()) if len(r) > 3 * third else 0
+            if bow > 0.35:
+                straight[i] = False
+    if not any(straight):
+        return fit_loop_curve(pts, tol, win)
 
     lines = {}
     for i in range(m):
@@ -173,9 +182,19 @@ def fit_loop(pts, tol, win):
         seg = span(verts[i], verts[j]).copy()
         seg[0], seg[-1] = node(i), node(j)
         cuts = [0] + [c for c in _inner_corners(seg, win)] + [len(seg) - 1]
+        unit = lambda v: v / max(1e-6, np.linalg.norm(v))
+        look = min(4 * SS, len(seg) - 1)
+        t_in = t_out = None
+        if (i - 1) % m in lines:
+            d_in = unit(node(i) - node((i - 1) % m))
+            if np.dot(d_in, unit(seg[look] - seg[0])) > math.cos(math.radians(25)):
+                t_in = d_in
+        if j in lines:
+            d_out = unit(node((j + 1) % m) - node(j))
+            if np.dot(d_out, unit(seg[-1] - seg[-1 - look])) > math.cos(math.radians(25)):
+                t_out = -d_out
         for a, b in zip(cuts, cuts[1:]):
-            t1 = -lines[(i - 1) % m][1] * 0 if False else None
-            out += [("C", c) for c in fit(seg[a:b + 1], tol, t1, None)]
+            out += [("C", c) for c in fit(seg[a:b + 1], tol, t_in if a == 0 else None, t_out if b == len(seg) - 1 else None)]
         i, done = j, done + steps
     return start, out
 
@@ -184,8 +203,6 @@ def _inner_corners(seg, win):
     n = len(seg)
     if n < 2 * win + 3:
         return []
-    a = seg[win:-win] - seg[:-2 * win]
-    a = a[: n - 2 * win]
     idx = np.arange(win, n - win)
     before = seg[idx] - seg[idx - win]
     after = seg[idx + win] - seg[idx]
@@ -235,42 +252,75 @@ def emit(cur, seg):
     return txt, cur + np.round(rel[2], 1)
 
 
-def to_path(outer, holes, tol, win):
-    """Satu M. Tiap lubang dicapai lewat jembatan garis lebar-nol dari kontur luar."""
+def _nodes(start, segs):
+    out = [np.asarray(start, float)]
+    for kind, data in segs:
+        out.append(np.asarray(data if kind == "L" else data[3], float))
+    return out[:-1]
+
+
+def _clear(p, q, inside):
+    if inside is None:
+        return True
+    steps = max(2, int(np.linalg.norm(q - p) * SS))
+    return all(inside(p + (q - p) * t) for t in np.linspace(0.08, 0.92, steps))
+
+
+def to_path(outer, holes, tol, win, inside=None):
+    """Satu M. Tiap lubang dicapai jembatan lebar-nol yang seluruhnya berada di dalam badan."""
     start, segs = fit_loop(outer, tol, win)
-    cur = np.round(start, 1)
+    onodes = _nodes(start, segs)
+    attach = {}
+    for hole in holes:
+        hs, hsegs = fit_loop(hole, tol, win)
+        hnodes = _nodes(hs, hsegs)
+        pairs = sorted((float(np.linalg.norm(p - q)), k, j) for k, p in enumerate(onodes) for j, q in enumerate(hnodes))
+        hit = next(((k, j) for _, k, j in pairs if _clear(onodes[k], hnodes[j], inside)), None)
+        if hit is None:
+            return None
+        k, j = hit
+        attach.setdefault(k, []).append((hnodes[j], hsegs[j:] + hsegs[:j]))
+    cur = np.round(np.asarray(start, float), 1)
     parts = ["M" + fmt(cur[0]) + " " + fmt(cur[1])]
-    pending = list(holes)
-    for seg in segs:
+
+    def line_to(target, cur):
+        d = target - cur
+        parts.append("l" + fmt(d[0]) + " " + fmt(d[1]))
+        return cur + np.round(d, 1)
+
+    for k, seg in enumerate(segs):
+        for hs, hsegs in attach.get(k, []):
+            back = cur.copy()
+            cur = line_to(hs, cur)
+            anchor = cur.copy()
+            for s2 in hsegs:
+                txt, cur = emit(cur, s2)
+                parts.append(txt)
+            cur = line_to(anchor, cur)
+            cur = line_to(back, cur)
         txt, cur = emit(cur, seg)
         parts.append(txt)
-        if not pending:
-            continue
-        here = cur.copy()
-        near = [h for h in pending if np.linalg.norm(h - here, axis=1).min() < 1e9]
-        h = min(near, key=lambda q: np.linalg.norm(q - here, axis=1).min())
-        if seg is segs[-1] or np.linalg.norm(h - here, axis=1).min() <= min(np.linalg.norm(q - here, axis=1).min() for q in pending):
-            if seg is not segs[-1] and len(segs) > len(pending) and np.linalg.norm(h - here, axis=1).min() > 40:
-                continue
-            pending.remove(h)
-            i = int(np.linalg.norm(h - here, axis=1).argmin())
-            loop = np.roll(h, -i, axis=0)
-            hs, hsegs = fit_loop(loop, tol, win)
-            back = cur.copy()
-            d = hs - cur
-            parts.append("l" + fmt(d[0]) + " " + fmt(d[1]))
-            cur = cur + np.round(d, 1)
-            for s in hsegs:
-                txt, cur = emit(cur, s)
-                parts.append(txt)
-            d = hs - cur
-            if np.abs(d).max() > 0.04:
-                parts.append("l" + fmt(d[0]) + " " + fmt(d[1]))
-                cur = cur + np.round(d, 1)
-            d = back - cur
-            parts.append("l" + fmt(d[0]) + " " + fmt(d[1]))
-            cur = cur + np.round(d, 1)
-    return "".join(parts) + "Z" if not pending else None
+    return "".join(parts) + "Z"
+
+
+def topology(mask):
+    """Jumlah komponen dan lubang bermakna. Lubang di bawah 6 px persegi dianggap derau."""
+    cnts, hier = cv2.findContours(mask.astype(np.uint8), cv2.RETR_CCOMP, cv2.CHAIN_APPROX_NONE)
+    if hier is None:
+        return 0, 0
+    comps = sum(1 for i, h in enumerate(hier[0]) if h[3] < 0 and cv2.contourArea(cnts[i]) > 4 * SS * SS)
+    holes = sum(1 for i, h in enumerate(hier[0]) if h[3] >= 0 and cv2.contourArea(cnts[i]) > 6 * SS * SS)
+    return comps, holes
+
+
+def ellipse_path(c, rx, ry, rot):
+    k = 0.5523
+    cr, sr = math.cos(rot), math.sin(rot)
+    p = lambda x, y: f"{fmt(c[0] + x * cr - y * sr)} {fmt(c[1] + x * sr + y * cr)}"
+    return ("M" + p(rx, 0) + "C" + p(rx, k * ry) + " " + p(k * rx, ry) + " " + p(0, ry)
+            + "C" + p(-k * rx, ry) + " " + p(-rx, k * ry) + " " + p(-rx, 0)
+            + "C" + p(-rx, -k * ry) + " " + p(-k * rx, -ry) + " " + p(0, -ry)
+            + "C" + p(k * rx, -ry) + " " + p(rx, -k * ry) + " " + p(rx, 0) + "Z")
 
 
 def rounded_bar(box):
@@ -303,10 +353,30 @@ def smooth(e):
     big = max(ext, key=cv2.contourArea)
     thick = area / max(1.0, cv2.arcLength(big, True)) / SS
     gate = 0.93 if thick >= 5 else 0.8
+    topo = topology(source)
+    inner = cv2.dilate(source.astype(np.uint8), np.ones((3, 3), np.uint8))
+
+    def inside(p):
+        x, y = int((p[0] + pad) * SS), int((p[1] + pad) * SS)
+        return 0 <= y < inner.shape[0] and 0 <= x < inner.shape[1] and bool(inner[y, x])
+
+    def build(d):
+        node = dict(e)
+        node["viewBox"] = dict(left=0, top=0, width=e["width"], height=e["height"])
+        node["paths"] = [dict(e["paths"][0], d=d)]
+        got = rasterize(node)[0] >= 128
+        return node, (got & source).sum() / max(1, (got | source).sum()), topology(got) == topo
+
+    if topo[1] == 0 and len(big) >= 5:
+        (ex, ey), (ea, eb), eang = cv2.fitEllipse(big)
+        d = ellipse_path(((ex + 0.5) / SS - pad, (ey + 0.5) / SS - pad), ea / 2 / SS, eb / 2 / SS, math.radians(eang))
+        node, score, same = build(d)
+        if same and score >= 0.975:
+            return node, f"smooth ellipse iou{score:.3f}"
     rect = cv2.minAreaRect(big)
     rw, rh = rect[1]
     is_bar = rw * rh > 0 and min(rw, rh) / max(rw, rh) <= 0.33 and area / (rw * rh) >= 0.8
-    if len(ext) == 1 and (is_bar or (rw * rh > 0 and area / (rw * rh) >= 0.985)):
+    if len(ext) == 1 and topo[1] == 0 and (is_bar or (rw * rh > 0 and area / (rw * rh) >= 0.985)):
         # Batang dan garis: pakai persegi miring bersih, bukan jejak tepi.
         corners4 = cv2.boxPoints(rect)
         mid = corners4.mean(0)
@@ -321,13 +391,8 @@ def smooth(e):
             d = rounded_bar(box)
         else:
             d = "M" + "L".join(f"{fmt(x)} {fmt(y)}" for x, y in box) + "Z"
-        node = dict(e)
-        node["viewBox"] = dict(left=0, top=0, width=e["width"], height=e["height"])
-        node["paths"] = [dict(e["paths"][0], d=d)]
-        got, _ = rasterize(node)
-        got = got >= 128
-        score = (got & source).sum() / max(1, (got | source).sum())
-        if score >= 0.72:
+        node, score, same = build(d)
+        if same and score >= 0.72:
             return node, f"smooth rect iou{score:.3f}"
     for sigma in (0.8, 1.2, 0.5):
         blur = cv2.GaussianBlur(alpha.astype(np.float32), (0, 0), sigma * SS)
@@ -347,16 +412,11 @@ def smooth(e):
         outer, holes = conv(cnts[roots[0]]), [conv(cnts[i]) for i in holes_i]
         # Toleransi kasar dulu: makin sedikit kurva, makin bersih tepinya.
         for tol in (1.4, 1.1, 0.85, 0.6, 1.8, 2.4):
-            d = to_path(outer, holes, tol, 3 * SS)
+            d = to_path(outer, holes, tol, 3 * SS, inside)
             if d is None or len(d.encode()) > MAX_BYTES:
                 continue
-            node = dict(e)
-            node["viewBox"] = dict(left=0, top=0, width=e["width"], height=e["height"])
-            node["paths"] = [dict(e["paths"][0], d=d)]
-            got, _ = rasterize(node)
-            got = got >= 128
-            score = (got & source).sum() / max(1, (got | source).sum())
-            if score >= (gate if tol <= 1.4 else 0.75):
+            node, score, same = build(d)
+            if same and score >= (gate if tol <= 1.4 else 0.75):
                 return node, f"smooth sigma{sigma} tol{tol} iou{score:.3f} {len(d)}B"
     # Detail kecil yang gagal direkonstruksi: kurva halus saja, tanpa deteksi garis.
     global fit_loop
@@ -373,15 +433,11 @@ def smooth(e):
                     holes.append(conv(cnts[child]))
                 child = hier[0][child][0]
             for tol in (0.5, 0.8, 1.2):
-                d = to_path(conv(cnts[roots[0]]), holes, tol, 2 * SS)
+                d = to_path(conv(cnts[roots[0]]), holes, tol, 2 * SS, inside)
                 if d is None or len(d.encode()) > MAX_BYTES:
                     continue
-                node = dict(e)
-                node["viewBox"] = dict(left=0, top=0, width=e["width"], height=e["height"])
-                node["paths"] = [dict(e["paths"][0], d=d)]
-                got = rasterize(node)[0] >= 128
-                score = (got & source).sum() / max(1, (got | source).sum())
-                if score >= 0.7:
+                node, score, same = build(d)
+                if same and score >= 0.8:
                     return node, f"smooth fallback tol{tol} iou{score:.3f}"
     finally:
         fit_loop = saved

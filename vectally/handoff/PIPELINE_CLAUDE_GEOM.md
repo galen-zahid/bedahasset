@@ -3,6 +3,12 @@
 Repo: `D:\bedahasset`, branch `ccr-6e448746-jedgxp`, folder kerja `vectally\`.
 Hasil terbaru di Canva: `DAHalMGU_GQ`, halaman 2–6 = S01–S05. Pembanding kualitas: desain Codex `DAHaawX9Fm8`.
 
+## Status setelah review Codex (11 Nov 2026)
+Sudah diperbaiki di `smooth_native_paths.py`, `render_package_svg.py`, `s01_connector.py`: F1 (gerbang topologi di semua jalur), F2/F3 (jembatan lubang dipilih per indeks dan dicek di dalam badan), F4 (tangen G1 di sambungan halus), F5 sebagian (uji lengkung garis, pengenal elips, fallback 0.8), F7, F8.
+Belum: batas bersama antarbagian, klasifikasi dari PNG sumber yang generik, F6 (headline menunggu font dan TypeCraft).
+Paket `ASSETS_GEOM2_PACKAGE.json` dibuat sebelum perbaikan ini dan perlu dibangun ulang.
+S03 sudah dibangun per objek dari PNG sumber: `work/s03_objects.py` -> `S03/ASSETS_OBJECT_PACKAGE.json`, halaman 2 di `DAHalMGU_GQ`. Uji pindah, ganti warna, dan ganti teks di Canva lolos, tidak disimpan.
+
 ## Alur
 ```
 PNG sumber

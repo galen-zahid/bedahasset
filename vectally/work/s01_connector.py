@@ -29,7 +29,23 @@ def normal(u):
 def side(way, radii, off):
     """Satu sisi offset. Hasil: titik awal dan daftar segmen."""
     way = [np.array(p, float) for p in way]
+    if len(radii) != len(way) - 2:
+        raise ValueError("Jumlah radius harus sama dengan jumlah tikungan")
+    gaps = [float(np.linalg.norm(b - a)) for a, b in zip(way, way[1:])]
+    if min(gaps) <= 0:
+        raise ValueError("Ada titik jalur yang berulang")
     dirs = [unit(b - a) for a, b in zip(way, way[1:])]
+    cuts = [0.0] * len(way)
+    for i, r in enumerate(radii):
+        dot = float(np.dot(dirs[i], dirs[i + 1]))
+        if abs(dot) >= 0.9999:
+            raise ValueError("Tikungan 0 atau 180 derajat tidak didukung")
+        if r <= abs(off):
+            raise ValueError("Radius dalam harus positif")
+        cuts[i + 1] = r * math.tan(math.acos(dot) / 2)
+    for i, g in enumerate(gaps):
+        if cuts[i] + cuts[i + 1] > g:
+            raise ValueError("Radius tidak muat di segmen jalur")
     start = way[0] + normal(dirs[0]) * off
     segs = []
     for i, r in enumerate(radii):
