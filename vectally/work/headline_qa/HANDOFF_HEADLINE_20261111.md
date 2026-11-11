@@ -24,7 +24,7 @@ dengan instance statis keluarga font brand (League Gothic, Archivo; OFL tanpa Re
 Catatan:
 - S04 IT’S THE native Asap lama dihapus (diganti TypeCraft, IoU 0.85 vs Asap 0.73, satu keluarga dengan PROFIT &).
 - SHOWS/PROFIT? sumber punya distorsi perspektif; batas fit outline ~0.6. Stem THE BOOKS sumber sedikit lebih tebal (29 vs 26 px).
-- Halaman 1 (pilot lama) masih punya 1 elemen TypeCraft nyasar `LB9pNxwMmlClRbxD` — belum dihapus, tunggu izin.
+- Elemen TypeCraft nyasar di halaman 1 (pilot lama) sudah dihapus atas izin user (2026-11-11).
 - Bukti: HEADLINE_QA.json, HEADLINE_QA_SHEET.png (sumber | Canva | overlay merah=sumber hijau=Canva), final_S01..S04.png.
 - Font instance: outputs/VECTALLY-hybrid/headline-fonts/*.ttf, font-identification/LeagueGothic-W79.ttf (skrip: work/make_headline_fonts.py).
 
