@@ -44,7 +44,7 @@ def count(es):
 
 
 for code, name in SRC.items():
-    dst = R / code / "ASSETS_GEOM_PACKAGE.json"
+    dst = R / code / "ASSETS_GEOM2_PACKAGE.json"
     if dst.exists():
         raise SystemExit(f"Sudah ada, tidak ditimpa: {dst}")
     pkg = json.load(open(R / code / name, encoding="utf-8"))

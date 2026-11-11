@@ -273,6 +273,24 @@ def to_path(outer, holes, tol, win):
     return "".join(parts) + "Z" if not pending else None
 
 
+def rounded_bar(box):
+    """Batang dengan radius penuh di kedua ujung, dari empat sudut persegi miring."""
+    a, b, c, d4 = box
+    if np.linalg.norm(b - a) < np.linalg.norm(c - b):
+        a, b, c, d4 = b, c, d4, a
+    u = (b - a) / np.linalg.norm(b - a)
+    v = (d4 - a) / np.linalg.norm(d4 - a)
+    r = np.linalg.norm(d4 - a) / 2
+    k = 0.5523 * r
+    p = lambda q: f"{fmt(q[0])} {fmt(q[1])}"
+    return ("M" + p(a + u * r) + "L" + p(b - u * r)
+            + "C" + p(b - u * r + u * k) + " " + p(b + v * r - v * k) + " " + p(b + v * r)
+            + "C" + p(b + v * r + v * k) + " " + p(c - u * r + u * k) + " " + p(c - u * r)
+            + "L" + p(d4 + u * r)
+            + "C" + p(d4 + u * r - u * k) + " " + p(a + v * r + v * k) + " " + p(a + v * r)
+            + "C" + p(a + v * r - v * k) + " " + p(a + u * r - u * k) + " " + p(a + u * r) + "Z")
+
+
 def smooth(e):
     if any(c in e["paths"][0]["d"] for c in "Cc") or len(e["paths"]) != 1 or e["width"] * e["height"] > 900000:
         return e, "skip"
@@ -290,8 +308,19 @@ def smooth(e):
     is_bar = rw * rh > 0 and min(rw, rh) / max(rw, rh) <= 0.33 and area / (rw * rh) >= 0.8
     if len(ext) == 1 and (is_bar or (rw * rh > 0 and area / (rw * rh) >= 0.985)):
         # Batang dan garis: pakai persegi miring bersih, bukan jejak tepi.
-        box = cv2.boxPoints(rect) / SS - pad
-        d = "M" + "L".join(f"{fmt(x)} {fmt(y)}" for x, y in box) + "Z"
+        corners4 = cv2.boxPoints(rect)
+        mid = corners4.mean(0)
+        t4 = min(rw, rh)
+        filled = 0
+        for q in corners4:
+            p = q + (mid - q) / np.linalg.norm(mid - q) * 0.2 * t4
+            filled += bool(source[int(p[1]), int(p[0])])
+        box = corners4 / SS - pad
+        if is_bar and filled <= 1 and os.environ.get("SMOOTH_ROUND", "1") == "1":
+            # Ujung membulat di sumber: pertahankan sebagai radius, bukan sudut.
+            d = rounded_bar(box)
+        else:
+            d = "M" + "L".join(f"{fmt(x)} {fmt(y)}" for x, y in box) + "Z"
         node = dict(e)
         node["viewBox"] = dict(left=0, top=0, width=e["width"], height=e["height"])
         node["paths"] = [dict(e["paths"][0], d=d)]
@@ -329,6 +358,33 @@ def smooth(e):
             score = (got & source).sum() / max(1, (got | source).sum())
             if score >= (gate if tol <= 1.4 else 0.75):
                 return node, f"smooth sigma{sigma} tol{tol} iou{score:.3f} {len(d)}B"
+    # Detail kecil yang gagal direkonstruksi: kurva halus saja, tanpa deteksi garis.
+    global fit_loop
+    saved, fit_loop = fit_loop, fit_loop_curve
+    try:
+        blur = cv2.GaussianBlur(alpha.astype(np.float32), (0, 0), 0.6 * SS)
+        cnts, hier = cv2.findContours((blur >= 127.5).astype(np.uint8), cv2.RETR_CCOMP, cv2.CHAIN_APPROX_NONE)
+        roots = [i for i, h in enumerate(hier[0]) if h[3] < 0] if hier is not None else []
+        if len(roots) == 1:
+            conv = lambda c: (c.reshape(-1, 2).astype(float) + 0.5) / SS - pad
+            holes, child = [], hier[0][roots[0]][2]
+            while child >= 0:
+                if cv2.contourArea(cnts[child]) > 6 * SS * SS:
+                    holes.append(conv(cnts[child]))
+                child = hier[0][child][0]
+            for tol in (0.5, 0.8, 1.2):
+                d = to_path(conv(cnts[roots[0]]), holes, tol, 2 * SS)
+                if d is None or len(d.encode()) > MAX_BYTES:
+                    continue
+                node = dict(e)
+                node["viewBox"] = dict(left=0, top=0, width=e["width"], height=e["height"])
+                node["paths"] = [dict(e["paths"][0], d=d)]
+                got = rasterize(node)[0] >= 128
+                score = (got & source).sum() / max(1, (got | source).sum())
+                if score >= 0.7:
+                    return node, f"smooth fallback tol{tol} iou{score:.3f}"
+    finally:
+        fit_loop = saved
     return e, "rejected"
 
 
