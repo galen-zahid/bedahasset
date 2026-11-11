@@ -1,0 +1,1042 @@
+[
+ {
+  "code": "S01",
+  "text": "THE BOOKS",
+  "inkBox": [
+   47,
+   213,
+   657,
+   439
+  ],
+  "fits": {
+   "League Gothic": {
+    "iou": 0.5737,
+    "angleCcw": -2,
+    "ls": -0.04,
+    "fontSize": 231.8,
+    "wRatio": 1.0,
+    "hRatio": 0.853
+   },
+   "Archivo Black": {
+    "iou": 0.2359,
+    "angleCcw": -11,
+    "ls": -0.04,
+    "fontSize": 123.8,
+    "wRatio": 1.237,
+    "hRatio": 1.0
+   },
+   "Asap bold": {
+    "iou": 0.2697,
+    "angleCcw": -5,
+    "ls": -0.04,
+    "fontSize": 166.0,
+    "wRatio": 1.3,
+    "hRatio": 0.813
+   },
+   "Asap bold italic": {
+    "iou": 0.266,
+    "angleCcw": 5,
+    "ls": -0.04,
+    "fontSize": 165.4,
+    "wRatio": 1.308,
+    "hRatio": 0.809
+   },
+   "Asap Condensed bold": {
+    "iou": 0.3288,
+    "angleCcw": 6,
+    "ls": -0.04,
+    "fontSize": 211.5,
+    "wRatio": 1.33,
+    "hRatio": 1.0
+   }
+  }
+ },
+ {
+  "code": "S01",
+  "text": "STORY.",
+  "inkBox": [
+   396,
+   1240,
+   895,
+   1540
+  ],
+  "fits": {
+   "League Gothic": {
+    "iou": 0.5507,
+    "angleCcw": -4,
+    "ls": -0.04,
+    "fontSize": 327.4,
+    "wRatio": 1.085,
+    "hRatio": 0.928
+   },
+   "Archivo Black": {
+    "iou": 0.245,
+    "angleCcw": 9,
+    "ls": -0.04,
+    "fontSize": 247.4,
+    "wRatio": 1.928,
+    "hRatio": 1.0
+   },
+   "Asap bold": {
+    "iou": 0.2821,
+    "angleCcw": 6,
+    "ls": -0.04,
+    "fontSize": 309.7,
+    "wRatio": 1.807,
+    "hRatio": 1.0
+   },
+   "Asap bold italic": {
+    "iou": 0.2812,
+    "angleCcw": 6,
+    "ls": -0.04,
+    "fontSize": 305.7,
+    "wRatio": 1.777,
+    "hRatio": 1.0
+   },
+   "Asap Condensed bold": {
+    "iou": 0.3506,
+    "angleCcw": 3,
+    "ls": -0.04,
+    "fontSize": 369.2,
+    "wRatio": 1.742,
+    "hRatio": 1.0
+   }
+  }
+ },
+ {
+  "code": "S02",
+  "text": "WHAT'S",
+  "inkBox": [
+   459,
+   148,
+   902,
+   260
+  ],
+  "fits": {
+   "League Gothic": {
+    "iou": 0.45,
+    "angleCcw": 4,
+    "ls": -0.04,
+    "fontSize": 232.6,
+    "wRatio": 1.0,
+    "hRatio": 1.766
+   },
+   "Archivo Black": {
+    "iou": 0.4757,
+    "angleCcw": 6,
+    "ls": -0.04,
+    "fontSize": 105.8,
+    "wRatio": 0.985,
+    "hRatio": 1.016
+   },
+   "Asap bold": {
+    "iou": 0.4943,
+    "angleCcw": -2,
+    "ls": -0.02,
+    "fontSize": 131.9,
+    "wRatio": 1.0,
+    "hRatio": 0.965
+   },
+   "Asap bold italic": {
+    "iou": 0.5113,
+    "angleCcw": -1,
+    "ls": -0.04,
+    "fontSize": 136.0,
+    "wRatio": 1.0,
+    "hRatio": 0.918
+   },
+   "Asap Condensed bold": {
+    "iou": 0.7419,
+    "angleCcw": 1,
+    "ls": 0.02,
+    "fontSize": 149.9,
+    "wRatio": 0.988,
+    "hRatio": 1.012
+   }
+  }
+ },
+ {
+  "code": "S02",
+  "text": "HARDER",
+  "inkBox": [
+   439,
+   281,
+   907,
+   388
+  ],
+  "fits": {
+   "League Gothic": {
+    "iou": 0.4918,
+    "angleCcw": -2,
+    "ls": 0.02,
+    "fontSize": 211.5,
+    "wRatio": 1.0,
+    "hRatio": 1.621
+   },
+   "Archivo Black": {
+    "iou": 0.5434,
+    "angleCcw": 0,
+    "ls": -0.04,
+    "fontSize": 107.6,
+    "wRatio": 1.0,
+    "hRatio": 0.704
+   },
+   "Asap bold": {
+    "iou": 0.6339,
+    "angleCcw": 0,
+    "ls": -0.04,
+    "fontSize": 133.2,
+    "wRatio": 1.0,
+    "hRatio": 0.896
+   },
+   "Asap bold italic": {
+    "iou": 0.564,
+    "angleCcw": 2,
+    "ls": -0.04,
+    "fontSize": 131.7,
+    "wRatio": 0.99,
+    "hRatio": 1.01
+   },
+   "Asap Condensed bold": {
+    "iou": 0.8433,
+    "angleCcw": 0,
+    "ls": 0.02,
+    "fontSize": 150.5,
+    "wRatio": 0.997,
+    "hRatio": 1.003
+   }
+  }
+ },
+ {
+  "code": "S02",
+  "text": "TO",
+  "inkBox": [
+   47,
+   1128,
+   214,
+   1245
+  ],
+  "fits": {
+   "League Gothic": {
+    "iou": 0.396,
+    "angleCcw": -6,
+    "ls": 0.04,
+    "fontSize": 194.3,
+    "wRatio": 0.798,
+    "hRatio": 1.34
+   },
+   "Archivo Black": {
+    "iou": 0.5396,
+    "angleCcw": -10,
+    "ls": -0.04,
+    "fontSize": 124.4,
+    "wRatio": 1.054,
+    "hRatio": 0.952
+   },
+   "Asap bold": {
+    "iou": 0.7647,
+    "angleCcw": -2,
+    "ls": -0.04,
+    "fontSize": 149.3,
+    "wRatio": 1.057,
+    "hRatio": 0.949
+   },
+   "Asap bold italic": {
+    "iou": 0.7337,
+    "angleCcw": -2,
+    "ls": -0.04,
+    "fontSize": 150.7,
+    "wRatio": 1.055,
+    "hRatio": 0.95
+   },
+   "Asap Condensed bold": {
+    "iou": 0.8518,
+    "angleCcw": 0,
+    "ls": 0.02,
+    "fontSize": 162.7,
+    "wRatio": 0.992,
+    "hRatio": 1.008
+   }
+  }
+ },
+ {
+  "code": "S02",
+  "text": "TRACK?",
+  "inkBox": [
+   47,
+   1262,
+   508,
+   1376
+  ],
+  "fits": {
+   "League Gothic": {
+    "iou": 0.4848,
+    "angleCcw": 3,
+    "ls": 0.04,
+    "fontSize": 199.5,
+    "wRatio": 1.0,
+    "hRatio": 1.487
+   },
+   "Archivo Black": {
+    "iou": 0.4975,
+    "angleCcw": -5,
+    "ls": -0.04,
+    "fontSize": 109.3,
+    "wRatio": 0.999,
+    "hRatio": 1.001
+   },
+   "Asap bold": {
+    "iou": 0.5626,
+    "angleCcw": 0,
+    "ls": -0.04,
+    "fontSize": 151.9,
+    "wRatio": 1.046,
+    "hRatio": 0.958
+   },
+   "Asap bold italic": {
+    "iou": 0.6156,
+    "angleCcw": -1,
+    "ls": -0.04,
+    "fontSize": 145.2,
+    "wRatio": 1.0,
+    "hRatio": 0.955
+   },
+   "Asap Condensed bold": {
+    "iou": 0.6406,
+    "angleCcw": 0,
+    "ls": 0.02,
+    "fontSize": 160.4,
+    "wRatio": 0.989,
+    "hRatio": 1.011
+   }
+  }
+ },
+ {
+  "code": "S03",
+  "text": "VECTALLY",
+  "inkBox": [
+   63,
+   60,
+   329,
+   95
+  ],
+  "fits": {
+   "League Gothic": {
+    "iou": 0.2731,
+    "angleCcw": -3,
+    "ls": 0.02,
+    "fontSize": 94.4,
+    "wRatio": 1.0,
+    "hRatio": 2.446
+   },
+   "Archivo Black": {
+    "iou": 0.6646,
+    "angleCcw": 0,
+    "ls": -0.04,
+    "fontSize": 48.1,
+    "wRatio": 1.01,
+    "hRatio": 1.0
+   },
+   "Asap bold": {
+    "iou": 0.4865,
+    "angleCcw": -1,
+    "ls": 0.04,
+    "fontSize": 56.1,
+    "wRatio": 1.0,
+    "hRatio": 1.288
+   },
+   "Asap bold italic": {
+    "iou": 0.6062,
+    "angleCcw": -1,
+    "ls": 0.04,
+    "fontSize": 56.0,
+    "wRatio": 1.0,
+    "hRatio": 1.287
+   },
+   "Asap Condensed bold": {
+    "iou": 0.3963,
+    "angleCcw": -2,
+    "ls": 0.04,
+    "fontSize": 70.1,
+    "wRatio": 1.0,
+    "hRatio": 1.701
+   }
+  }
+ },
+ {
+  "code": "S03",
+  "text": "WHICH",
+  "inkBox": [
+   74,
+   194,
+   402,
+   292
+  ],
+  "fits": {
+   "League Gothic": {
+    "iou": 0.3723,
+    "angleCcw": -10,
+    "ls": -0.04,
+    "fontSize": 205.0,
+    "wRatio": 1.0,
+    "hRatio": 2.092
+   },
+   "Archivo Black": {
+    "iou": 0.4942,
+    "angleCcw": 5,
+    "ls": -0.04,
+    "fontSize": 90.3,
+    "wRatio": 1.0,
+    "hRatio": 0.91
+   },
+   "Asap bold": {
+    "iou": 0.4208,
+    "angleCcw": 5,
+    "ls": -0.02,
+    "fontSize": 103.2,
+    "wRatio": 0.995,
+    "hRatio": 1.0
+   },
+   "Asap bold italic": {
+    "iou": 0.4889,
+    "angleCcw": 1,
+    "ls": 0,
+    "fontSize": 102.3,
+    "wRatio": 1.0,
+    "hRatio": 0.789
+   },
+   "Asap Condensed bold": {
+    "iou": 0.424,
+    "angleCcw": 3,
+    "ls": 0.04,
+    "fontSize": 117.9,
+    "wRatio": 0.982,
+    "hRatio": 1.0
+   }
+  }
+ },
+ {
+  "code": "S03",
+  "text": "REPORT",
+  "inkBox": [
+   59,
+   277,
+   510,
+   397
+  ],
+  "fits": {
+   "League Gothic": {
+    "iou": 0.364,
+    "angleCcw": -5,
+    "ls": 0.02,
+    "fontSize": 206.3,
+    "wRatio": 1.0,
+    "hRatio": 1.569
+   },
+   "Archivo Black": {
+    "iou": 0.5838,
+    "angleCcw": 6,
+    "ls": -0.04,
+    "fontSize": 106.1,
+    "wRatio": 1.0,
+    "hRatio": 1.0
+   },
+   "Asap bold": {
+    "iou": 0.6093,
+    "angleCcw": 4,
+    "ls": -0.04,
+    "fontSize": 129.7,
+    "wRatio": 0.957,
+    "hRatio": 1.0
+   },
+   "Asap bold italic": {
+    "iou": 0.6612,
+    "angleCcw": 4,
+    "ls": -0.04,
+    "fontSize": 131.0,
+    "wRatio": 0.977,
+    "hRatio": 1.024
+   },
+   "Asap Condensed bold": {
+    "iou": 0.5674,
+    "angleCcw": 4,
+    "ls": 0.02,
+    "fontSize": 142.1,
+    "wRatio": 0.942,
+    "hRatio": 1.066
+   }
+  }
+ },
+ {
+  "code": "S03",
+  "text": "SHOWS",
+  "inkBox": [
+   339,
+   357,
+   904,
+   593
+  ],
+  "fits": {
+   "League Gothic": {
+    "iou": 0.3981,
+    "angleCcw": 3,
+    "ls": 0.04,
+    "fontSize": 278.0,
+    "wRatio": 1.014,
+    "hRatio": 0.987
+   },
+   "Archivo Black": {
+    "iou": 0.4185,
+    "angleCcw": 12,
+    "ls": -0.04,
+    "fontSize": 158.9,
+    "wRatio": 1.081,
+    "hRatio": 0.93
+   },
+   "Asap bold": {
+    "iou": 0.4104,
+    "angleCcw": 9,
+    "ls": -0.04,
+    "fontSize": 178.0,
+    "wRatio": 1.0,
+    "hRatio": 0.867
+   },
+   "Asap bold italic": {
+    "iou": 0.4339,
+    "angleCcw": 11,
+    "ls": -0.04,
+    "fontSize": 180.1,
+    "wRatio": 1.0,
+    "hRatio": 0.959
+   },
+   "Asap Condensed bold": {
+    "iou": 0.4906,
+    "angleCcw": 9,
+    "ls": -0.04,
+    "fontSize": 221.4,
+    "wRatio": 1.003,
+    "hRatio": 0.997
+   }
+  }
+ },
+ {
+  "code": "S03",
+  "text": "PROFIT?",
+  "inkBox": [
+   34,
+   1081,
+   907,
+   1354
+  ],
+  "fits": {
+   "League Gothic": {
+    "iou": 0.3588,
+    "angleCcw": 4,
+    "ls": 0.02,
+    "fontSize": 344.9,
+    "wRatio": 0.9,
+    "hRatio": 1.125
+   },
+   "Archivo Black": {
+    "iou": 0.4322,
+    "angleCcw": 9,
+    "ls": -0.04,
+    "fontSize": 202.1,
+    "wRatio": 1.007,
+    "hRatio": 0.994
+   },
+   "Asap bold": {
+    "iou": 0.4228,
+    "angleCcw": 7,
+    "ls": -0.04,
+    "fontSize": 250.1,
+    "wRatio": 0.955,
+    "hRatio": 1.0
+   },
+   "Asap bold italic": {
+    "iou": 0.4518,
+    "angleCcw": 7,
+    "ls": -0.04,
+    "fontSize": 248.7,
+    "wRatio": 0.952,
+    "hRatio": 1.0
+   },
+   "Asap Condensed bold": {
+    "iou": 0.5232,
+    "angleCcw": 4,
+    "ls": -0.04,
+    "fontSize": 306.5,
+    "wRatio": 0.967,
+    "hRatio": 1.0
+   }
+  }
+ },
+ {
+  "code": "S03",
+  "text": "OR",
+  "inkBox": [
+   425,
+   800,
+   503,
+   848
+  ],
+  "fits": {
+   "League Gothic": {
+    "iou": 0.4859,
+    "angleCcw": -12,
+    "ls": 0.02,
+    "fontSize": 104.0,
+    "wRatio": 1.0,
+    "hRatio": 1.828
+   },
+   "Archivo Black": {
+    "iou": 0.6008,
+    "angleCcw": -8,
+    "ls": -0.04,
+    "fontSize": 56.1,
+    "wRatio": 1.069,
+    "hRatio": 1.0
+   },
+   "Asap bold": {
+    "iou": 0.6464,
+    "angleCcw": -2,
+    "ls": -0.04,
+    "fontSize": 64.5,
+    "wRatio": 1.019,
+    "hRatio": 1.0
+   },
+   "Asap bold italic": {
+    "iou": 0.6885,
+    "angleCcw": -4,
+    "ls": -0.04,
+    "fontSize": 62.9,
+    "wRatio": 0.993,
+    "hRatio": 1.007
+   },
+   "Asap Condensed bold": {
+    "iou": 0.7407,
+    "angleCcw": -3,
+    "ls": 0,
+    "fontSize": 69.4,
+    "wRatio": 0.928,
+    "hRatio": 1.084
+   }
+  }
+ },
+ {
+  "code": "S04",
+  "text": "VECTALLY",
+  "inkBox": [
+   59,
+   59,
+   403,
+   109
+  ],
+  "fits": {
+   "League Gothic": {
+    "iou": 0.2972,
+    "angleCcw": 2,
+    "ls": 0.02,
+    "fontSize": 121.8,
+    "wRatio": 1.0,
+    "hRatio": 2.024
+   },
+   "Archivo Black": {
+    "iou": 0.5714,
+    "angleCcw": 1,
+    "ls": -0.04,
+    "fontSize": 61.6,
+    "wRatio": 1.0,
+    "hRatio": 0.971
+   },
+   "Asap bold": {
+    "iou": 0.7243,
+    "angleCcw": 0,
+    "ls": 0.04,
+    "fontSize": 71.0,
+    "wRatio": 0.98,
+    "hRatio": 1.021
+   },
+   "Asap bold italic": {
+    "iou": 0.6212,
+    "angleCcw": 0,
+    "ls": 0.04,
+    "fontSize": 71.0,
+    "wRatio": 0.98,
+    "hRatio": 1.021
+   },
+   "Asap Condensed bold": {
+    "iou": 0.5249,
+    "angleCcw": 1,
+    "ls": 0.04,
+    "fontSize": 90.5,
+    "wRatio": 1.0,
+    "hRatio": 1.392
+   }
+  }
+ },
+ {
+  "code": "S04",
+  "text": "IT'S THE",
+  "inkBox": [
+   60,
+   219,
+   362,
+   280
+  ],
+  "fits": {
+   "League Gothic": {
+    "iou": 0.3627,
+    "angleCcw": 10,
+    "ls": -0.02,
+    "fontSize": 145.5,
+    "wRatio": 1.0,
+    "hRatio": 2.592
+   },
+   "Archivo Black": {
+    "iou": 0.6663,
+    "angleCcw": 0,
+    "ls": -0.04,
+    "fontSize": 70.0,
+    "wRatio": 1.0,
+    "hRatio": 0.824
+   },
+   "Asap bold": {
+    "iou": 0.7257,
+    "angleCcw": 1,
+    "ls": 0.02,
+    "fontSize": 84.0,
+    "wRatio": 1.0,
+    "hRatio": 1.068
+   },
+   "Asap bold italic": {
+    "iou": 0.6991,
+    "angleCcw": 0,
+    "ls": 0.02,
+    "fontSize": 83.5,
+    "wRatio": 1.016,
+    "hRatio": 1.0
+   },
+   "Asap Condensed bold": {
+    "iou": 0.7087,
+    "angleCcw": 0,
+    "ls": 0.04,
+    "fontSize": 98.4,
+    "wRatio": 1.0,
+    "hRatio": 1.179
+   }
+  }
+ },
+ {
+  "code": "S04",
+  "text": "PROFIT &",
+  "inkBox": [
+   241,
+   349,
+   908,
+   510
+  ],
+  "fits": {
+   "League Gothic": {
+    "iou": 0.4163,
+    "angleCcw": 5,
+    "ls": -0.02,
+    "fontSize": 288.0,
+    "wRatio": 1.0,
+    "hRatio": 1.665
+   },
+   "Archivo Black": {
+    "iou": 0.3365,
+    "angleCcw": 6,
+    "ls": -0.04,
+    "fontSize": 134.9,
+    "wRatio": 1.01,
+    "hRatio": 0.99
+   },
+   "Asap bold": {
+    "iou": 0.5782,
+    "angleCcw": -1,
+    "ls": -0.04,
+    "fontSize": 177.9,
+    "wRatio": 1.0,
+    "hRatio": 0.855
+   },
+   "Asap bold italic": {
+    "iou": 0.58,
+    "angleCcw": 2,
+    "ls": -0.04,
+    "fontSize": 176.4,
+    "wRatio": 1.0,
+    "hRatio": 0.917
+   },
+   "Asap Condensed bold": {
+    "iou": 0.8249,
+    "angleCcw": 0,
+    "ls": -0.02,
+    "fontSize": 211.8,
+    "wRatio": 1.0,
+    "hRatio": 0.952
+   }
+  }
+ },
+ {
+  "code": "S04",
+  "text": "LOSS.",
+  "inkBox": [
+   46,
+   1036,
+   923,
+   1329
+  ],
+  "fits": {
+   "League Gothic": {
+    "iou": 0.4124,
+    "angleCcw": 8,
+    "ls": 0.04,
+    "fontSize": 523.0,
+    "wRatio": 1.0,
+    "hRatio": 1.634
+   },
+   "Archivo Black": {
+    "iou": 0.515,
+    "angleCcw": 0,
+    "ls": -0.04,
+    "fontSize": 293.2,
+    "wRatio": 1.0,
+    "hRatio": 0.709
+   },
+   "Asap bold": {
+    "iou": 0.6317,
+    "angleCcw": 0,
+    "ls": 0,
+    "fontSize": 379.8,
+    "wRatio": 1.0,
+    "hRatio": 0.935
+   },
+   "Asap bold italic": {
+    "iou": 0.5589,
+    "angleCcw": 1,
+    "ls": -0.02,
+    "fontSize": 389.3,
+    "wRatio": 1.0,
+    "hRatio": 0.992
+   },
+   "Asap Condensed bold": {
+    "iou": 0.7334,
+    "angleCcw": 0,
+    "ls": 0.04,
+    "fontSize": 413.0,
+    "wRatio": 0.984,
+    "hRatio": 1.016
+   }
+  }
+ },
+ {
+  "code": "S05",
+  "text": "VECTALLY",
+  "inkBox": [
+   64,
+   76,
+   362,
+   135
+  ],
+  "fits": {
+   "League Gothic": {
+    "iou": 0.2779,
+    "angleCcw": 3,
+    "ls": 0.02,
+    "fontSize": 105.5,
+    "wRatio": 1.0,
+    "hRatio": 1.603
+   },
+   "Archivo Black": {
+    "iou": 0.6231,
+    "angleCcw": 4,
+    "ls": -0.04,
+    "fontSize": 54.1,
+    "wRatio": 1.009,
+    "hRatio": 0.991
+   },
+   "Asap bold": {
+    "iou": 0.6727,
+    "angleCcw": 3,
+    "ls": 0.04,
+    "fontSize": 61.9,
+    "wRatio": 0.982,
+    "hRatio": 1.0
+   },
+   "Asap bold italic": {
+    "iou": 0.6282,
+    "angleCcw": 5,
+    "ls": 0.02,
+    "fontSize": 65.0,
+    "wRatio": 1.0,
+    "hRatio": 1.211
+   },
+   "Asap Condensed bold": {
+    "iou": 0.4757,
+    "angleCcw": 3,
+    "ls": 0.04,
+    "fontSize": 78.4,
+    "wRatio": 1.0,
+    "hRatio": 1.2
+   }
+  }
+ },
+ {
+  "code": "S05",
+  "text": "GOT A",
+  "inkBox": [
+   41,
+   274,
+   367,
+   355
+  ],
+  "fits": {
+   "League Gothic": {
+    "iou": 0.2508,
+    "angleCcw": 11,
+    "ls": -0.02,
+    "fontSize": 209.5,
+    "wRatio": 1.0,
+    "hRatio": 2.537
+   },
+   "Archivo Black": {
+    "iou": 0.6265,
+    "angleCcw": 0,
+    "ls": -0.04,
+    "fontSize": 99.4,
+    "wRatio": 1.0,
+    "hRatio": 0.877
+   },
+   "Asap bold": {
+    "iou": 0.7864,
+    "angleCcw": 0,
+    "ls": -0.02,
+    "fontSize": 116.7,
+    "wRatio": 0.956,
+    "hRatio": 1.049
+   },
+   "Asap bold italic": {
+    "iou": 0.7255,
+    "angleCcw": 1,
+    "ls": 0,
+    "fontSize": 113.0,
+    "wRatio": 0.947,
+    "hRatio": 1.059
+   },
+   "Asap Condensed bold": {
+    "iou": 0.52,
+    "angleCcw": 0,
+    "ls": 0.04,
+    "fontSize": 126.1,
+    "wRatio": 0.895,
+    "hRatio": 1.133
+   }
+  }
+ },
+ {
+  "code": "S05",
+  "text": "BOOKKEEPING",
+  "inkBox": [
+   21,
+   397,
+   152,
+   1124
+  ],
+  "fits": {
+   "League Gothic": {
+    "iou": 0.3033,
+    "angleCcw": 89,
+    "ls": 0.04,
+    "fontSize": 168.1,
+    "wRatio": 1.058,
+    "hRatio": 0.948
+   },
+   "Archivo Black": {
+    "iou": 0.4365,
+    "angleCcw": 87,
+    "ls": -0.04,
+    "fontSize": 93.1,
+    "wRatio": 0.788,
+    "hRatio": 1.0
+   },
+   "Asap bold": {
+    "iou": 0.657,
+    "angleCcw": 86,
+    "ls": -0.04,
+    "fontSize": 119.3,
+    "wRatio": 1.015,
+    "hRatio": 0.985
+   },
+   "Asap bold italic": {
+    "iou": 0.7387,
+    "angleCcw": 86,
+    "ls": -0.04,
+    "fontSize": 118.8,
+    "wRatio": 1.005,
+    "hRatio": 0.995
+   },
+   "Asap Condensed bold": {
+    "iou": 0.5514,
+    "angleCcw": 86,
+    "ls": 0.04,
+    "fontSize": 124.2,
+    "wRatio": 1.033,
+    "hRatio": 0.969
+   }
+  }
+ },
+ {
+  "code": "S05",
+  "text": "QUESTION?",
+  "inkBox": [
+   283,
+   1243,
+   914,
+   1395
+  ],
+  "fits": {
+   "League Gothic": {
+    "iou": 0.3257,
+    "angleCcw": 4,
+    "ls": 0.04,
+    "fontSize": 153.9,
+    "wRatio": 0.791,
+    "hRatio": 1.0
+   },
+   "Archivo Black": {
+    "iou": 0.4951,
+    "angleCcw": 7,
+    "ls": -0.04,
+    "fontSize": 102.6,
+    "wRatio": 0.982,
+    "hRatio": 1.0
+   },
+   "Asap bold": {
+    "iou": 0.7321,
+    "angleCcw": 5,
+    "ls": 0,
+    "fontSize": 122.2,
+    "wRatio": 0.986,
+    "hRatio": 1.0
+   },
+   "Asap bold italic": {
+    "iou": 0.7878,
+    "angleCcw": 5,
+    "ls": -0.02,
+    "fontSize": 124.8,
+    "wRatio": 0.984,
+    "hRatio": 1.016
+   },
+   "Asap Condensed bold": {
+    "iou": 0.6325,
+    "angleCcw": 4,
+    "ls": 0.04,
+    "fontSize": 136.5,
+    "wRatio": 0.979,
+    "hRatio": 1.022
+   }
+  }
+ }
+]
