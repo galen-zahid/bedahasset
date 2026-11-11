@@ -1,6 +1,8 @@
 # Impor display copy S02, S04, S05 (11 Nov 2026)
 
-Salinan kerja: `DAHakqcLPHk`. Halaman 1 adalah salinan S02 lama dari `DAHabUK1x7c`; halaman 2, 3, 4 adalah kandidat S02, S04, S05. Desain lain tidak diubah.
+Salinan kerja: `DAHakqcLPHk`. Halaman 1 adalah salinan S02 lama dari `DAHabUK1x7c`; halaman 2 kandidat S03 (copy kecil saja), halaman 3, 4, 5 kandidat S02, S04, S05. Importer menyisipkan halaman baru setelah halaman aktif, jadi cek nomor halaman setelah impor. Desain lain tidak diubah.
+
+Font: `YACgEZ1OEPI` terbukti League Gothic (normal dan italic) lewat `findFonts`. Headline S01 cocok ke League Gothic lebar 75–85 (IoU 0.76–0.80), sedangkan lebar normal yang tersedia native hanya 0.55–0.57. Headline besar S03 (WHICH, REPORT, SHOWS, PROFIT?) maksimal 0.44–0.66 dengan font native.
 
 Status: RENDERED di Canva, TECHNICAL PASS untuk font native. VISUAL PASS, buyer edit-test, dan USER APPROVED belum.
 
