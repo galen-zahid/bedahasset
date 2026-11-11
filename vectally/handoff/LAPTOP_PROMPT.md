@@ -26,6 +26,25 @@ Baca dalam urutan ini:
 7. `vectally\handoff\jobs.json`
 8. `vectally\handoff\POWERSHELL.md`
 
+## 1a. Riwayat singkat seluruh sesi sebelumnya
+1. Awalnya kita membuat CLI `split.py` dan pipeline untuk membedah desain PNG flat buatan AI (KINRAVA, DORVAN, VECTALLY) menjadi layer yang bisa diedit.
+2. Pipeline itu berkembang jadi mode **rebuild** (`pipeline\rebuild\`):
+   - background foto dibersihkan dengan satu kali inpaint (pita lama dan atlet dihapus tanpa bekas);
+   - vektor jadi shape native Canva;
+   - teks jadi teks native.
+3. Setup laptop yang sudah beres:
+   - `setup.bat`: reportlab, wordninja, vtracer, resvg;
+   - node v22.16.0 dan npm 10.9.2;
+   - `@canva/cli`, sudah `canva login`.
+4. App dibuat dengan `--distribution=public`, karena app private butuh Canva Enterprise.
+5. Uji di Canva:
+   - Tahap 1 OK (foto, pita, teks).
+   - Tahap 2: 15/15 elemen OK. Ada masalah background (sisa stripe dan bekas atlet), lalu diperbaiki.
+6. Importer diubah supaya bisa memilih banyak file, dan setiap desain jadi satu halaman baru.
+7. Saya menjalankan batch 18 desain di laptop: 18 ok, butuh sekitar 35 menit. Paketnya dikumpulkan di `D:\bedahasset\paket`.
+   - Setelah itu tombol "Susun semua" tidak muncul. Penyebabnya server lama masih memegang port 8080. Solusinya matikan proses itu, jalankan `canva apps start` lagi, lalu reload app.
+8. Setelah itu datang snapshot VECTALLY dari Google Drive (`VECTALLY_CLOUD_INPUT_20261110.zip`). Isinya sudah diekstrak ke folder `vectally\` di repo dan dilanjutkan di sesi cloud (lihat bagian 4).
+
 ## 1. Konteks proyek
 - **Pipeline rebuild** (`pipeline\rebuild\*`, CLI `split.py`) mengubah desain PNG flat menjadi `CANVA_PACKAGE.json`, berisi shape native, teks native, dan gambar.
 - **CUSBE Native Importer** adalah app Canva (Apps SDK) di `D:\cusbe-importer`. Sumbernya ada di `canva_importer\app.tsx` di repo.
@@ -112,6 +131,20 @@ Baca dalam urutan ini:
 4. Impor ke Canva lewat CUSBE.
    - Sebelum menulis ke Canva, cek dulu koneksi atau tool yang benar-benar tersedia.
    - Jangan klaim Canva sudah diperbarui kalau belum ada bukti, misalnya screenshot atau hasil read-design.
+
+## 5b. Lampiran
+Tidak ada yang perlu dilampirkan selain prompt ini. Semuanya sudah ada di disk atau di git:
+- Di git (`git pull`):
+  - sumber 84 PNG (`vectally\sources\VECTALLY`);
+  - handoff, resep, font, dan paket kandidat;
+  - source app;
+  - pipeline dan importer.
+- Di laptop (bukan di git):
+  - `D:\cusbe-importer`, proyek app Canva yang dijalankan;
+  - `D:\bedahasset\paket`, hasil batch 18 desain;
+  - login Canva CLI.
+
+ZIP dari Google Drive tidak perlu diunduh lagi karena isinya sudah ada di repo.
 
 ## 6. Cara kerja dengan saya
 - Kasih perintah PowerShell lengkap dengan `cd`-nya, supaya saya bisa jalankan sendiri.
