@@ -14,7 +14,7 @@ import smooth_native_paths as S  # noqa: E402
 
 ROOT = Path(__file__).resolve().parents[1]
 R = ROOT / "outputs/VECTALLY-story-repair"
-SRC = {"S02": "ASSETS_DISPLAY_COPY_PACKAGE.json", "S03": "ASSETS_PARTIAL_COPY_PACKAGE.json",
+SRC = {"S02": "ASSETS_DISPLAY_COPY_PACKAGE.json", 
        "S04": "ASSETS_DISPLAY_COPY_PACKAGE.json", "S05": "ASSETS_DISPLAY_COPY_PACKAGE.json"}
 
 
@@ -44,7 +44,7 @@ def count(es):
 
 
 for code, name in SRC.items():
-    dst = R / code / "ASSETS_GEOM2_PACKAGE.json"
+    dst = R / code / "ASSETS_GEOM3_PACKAGE.json"
     if dst.exists():
         raise SystemExit(f"Sudah ada, tidak ditimpa: {dst}")
     pkg = json.load(open(R / code / name, encoding="utf-8"))

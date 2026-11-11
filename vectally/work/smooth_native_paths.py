@@ -341,10 +341,11 @@ def rounded_bar(box):
             + "C" + p(a + v * r - v * k) + " " + p(a + u * r - u * k) + " " + p(a + u * r) + "Z")
 
 
-def smooth(e):
-    if any(c in e["paths"][0]["d"] for c in "Cc") or len(e["paths"]) != 1 or e["width"] * e["height"] > 900000:
+def smooth(e, override=None):
+    """override = (alpha, pad) dari PNG sumber; kalau ada, shape dipas ulang walau sudah berkurva."""
+    if override is None and (any(c in e["paths"][0]["d"] for c in "Cc") or len(e["paths"]) != 1 or e["width"] * e["height"] > 900000):
         return e, "skip"
-    alpha, pad = rasterize(e)
+    alpha, pad = override if override is not None else rasterize(e)
     source = alpha >= 128
     area = int(source.sum())
     if area < 40 * SS * SS:
@@ -371,7 +372,7 @@ def smooth(e):
         (ex, ey), (ea, eb), eang = cv2.fitEllipse(big)
         d = ellipse_path(((ex + 0.5) / SS - pad, (ey + 0.5) / SS - pad), ea / 2 / SS, eb / 2 / SS, math.radians(eang))
         node, score, same = build(d)
-        if same and score >= 0.975:
+        if same and score >= (0.975 if area > 900 * SS * SS else 0.92):
             return node, f"smooth ellipse iou{score:.3f}"
     rect = cv2.minAreaRect(big)
     rw, rh = rect[1]
