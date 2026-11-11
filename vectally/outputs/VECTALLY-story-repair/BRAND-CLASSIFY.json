@@ -1,0 +1,386 @@
+[
+ {
+  "code": "S01",
+  "text": "THE BOOKS",
+  "inkBox": [
+   47,
+   213,
+   657,
+   439
+  ],
+  "fits": {
+   "League Gothic": {
+    "iou": 0.703,
+    "shear": 0.08,
+    "angleCcw": 0,
+    "xRatio": 0.692
+   },
+   "Archivo Black": {
+    "iou": 0.704,
+    "shear": 0,
+    "angleCcw": 0,
+    "xRatio": 0.291
+   }
+  }
+ },
+ {
+  "code": "S01",
+  "text": "STORY.",
+  "inkBox": [
+   396,
+   1240,
+   895,
+   1540
+  ],
+  "fits": {
+   "League Gothic": {
+    "iou": 0.691,
+    "shear": 0.08,
+    "angleCcw": 0,
+    "xRatio": 0.679
+   },
+   "Archivo Black": {
+    "iou": 0.675,
+    "shear": 0.08,
+    "angleCcw": 0,
+    "xRatio": 0.289
+   }
+  }
+ },
+ {
+  "code": "S02",
+  "text": "WHAT'S",
+  "inkBox": [
+   459,
+   148,
+   902,
+   260
+  ],
+  "fits": {
+   "League Gothic": {
+    "iou": 0.563,
+    "shear": 0,
+    "angleCcw": 2,
+    "xRatio": 1.524
+   },
+   "Archivo Black": {
+    "iou": 0.566,
+    "shear": 0,
+    "angleCcw": 0,
+    "xRatio": 0.65
+   }
+  }
+ },
+ {
+  "code": "S02",
+  "text": "HARDER",
+  "inkBox": [
+   439,
+   281,
+   907,
+   388
+  ],
+  "fits": {
+   "League Gothic": {
+    "iou": 0.804,
+    "shear": 0,
+    "angleCcw": 0,
+    "xRatio": 1.551
+   },
+   "Archivo Black": {
+    "iou": 0.824,
+    "shear": 0,
+    "angleCcw": 0,
+    "xRatio": 0.673
+   }
+  }
+ },
+ {
+  "code": "S02",
+  "text": "TO",
+  "inkBox": [
+   47,
+   1128,
+   214,
+   1245
+  ],
+  "fits": {
+   "League Gothic": {
+    "iou": 0.667,
+    "shear": 0.08,
+    "angleCcw": 0,
+    "xRatio": 1.665
+   },
+   "Archivo Black": {
+    "iou": 0.765,
+    "shear": 0.08,
+    "angleCcw": 0,
+    "xRatio": 0.685
+   }
+  }
+ },
+ {
+  "code": "S02",
+  "text": "TRACK?",
+  "inkBox": [
+   47,
+   1262,
+   508,
+   1376
+  ],
+  "fits": {
+   "League Gothic": {
+    "iou": 0.775,
+    "shear": 0,
+    "angleCcw": 0,
+    "xRatio": 1.453
+   },
+   "Archivo Black": {
+    "iou": 0.775,
+    "shear": 0.08,
+    "angleCcw": 0,
+    "xRatio": 0.645
+   }
+  }
+ },
+ {
+  "code": "S03",
+  "text": "WHICH",
+  "inkBox": [
+   74,
+   194,
+   402,
+   292
+  ],
+  "fits": {
+   "League Gothic": {
+    "iou": 0.731,
+    "shear": 0.26,
+    "angleCcw": 8,
+    "xRatio": 1.89
+   },
+   "Archivo Black": {
+    "iou": 0.719,
+    "shear": 0.32,
+    "angleCcw": 4,
+    "xRatio": 0.853
+   }
+  }
+ },
+ {
+  "code": "S03",
+  "text": "REPORT",
+  "inkBox": [
+   59,
+   277,
+   510,
+   397
+  ],
+  "fits": {
+   "League Gothic": {
+    "iou": 0.747,
+    "shear": 0.26,
+    "angleCcw": 8,
+    "xRatio": 1.864
+   },
+   "Archivo Black": {
+    "iou": 0.795,
+    "shear": 0.32,
+    "angleCcw": 4,
+    "xRatio": 0.828
+   }
+  }
+ },
+ {
+  "code": "S03",
+  "text": "SHOWS",
+  "inkBox": [
+   339,
+   357,
+   904,
+   593
+  ],
+  "fits": {
+   "League Gothic": {
+    "iou": 0.577,
+    "shear": 0.32,
+    "angleCcw": 10,
+    "xRatio": 1.323
+   },
+   "Archivo Black": {
+    "iou": 0.659,
+    "shear": 0.32,
+    "angleCcw": 6,
+    "xRatio": 0.637
+   }
+  }
+ },
+ {
+  "code": "S03",
+  "text": "PROFIT?",
+  "inkBox": [
+   34,
+   1081,
+   907,
+   1354
+  ],
+  "fits": {
+   "League Gothic": {
+    "iou": 0.483,
+    "shear": 0.32,
+    "angleCcw": 4,
+    "xRatio": 1.246
+   },
+   "Archivo Black": {
+    "iou": 0.479,
+    "shear": 0.32,
+    "angleCcw": 2,
+    "xRatio": 0.578
+   }
+  }
+ },
+ {
+  "code": "S04",
+  "text": "IT'S THE",
+  "inkBox": [
+   60,
+   219,
+   362,
+   280
+  ],
+  "fits": {
+   "League Gothic": {
+    "iou": 0.663,
+    "shear": 0,
+    "angleCcw": 0,
+    "xRatio": 1.776
+   },
+   "Archivo Black": {
+    "iou": 0.85,
+    "shear": 0,
+    "angleCcw": 0,
+    "xRatio": 0.774
+   }
+  }
+ },
+ {
+  "code": "S04",
+  "text": "PROFIT &",
+  "inkBox": [
+   241,
+   349,
+   908,
+   510
+  ],
+  "fits": {
+   "League Gothic": {
+    "iou": 0.526,
+    "shear": 0.08,
+    "angleCcw": 0,
+    "xRatio": 1.301
+   },
+   "Archivo Black": {
+    "iou": 0.539,
+    "shear": 0.26,
+    "angleCcw": 0,
+    "xRatio": 0.548
+   }
+  }
+ },
+ {
+  "code": "S04",
+  "text": "LOSS.",
+  "inkBox": [
+   46,
+   1036,
+   923,
+   1329
+  ],
+  "fits": {
+   "League Gothic": {
+    "iou": 0.69,
+    "shear": 0,
+    "angleCcw": 0,
+    "xRatio": 1.592
+   },
+   "Archivo Black": {
+    "iou": 0.834,
+    "shear": 0,
+    "angleCcw": 0,
+    "xRatio": 0.673
+   }
+  }
+ },
+ {
+  "code": "S05",
+  "text": "GOT A",
+  "inkBox": [
+   41,
+   274,
+   367,
+   355
+  ],
+  "fits": {
+   "League Gothic": {
+    "iou": 0.479,
+    "shear": 0.08,
+    "angleCcw": 0,
+    "xRatio": 2.004
+   },
+   "Archivo Black": {
+    "iou": 0.63,
+    "shear": 0.08,
+    "angleCcw": 0,
+    "xRatio": 0.842
+   }
+  }
+ },
+ {
+  "code": "S05",
+  "text": "BOOKKEEPING",
+  "inkBox": [
+   21,
+   397,
+   152,
+   1124
+  ],
+  "fits": {
+   "League Gothic": {
+    "iou": 0.498,
+    "shear": 0.14,
+    "angleCcw": 84,
+    "xRatio": 0.621
+   },
+   "Archivo Black": {
+    "iou": 0.521,
+    "shear": 0.32,
+    "angleCcw": 88,
+    "xRatio": 1.545
+   }
+  }
+ },
+ {
+  "code": "S05",
+  "text": "QUESTION?",
+  "inkBox": [
+   283,
+   1243,
+   914,
+   1395
+  ],
+  "fits": {
+   "League Gothic": {
+    "iou": 0.445,
+    "shear": 0.08,
+    "angleCcw": 10,
+    "xRatio": 1.771
+   },
+   "Archivo Black": {
+    "iou": 0.553,
+    "shear": 0.2,
+    "angleCcw": 4,
+    "xRatio": 0.799
+   }
+  }
+ }
+]
