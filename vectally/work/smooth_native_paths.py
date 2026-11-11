@@ -9,6 +9,7 @@ Pemakaian: smooth_native_paths.py IN.json OUT.json
 """
 import io
 import json
+import math
 import os
 import sys
 
@@ -87,7 +88,120 @@ def fit(p, tol, t1=None, t2=None, depth=0):
     return fit(p[: i + 1], tol, t1, tc, depth + 1) + fit(p[i:], tol, -tc, t2, depth + 1)
 
 
+def _line(p):
+    """Garis least-squares: titik tengah dan arah satuan."""
+    c = p.mean(0)
+    v = np.linalg.svd(p - c)[2][0]
+    return c, v
+
+
+def _meet(a, b, near):
+    (c1, v1), (c2, v2) = a, b
+    det = v1[0] * -v2[1] + v2[0] * v1[1]
+    if abs(det) < 0.05:
+        return near
+    d = c2 - c1
+    t = (d[0] * -v2[1] + v2[0] * d[1]) / det
+    p = c1 + v1 * t
+    return p if np.linalg.norm(p - near) <= 3.5 else near
+
+
+def _project(line, p):
+    c, v = line
+    return c + v * np.dot(p - c, v)
+
+
 def fit_loop(pts, tol, win):
+    """Rekonstruksi: sisi lurus jadi garis sejati, sudut dari perpotongan, sisanya sedikit kurva."""
+    n = len(pts)
+    grid = np.round(pts * SS).astype(np.int32)
+    index = {}
+    for i, g in enumerate(map(tuple, grid.tolist())):
+        index.setdefault(g, i)
+    approx = cv2.approxPolyDP(grid.reshape(-1, 1, 2), 1.0 * SS, True).reshape(-1, 2)
+    verts = sorted({index[tuple(a)] for a in approx.tolist()})
+    m = len(verts)
+    if m < 3:
+        return fit_loop_curve(pts, tol, win)
+    vec = [pts[verts[(i + 1) % m]] - pts[verts[i]] for i in range(m)]
+    length = [float(np.linalg.norm(v)) for v in vec]
+
+    def turn(i):  # sudut di verts[i], antara edge i-1 dan edge i
+        a, b = vec[i - 1], vec[i]
+        c = np.dot(a, b) / max(1e-6, np.linalg.norm(a) * np.linalg.norm(b))
+        return math.degrees(math.acos(max(-1, min(1, c))))
+
+    straight = []
+    for i in range(m):
+        prev_ok = turn(i) >= 22 or length[i] >= 2.2 * length[i - 1]
+        next_ok = turn((i + 1) % m) >= 22 or length[i] >= 2.2 * length[(i + 1) % m]
+        straight.append(length[i] >= 10 and prev_ok and next_ok)
+    if not any(straight):
+        return fit_loop_curve(pts, tol, win)
+
+    def span(a, b):
+        return pts[np.arange(a, b + 1 if b >= a else b + n + 1) % n]
+
+    lines = {}
+    for i in range(m):
+        if straight[i]:
+            seg = span(verts[i], verts[(i + 1) % m])
+            k = max(1, len(seg) // 8)
+            lines[i] = _line(seg[k:-k] if len(seg) > 2 * k + 2 else seg)
+
+    def node(i):  # posisi verts[i] setelah dibersihkan
+        p, a, b = pts[verts[i]], (i - 1) % m, i
+        if a in lines and b in lines:
+            return _meet(lines[a], lines[b], p)
+        if a in lines:
+            return _project(lines[a], p)
+        if b in lines:
+            return _project(lines[b], p)
+        return p
+
+    first = next(i for i in range(m) if straight[i])
+    start = node(first)
+    out, i, done = [], first, 0
+    while done < m:
+        if straight[i]:
+            out.append(("L", node((i + 1) % m)))
+            i, done = (i + 1) % m, done + 1
+            continue
+        j, steps = i, 0
+        while not straight[j] and steps < m - done:
+            j, steps = (j + 1) % m, steps + 1
+        seg = span(verts[i], verts[j]).copy()
+        seg[0], seg[-1] = node(i), node(j)
+        cuts = [0] + [c for c in _inner_corners(seg, win)] + [len(seg) - 1]
+        for a, b in zip(cuts, cuts[1:]):
+            t1 = -lines[(i - 1) % m][1] * 0 if False else None
+            out += [("C", c) for c in fit(seg[a:b + 1], tol, t1, None)]
+        i, done = j, done + steps
+    return start, out
+
+
+def _inner_corners(seg, win):
+    n = len(seg)
+    if n < 2 * win + 3:
+        return []
+    a = seg[win:-win] - seg[:-2 * win]
+    a = a[: n - 2 * win]
+    idx = np.arange(win, n - win)
+    before = seg[idx] - seg[idx - win]
+    after = seg[idx + win] - seg[idx]
+    cos = (before * after).sum(1) / np.maximum(1e-6, np.linalg.norm(before, axis=1) * np.linalg.norm(after, axis=1))
+    turn = np.degrees(np.arccos(np.clip(cos, -1, 1)))
+    found = []
+    for k in np.argsort(-turn):
+        if turn[k] < 45:
+            break
+        i = int(idx[k])
+        if all(abs(i - j) > win for j in found):
+            found.append(i)
+    return sorted(found)
+
+
+def fit_loop_curve(pts, tol, win):
     cs = corners(pts, win, 42)
     if not cs:
         cs = [0, len(pts) // 2]
@@ -186,7 +300,7 @@ def smooth(e):
         score = (got & source).sum() / max(1, (got | source).sum())
         if score >= 0.72:
             return node, f"smooth rect iou{score:.3f}"
-    for sigma in (1.3, 1.0, 0.75, 0.5):
+    for sigma in (0.8, 1.2, 0.5):
         blur = cv2.GaussianBlur(alpha.astype(np.float32), (0, 0), sigma * SS)
         mask = (blur >= 127.5).astype(np.uint8)
         cnts, hier = cv2.findContours(mask, cv2.RETR_CCOMP, cv2.CHAIN_APPROX_NONE)

@@ -18,6 +18,10 @@ SRC = {"S02": "ASSETS_DISPLAY_COPY_PACKAGE.json", "S03": "ASSETS_PARTIAL_COPY_PA
        "S04": "ASSETS_DISPLAY_COPY_PACKAGE.json", "S05": "ASSETS_DISPLAY_COPY_PACKAGE.json"}
 
 
+FIX = {"S04": {"VECTALLY": (58.5, 48.25), "IT'S THE": (54, 198)},
+       "S05": {"VECTALLY": (62.5, 73.5), "GOT A": (42.5, 243.25), "BOOKKEEPING": (-288.5, 678.5), "QUESTION?": (280, 1235.5)}}
+
+
 def clean_text(es):
     out = []
     for e in es:
@@ -40,13 +44,16 @@ def count(es):
 
 
 for code, name in SRC.items():
-    dst = R / code / "ASSETS_CLEAN_PACKAGE.json"
+    dst = R / code / "ASSETS_GEOM_PACKAGE.json"
     if dst.exists():
         raise SystemExit(f"Sudah ada, tidak ditimpa: {dst}")
     pkg = json.load(open(R / code / name, encoding="utf-8"))
     log = []
     S.walk(pkg["elements"], log)
     pkg["elements"] = clean_text(pkg["elements"])
+    for e in pkg["elements"]:
+        if e.get("type") == "text" and e["text"] in FIX.get(code, {}):
+            e["left"], e["top"] = FIX[code][e["text"]]
     pkg["source"] = f"{code} - ASET BERSIH, FONT BRAND - HEADLINE TYPECRAFT MENYUSUL"
     pkg.setdefault("summary", {})["text"] = count(pkg["elements"])
     json.dump(pkg, open(dst, "w", encoding="utf-8"), ensure_ascii=False)
