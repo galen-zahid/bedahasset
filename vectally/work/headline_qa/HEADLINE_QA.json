@@ -1,0 +1,314 @@
+[
+ {
+  "code": "S01",
+  "text": "THE BOOKS",
+  "iou": 0.791,
+  "srcBox": [
+   47,
+   213,
+   657,
+   439
+  ],
+  "exportBox": [
+   47,
+   213,
+   656,
+   438
+  ],
+  "edgeDelta": [
+   0,
+   0,
+   -1,
+   -1
+  ],
+  "maxEdge": 1
+ },
+ {
+  "code": "S01",
+  "text": "STORY.",
+  "iou": 0.702,
+  "srcBox": [
+   396,
+   1240,
+   895,
+   1540
+  ],
+  "exportBox": [
+   396,
+   1240,
+   895,
+   1540
+  ],
+  "edgeDelta": [
+   0,
+   0,
+   0,
+   0
+  ],
+  "maxEdge": 0
+ },
+ {
+  "code": "S02",
+  "text": "WHAT'S",
+  "iou": 0.783,
+  "srcBox": [
+   459,
+   148,
+   902,
+   260
+  ],
+  "exportBox": [
+   460,
+   148,
+   902,
+   260
+  ],
+  "edgeDelta": [
+   1,
+   0,
+   0,
+   0
+  ],
+  "maxEdge": 1
+ },
+ {
+  "code": "S02",
+  "text": "HARDER",
+  "iou": 0.808,
+  "srcBox": [
+   439,
+   281,
+   907,
+   388
+  ],
+  "exportBox": [
+   439,
+   281,
+   907,
+   388
+  ],
+  "edgeDelta": [
+   0,
+   0,
+   0,
+   0
+  ],
+  "maxEdge": 0
+ },
+ {
+  "code": "S02",
+  "text": "TO",
+  "iou": 0.735,
+  "srcBox": [
+   47,
+   1128,
+   214,
+   1245
+  ],
+  "exportBox": [
+   47,
+   1128,
+   214,
+   1244
+  ],
+  "edgeDelta": [
+   0,
+   0,
+   0,
+   -1
+  ],
+  "maxEdge": 1
+ },
+ {
+  "code": "S02",
+  "text": "TRACK?",
+  "iou": 0.753,
+  "srcBox": [
+   47,
+   1262,
+   508,
+   1376
+  ],
+  "exportBox": [
+   47,
+   1262,
+   508,
+   1376
+  ],
+  "edgeDelta": [
+   0,
+   0,
+   0,
+   0
+  ],
+  "maxEdge": 0
+ },
+ {
+  "code": "S03",
+  "text": "WHICH",
+  "iou": 0.805,
+  "srcBox": [
+   74,
+   194,
+   402,
+   292
+  ],
+  "exportBox": [
+   73,
+   194,
+   403,
+   292
+  ],
+  "edgeDelta": [
+   -1,
+   0,
+   1,
+   0
+  ],
+  "maxEdge": 1
+ },
+ {
+  "code": "S03",
+  "text": "REPORT",
+  "iou": 0.813,
+  "srcBox": [
+   59,
+   277,
+   510,
+   397
+  ],
+  "exportBox": [
+   59,
+   277,
+   511,
+   397
+  ],
+  "edgeDelta": [
+   0,
+   0,
+   1,
+   0
+  ],
+  "maxEdge": 1
+ },
+ {
+  "code": "S03",
+  "text": "SHOWS",
+  "iou": 0.632,
+  "srcBox": [
+   339,
+   357,
+   904,
+   593
+  ],
+  "exportBox": [
+   344,
+   355,
+   900,
+   595
+  ],
+  "edgeDelta": [
+   5,
+   -2,
+   -4,
+   2
+  ],
+  "maxEdge": 5
+ },
+ {
+  "code": "S03",
+  "text": "PROFIT?",
+  "iou": 0.67,
+  "srcBox": [
+   34,
+   1081,
+   907,
+   1354
+  ],
+  "exportBox": [
+   35,
+   1080,
+   905,
+   1355
+  ],
+  "edgeDelta": [
+   1,
+   -1,
+   -2,
+   1
+  ],
+  "maxEdge": 2
+ },
+ {
+  "code": "S04",
+  "text": "IT'S THE",
+  "iou": 0.769,
+  "srcBox": [
+   60,
+   219,
+   362,
+   280
+  ],
+  "exportBox": [
+   60,
+   219,
+   362,
+   280
+  ],
+  "edgeDelta": [
+   0,
+   0,
+   0,
+   0
+  ],
+  "maxEdge": 0
+ },
+ {
+  "code": "S04",
+  "text": "PROFIT &",
+  "iou": 0.85,
+  "srcBox": [
+   241,
+   349,
+   908,
+   510
+  ],
+  "exportBox": [
+   241,
+   349,
+   908,
+   509
+  ],
+  "edgeDelta": [
+   0,
+   0,
+   0,
+   -1
+  ],
+  "maxEdge": 1
+ },
+ {
+  "code": "S04",
+  "text": "LOSS.",
+  "iou": 0.864,
+  "srcBox": [
+   46,
+   1036,
+   923,
+   1329
+  ],
+  "exportBox": [
+   46,
+   1036,
+   923,
+   1331
+  ],
+  "edgeDelta": [
+   0,
+   0,
+   0,
+   2
+  ],
+  "maxEdge": 2
+ }
+]

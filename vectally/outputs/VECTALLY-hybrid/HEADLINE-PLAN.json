@@ -1,0 +1,167 @@
+[
+ {
+  "code": "S02",
+  "text": "WHAT’S",
+  "font": "ArchivoVXW66800",
+  "ls": -0.024,
+  "angle": 0,
+  "box": [
+   459,
+   148,
+   902,
+   260
+  ],
+  "targetAspect": 3.955,
+  "slopeCanva": 14.08
+ },
+ {
+  "code": "S02",
+  "text": "HARDER",
+  "font": "ArchivoVXW66800",
+  "ls": -0.006,
+  "angle": 0,
+  "box": [
+   439,
+   281,
+   907,
+   388
+  ],
+  "targetAspect": 4.374,
+  "slopeCanva": 14.39
+ },
+ {
+  "code": "S02",
+  "text": "TO",
+  "font": "ArchivoVXW66800",
+  "ls": 0.008,
+  "angle": 0,
+  "box": [
+   47,
+   1128,
+   214,
+   1245
+  ],
+  "targetAspect": 1.427,
+  "slopeCanva": 2.82
+ },
+ {
+  "code": "S02",
+  "text": "TRACK?",
+  "font": "ArchivoVXW66800",
+  "ls": -0.022,
+  "angle": 0,
+  "box": [
+   47,
+   1262,
+   508,
+   1376
+  ],
+  "targetAspect": 4.044,
+  "slopeCanva": 14.08
+ },
+ {
+  "code": "S03",
+  "text": "WHICH",
+  "font": "ArchivoVXSlantW84800",
+  "ls": -0.018,
+  "angle": 4,
+  "box": [
+   74,
+   194,
+   402,
+   292
+  ],
+  "targetAspect": 3.347,
+  "slopeCanva": 11.27
+ },
+ {
+  "code": "S03",
+  "text": "REPORT",
+  "font": "ArchivoVXSlantW84800",
+  "ls": -0.04,
+  "angle": 4,
+  "box": [
+   59,
+   277,
+   510,
+   397
+  ],
+  "targetAspect": 3.758,
+  "slopeCanva": 14.08
+ },
+ {
+  "code": "S03",
+  "text": "SHOWS",
+  "font": "ArchivoVXSlantW64900",
+  "ls": 0.002,
+  "angle": 10,
+  "box": [
+   339,
+   357,
+   904,
+   593
+  ],
+  "targetAspect": 2.394,
+  "slopeCanva": 11.27
+ },
+ {
+  "code": "S03",
+  "text": "PROFIT?",
+  "font": "ArchivoVXSlantW64900",
+  "ls": -0.06,
+  "angle": 4,
+  "box": [
+   34,
+   1081,
+   907,
+   1354
+  ],
+  "targetAspect": 3.198,
+  "slopeCanva": 16.9
+ },
+ {
+  "code": "S04",
+  "text": "IT’S THE",
+  "font": "ArchivoVXW87800",
+  "ls": -0.032,
+  "angle": 0,
+  "box": [
+   60,
+   219,
+   362,
+   280
+  ],
+  "targetAspect": 4.951,
+  "slopeCanva": 19.72
+ },
+ {
+  "code": "S04",
+  "text": "PROFIT &",
+  "font": "ArchivoVXW62800",
+  "ls": -0.036,
+  "angle": 0,
+  "box": [
+   241,
+   349,
+   908,
+   510
+  ],
+  "targetAspect": 4.143,
+  "slopeCanva": 19.58
+ },
+ {
+  "code": "S04",
+  "text": "LOSS.",
+  "font": "ArchivoVXW66900",
+  "ls": -0.008,
+  "angle": 0,
+  "box": [
+   46,
+   1036,
+   923,
+   1329
+  ],
+  "targetAspect": 2.993,
+  "slopeCanva": 11.19
+ }
+]
