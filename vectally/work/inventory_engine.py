@@ -215,6 +215,8 @@ def build(inv_path, out_dir):
         fm &= r if o.get("clip_roi", True) else fm
         sel = m & ~textpix
         col = np.median(flat[sel], 0) if sel.sum() > 20 else flat[o["seeds"][0][1], o["seeds"][0][0]]
+        if o.get("color"):  # warna badan ditetapkan di inventory
+            col = np.array([int(o["color"][k:k + 2], 16) for k in (1, 3, 5)], float)
         fits.append((ds, fm))
         cols.append(col)
         report.append(dict(id=o["id"], fit=o.get("fit", "auto"), visible_px=int(m.sum()), body_px=int(fm.sum()),
