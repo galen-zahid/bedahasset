@@ -1,0 +1,142 @@
+{
+  "objects": [
+    {
+      "id": "BG",
+      "name": "Latar",
+      "parts": 1,
+      "native_text": 0
+    },
+    {
+      "id": "RAYS_UNGU",
+      "name": "Pecahan ungu latar",
+      "parts": 8,
+      "native_text": 0
+    },
+    {
+      "id": "RAYS_GELAP",
+      "name": "Pecahan gelap latar",
+      "parts": 13,
+      "native_text": 0
+    },
+    {
+      "id": "PLAT_SIGNS",
+      "name": "Plat gelap SIGNS",
+      "parts": 1,
+      "native_text": 0
+    },
+    {
+      "id": "ANGKA3",
+      "name": "Angka 3 (3D)",
+      "parts": 11,
+      "native_text": 0
+    },
+    {
+      "id": "KARTU1",
+      "name": "Kartu ikon grafik",
+      "parts": 8,
+      "native_text": 0
+    },
+    {
+      "id": "KARTU2",
+      "name": "Kartu ikon dokumen",
+      "parts": 13,
+      "native_text": 0
+    },
+    {
+      "id": "KARTU3",
+      "name": "Kartu ikon jam",
+      "parts": 8,
+      "native_text": 0
+    },
+    {
+      "id": "PENGHUBUNG",
+      "name": "Garis penghubung dan titik",
+      "parts": 5,
+      "native_text": 0
+    },
+    {
+      "id": "GARIS_PUTIH",
+      "name": "Garis putih tipis kiri",
+      "parts": 1,
+      "native_text": 0
+    },
+    {
+      "id": "HEADER",
+      "name": "Logo VECTALLY, garis, ///",
+      "parts": 6,
+      "native_text": 1
+    }
+  ],
+  "texts": [
+    {
+      "word": "SIGNS",
+      "box": [
+        423.29,
+        387.05,
+        674.72,
+        293.42
+      ],
+      "font": "League Gothic",
+      "color": "#fdfdfd",
+      "angle": -17.27,
+      "parent": null,
+      "typecraft": "italic miring"
+    },
+    {
+      "word": "YOUR BOOKS",
+      "box": [
+        471.96,
+        749.8,
+        343.61,
+        74.92
+      ],
+      "font": "League Gothic",
+      "color": "#1ef7b2",
+      "angle": -20.84,
+      "parent": null,
+      "typecraft": "italic miring"
+    },
+    {
+      "word": "NEED",
+      "box": [
+        118.0,
+        915.0,
+        446.0,
+        210.0
+      ],
+      "font": "League Gothic",
+      "color": "#011423",
+      "angle": 0,
+      "parent": null,
+      "typecraft": null
+    },
+    {
+      "word": "ATTENTION.",
+      "box": [
+        105.0,
+        1129.0,
+        961.0,
+        224.0
+      ],
+      "font": "League Gothic",
+      "color": "#fdfdfd",
+      "angle": 0,
+      "parent": null,
+      "typecraft": null
+    },
+    {
+      "word": "VECTALLY",
+      "box": [
+        72.0,
+        45.0,
+        192.0,
+        23.0
+      ],
+      "font": "Archivo Black",
+      "color": "#011423",
+      "angle": 0,
+      "parent": "HEADER",
+      "typecraft": null
+    }
+  ]
+}

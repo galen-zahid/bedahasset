@@ -128,11 +128,33 @@ def a09():
     s.add('GARIS_PUTIH', 'Garis putih tipis kiri', 'ornament', [bar(0, 892, 79, 807, 3, WH)])
 
     # ---- header
+    s.add('T_LOGO', 'VECTALLY', 'lettering', s.ink((70, 40, 272, 78), DK, 'dark', BG))
     s.add('HEADER', 'Logo VECTALLY, garis, ///', 'brand', [
-        *s.ink((70, 40, 272, 78), DK, 'dark', BG), ellipse(277, 64.4, 3.5, 3.5, '#7a55f0'),
+        ellipse(277, 64.4, 3.5, 3.5, '#7a55f0'),
         rect(310, 55, 660, 2, '#0b2a2a'), *s.ink((990, 40, 1058, 72), DK, 'dark', BG)])
     return s
 
 
+def a09_texts(s):
+    """Teks native A09: kotak diukur dari tinta sumber (posisi, ukuran, sudut)."""
+    from codex_native import txt, measure_box
+    rgb = s.rgb
+    sg = measure_box(rgb, 'white', [[478, 470], [1062, 268], [1062, 612], [478, 806]])
+    bk = measure_box(rgb, 'green', [[484, 790], [806, 676], [814, 782], [492, 894]])
+    nd = measure_box(rgb, 'dark', [[110, 915], [570, 915], [570, 1130], [110, 1130]])
+    at = measure_box(rgb, 'white', [[100, 1125], [1075, 1125], [1075, 1360], [100, 1360]])
+    lg = measure_box(rgb, 'dark', [[70, 40], [272, 40], [272, 78], [70, 78]])
+    return [
+        txt('SIGNS', sg[:4], 'League Gothic', WH, sg[4], typecraft='italic miring'),
+        txt('YOUR BOOKS', bk[:4], 'League Gothic', GR, bk[4], typecraft='italic miring'),
+        txt('NEED', nd[:4], 'League Gothic', DK, 0),
+        txt('ATTENTION.', at[:4], 'League Gothic', WH, 0),
+        txt('VECTALLY', lg[:4], 'Archivo Black', DK, 0, parent='HEADER'),
+    ]
+
+
 if __name__ == '__main__':
-    a09().export()
+    from codex_native import export_native
+    s = a09()
+    s.export()                                   # artwork + outline huruf (pembanding)
+    export_native(s, a09_texts(s), Path(__file__).resolve().parents[1] / 'outputs' / 'VECTALLY-resep' / 'A09-NATIVE')

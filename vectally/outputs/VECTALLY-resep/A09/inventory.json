@@ -210,17 +210,32 @@
     ]
   },
   {
+    "id": "T_LOGO",
+    "name": "VECTALLY",
+    "kind": "lettering",
+    "note": "",
+    "body_part": 0,
+    "index": 14,
+    "parts": 9,
+    "bbox": [
+      72.0,
+      45.0,
+      193.0,
+      23.0
+    ]
+  },
+  {
     "id": "HEADER",
     "name": "Logo VECTALLY, garis, ///",
     "kind": "brand",
     "note": "",
     "body_part": 0,
-    "index": 14,
-    "parts": 14,
+    "index": 15,
+    "parts": 5,
     "bbox": [
-      72.0,
+      273.5,
       42.0,
-      981.0,
+      779.5,
       26.0
     ]
   }
