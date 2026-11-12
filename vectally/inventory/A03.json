@@ -1,0 +1,705 @@
+{
+ "code": "A03",
+ "source": "sources/VECTALLY/Feed/VECTALLY_A03_Every_Entry_In_Its_Place.png",
+ "background": [
+  1100,
+  1380
+ ],
+ "objects": [
+  {
+   "id": "bayangan_lavender",
+   "name": "Bayangan lavender",
+   "roi": [
+    0,
+    1000,
+    470,
+    1360
+   ],
+   "seeds": [
+    [
+     200,
+     1180
+    ]
+   ],
+   "fit": "auto",
+   "details": false
+  },
+  {
+   "id": "bayangan_ungu",
+   "name": "Bayangan ungu kiri",
+   "roi": [
+    0,
+    1080,
+    170,
+    1270
+   ],
+   "seeds": [
+    [
+     30,
+     1180
+    ]
+   ],
+   "fit": "poly:3",
+   "details": false
+  },
+  {
+   "id": "segitiga_ungu",
+   "name": "Segitiga ungu kiri",
+   "roi": [
+    0,
+    880,
+    110,
+    1000
+   ],
+   "seeds": [
+    [
+     20,
+     945
+    ]
+   ],
+   "fit": "poly:3",
+   "details": false
+  },
+  {
+   "id": "pita_ungu_atas",
+   "name": "Pita ungu atas",
+   "roi": [
+    50,
+    20,
+    290,
+    150
+   ],
+   "seeds": [
+    [
+     150,
+     80
+    ]
+   ],
+   "fit": "poly:4",
+   "tol": 20
+  },
+  {
+   "id": "panel_gelap",
+   "name": "Panel gelap belakang",
+   "roi": [
+    [
+     0,
+     40
+    ],
+    [
+     330,
+     40
+    ],
+    [
+     740,
+     180
+    ],
+    [
+     740,
+     790
+    ],
+    [
+     0,
+     790
+    ]
+   ],
+   "seeds": [
+    [
+     50,
+     100
+    ],
+    [
+     700,
+     200
+    ],
+    [
+     340,
+     60
+    ]
+   ],
+   "fit": "hull",
+   "details": false
+  },
+  {
+   "id": "map_hijau_kiri",
+   "name": "Map hijau kiri",
+   "roi": [
+    30,
+    150,
+    270,
+    480
+   ],
+   "seeds": [
+    [
+     60,
+     250
+    ]
+   ],
+   "fit": "auto",
+   "tol": 18
+  },
+  {
+   "id": "map_hijau_tengah",
+   "name": "Map hijau tengah",
+   "roi": [
+    250,
+    120,
+    345,
+    320
+   ],
+   "seeds": [
+    [
+     290,
+     200
+    ]
+   ],
+   "fit": "auto",
+   "tol": 18
+  },
+  {
+   "id": "map_hijau_kanan",
+   "name": "Map hijau kanan",
+   "roi": [
+    600,
+    210,
+    850,
+    420
+   ],
+   "seeds": [
+    [
+     780,
+     280
+    ]
+   ],
+   "fit": "auto",
+   "tol": 18
+  },
+  {
+   "id": "map_hijau_bawah",
+   "name": "Bidang hijau kanan bawah",
+   "roi": [
+    570,
+    540,
+    900,
+    850
+   ],
+   "seeds": [
+    [
+     700,
+     800
+    ],
+    [
+     620,
+     600
+    ]
+   ],
+   "fit": "auto",
+   "tol": 18
+  },
+  {
+   "id": "map_ungu_belakang",
+   "name": "Map ungu belakang",
+   "roi": [
+    95,
+    160,
+    260,
+    300
+   ],
+   "seeds": [
+    [
+     150,
+     200
+    ]
+   ],
+   "fit": "auto",
+   "tol": 22
+  },
+  {
+   "id": "map_ungu_kanan",
+   "name": "Map ungu kanan",
+   "roi": [
+    500,
+    170,
+    670,
+    500
+   ],
+   "seeds": [
+    [
+     640,
+     250
+    ],
+    [
+     560,
+     400
+    ]
+   ],
+   "fit": "auto",
+   "tol": 22
+  },
+  {
+   "id": "lipat_ungu_kanan",
+   "name": "Bidang lipat ungu kanan",
+   "roi": [
+    790,
+    430,
+    1100,
+    665
+   ],
+   "seeds": [
+    [
+     950,
+     560
+    ],
+    [
+     900,
+     620
+    ]
+   ],
+   "fit": "auto",
+   "tol": 20
+  },
+  {
+   "id": "struk_keranjang",
+   "name": "Struk keranjang",
+   "roi": [
+    [
+     900,
+     220
+    ],
+    [
+     1035,
+     260
+    ],
+    [
+     985,
+     480
+    ],
+    [
+     860,
+     440
+    ]
+   ],
+   "seeds": [
+    [
+     1030,
+     300
+    ]
+   ],
+   "fit": "roi",
+   "tol": 12
+  },
+  {
+   "id": "struk_sama_dengan",
+   "name": "Struk kanan (=)",
+   "roi": [
+    [
+     735,
+     300
+    ],
+    [
+     925,
+     375
+    ],
+    [
+     812,
+     580
+    ],
+    [
+     700,
+     665
+    ],
+    [
+     620,
+     520
+    ],
+    [
+     650,
+     440
+    ]
+   ],
+   "seeds": [
+    [
+     800,
+     550
+    ]
+   ],
+   "fit": "roi",
+   "tol": 10
+  },
+  {
+   "id": "struk_dolar",
+   "name": "Struk dolar",
+   "roi": [
+    [
+     395,
+     35
+    ],
+    [
+     605,
+     100
+    ],
+    [
+     560,
+     470
+    ],
+    [
+     300,
+     410
+    ],
+    [
+     290,
+     320
+    ]
+   ],
+   "seeds": [
+    [
+     450,
+     300
+    ]
+   ],
+   "fit": "roi",
+   "tol": 10
+  },
+  {
+   "id": "struk_kiri",
+   "name": "Struk kiri",
+   "roi": [
+    [
+     112,
+     215
+    ],
+    [
+     245,
+     262
+    ],
+    [
+     300,
+     300
+    ],
+    [
+     305,
+     410
+    ],
+    [
+     110,
+     400
+    ]
+   ],
+   "seeds": [
+    [
+     150,
+     280
+    ]
+   ],
+   "fit": "roi",
+   "tol": 12
+  },
+  {
+   "id": "map_gelap_tengah",
+   "name": "Map gelap tengah",
+   "roi": [
+    [
+     55,
+     385
+    ],
+    [
+     330,
+     385
+    ],
+    [
+     595,
+     500
+    ],
+    [
+     595,
+     640
+    ],
+    [
+     55,
+     530
+    ]
+   ],
+   "seeds": [
+    [
+     80,
+     420
+    ]
+   ],
+   "fit": "auto"
+  },
+  {
+   "id": "struk_depan_kecil",
+   "name": "Struk depan kecil",
+   "roi": [
+    [
+     333,
+     410
+    ],
+    [
+     535,
+     500
+    ],
+    [
+     560,
+     640
+    ],
+    [
+     345,
+     570
+    ]
+   ],
+   "seeds": [
+    [
+     460,
+     520
+    ]
+   ],
+   "fit": "roi",
+   "tol": 12
+  },
+  {
+   "id": "map_income",
+   "name": "Map INCOME",
+   "roi": [
+    [
+     95,
+     420
+    ],
+    [
+     355,
+     500
+    ],
+    [
+     355,
+     655
+    ],
+    [
+     95,
+     565
+    ]
+   ],
+   "seeds": [
+    [
+     150,
+     480
+    ]
+   ],
+   "fit": "auto",
+   "tol": 18
+  },
+  {
+   "id": "map_expenses",
+   "name": "Map EXPENSES",
+   "roi": [
+    355,
+    540,
+    575,
+    725
+   ],
+   "seeds": [
+    [
+     540,
+     650
+    ]
+   ],
+   "fit": "auto",
+   "tol": 18
+  },
+  {
+   "id": "map_putih_depan",
+   "name": "Map putih depan",
+   "roi": [
+    [
+     0,
+     440
+    ],
+    [
+     400,
+     560
+    ],
+    [
+     485,
+     720
+    ],
+    [
+     485,
+     810
+    ],
+    [
+     0,
+     810
+    ]
+   ],
+   "seeds": [
+    [
+     200,
+     560
+    ],
+    [
+     350,
+     700
+    ]
+   ],
+   "fit": "auto",
+   "tol": 10
+  },
+  {
+   "id": "map_ungu_depan",
+   "name": "Map ungu depan",
+   "roi": [
+    0,
+    480,
+    260,
+    720
+   ],
+   "seeds": [
+    [
+     150,
+     600
+    ]
+   ],
+   "fit": "auto",
+   "tol": 18
+  },
+  {
+   "id": "map_hijau_depan",
+   "name": "Map hijau depan",
+   "roi": [
+    0,
+    560,
+    330,
+    870
+   ],
+   "seeds": [
+    [
+     290,
+     800
+    ]
+   ],
+   "fit": "auto",
+   "tol": 18
+  },
+  {
+   "id": "kotak_arsip",
+   "name": "Kotak arsip",
+   "roi": [
+    [
+     0,
+     600
+    ],
+    [
+     300,
+     690
+    ],
+    [
+     630,
+     690
+    ],
+    [
+     630,
+     845
+    ],
+    [
+     150,
+     1175
+    ],
+    [
+     0,
+     1110
+    ]
+   ],
+   "seeds": [
+    [
+     100,
+     950
+    ],
+    [
+     300,
+     1000
+    ],
+    [
+     500,
+     780
+    ],
+    [
+     200,
+     850
+    ],
+    [
+     560,
+     830
+    ]
+   ],
+   "fit": "auto",
+   "tol": 10,
+   "fill_holes": true
+  }
+ ],
+ "text": [
+  {
+   "roi": [
+    480,
+    910,
+    1115,
+    1120
+   ],
+   "seed": [
+    600,
+    1000
+   ],
+   "tol": 14
+  },
+  {
+   "roi": [
+    480,
+    1120,
+    1115,
+    1330
+   ],
+   "seed": [
+    520,
+    1200
+   ],
+   "tol": 14
+  },
+  {
+   "roi": [
+    830,
+    35,
+    1045,
+    85
+   ],
+   "seed": [
+    845,
+    60
+   ],
+   "tol": 18
+  },
+  {
+   "roi": [
+    205,
+    495,
+    305,
+    565
+   ],
+   "seed": [
+    230,
+    520
+   ],
+   "tol": 18
+  },
+  {
+   "roi": [
+    425,
+    595,
+    540,
+    675
+   ],
+   "seed": [
+    450,
+    620
+   ],
+   "tol": 18
+  }
+ ]
+}
