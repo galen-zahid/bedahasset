@@ -205,15 +205,40 @@ def build(inv_path, out_dir):
         m = r & (match | textpix)
         m = cv2.morphologyEx(m.astype(np.uint8), cv2.MORPH_CLOSE, np.ones((5, 5), np.uint8)) > 0
         m = keep_seeded(m & r, o["seeds"])
+        vis = m.copy()                      # bagian yang terlihat (sebelum lubang ditutup) -> warna badan
         m = fill_holes(m) & r if o.get("fill_holes", True) else m
-        if o.get("fit") == "roi":  # garis tepi ditulis di inventory (benda putih di atas latar putih)
+        if o.get("ring"):  # cincin: [cx, cy, r_luar, r_dalam] atau [cx, cy, rx_l, ry_l, rx_d, ry_d]
+            g = o["ring"]
+            cx, cy, ax, ay, bx, by = (g[0], g[1], g[2], g[2], g[3], g[3]) if len(g) == 4 else g
+            ds = [ellipse_d(cx, cy, ax, ay, 0.0) + " " + ellipse_d(cx, cy, bx, -by, 0.0)]  # dalam dibalik -> lubang
+            fm = raster(ds[0], H, W)
+        elif o.get("arc"):  # busur tebal: [cx, cy, rx_l, ry_l, rx_d, ry_d, derajat0, derajat1]
+            cx, cy, ax, ay, bx, by, a0, a1 = o["arc"]
+            n = max(8, int(abs(a1 - a0) / 2))
+            angs = [math.radians(a0 + (a1 - a0) * i / n) for i in range(n + 1)]
+            pts = [(cx + ax * math.cos(t), cy + ay * math.sin(t)) for t in angs] +                   [(cx + bx * math.cos(t), cy + by * math.sin(t)) for t in reversed(angs)]
+            ds = [poly_d(pts)]
+            fm = raster(ds[0], H, W)
+        elif o.get("ellipse"):  # primitif ditulis di inventory: [cx, cy, rx, ry]
+            ds = [ellipse_d(*o["ellipse"], 0.0)]
+            fm = raster(ds[0], H, W)
+        elif o.get("pill"):  # kapsul/rounded rect: [x0, y0, x1, y1, radius?]
+            x0, y0, x1, y1 = o["pill"][:4]
+            rr = o["pill"][4] if len(o["pill"]) > 4 else (y1 - y0) / 2
+            k = 0.5523 * rr
+            ds = [f"M{fmt(x0 + rr)} {fmt(y0)} L{fmt(x1 - rr)} {fmt(y0)} C{fmt(x1 - rr + k)} {fmt(y0)} {fmt(x1)} {fmt(y0 + rr - k)} {fmt(x1)} {fmt(y0 + rr)}"
+                  f" L{fmt(x1)} {fmt(y1 - rr)} C{fmt(x1)} {fmt(y1 - rr + k)} {fmt(x1 - rr + k)} {fmt(y1)} {fmt(x1 - rr)} {fmt(y1)}"
+                  f" L{fmt(x0 + rr)} {fmt(y1)} C{fmt(x0 + rr - k)} {fmt(y1)} {fmt(x0)} {fmt(y1 - rr + k)} {fmt(x0)} {fmt(y1 - rr)}"
+                  f" L{fmt(x0)} {fmt(y0 + rr)} C{fmt(x0)} {fmt(y0 + rr - k)} {fmt(x0 + rr - k)} {fmt(y0)} {fmt(x0 + rr)} {fmt(y0)} Z"]
+            fm = raster(ds[0], H, W)
+        elif o.get("fit") == "roi":  # garis tepi ditulis di inventory (benda putih di atas latar putih)
             ds = [poly_d(o["roi"])] if not isinstance(o["roi"][0], (int, float)) else [
                 poly_d([(o["roi"][0], o["roi"][1]), (o["roi"][2], o["roi"][1]), (o["roi"][2], o["roi"][3]), (o["roi"][0], o["roi"][3])])]
             fm = raster(ds[0], H, W)
         else:
             ds, fm = fit_shape(m, o.get("fit", "auto"), H, W)
         fm &= r if o.get("clip_roi", True) else fm
-        sel = m & ~textpix
+        sel = vis & ~textpix
         col = np.median(flat[sel], 0) if sel.sum() > 20 else flat[o["seeds"][0][1], o["seeds"][0][0]]
         if o.get("color"):  # warna badan ditetapkan di inventory
             col = np.array([int(o["color"][k:k + 2], 16) for k in (1, 3, 5)], float)
@@ -222,6 +247,10 @@ def build(inv_path, out_dir):
         report.append(dict(id=o["id"], fit=o.get("fit", "auto"), visible_px=int(m.sum()), body_px=int(fm.sum()),
                            paths=len(ds), color=hexc(col)))
 
+    # benda di DEPAN teks: tinta gelap di dalamnya (jarum, garis jam) bukan huruf
+    for o, (_, fm) in zip(objs, fits):
+        if o.get("front_of_text"):
+            textpix &= ~fm
     # pemilik piksel = benda paling depan yang badannya menutup piksel itu
     owner = np.full((H, W), -1, np.int32)
     for i, (_, fm) in enumerate(fits):

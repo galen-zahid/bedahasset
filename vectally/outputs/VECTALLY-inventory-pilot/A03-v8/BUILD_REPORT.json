@@ -1,0 +1,232 @@
+[
+ {
+  "id": "bayangan_lavender",
+  "fit": "auto",
+  "visible_px": 27374,
+  "body_px": 26738,
+  "paths": 1,
+  "color": "#d6cafd"
+ },
+ {
+  "id": "bayangan_ungu",
+  "fit": "poly:3",
+  "visible_px": 12491,
+  "body_px": 12154,
+  "paths": 1,
+  "color": "#a985fc"
+ },
+ {
+  "id": "segitiga_ungu",
+  "fit": "poly:3",
+  "visible_px": 2000,
+  "body_px": 1875,
+  "paths": 1,
+  "color": "#9d77fc"
+ },
+ {
+  "id": "pita_ungu_atas",
+  "fit": "poly:4",
+  "visible_px": 2943,
+  "body_px": 3464,
+  "paths": 1,
+  "color": "#bca0fd",
+  "details": 1
+ },
+ {
+  "id": "panel_gelap",
+  "fit": "roi",
+  "visible_px": 44585,
+  "body_px": 492006,
+  "paths": 1,
+  "color": "#0a1523"
+ },
+ {
+  "id": "map_hijau_kiri",
+  "fit": "auto",
+  "visible_px": 11895,
+  "body_px": 11701,
+  "paths": 1,
+  "color": "#02e595",
+  "details": 0
+ },
+ {
+  "id": "map_hijau_tengah",
+  "fit": "auto",
+  "visible_px": 10269,
+  "body_px": 10079,
+  "paths": 1,
+  "color": "#02df92",
+  "details": 0
+ },
+ {
+  "id": "map_hijau_kanan",
+  "fit": "auto",
+  "visible_px": 15583,
+  "body_px": 15273,
+  "paths": 1,
+  "color": "#03e89a",
+  "details": 0
+ },
+ {
+  "id": "map_hijau_bawah",
+  "fit": "auto",
+  "visible_px": 31299,
+  "body_px": 30596,
+  "paths": 1,
+  "color": "#03ea9b",
+  "details": 0
+ },
+ {
+  "id": "map_ungu_belakang",
+  "fit": "auto",
+  "visible_px": 3225,
+  "body_px": 3036,
+  "paths": 1,
+  "color": "#6b48dc",
+  "details": 1
+ },
+ {
+  "id": "map_ungu_kanan",
+  "fit": "auto",
+  "visible_px": 20655,
+  "body_px": 20048,
+  "paths": 2,
+  "color": "#946dfb",
+  "details": 4
+ },
+ {
+  "id": "lipat_ungu_kanan",
+  "fit": "auto",
+  "visible_px": 4928,
+  "body_px": 4762,
+  "paths": 1,
+  "color": "#6345ce",
+  "details": 0
+ },
+ {
+  "id": "struk_keranjang",
+  "fit": "roi",
+  "visible_px": 5771,
+  "body_px": 30390,
+  "paths": 1,
+  "color": "#e0d8fd",
+  "details": 8
+ },
+ {
+  "id": "struk_sama_dengan",
+  "fit": "roi",
+  "visible_px": 57364,
+  "body_px": 61072,
+  "paths": 1,
+  "color": "#f8f8fa",
+  "details": 19
+ },
+ {
+  "id": "struk_dolar",
+  "fit": "roi",
+  "visible_px": 72433,
+  "body_px": 98055,
+  "paths": 1,
+  "color": "#f8f8fa",
+  "details": 33
+ },
+ {
+  "id": "struk_kiri",
+  "fit": "roi",
+  "visible_px": 15958,
+  "body_px": 29435,
+  "paths": 1,
+  "color": "#f0f0fc",
+  "details": 13
+ },
+ {
+  "id": "map_gelap_tengah",
+  "fit": "auto",
+  "visible_px": 8994,
+  "body_px": 8411,
+  "paths": 1,
+  "color": "#0a1523",
+  "details": 0
+ },
+ {
+  "id": "struk_depan_kecil",
+  "fit": "roi",
+  "visible_px": 16795,
+  "body_px": 24427,
+  "paths": 1,
+  "color": "#f3f2fa",
+  "details": 11
+ },
+ {
+  "id": "map_income",
+  "fit": "auto",
+  "visible_px": 18226,
+  "body_px": 17879,
+  "paths": 1,
+  "color": "#02e494",
+  "details": 1
+ },
+ {
+  "id": "map_expenses",
+  "fit": "auto",
+  "visible_px": 16297,
+  "body_px": 16006,
+  "paths": 1,
+  "color": "#a984fc",
+  "details": 2
+ },
+ {
+  "id": "lembar_putih_atas",
+  "fit": "roi",
+  "visible_px": 12182,
+  "body_px": 62367,
+  "paths": 1,
+  "color": "#f0f0fa",
+  "details": 1
+ },
+ {
+  "id": "map_ungu_tengah",
+  "fit": "roi",
+  "visible_px": 8057,
+  "body_px": 40952,
+  "paths": 1,
+  "color": "#c0a5fd",
+  "details": 7
+ },
+ {
+  "id": "lembar_putih_kanan",
+  "fit": "roi",
+  "visible_px": 15026,
+  "body_px": 24997,
+  "paths": 1,
+  "color": "#f0f0fa",
+  "details": 10
+ },
+ {
+  "id": "map_hijau_depan",
+  "fit": "roi",
+  "visible_px": 8014,
+  "body_px": 48815,
+  "paths": 1,
+  "color": "#02e593",
+  "details": 7
+ },
+ {
+  "id": "map_ungu_bawah",
+  "fit": "roi",
+  "visible_px": 12091,
+  "body_px": 39417,
+  "paths": 1,
+  "color": "#a682fc",
+  "details": 2
+ },
+ {
+  "id": "kotak_arsip",
+  "fit": "auto",
+  "visible_px": 166403,
+  "body_px": 165347,
+  "paths": 1,
+  "color": "#0a1523",
+  "details": 3
+ }
+]

@@ -1,0 +1,648 @@
+{
+ "code": "A12",
+ "source": "sources/VECTALLY/Feed/VECTALLY_A12_Reports_Arrive_Too_Late.png",
+ "background": [
+  1100,
+  1380
+ ],
+ "objects": [
+  {
+   "id": "garis_atas",
+   "name": "Garis atas",
+   "pill": [
+    310,
+    54,
+    930,
+    57,
+    1.5
+   ],
+   "roi": [
+    300,
+    46,
+    940,
+    64
+   ],
+   "seeds": [
+    [
+     600,
+     55
+    ]
+   ],
+   "details": false,
+   "tol": 25
+  },
+  {
+   "id": "pita_putih_kanan",
+   "name": "Pita putih kanan atas",
+   "roi": [
+    [
+     1092,
+     345
+    ],
+    [
+     1122,
+     325
+    ],
+    [
+     1122,
+     450
+    ],
+    [
+     1010,
+     562
+    ],
+    [
+     905,
+     640
+    ],
+    [
+     955,
+     560
+    ]
+   ],
+   "seeds": [
+    [
+     1080,
+     420
+    ]
+   ],
+   "fit": "roi",
+   "details": false
+  },
+  {
+   "id": "pita_gelap_kanan",
+   "name": "Pita gelap kanan",
+   "roi": [
+    [
+     1122,
+     512
+    ],
+    [
+     1122,
+     592
+    ],
+    [
+     931,
+     842
+    ],
+    [
+     885,
+     852
+    ],
+    [
+     885,
+     620
+    ]
+   ],
+   "seeds": [
+    [
+     1000,
+     650
+    ]
+   ],
+   "fit": "roi"
+  },
+  {
+   "id": "pita_putih_kanan_bawah",
+   "name": "Pita putih kanan bawah",
+   "roi": [
+    [
+     1095,
+     790
+    ],
+    [
+     1060,
+     832
+    ],
+    [
+     975,
+     922
+    ],
+    [
+     850,
+     960
+    ],
+    [
+     850,
+     880
+    ]
+   ],
+   "seeds": [
+    [
+     1000,
+     830
+    ]
+   ],
+   "fit": "roi",
+   "details": false
+  },
+  {
+   "id": "pita_gelap_kiri",
+   "name": "Pita gelap kiri",
+   "roi": [
+    [
+     0,
+     765
+    ],
+    [
+     150,
+     690
+    ],
+    [
+     215,
+     655
+    ],
+    [
+     225,
+     665
+    ],
+    [
+     0,
+     890
+    ]
+   ],
+   "seeds": [
+    [
+     30,
+     800
+    ]
+   ],
+   "fit": "roi"
+  },
+  {
+   "id": "pita_putih_kiri",
+   "name": "Pita putih kiri",
+   "roi": [
+    [
+     210,
+     650
+    ],
+    [
+     222,
+     668
+    ],
+    [
+     185,
+     768
+    ],
+    [
+     28,
+     902
+    ],
+    [
+     0,
+     902
+    ],
+    [
+     0,
+     888
+    ]
+   ],
+   "seeds": [
+    [
+     60,
+     840
+    ]
+   ],
+   "fit": "roi",
+   "details": false
+  },
+  {
+   "id": "bayangan_navy",
+   "name": "Bayangan navy kiri",
+   "roi": [
+    0,
+    860,
+    320,
+    1270
+   ],
+   "seeds": [
+    [
+     60,
+     1000
+    ]
+   ],
+   "fit": "auto",
+   "details": false
+  },
+  {
+   "id": "cincin_luar",
+   "name": "Cincin tipis luar",
+   "roi": [
+    200,
+    340,
+    940,
+    900
+   ],
+   "seeds": [
+    [
+     225,
+     550
+    ]
+   ],
+   "details": false,
+   "fill_holes": false,
+   "ring": [
+    561,
+    712,
+    369,
+    353,
+    365,
+    349
+   ],
+   "front_of_text": true
+  },
+  {
+   "id": "jam_badan",
+   "name": "Jam - cincin gelap",
+   "ellipse": [
+    561,
+    712,
+    330,
+    316
+   ],
+   "roi": [
+    200,
+    360,
+    920,
+    1050
+   ],
+   "seeds": [
+    [
+     232,
+     700
+    ]
+   ],
+   "front_of_text": true,
+   "details": false
+  },
+  {
+   "id": "jam_muka",
+   "name": "Jam - muka",
+   "ellipse": [
+    561,
+    712,
+    300,
+    282
+   ],
+   "roi": [
+    250,
+    400,
+    870,
+    1020
+   ],
+   "seeds": [
+    [
+     700,
+     780
+    ]
+   ],
+   "front_of_text": true
+  },
+  {
+   "id": "busur_hijau",
+   "name": "Jam - busur hijau",
+   "arc": [
+    561,
+    712,
+    329,
+    315,
+    306,
+    288,
+    -90,
+    -25
+   ],
+   "roi": [
+    540,
+    370,
+    900,
+    620
+   ],
+   "seeds": [
+    [
+     700,
+     420
+    ]
+   ],
+   "color": "#04ea95",
+   "front_of_text": true,
+   "details": false
+  },
+  {
+   "id": "kenop_putih",
+   "name": "Jam - kenop",
+   "ellipse": [
+    848,
+    581,
+    23,
+    23
+   ],
+   "roi": [
+    820,
+    555,
+    876,
+    607
+   ],
+   "seeds": [
+    [
+     848,
+     560
+    ]
+   ],
+   "color": "#f7f7f9",
+   "front_of_text": true,
+   "details": false
+  },
+  {
+   "id": "kenop_hijau",
+   "name": "Jam - kenop hijau",
+   "ellipse": [
+    848,
+    581,
+    13,
+    13
+   ],
+   "roi": [
+    830,
+    565,
+    866,
+    597
+   ],
+   "seeds": [
+    [
+     848,
+     581
+    ]
+   ],
+   "color": "#04ea95",
+   "front_of_text": true,
+   "details": false
+  },
+  {
+   "id": "jarum",
+   "name": "Jam - jarum",
+   "roi": [
+    [
+     590,
+     690
+    ],
+    [
+     600,
+     660
+    ],
+    [
+     790,
+     555
+    ],
+    [
+     800,
+     585
+    ],
+    [
+     610,
+     700
+    ]
+   ],
+   "seeds": [
+    [
+     660,
+     642
+    ]
+   ],
+   "fit": "rect",
+   "front_of_text": true,
+   "details": false
+  },
+  {
+   "id": "poros",
+   "name": "Jam - poros",
+   "ellipse": [
+    562,
+    700,
+    33,
+    33
+   ],
+   "roi": [
+    520,
+    660,
+    605,
+    740
+   ],
+   "seeds": [
+    [
+     540,
+     700
+    ]
+   ],
+   "front_of_text": true,
+   "details": false
+  },
+  {
+   "id": "poros_titik",
+   "name": "Jam - titik poros",
+   "ellipse": [
+    561.3,
+    697.5,
+    11,
+    11
+   ],
+   "roi": [
+    545,
+    680,
+    580,
+    715
+   ],
+   "seeds": [
+    [
+     561,
+     697
+    ]
+   ],
+   "front_of_text": true,
+   "details": false
+  },
+  {
+   "id": "pita_headline",
+   "name": "Pita gelap headline",
+   "roi": [
+    [
+     0,
+     1150
+    ],
+    [
+     100,
+     1100
+    ],
+    [
+     120,
+     935
+    ],
+    [
+     1020,
+     935
+    ],
+    [
+     1066,
+     1146
+    ],
+    [
+     240,
+     1152
+    ],
+    [
+     0,
+     1270
+    ]
+   ],
+   "seeds": [
+    [
+     1040,
+     1120
+    ],
+    [
+     60,
+     1200
+    ],
+    [
+     868,
+     1140
+    ]
+   ],
+   "fit": "auto",
+   "details": false
+  },
+  {
+   "id": "garis_putih_bawah",
+   "name": "Garis putih bawah",
+   "roi": [
+    0,
+    1140,
+    260,
+    1402
+   ],
+   "seeds": [
+    [
+     113,
+     1300
+    ]
+   ],
+   "fit": "auto",
+   "details": false
+  },
+  {
+   "id": "tombol",
+   "name": "Tombol simpan",
+   "pill": [
+    322,
+    1248,
+    800,
+    1328
+   ],
+   "roi": [
+    310,
+    1240,
+    810,
+    1336
+   ],
+   "seeds": [
+    [
+     340,
+     1290
+    ]
+   ]
+  }
+ ],
+ "text": [
+  {
+   "roi": [
+    70,
+    95,
+    1060,
+    528
+   ],
+   "seed": [
+    120,
+    300
+   ],
+   "tol": 16
+  },
+  {
+   "roi": [
+    105,
+    935,
+    520,
+    1148
+   ],
+   "seed": [
+    197,
+    1049
+   ],
+   "tol": 16
+  },
+  {
+   "roi": [
+    520,
+    935,
+    1060,
+    1148
+   ],
+   "seed": [
+    600,
+    1050
+   ],
+   "tol": 16
+  },
+  {
+   "roi": [
+    265,
+    1165,
+    865,
+    1215
+   ],
+   "seed": [
+    300,
+    1190
+   ],
+   "tol": 20
+  },
+  {
+   "roi": [
+    445,
+    1268,
+    775,
+    1308
+   ],
+   "seed": [
+    470,
+    1290
+   ],
+   "tol": 20
+  },
+  {
+   "roi": [
+    70,
+    38,
+    290,
+    78
+   ],
+   "seed": [
+    233,
+    56
+   ],
+   "tol": 20
+  },
+  {
+   "roi": [
+    950,
+    38,
+    1055,
+    78
+   ],
+   "seed": [
+    985,
+    56
+   ],
+   "tol": 20
+  }
+ ]
+}
