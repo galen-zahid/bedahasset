@@ -162,6 +162,79 @@ def ring_color(src, x0, y0, x1, y1, pad=10):
     return "#%02x%02x%02x" % tuple(m)
 
 
+def _alnum(t):
+    return "".join(ch for ch in t.upper() if ch.isalnum())
+
+
+def _respace(ocr, words):
+    """Teks OCR dengan spasi disusun ulang sesuai batas kata judul (tanda baca OCR dipertahankan)."""
+    bounds, n = set(), 0
+    for w in words[:-1]:
+        n += len(w)
+        bounds.add(n)
+    out, k = "", 0
+    for ch in ocr:
+        if ch == " ":
+            continue
+        if ch.isalnum():
+            if k in bounds and out and out[-1].isalnum():
+                out += " "
+            k += 1
+        out += ch
+    return out
+
+
+def fix_headlines(es, src_png):
+    """Koreksi headline OCR memakai judul di nama file sumber (VECTALLY_A12_Reports_Arrive_Too_Late):
+    spasi nyasar ('NUMBER S' -> 'NUMBERS') dan salah baca ('ARRIMDIHTE.' -> 'ARRIVE TOO LATE.')."""
+    import difflib
+    words = [w.upper() for w in Path(src_png).stem.split("_")[2:] if w]
+    if not words:
+        return []
+    heads = []
+    walk_heads(es, 0, 0, heads)
+    heads.sort(key=lambda t: t[0])
+    notes, start = [], 0
+    for i, (_, e) in enumerate(heads):
+        ocr = e.get("text", "")
+        letters = _alnum(ocr)
+        if not letters:
+            continue
+        spans = [(j, k) for j in range(start, len(words)) for k in range(j + 1, len(words) + 1)]
+        exact = [(j, k) for j, k in spans if "".join(words[j:k]) == letters]
+        if exact:
+            j, k = exact[0]
+            new = _respace(ocr, words[j:k])
+        else:
+            scored = [(difflib.SequenceMatcher(None, letters, "".join(words[j:k])).ratio(), j, k) for j, k in spans]
+            if not scored:
+                continue
+            r, j, k = max(scored)
+            if r < 0.5:
+                notes.append(f"headline OCR '{ocr}' tidak cocok judul, cek manual")
+                continue
+            if i == len(heads) - 1 and k < len(words):
+                r2 = difflib.SequenceMatcher(None, letters, "".join(words[j:])).ratio()
+                if r2 >= 0.45:
+                    k = len(words)
+            tail = ocr[len(ocr.rstrip(".,!?:;")):]
+            new = " ".join(words[j:k]) + tail
+        if new != ocr:
+            notes.append(f"headline '{ocr}' -> '{new}' (dari judul file)")
+            e["text"] = new
+            e["name"] = f"HEADLINE_TYPECRAFT {new[:30]}"
+        start = k
+    return notes
+
+
+def walk_heads(es, ox, oy, out):
+    for e in es:
+        if e.get("type") == "group":
+            walk_heads(e["children"], ox + e["left"], oy + e["top"], out)
+        elif e.get("type") == "text" and str(e.get("name", "")).startswith("HEADLINE_TYPECRAFT"):
+            out.append((oy + e["top"], e))
+
+
 def finalize(pkg_path, dst, code, src_png):
     pkg = json.load(open(pkg_path, encoding="utf-8"))
     TEXT_COLORS.clear()
@@ -172,6 +245,10 @@ def finalize(pkg_path, dst, code, src_png):
     log, heads = [], []
     S.walk(pkg["elements"], log)
     walk_text(pkg["elements"], heads)
+    notes = fix_headlines(pkg["elements"], src_png)
+    if notes:
+        pkg.setdefault("warnings", []).extend(notes)
+        print(f"  [{code}] " + " | ".join(notes))
     pkg["source"] = f"{code} - VECTALLY BATCH (geometri Codex+Claude, font brand)"
     json.dump(pkg, open(dst, "w", encoding="utf-8"), ensure_ascii=False)
     status = {}
@@ -209,10 +286,12 @@ def main(rebuild_root, final_root, sources_root):
                 pkg, status, heads = finalize(pkg_path, dst, code, src)
                 origin = "batch"
             score, preview = qa(pkg, src)
-            rows.append({"no": i, "code": code, "status": "SIAP_IMPOR", "origin": origin,
+            # skor tanpa teks; < 0.70 biasanya berarti segmentasi rusak (objek terpotong) -> perbaiki manual
+            st = "SIAP_IMPOR" if score is None or score >= 0.70 else "CEK_MANUAL"
+            rows.append({"no": i, "code": code, "status": st, "origin": origin,
                          "shapeStatus": json.dumps(status), "headlineTypeCraft": heads,
                          "pixelMatch": score, "file": dst.name})
-            print(f"[{fam}] {code} siap impor | {status} | headline TypeCraft {heads} | match {score}", flush=True)
+            print(f"[{fam}] {code} {'siap impor' if st == 'SIAP_IMPOR' else 'CEK MANUAL'} | {status} | headline TypeCraft {heads} | match {score}", flush=True)
             a = Image.open(src).convert("RGB").resize((240, int(240 * pkg["height"] / pkg["width"])))
             b = preview.resize(a.size)
             t = Image.new("RGB", (a.width * 2 + 6, a.height + 22), "white")

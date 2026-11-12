@@ -175,6 +175,40 @@ def _png_data_url(path, bbox=None):
     return "data:image/png;base64," + base64.b64encode(buf.getvalue()).decode()
 
 
+def _split_region_paths(r, W, H, c, depth=0):
+    """Bidang yang outline-nya melebihi batas 2 kB dibelah dua (sumbu terpanjang, tumpang 2 px
+    supaya tidak ada celah) berulang sampai tiap keping muat. Warna sama, jadi tetap tampak utuh."""
+    m = r["filled"]
+    ys, xs = np.nonzero(m)
+    if not len(ys):
+        return []
+    for scale in (1.0, 2.0, 3.5):
+        pr = region_paths(dict(r, shape=("path", None, None)), W, H, c, eps_scale=scale)
+        if pr and all(len(d) <= MAX_D for d, _ in pr):
+            return pr
+    if depth >= 10:
+        return None
+    a, b = dict(r), dict(r)
+    if ys.max() - ys.min() >= xs.max() - xs.min():
+        mid = (ys.min() + ys.max()) // 2
+        ma, mb = m.copy(), m.copy()
+        ma[mid + 2:, :] = False
+        mb[:max(mid - 1, 0), :] = False
+    else:
+        mid = (xs.min() + xs.max()) // 2
+        ma, mb = m.copy(), m.copy()
+        ma[:, mid + 2:] = False
+        mb[:, :max(mid - 1, 0)] = False
+    out = []
+    for part, mm in ((a, ma), (b, mb)):
+        part["filled"] = mm
+        got = _split_region_paths(part, W, H, c, depth + 1)
+        if got is None:
+            return None
+        out += got
+    return out
+
+
 def _never_image_elements(L, regs, W, H, c, warnings):
     """Mode VECTALLY tanpa PNG: 1 path = 1 shape (bisa dirapikan mesin smooth), dibungkus 1 grup
     per objek. Bidang yang path-nya terlalu panjang dicoba lagi tanpa lubang (bentuk di atasnya
@@ -191,6 +225,9 @@ def _never_image_elements(L, regs, W, H, c, warnings):
                     break
             if got:
                 break
+        if not got:
+            # terakhir: potong bidang (tanpa lubang) jadi beberapa keping yang masing-masing muat
+            got = _split_region_paths(dict(r, filled=_ndi.binary_fill_holes(r["filled"])), W, H, c)
         if not got:
             lost += 1
             continue
@@ -254,8 +291,51 @@ def text_element(b):
             "fontWeight": "bold" if caps or b["h"] / nl > 60 else "normal", "textAlign": "start"}
 
 
-def write(out, src, W, H, layers, blocks, c):
+def _cover_glyphs(layers, blocks, text_mask, W, H):
+    """Mode tanpa PNG: piksel huruf (yang kini jadi teks native) diberikan ke bidang yang paling
+    menguasai kotak teks itu, supaya tidak ada lubang/bekas bentuk huruf lama di bawah teks Canva."""
+    regs = [(li, r) for li, L in enumerate(layers) if L["type"] == "vector"
+            for r in L["regions"] if r["shape"][0] != "canvas"]
+    for b in blocks:
+        x, y, w, h = [int(v) for v in b.get("ocr_bbox", (b["x"], b["y"], b["w"], b["h"]))]
+        p = max(4, int(0.15 * h))
+        X0, Y0, X1, Y1 = max(x - p, 0), max(y - p, 0), min(x + w + p, W), min(y + h + p, H)
+        g = text_mask[Y0:Y1, X0:X1]
+        if not g.any():
+            continue
+        cand = []
+        for li, r in regs:
+            sl, m = r["sl"], r["filled"]
+            ys0, xs0 = max(Y0, sl[0].start), max(X0, sl[1].start)
+            ys1, xs1 = min(Y1, sl[0].start + m.shape[0]), min(X1, sl[1].start + m.shape[1])
+            if ys1 <= ys0 or xs1 <= xs0:
+                continue
+            sub = m[ys0 - sl[0].start:ys1 - sl[0].start, xs0 - sl[1].start:xs1 - sl[1].start]
+            n = int((sub & ~g[ys0 - Y0:ys1 - Y0, xs0 - X0:xs1 - X0]).sum())
+            if n:
+                cand.append((li, r.get("z", 0), n, r))
+        if not cand:
+            continue
+        # bidang latar = layer paling BAWAH yang cukup menguasai kotak, supaya objek di atasnya
+        # (jam, ikon) tidak tertutup piksel huruf yang ditambahkan
+        top = max(n for _, _, n, _ in cand)
+        best = min((c_ for c_ in cand if c_[2] >= 0.3 * top), key=lambda t: (t[0], t[1]))[3]
+        sl, m = best["sl"], best["filled"]
+        ny0, nx0 = min(sl[0].start, Y0), min(sl[1].start, X0)
+        ny1, nx1 = max(sl[0].start + m.shape[0], Y1), max(sl[1].start + m.shape[1], X1)
+        big = np.zeros((ny1 - ny0, nx1 - nx0), bool)
+        big[sl[0].start - ny0:sl[0].start - ny0 + m.shape[0], sl[1].start - nx0:sl[1].start - nx0 + m.shape[1]] = m
+        big[Y0 - ny0:Y1 - ny0, X0 - nx0:X1 - nx0] |= g
+        best["filled"] = big
+        best["sl"] = (slice(ny0, ny1), slice(nx0, nx1))
+        if best["shape"][0] != "path":
+            best["shape"] = ("path", None, None)
+
+
+def write(out, src, W, H, layers, blocks, c, text_mask=None):
     els, warnings = [], []
+    if c.get("canva_never_image", False) and blocks and text_mask is not None:
+        _cover_glyphs(layers, blocks, text_mask, W, H)
     for L in layers:
         if L["type"] == "vector":
             els += vector_layer_elements(L, W, H, c, out, warnings)
