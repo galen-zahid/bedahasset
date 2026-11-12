@@ -13,15 +13,21 @@
 # Aman diulang: desain yang sudah selesai dilewati, tidak ada file yang ditimpa.
 param(
     [ValidateSet("All", "Feed", "Story", "Highlight")][string]$Family = "All",
-    [string]$Stamp = (Get-Date -Format "yyyyMMdd")
+    [string]$Stamp = (Get-Date -Format "yyyyMMdd"),
+    [string]$SourceRoot = "",   # default: sources\VECTALLY
+    [string]$OutRoot = ""       # default: outputs
 )
 $ErrorActionPreference = "Stop"
 $Vectally = $PSScriptRoot
 $Repo = Split-Path $Vectally -Parent
 $Py = Join-Path $Repo ".venv\Scripts\python.exe"
-$Sources = Join-Path $Vectally "sources\VECTALLY"
-$Rebuild = Join-Path $Vectally "outputs\VECTALLY-rebuild-$Stamp"
-$Final = Join-Path $Vectally "outputs\VECTALLY-final-$Stamp"
+$Sources = if ($SourceRoot) { $SourceRoot } else { Join-Path $Vectally "sources\VECTALLY" }
+$Outs = if ($OutRoot) { $OutRoot } else { Join-Path $Vectally "outputs" }
+$Rebuild = Join-Path $Outs "VECTALLY-rebuild-$Stamp"
+$Final = Join-Path $Outs "VECTALLY-final-$Stamp"
+# Config VECTALLY: tanpa fallback PNG, tanpa layer efek (semua bidang jadi shape native)
+$Config = Join-Path $Vectally "config_vectally.yaml"
+if (-not (Test-Path $Config)) { throw "Config VECTALLY hilang: $Config" }
 if (-not (Test-Path $Py)) { throw "Python venv belum ada: $Py (jalankan D:\bedahasset\setup.ps1)" }
 $Families = if ($Family -eq "All") { @("Feed", "Story", "Highlight") } else { @($Family) }
 
@@ -30,7 +36,7 @@ foreach ($f in $Families) {
     Write-Host "`n=== [1/2] Render $f ===" -ForegroundColor Cyan
     Push-Location $Repo
     try {
-        & $Py split.py (Join-Path $Sources $f) (Join-Path $Rebuild $f) --mode rebuild
+        & $Py split.py (Join-Path $Sources $f) (Join-Path $Rebuild $f) --mode rebuild --config $Config
         if ($LASTEXITCODE -eq 3) { throw "Model AI belum lengkap. Jalankan ulang perintah yang sama." }
         if ($LASTEXITCODE -ne 0) { Write-Host "Ada desain $f yang gagal; detail di $Rebuild\$f\log.txt. Lanjut." -ForegroundColor Yellow }
     } finally { Pop-Location }

@@ -91,7 +91,9 @@ def region_paths(r, W, H, c, eps_scale=1.0):
     kind, p, _ = r["shape"]
     col, spread = _region_color(r)
     if spread > c.canva_max_gradient:  # a real gradient: Canva shapes are solid only
-        return None
+        if not c.get("canva_never_image", False):
+            return None
+        # mode tanpa PNG: gradien jadi warna solid rata-rata (tetap shape native)
     hx = _hex(col)
     sl = r["sl"]
     oy, ox = sl[0].start, sl[1].start
@@ -173,9 +175,45 @@ def _png_data_url(path, bbox=None):
     return "data:image/png;base64," + base64.b64encode(buf.getvalue()).decode()
 
 
+def _never_image_elements(L, regs, W, H, c, warnings):
+    """Mode VECTALLY tanpa PNG: 1 path = 1 shape (bisa dirapikan mesin smooth), dibungkus 1 grup
+    per objek. Bidang yang path-nya terlalu panjang dicoba lagi tanpa lubang (bentuk di atasnya
+    menutup lubang itu), lalu disederhanakan bertahap."""
+    from scipy import ndimage as _ndi
+    kids, lost = [], 0
+    for k, r in enumerate(regs):
+        got = None
+        for variant in (r, dict(r, filled=_ndi.binary_fill_holes(r["filled"]))):
+            for scale in (1.0, 2.0, 3.5, 6.0, 10.0, 16.0):
+                pr = region_paths(variant, W, H, c, eps_scale=scale)
+                if pr and all(len(d) <= MAX_D for d, _ in pr):
+                    got = pr
+                    break
+            if got:
+                break
+        if not got:
+            lost += 1
+            continue
+        for j, item in enumerate(got):
+            kids.append(_shape_el(f"{L['name']}_r{k + 1}_{j + 1}", [item], W, H))
+    if lost:
+        warnings.append(f"{L['name']}: {lost} bidang terlalu rumit untuk shape dan DILEWATI (cek QA)")
+    if len(kids) <= 1:
+        return kids
+    x0 = min(e["left"] for e in kids); y0 = min(e["top"] for e in kids)
+    x1 = max(e["left"] + e["width"] for e in kids); y1 = max(e["top"] + e["height"] for e in kids)
+    for e in kids:
+        e["left"] = round(e["left"] - x0, 2); e["top"] = round(e["top"] - y0, 2)
+    return [{"type": "group", "name": L["name"], "left": round(x0, 2), "top": round(y0, 2),
+             "width": round(x1 - x0, 2), "height": round(y1 - y0, 2), "children": kids}]
+
+
 def vector_layer_elements(L, W, H, c, out, warnings):
     """Native shape element(s) for one vector layer, or an image fallback."""
     regs = sorted(L["regions"], key=lambda r: r["z"])
+    never = bool(c.get("canva_never_image", False))
+    if never:
+        return _never_image_elements(L, regs, W, H, c, warnings)
     for scale in (1.0, 2.0, 3.5):
         ds, ok = [], True
         for r in regs:

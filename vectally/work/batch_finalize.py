@@ -89,8 +89,86 @@ def qa(pkg, src_png):
     return round(score, 3), Image.fromarray(ren.astype(np.uint8))
 
 
-def finalize(pkg_path, dst, code):
+TEXT_COLORS = []
+
+
+def _rgb(h):
+    h = (h or "#000000").lstrip("#")
+    return tuple(int(h[i:i + 2], 16) for i in (0, 2, 4)) if len(h) >= 6 else (0, 0, 0)
+
+
+def near_text_color(hexcol, limit=120):
+    c = _rgb(hexcol)
+    return any(sum(abs(a - b) for a, b in zip(c, _rgb(t))) <= limit for t in TEXT_COLORS)
+
+
+def text_boxes(es):
+    """Kotak headline; baris yang bertumpuk (jarak antarbaris kecil) digabung jadi satu blok."""
+    boxes = []
+    for e in es:
+        if e.get("type") == "text" and e.get("fontSize", 0) >= 40:
+            h = e.get("height") or e["fontSize"] * 1.25 * (e.get("text", "").count("\n") + 1)
+            boxes.append([e["left"] - 6, e["top"] - 6, e["left"] + e["width"] + 6, e["top"] + h + 6, e["fontSize"]])
+            TEXT_COLORS.append(e.get("color", "#000000"))
+    merged = True
+    while merged:
+        merged = False
+        for i in range(len(boxes)):
+            for j in range(i + 1, len(boxes)):
+                a, b = boxes[i], boxes[j]
+                xover = min(a[2], b[2]) - max(a[0], b[0]) > 0
+                gap = max(a[1], b[1]) - min(a[3], b[3])
+                if xover and gap <= 0.6 * max(a[4], b[4]):
+                    boxes[i] = [min(a[0], b[0]), min(a[1], b[1]), max(a[2], b[2]), max(a[3], b[3]), max(a[4], b[4])]
+                    del boxes[j]
+                    merged = True
+                    break
+            if merged:
+                break
+    return [tuple(b[:4]) for b in boxes]
+
+
+def drop_text_ghosts(es, boxes, src, ox=0, oy=0):
+    """Sisa huruf yang gagal dihapus OCR (bentuk >= 85% di dalam blok headline, warnanya mirip teks
+    atau menutup >= 30% blok) diwarnai ulang dengan warna latar di sekelilingnya. Tidak dibuang,
+    karena bentuk itu sering menambal lubang di latar."""
+    n = 0
+    for e in es:
+        x0, y0 = ox + e["left"], oy + e["top"]
+        if e.get("type") == "group":
+            n += drop_text_ghosts(e["children"], boxes, src, x0, y0)
+        elif e.get("type") == "shape":
+            x1, y1, area = x0 + e["width"], y0 + e["height"], max(1.0, e["width"] * e["height"])
+            inside = min(1.0, sum(max(0, min(x1, b[2]) - max(x0, b[0])) * max(0, min(y1, b[3]) - max(y0, b[1]))
+                                  for b in boxes) / area) if boxes else 0
+            block = max(((b[2] - b[0]) * (b[3] - b[1]) for b in boxes), default=1)
+            if inside >= 0.85 and (near_text_color(e["paths"][0]["fill"].get("color")) or area >= 0.3 * block):
+                col = ring_color(src, x0, y0, x1, y1)
+                for p in e["paths"]:
+                    p["fill"]["color"] = col
+                n += 1
+    return n
+
+
+def ring_color(src, x0, y0, x1, y1, pad=10):
+    """Median warna sumber di cincin tepat di luar kotak (warna latar sekitar)."""
+    H, W = src.shape[:2]
+    X0, Y0, X1, Y1 = [int(max(0, min(v, lim))) for v, lim in ((x0 - pad, W), (y0 - pad, H), (x1 + pad, W), (y1 + pad, H))]
+    ring = np.concatenate([src[Y0:Y0 + pad, X0:X1].reshape(-1, 3), src[max(Y1 - pad, 0):Y1, X0:X1].reshape(-1, 3),
+                           src[Y0:Y1, X0:X0 + pad].reshape(-1, 3), src[Y0:Y1, max(X1 - pad, 0):X1].reshape(-1, 3)])
+    if not len(ring):
+        return "#000000"
+    m = np.median(ring, axis=0).astype(int)
+    return "#%02x%02x%02x" % tuple(m)
+
+
+def finalize(pkg_path, dst, code, src_png):
     pkg = json.load(open(pkg_path, encoding="utf-8"))
+    TEXT_COLORS.clear()
+    src = np.asarray(Image.open(src_png).convert("RGB").resize((pkg["width"], pkg["height"])))
+    ghosts = drop_text_ghosts(pkg["elements"], text_boxes(pkg["elements"]), src)
+    if ghosts:
+        pkg.setdefault("warnings", []).append(f"{ghosts} shape sisa huruf di area headline diwarnai ulang ke warna latar")
     log, heads = [], []
     S.walk(pkg["elements"], log)
     walk_text(pkg["elements"], heads)
@@ -128,7 +206,7 @@ def main(rebuild_root, final_root, sources_root):
                     rows.append({"no": i, "code": code, "status": "BELUM_DIRENDER", "file": ""})
                     print(f"[{fam}] {code} BELUM DIRENDER: {pkg_path}", flush=True)
                     continue
-                pkg, status, heads = finalize(pkg_path, dst, code)
+                pkg, status, heads = finalize(pkg_path, dst, code, src)
                 origin = "batch"
             score, preview = qa(pkg, src)
             rows.append({"no": i, "code": code, "status": "SIAP_IMPOR", "origin": origin,

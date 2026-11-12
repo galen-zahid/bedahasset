@@ -1,0 +1,494 @@
+# =====================================================================
+#  bedahasset - config. Semua threshold yang bisa di-tune ada di sini.
+#  Nilai warna/alpha pakai skala 0..1 kecuali disebut lain.
+#  Jarak/ukuran dalam pixel di resolusi asli kanvas.
+# =====================================================================
+
+device: auto            # auto | cpu | cuda   (auto = pakai GPU kalau ada)
+cache_dir: ""           # folder untuk semua model AI (~2 GB). Kosong = default di folder user (C:).
+                        # Kalau C: penuh isi mis. "D:/ai-cache" (model yang sudah ada akan di-download ulang ke sini)
+
+# ---------------------------------------------------------------- subject
+subject:
+  rembg_model: birefnet-general   # ~40 dtk/desain di CPU. Lebih cepat (~2-3x, tepi sedikit kasar):
+                                  # birefnet-general-lite
+  # Guided filter untuk merapikan tepi mask mengikuti tepi gambar asli.
+  guided_radius: 4      # makin besar = tepi makin "menempel" ke gambar, tapi bisa bleeding
+  guided_eps: 0.0005    # makin kecil = tepi makin tajam mengikuti detail (rambut)
+  # "Levels" alpha untuk membuang halo tipis: alpha < lo -> 0, alpha > hi -> 1.
+  alpha_lo: 0.06
+  alpha_hi: 0.94
+  feather_px: 0.8       # sigma gaussian feather tepi (0 = mati)
+  raw_cap_gain: 3.0     # alpha hasil refine maks. 3x matte mentah BiRefNet (+1px). Mencegah guided
+                        # filter "meluberkan" alpha ke background -> pita krem/abu di tepi rambut. 0 = mati
+  min_island_frac: 0.0005  # buang pulau alpha kecil < fraksi area kanvas
+  decontaminate: true   # estimasi warna foreground (pymatting) -> no halo warna background
+  hard_threshold: 0.5   # alpha > ini dianggap "subject" untuk masking/inpaint
+  text_component_frac: 0.35  # bagian "subject" yang >35% isinya teks = headline, bukan subject
+  max_subject_frac: 0.65     # "subject" > 65% kanvas = tidak ada subject terpisah (desain grafis)
+  min_subject_frac: 0.003
+  # Re-matting tepi terhadap clean plate (known-background matting) -> buang halo.
+  plate_matting: true
+  plate_min_contrast: 0.10  # hanya bila warna subject & plate cukup beda (jarak RGB)
+  plate_max_grow: 0.10      # alpha boleh naik maks segini dari matte awal
+  ambiguous_choke: 0.25     # tepi yang warnanya mirip background (rambut gelap di latar gelap):
+                            # alpha < 0.25 dibuang -> tidak jadi "asap" di latar terang. 0 = mati
+  detail_ref: 0.012         # di zona ambigu, alpha dikali (energi detail lokal / nilai ini): helai
+                            # rambut bertekstur tetap, area gelap yang mulus (= background) hilang
+
+# --------------------------------------------------------------- elements
+elements:               # subject dipecah jadi elemen terpisah (asset besar/kecil, shape) bukan 1 layer
+  enabled: true
+  link_cut_frac: 0.008  # sambungan lebih tipis dari ~2x (0.8% diagonal) diputus: garis penghubung,
+                        # batang barbell, panah. Naikkan = lebih banyak pecahan
+  min_area_frac: 0.002  # elemen minimal 0.2% kanvas (lebih kecil digabung ke elemen terdekat)
+  min_link_area_frac: 0.0015  # sambungan yang terputus & cukup besar jadi elemen "shape" sendiri
+  large_frac: 0.08      # elemen >= 8% kanvas = asset_large, selebihnya asset_small
+  flat_shape_threshold: 0.8   # >= 80% pixel di 4 warna dominan = shape (flat)
+  sam: true            # SAM (Segment Anything) memisahkan objek yang menempel/bertumpuk
+  sam_model: facebook/sam-vit-base   # ~375 MB, ~6 dtk/desain di CPU. Cepat: Zigeng/SlimSAM-uniform-77
+  sam_points: 24        # jumlah titik klik per elemen
+  sam_min_score: 0.80   # keyakinan minimal mask SAM
+  sam_min_inside: 0.90  # mask harus >= 90% di dalam elemen (tidak bocor ke background)
+  sam_min_part: 0.06    # objek minimal 6% elemen
+  sam_part_overlap: 0.6 # mask yang >60% di dalam objek lain = bagiannya (tidak dipisah)
+  sam_min_cover: 0.6   # objek-objek SAM harus menutup >= 60% elemen, kalau tidak elemen tidak dipecah
+  sam_min_elem_frac: 0.01  # hanya elemen >= 1% kanvas yang dicoba dipecah dengan SAM
+  keep_separate_frac: 0.45  # objek foto >= 45% objek terbesar tetap terpisah (orang lain); yang lebih kecil
+  min_contact_px: 40        # dan menempel (>= 40 px batas bersama) digabung ke tetangganya
+  photo_texture: 0.004  # tekstur halus >= ini = foto (asset_*), di bawah = ilustrasi vektor (vector_*)
+
+# -------------------------------------------------------------- gradients
+gradients:              # background grafis (bukan foto) -> bidang gradien SVG + layer efek
+  enabled: true         # 01_background_gradients.png/.svg + 01_a_shadow, 01_b_glow, 01_c_reflection, 01_d_detail
+  work_size: 500        # segmentasi dihitung di resolusi kecil (px sisi terpanjang)
+  superpixels: 1200
+  compactness: 15
+  merge_tol: 0.002      # gabung bidang selama 1 gradien linear masih menjelaskan keduanya
+  min_region_frac: 0.004  # bidang lebih kecil dari 0.4% kanvas selalu digabung ke tetangga
+  min_shapes: 2
+  max_shapes: 12        # maksimal bidang gradien (sisanya digabung ke tetangga paling cocok).
+                        # Hanya untuk desain tanpa subject foto; desain foto -> background tetap PNG
+  effect_sigma: 10      # efek shadow/glow = bagian halus (blur px)
+  reflection_min_lift: 0.06  # reflection = kilau tajam yang >= ini lebih terang; sisanya ke layer detail
+  flat_rms: 0.03        # background hampir polos (rms < ini): tanpa layer shadow/glow/reflection
+  edge_smooth: 3        # haluskan tepi bidang gradien (px di resolusi kerja)
+  min_effect_alpha: 0.02
+  max_effect_alpha: 0.95
+  svg_epsilon: 1.0
+
+# ---------------------------------------------------------------- pentool
+pentool:                # "pen tool": 1 path Bezier per potongan, isi solid / gradien 2 warna
+  enabled: true
+  max_colors: 16        # warna awal per elemen vektor (sebelum potongan digabung)
+  merge_tol: 0.002      # gabung potongan selama satu gradien linear masih menjelaskan keduanya
+  max_pieces: 40        # potongan maksimal per elemen
+  color_join: 0.15      # potongan dengan rata-rata warna beda > ini tidak pernah digabung jadi gradien
+  split_objects: true   # pisah per objek: potongan yang cuma bersentuhan sedikit (garis penghubung vs
+  group_contact: 0.2    # ikon) jadi layer sendiri. Bersentuhan >= 20% keliling = satu objek
+  min_object_px: 150    # objek lebih kecil dari ini dibuang
+  palette_colors: 16    # SATU palet warna untuk seluruh desain (warna konsisten antar ikon)
+  palette_merge: 0.07   # warna palet yang beda < ini digabung
+  palette_snap: 0.12    # warna potongan dikunci ke warna palet terdekat kalau beda < ini
+  gradient_min_area_frac: 0.01  # gradien hanya untuk potongan >= 1% kanvas; yang kecil selalu solid
+  max_interior_err: 0.04  # isi potongan beda > ini dari aslinya = foto/render 3D -> tetap PNG
+  min_part_frac: 0.02   # bagian elemen yang terpisah & < 2% bagian terbesar dibuang (sisa teks/debu)
+  min_piece_px: 30      # potongan lebih kecil dari ini digabung ke tetangga
+  gradient_min_delta: 0.08  # beda warna ujung < ini = warna solid (paling gampang diedit di Canva)
+  anchor_eps: 1.5       # jarak titik anchor (px): kecil = lebih presisi, lebih banyak anchor
+  corner_deg: 55        # belokan > ini = sudut tajam (bukan kurva)
+  smooth: 1.5           # haluskan tepi sebelum anchor dipilih
+  overlap_px: 1         # potongan saling tumpuk 1px supaya tidak ada celah
+  bg_max_pieces: 14     # background grafis: maksimal potongan
+  effects_layer: true   # semua efek (glow/kilau/bayangan/detail) digabung jadi SATU layer
+
+# ---------------------------------------------------------------- graphic
+graphic:                # background grafis (DORVAN): potongan + aksen + 2 efek umum
+  inpaint_smooth: 18    # bekas teks di background grafis dihaluskan (tidak burek)
+  accent_min_sat: 0.35  # garis/panah aksen: warna jenuh yang berbeda dari warna utama background
+  accent_min_val: 0.35
+  accent_min_hue_gap: 45   # beda hue minimal dari warna dominan (emas vs biru)
+  accent_hue_tol: 22
+  accent_min_part_px: 30
+  accent_min_frac: 0.0008  # aksen minimal 0.08% kanvas
+  max_accents: 3
+  light_sigma: 10       # layer efek "light": cahaya & bayangan lembut menyeluruh
+  highlight_px: 18       # layer efek "highlight": kilau tajam yang lebih tipis dari ~2x ini
+  highlight_min: 0.06
+  min_alpha: 0.02
+  max_alpha: 0.95
+
+# -------------------------------------------------------------- vectorize
+vectorize:              # elemen flat/vektor: tepi "magic wand" + ekspor SVG ("pen tool") ke vectors/
+  enabled: true
+  engine: vtracer       # vtracer = kurva Bezier halus (seperti pen tool) | polygon = tracing dasar
+  vt_filter_speckle: 6  # vtracer: bintik lebih kecil dari ini (px) dibuang
+  vt_layer_difference: 24  # vtracer: beda warna minimal antar layer
+  sam_points: 12        # SAM melengkapi ikon vektor (garis gelap di dalam ikon tidak bolong)
+  sam_grow_px: 12       # mask SAM boleh melebar segini dari elemen awal
+  sam_min_score: 0.85
+  wand_band_px: 3       # lebar pita di tepi elemen yang dihitung ulang dengan magic wand
+  wand_tol_lo: 0.04     # beda warna vs background: < lo = background (transparan)
+  wand_tol_hi: 0.12     #                           > hi = elemen (penuh). Di antaranya = anti-alias
+  svg_max_colors: 12    # warna maksimum per SVG (tiap warna = path terpisah, bisa diganti di Canva)
+  svg_merge_tol: 0.06   # warna yang beda < ini digabung
+  svg_min_region_px: 12 # potongan warna lebih kecil dari ini dibuang
+  max_hole_frac: 0.15   # lubang tertutup di elemen vektor < 15% luas elemen diisi kembali (anti bolong)
+  svg_grow_px: 1        # path warna dilebarkan 1px supaya tidak ada celah di antara warna
+  svg_epsilon: 0.8      # ketelitian path (px). Kecil = lebih presisi, file lebih besar
+
+# ------------------------------------------------------------- foreground
+foreground:
+  enabled: true
+  depth_model: depth-anything/Depth-Anything-V2-Small-hf
+  # Pixel salient dianggap "di depan subject" bila depth_norm > median_subject + margin.
+  # depth_norm 0..1 (1 = paling dekat kamera), dinormalisasi per gambar.
+  depth_margin: 0.25
+  min_area_frac: 0.004  # komponen < 0.4% kanvas diabaikan
+  max_area_frac_of_salient: 0.6  # kalau "foreground" > 60% area salient, itu subject-nya -> skip
+  edge_erode_px: 1      # area foreground yang dibuang dari layer subject di-erode segini (hindari seam)
+  guided_radius: 3      # refine tepi dalam (batas depth) mengikuti tepi gambar
+  merge_touching: true  # objek depan yang menempel ke subject (plate di barbell yang dipegang) digabung
+  require_frame_edge: true  # objek depan harus terpotong tepi frame (plate, bahu, daun di depan lensa)
+  edge_px: 6
+  sliver_px: 6          # bagian subject yang lebih tipis dari ~2x ini & menempel ke tepi objek depan
+                        # dipindah ke layer foreground (sisa rim objek). 0 = mati
+
+# ------------------------------------------------------------------- text
+text:
+  enabled: true
+  languages: [en]
+  min_confidence: 0.10  # font display/grunge sering confidence rendah, jangan terlalu ketat
+  max_subject_overlap: 0.4  # teks yang >40% di atas subject (mis. logo di plate) dianggap bagian foto
+  second_pass: true     # OCR ulang dari crop yang sudah dibinarisasi, ambil yang confidence lebih tinggi
+  pad_frac: 0.18        # padding bbox (x tinggi teks) untuk menangkap glyph yang terpotong bbox OCR
+  color_tol: 0.55       # toleransi (relatif jarak antar cluster) pixel dianggap glyph
+  inpaint_close_frac: 0.25  # huruf digabung jadi gumpalan (x tinggi teks) sebelum di-inpaint -> tidak ada "bayangan huruf"
+  dilate_px: 5          # mask glyph di-dilate sebelum inpaint (anti-alias + grain)
+  cap_height_ratio: 0.72  # tinggi huruf kapital / font size (estimasi ukuran font)
+  giant_scales: [0.5, 0.35]   # OCR ulang di resolusi kecil untuk headline raksasa yang terlewat
+  giant_min_height_frac: 0.06 # ...hanya kotak setinggi >= 6% kanvas
+  giant_min_conf: 0.30
+  second_pass_heights: [32, 48, 64]  # tinggi crop (px) untuk OCR ulang
+  second_pass_thin: [0, 1, 2]        # penipisan huruf (px); font display tebal lebih terbaca
+  fix_text: true        # perbaiki hasil OCR pakai geometri glyph: spasi kata, ALL CAPS, '.' vs ':',
+                        # karakter sampah di ujung (~ ' ^ |)
+  space_gap_mult: 2.0   # celah > 2x celah antar-huruf (median) = spasi kata
+  space_min_frac: 0.18  # ...dan minimal 18% tinggi huruf
+  caps_tolerance: 0.10  # semua huruf punya garis atas & bawah sama (+-10%) = ALL CAPS
+  # Teks di atas area salient tetap dianggap TEKS DESAIN (bukan bagian foto) bila
+  # confidence tinggi dan horizontal (mis. tombol CTA yang menempel ke subject).
+  design_text_min_conf: 0.30
+  design_text_max_angle: 5
+  decor:                # garis/slash/bullet kecil di baris yang sama dengan teks kecil (tidak terbaca OCR)
+    enabled: true
+    color_tol: 14       # jarak warna Lab ke warna teks di baris itu
+    band_pad: 0.35      # tinggi pita pencarian = tinggi teks +- 35%
+    search_x: 5.0       # cari sampai 5x tinggi teks ke kiri/kanan
+    line_contrast: 25   # garis lurus: selisih L (Lab) vs median pita
+    line_max_thickness: 0.3  # tebal garis maks (x tinggi teks)
+    line_extend: 1.0    # mask garis diperpanjang (x tinggi teks) di kedua ujung: ujung gradasi pudar
+    min_area: 6
+    max_area_h2: 3.0    # maks luas = 3 x tinggi_teks^2
+  container:            # deteksi tombol/pill/kotak di sekitar teks -> layer UI terpisah
+    enabled: true
+    max_text_height_frac: 0.06   # hanya untuk teks kecil (headline besar tidak punya tombol)
+    search_margin_x: 3.0         # area cari = bbox teks + margin (x tinggi teks)
+    search_margin_y: 1.5
+    edge_threshold: 18           # kekuatan tepi (Lab) untuk garis tepi tombol
+    max_area_mult: 5.0           # kotak maks. 5x luas bbox teks
+    min_rectangularity: 0.85
+
+# ------------------------------------------------------------- background
+background:
+  raw_threshold: 0.01   # pixel dengan nilai mask mentah BiRefNet > ini ikut di-inpaint (helai rambut)
+  dilate_px: 28         # mask subject/fg di-dilate sebelum inpaint. Terlalu kecil -> LaMa
+                        # "melanjutkan" helai rambut jadi hantu subject di background
+  restore_beyond_px: 8  # setelah inpaint, pixel asli dikembalikan bila > 8px dari subject (celah
+                         # antara lengan/kaki tetap asli). 0 = pakai hasil LaMa di seluruh mask
+  restore_strict_px: 45   # dalam radius ini dari subject, pixel asli hanya dikembalikan kalau mirip
+  restore_max_diff: 0.08  # hasil LaMa (selisih < 0.08) -> helai rambut tipis tidak "balik" ke bg
+  text_extra_dilate_px: 2
+  lama_max_side: 800    # LaMa dijalankan di resolusi ini lalu di-upscale (hanya area mask yang dipakai).
+                        # Lubang besar lebih koheren di ~800px; 0 = full-res (lebih tajam, struktur kurang)
+  paste_feather_px: 3   # blend hasil inpaint ke plate asli dengan feather segini
+  flat_fill_max_spread: 0.08 # latar polos (sebaran kecerahan di sekitar lubang < ini, mis. kertas/dinding):
+  flat_ring_px: 30           # noda gelap/terang hasil LaMa diganti gradasi halus dari warna sekitar.
+  flat_fill_min_diff: 0.05   # pixel yang beda > ini dari gradasi halus dianggap noda. 0 di max_spread = mati
+  smooth_inpainted_px: 6  # haluskan pola "tambal-sulam" LaMa di area inpaint (guided filter). 0 = mati
+  regrain_inpainted: true  # tambahkan grain sintetis di area inpaint supaya cocok dengan sekitarnya
+
+# ------------------------------------------------------------------- glow
+glow:
+  # Glow per-pixel (semua cahaya oranye) -> MATI: yang dijadikan layer editable hanya strip
+  # grafis di belakang subject (lihat "stripe"). Lampu/pantulan oranye lain tetap di background.
+  enabled: false
+  # Deteksi warna aksen dominan (di luar subject).
+  min_saturation: 0.45
+  min_value: 0.30
+  min_pixels_frac: 0.004  # kalau pixel aksen < 0.4% kanvas -> tidak ada glow layer
+  # Area yang diekstrak jadi glow:
+  hue_tol_deg: 18       # jarak hue penuh masuk
+  hue_soft_deg: 12      # ramp lembut di luar hue_tol
+  min_chroma: 0.06      # chroma (max-min RGB) minimal
+  chroma_soft: 0.06     # ramp lembut di atas min_chroma
+  max_alpha: 1.0        # batas alpha glow
+  base_mode: lama       # lama = area glow di-inpaint untuk dapat base bertekstur | blur = base halus
+  base_blur_px: 25      # (base_mode: blur) sigma blur estimasi "scene tanpa glow"
+  color_mode: pixel     # pixel = warna glow per-pixel (akurat, recomposite lossless)
+                        # accent = satu warna aksen rata (mudah di-recolor di Canva, sedikit lossy)
+  subject_dilate_px: 6  # jauhi tepi subject
+
+# ----------------------------------------------------------------- stripe
+stripe:                 # strip/pita warna aksen yang lewat DI BELAKANG subject
+  enabled: true
+  # layered = 3 layer, blend NORMAL + opacity saja (jalan di semua akun Canva), ditumpuk = 1:1:
+  #   04_stripe_NN_base.png   persegi panjang 1 warna, opacity dasar (bisa dibuat native, shapes.csv)
+  #   04_stripe_NN_grunge.png warna yang SAMA, cuma bercak (opacity per-pixel), tanpa foto
+  #   01_background di bawah strip = scene yang terlihat menembus strip (balok gelap, terang
+  #                           jendela), tanpa warna oranye -> strip semi-transparan seperti referensi
+  #   04_stripe_NN_shade.png  hanya kalau shade: true (lihat bawah)
+  # single  = 1 PNG: warna rata + grunge di alpha
+  # multiply = (default) seperti referensi: strip oranye ber-blend MULTIPLY di atas scene.
+  #   01_background           scene di balik strip (jendela, balok), tanpa oranye & tanpa bercak
+  #   04_stripe_NN_base.png   oranye, blend MULTIPLY, opacity per segmen
+  #   04_stripe_NN_grunge.png bercak HITAM, blend normal (setara multiply) -> semua layer bersih, 1:1
+  # canva = (default) background BERSIH + strip bersih, blend NORMAL saja (jalan di semua akun Canva):
+  #   04_stripe_NN_base.png   oranye solid 100%
+  #   04_stripe_NN_depth.png  gelap-terang ABU-ABU netral (tanpa warna foto), halus
+  #   04_stripe_NN_grunge.png bercak hitam kecil
+  mode: canva
+  depth_blur: 1.5       # blur layer depth (px): bentuk gelap-terang ada, tepi tajam foto tidak
+  mult_min_scene: 0.12  # pixel scene lebih gelap dari ini tidak dipakai untuk mengukur opacity strip
+  neutral_scene: false  # true = scene di balik strip pakai warna cast background (lebih netral kalau
+                        # strip digeser, tapi tumpukan tidak lagi 1:1)
+  speck_px: 2           # ukuran bercak grunge (px); detail lebih besar (balok, jendela) tetap di background
+  speck_min: 0.03       # bercak lebih tipis dari ini dibuang (noise)
+  line_min_alpha: 0.12  # garis tipis panjang di grunge (tepi kusen, helai rambut) = detail foto,
+  line_min_len: 10      # dikembalikan ke background: panjang >= 10px dan
+  line_max_width: 2.5   # lebar rata-rata < 2.5px
+  speck_max_area: 400   # bercak > 400px (bentuk gelap besar/tebal) = struktur foto -> background
+  hue_tol_deg: 20       # jarak hue ke warna aksen
+  min_saturation: 0.45
+  min_value: 0.30
+  min_piece_frac: 0.002 # potongan strip minimal 0.2% kanvas
+  collinear_tol: 1.35   # potongan dianggap segaris kalau gabungannya tidak lebih lebar dari 1.35x
+  min_elongation: 3.5   # panjang/tebal minimal
+  min_length_frac: 0.3  # panjang minimal = 30% diagonal kanvas (lampu/bidang kecil bukan strip)
+  min_mean_saturation: 0.6  # strip = grafis berwarna pekat
+  max_accent_frac: 0.25 # warna aksen > 25% area bebas = warna latar (mis. poster biru), bukan strip
+  min_behind_frac: 0.05 # minimal 5% persegi panjang strip tertutup subject ("di belakang orang")
+  max_stripes: 3
+  close_px: 7           # tutup bintik grunge gelap di dalam strip (tetap ikut layer strip)
+  max_hole_px: 4000
+  dilate_px: 4          # mask strip di-dilate sebelum dihapus dari background
+  coverage_sigma: 30    # variasi opacity strip dihaluskan (px): beda antar segmen tertangkap,
+                        # tiang/jendela (detail foto) tidak masuk ke layer strip
+  shade: false          # true = tambah 04_stripe_NN_shade.png (sisa selisih -> tumpukan 1:1 pixel,
+                        # tapi layer itu berisi potongan foto). false = semua layer strip bersih
+  max_luma_gain: 6.0    # batas penguatan kecerahan scene di bawah strip
+  shade_min_diff: 0.01  # layer shade hanya di pixel yang selisihnya > ini (sisanya dibulatkan)
+  base_percentile: 15   # opacity base = persentil ke-15 coverage strip. Grunge menambah bercak oranye
+                        # di atasnya; bagian yang lebih gelap dari base jadi bercak gelap di grunge
+  min_alpha: 0.15       # batas coverage strip (bawah/atas). Atas < 1 supaya background di bawah
+  max_alpha: 0.92       # strip bisa dihitung balik tanpa "meledak"
+  texture_sigma: 6     # alpha strip = opacity dasar + grunge halus (< ~6px). Bentuk besar (tiang,
+                        # jendela yang tembus) dibuang karena sudah ada di background. 0 = apa adanya
+  subject_clearance_px: 12 # pixel strip sedekat ini ke subject (tercemar helai rambut/tepi) tidak
+                           # dipakai; teksturnya disintesis seperti bagian di belakang subject
+
+# -------------------------------------------------------------- particles
+particles:
+  enabled: true
+  tophat_px: 9          # ukuran kernel top-hat; struktur terang lebih kecil dari ini = partikel
+  min_contrast: 0.06    # selisih luminance minimal vs sekitarnya
+  max_chroma: 0.14      # partikel harus low-saturation (debu/kapur). Naikkan untuk spark berwarna
+  min_luma: 0.18
+  max_blob_area: 400    # blob lebih besar dari ini (px) bukan partikel
+  max_scene_luma: 0.45  # partikel/awan hanya dicari kalau median kecerahan desain <= ini (desain gelap)
+  streak_min_len: 12    # blob memanjang (>= 12px) dan tipis...
+  streak_max_width: 2.5 # ...(lebar rata-rata < 2.5px) = highlight tepi alat/kusen, bukan debu
+  min_pixels: 30        # total pixel partikel < ini -> layer di-skip
+  subject_dilate_px: 4
+  max_alpha: 0.95
+  cloud:                # awan debu/kapur/asap besar (bukan bintik) ikut masuk 05_particles
+    enabled: true
+    model: CIDAS/clipseg-rd64-refined   # segmentasi via text prompt (~600 MB, download sekali)
+    prompts: ["chalk dust cloud", "white powder smoke", "dust cloud", "mist"]
+    min_prob: 0.15      # prob CLIPSeg maksimum di bawah ini = tidak ada awan
+    rel_threshold: 0.35 # seed = pixel dengan prob >= 35% dari maksimum
+    min_area_frac: 0.003
+    max_area_frac: 0.30 # seed > 30% kanvas = kabut seluruh background, jangan diekstrak
+    grow_frac: 0.06     # seed diperluas & di-feather selebar 6% diagonal (transisi lembut,
+                        # dan LaMa tidak melihat sisa awan di tepi region)
+    min_lift: 0.02      # pixel harus lebih terang dari "lantai gelap" sekitarnya sebesar ini...
+    lift_soft: 0.06     # ...dengan ramp lembut
+    max_chroma: 0.15
+  color: null           # null = warna per-pixel (lossless). Atau mis. [0.96, 0.95, 0.93] = satu warna
+
+# ------------------------------------------------------------------ grain
+grain:
+  enabled: true
+  size_px: 0.7          # sigma blur noise (besar butiran)
+  strength: 1.0         # pengali terhadap noise level hasil estimasi dari gambar asli
+  monochrome: true
+  vignette_strength: 0.25  # alpha hitam di sudut (0 = tanpa vignette)
+  vignette_radius: 0.75    # mulai gelap dari radius (relatif setengah diagonal)
+  suggested_opacity: 0.6   # opacity yang disarankan di Canva (grain asli sudah ada di layer lain)
+  seed: 1234
+
+# ----------------------------------------------------------------- output
+output:
+  crop_alpha_threshold: 0.004  # pixel dengan alpha > ini masuk bbox crop
+  diff_gain: 4.0               # penguat preview_diff.png
+  contact_sheet: true          # out/<nama>_sheet.png: semua layer + SVG + daftar teks dalam 1 gambar
+
+# ------------------------------------------------------------- MODE REBUILD
+# python split.py in out --mode rebuild   (atau .\run.ps1 -Mode rebuild)
+# Desain digambar ulang dari nol: bidang warna -> bentuk dasar (kotak, kapsul, lingkaran,
+# poligon, garis) atau kurva Bezier rapi; warna dikunci ke palet; foto tetap foto;
+# SATU layer efek umum; teks jadi teks asli Canva.
+mode: rebuild           # rebuild (gambar ulang dari nol, default) | layers (pemecah lama)
+rebuild:
+  text: true            # baca teks (OCR) -> text.csv, teks dihapus dari gambar
+  text_extra_dilate: 2
+  photo_stripes: true    # pita warna aksen di belakang orang/produk di foto -> pita vektor utuh
+  stripe_min_chroma: 45
+  stripe_max: 4
+  stripe_chroma_frac: 0.25  # pita di foto: bagian yang kena bayangan (oranye gelap) tetap bagian pita
+  stripe_edge_contrast: 0.25 # tepi pita harus tajam (cahaya/kilau buram di lantai bukan pita)
+  stripe_bridge_open: 0.3  # potongan pita = 1 pita bila jalur di antaranya <= 30% latar kosong yang terlihat
+  stripe_merge_deg: 8    # potongan pita sejajar & segaris (kiri-kanan orang) = 1 pita
+  stripe_same_color: 30  # pita-pita dengan warna semirip ini dapat 1 warna yang sama (paling pekat)
+  stripe_bit_px: 400     # potongan kecil pita yang segaris (di sela siku & badan) ikut memperpanjang pita
+  stripe_edge_snap: 60   # ujung pita < 60px dari tepi kanvas diteruskan sampai tepi
+  stripe_close_px: 15    # lubang grunge di pita dirapatkan sebelum diukur
+  stripe_min_fill: 0.45  # gumpalan harus mengisi bentuk pitanya (bukan bercak acak)
+  stripe_min_aspect: 1.0 # pita di foto boleh terlihat pendek (sisanya di belakang orang)
+  stripe_iou: 0.35       # pita di foto kena cahaya/grunge/tertutup alat: kecocokan minimal lebih longgar
+                         # (yang ada di DEPAN pita dipotong jadi layer photo_front di atas pita)
+  stripe_min_width: 50   # ...minimal selebar 50px (kilau/cahaya tipis di lantai bukan pita)
+  stripe_min_hidden: 0.0 # pita boleh tertutup apa saja (orang, rak); kilau lantai tersaring oleh lebar minimal
+  bands: true            # pita/strip yang terpotong huruf disambung jadi 1 pita utuh di belakang teks
+  rules: true            # garis tipis lurus (pemisah di samping teks kecil) -> 1 garis vektor utuh
+  rule_contrast: 30
+  rule_min_len: 40
+  rule_side_tol: 18      # garis = warna di kedua sisinya sama (bukan tepi bidang)
+  rule_max_thick: 6
+  stripe_clean_px: 60    # pita hasil rebuild + 60px di sekitarnya bersih dari layer efek (tanpa sobekan/grunge)
+  band_max_cover: 0.08   # pita di belakang teks tidak boleh menutupi bentuk lain (> 8% luasnya)
+  band_max_width_frac: 0.2  # pita maksimal selebar 20% sisi kanvas (panel besar bukan pita)
+  band_iou: 0.6 
+  band_color_tol: 45     # potongan pita dengan warna semirip ini (Lab) = pita yang sama
+  band_min_px: 2000
+  band_envelope: 0.15    # tepi pita = sisi terluar yang terlihat (persentil 15%)
+  band_gap_bins: 5       # pita berhenti setelah > 4x12px kosong (terlihat tapi tidak ada pita)
+  band_hue_tol: 16       # piksel pita: corak warna (hue) beda < 16 derajat...
+  band_min_chroma_frac: 0.45  # ...dan cukup berwarna (terang/gelap karena cahaya tetap ikut)
+  band_pix_tol: 32        # piksel gambar dengan warna semirip ini (Lab) = bagian pita
+  band_hug_px: 40         # serpihan kecil (sobekan grunge, bagian pudar) dalam 40px dari pita...
+  band_bits_frac: 0.08    # ...dan < 8% luas pita ikut diserap ke pita
+  band_absorb: 0.6        # bercak yang >= 60% di dalam pita jadi bagian pita (pudar/grunge -> layer efek)
+  text_mask_mode: glyph  # glyph = hanya huruf yang dihapus (pita/bidang di sela huruf tetap) | blob
+  text_glyph_dilate: 3
+  text_shadow_frac: 0.05  # bayangan huruf: + 5% tinggi huruf ikut dihapus bersama hurufnya...
+  text_shadow_min: 6      # ...hanya bila tepi di sekitar huruf memang lebih gelap/terang (selisih > 6)
+  text_zone_px: 6        # bayangan/glow huruf (sampai 6px di luar gumpalan teks) tidak masuk layer efek
+  smooth_passes: 2      # bilateral filter: hilangkan grain/noise, tepi tetap tajam
+  smooth_d: 7
+  smooth_sigma_color: 22
+  smooth_sigma_space: 7
+  flat_grad: 3.0        # perubahan warna (Lab/px) di bawah ini = "datar" (bagian dalam bidang)
+  min_seed_px: 12       # bidang lebih kecil dari ini tidak jadi bidang sendiri
+  min_region_px: 40     # bidang < ini digabung ke tetangga yang warnanya paling mirip
+  merge_tol: 0.002       # bidang bertetangga yang bisa dijelaskan 1 gradien digabung (tekstur/banding hilang)
+  color_join: 0.15       # ...kecuali rata-rata warnanya beda jauh
+  merge_max_both: 0.01   # ...dan tidak bila keduanya bidang besar (> 1% kanvas)
+  photos: true           # area yang butuh banyak bidang kecil tak beraturan = foto -> tetap foto (PNG)
+  photo_window: 61
+  photo_density: 0.45
+  photo_err: 0.02        # detail (frekuensi menengah) yang tidak bisa digambar vektor > ini = isi foto
+  photo_dark_ref: 0.3    # detail di area gelap dihitung relatif (piringan hitam, bayangan)...
+  photo_dark_max: 1.4    # ...dikuatkan maksimal 1.4x
+  photo_blur: 4          # blur selisih: tekstur halus/grain tidak dihitung foto
+  photo_small_px: 2500
+  photo_solidity: 0.8
+  photo_min_frac: 0.02
+  photo_absorb_dist: 25  # ...atau dalam 25px dari foto (serpihan tak beraturan)
+  photo_dull_chroma: 22  # ...atau serpihan kusam (abu/coklat) di desain yang punya foto
+  photo_absorb_px: 6000  # bidang kecil yang menempel ke foto (>= 30% kelilingnya) ikut jadi foto
+  photo_close: 81         # garis tepi foto dihaluskan (px)
+  photo_max_frac: 0.95
+  photo_bg_takeover: 0.45 # desain yang >= 45% foto: background yang menyambung ke foto ikut jadi foto
+  photo_bg_min_frac: 0.02
+  photo_bg_contact: 0.25  # ...bila >= 25% kelilingnya menempel ke foto
+  photo_ui_flat: 0.08   # ...polos = 80% pikselnya beda warna < 8%
+  photo_ui_border_px: 10  # ...beserta garis tepinya
+  photo_ui_min_px: 1500 # bidang polos berbentuk bersih (tombol/badge) di atas foto tetap vektor
+  subject_flat_std: 0.035  # bidang polos (isi tombol) yang ikut terambil pemisah subjek tetap vektor
+  subject_accent_chroma: 35  # bidang berwarna tegas & rata yang ikut terambil pemisah subjek tetap vektor
+  subject_hole_thr: 0.03 # area atlet yang dihapus dari foto background: termasuk rambut/bayangan tipis...
+  subject_hole_px: 22    # ...dan diperlebar 22px (tidak ada bekas atlet)
+  stripe_bg_reach_px: 90 # ...termasuk tinta pita yang pudar sampai 90px di luar bentuknya
+  stripe_bg_clear_px: 12 # pita lama dihapus dari foto background (+12px)
+  photo_text_lama: true  # teks di atas foto dihapus pakai LaMa (lebih bersih)
+  photo_subject: true   # foto: orang/produk dipisah dari background foto (rembg + LaMa)
+  fill_holes: true      # bentuk ditutup penuh (tanpa bolong); isi lubang ditumpuk di atasnya
+  grad_min_px: 400      # bidang lebih kecil selalu 1 warna solid
+  grad_gain: 0.85       # gradien dipakai bila error turun ke < 85% dibanding warna solid
+  grad_min_delta: 0.05  # ...dan beda warna ujung ke ujung > 5%
+  grad_max_stops: 5      # gradien sampai 5 titik warna (panel render yang terang-gelap-terang)
+  grad_multi_min_px: 3000
+  grad_multi_gain: 0.75  # dipakai bila error turun ke < 75% dibanding gradien 2 warna
+  palette_tol: 7.0      # warna yang beda < 7 (Lab) disamakan -> warna konsisten
+  bg_min_frac: 0.12     # bidang besar yang menyentuh tepi kanvas = bagian background
+  # pencocokan bentuk dasar (IoU = seberapa pas, 1 = sempurna)
+  iou_rect: 0.965
+  iou_ellipse: 0.965
+  iou_polygon: 0.97
+  poly_eps: 1.5
+  poly_eps_frac: 0.004
+  poly_max_vertices: 10
+  axis_snap_deg: 1.5    # kotak miring < 1.5 derajat diluruskan
+  iou_stroke: 0.78      # garis: lebih toleran karena tipis
+  stroke_max_width: 40
+  stroke_min_aspect: 4  # garis = panjang >= 4x tebal
+  stroke_eps: 1.2
+  stroke_max_err_px: 2.5
+  # pen tool (kalau bukan bentuk dasar)
+  anchor_eps: 1.0
+  corner_deg: 50
+  smooth: 1.0
+  overlap_px: 1         # bidang bersebelahan saling tumpang 1px: tidak ada garis celah di Canva
+  # pengelompokan layer
+  icon_max_frac: 0.12
+  split_thin_px: 8      # bagian setipis < 2x8px yang memanjang dipisah dari bentuk tebal (kapsul + garis)
+  split_min_thick: 1500 # ...hanya bila bagian tebalnya >= 1500 px
+  line_max_contact: 0.3 # garis yang menempel di sepanjang bentuk lain (bingkai/tepi) bukan konektor
+  line_min_len: 60      # garis lebih panjang dari ini = layer garis sendiri
+  lines_by_color: true  # semua garis warna sama = 1 layer (ganti warna sekali klik)
+  # layer efek (1 saja)
+  effects: false        # VECTALLY: tidak ada layer efek PNG
+  fx_min_alpha: 0.06
+  fx_edge_px: 2         # tepi bentuk tidak masuk layer efek
+  fx_open_px: 3         # sisa tipis (garis tepi bentuk) dibuang dari layer efek
+  fx_min_px: 120       # gumpalan efek lebih kecil dari ini dibuang (bintik)
+  fx_from_smoothed: true  # efek dihitung dari gambar yang sudah dihaluskan: grain/bintik tidak ikut
+  fx_min_total: 0.0005
+  canva_max_gradient: 0.18  # bidang bergradien kuat -> gambar (shape Canva hanya warna solid)
+  canva_max_split: 999      # VECTALLY: pecah sebanyak perlu, jangan jatuh ke gambar
+  canva_never_image: true   # VECTALLY: tidak ada fallback PNG; gradien jadi warna solid rata-rata
+  text_reread: true      # baca ulang tiap baris (diregangkan utk font condensed, hitam-putih) + perbaiki kata
+  text_stretch: [0.7, 1.0, 1.6]   # dirapatkan (logo berspasi lebar), asli, diregangkan (font condensed)
+  text_logo_max_h: 0.04 # ...dan hurufnya kecil (< 4% tinggi kanvas); headline besar tetap dikoreksi
+  text_logo_top: 0.15    # teks 1-2 kata di 15% atas = logo/brand: tidak pernah dikoreksi kamus
+  text_line_px: 64
+  text_side_pad: 0.8      # baca ulang juga huruf yang terpotong di luar kotak OCR ("FINIS" -> "FINISH")
+  text_reread_min_words: 0.8  # bacaan ulang dipakai hanya bila >= 80% katanya kata sungguhan
+  text_word_bonus: 0.5   # bacaan yang terdiri dari kata sungguhan lebih dipercaya
+  text_dict_max_cost: 11.5   # kata dianggap ada di kamus (semakin besar semakin longgar)
+  text_split_max_cost: 10.0  # potongan kata gabungan harus kata yang cukup umum
+  text_min_chars: 3     # teks < 3 huruf/angka dianggap ikon (mis. "$", "2"), bukan teks
+  contain_frac: 0.85    # bentuk yang >= 85% berada DI ATAS bentuk lain = bagian objek itu
+  group_gap_px: 4       # bentuk berjarak <= 4px (dipisah garis tepi tipis) dianggap bersentuhan
+  group_contact: 0.25   # bentuk utama bersebelahan dgn tepi bersama >= 25% kelilingnya = 1 objek
