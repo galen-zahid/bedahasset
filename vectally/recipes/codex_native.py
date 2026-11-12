@@ -120,10 +120,8 @@ def export_native(scene, texts, out):
         elements.append(e)
         records.append(dict(id=a['id'], name=a['name'], parts=len(es), native_text=sum(c['type'] == 'text' for c in es)))
     for t in texts:
-        if t['parent'] is None:
+        if t['parent'] is None and not t.get('typecraft'):  # teks TypeCraft dibuat robot di Canva, bukan di paket
             e = fit_text(t['word'], t['font'], t['box'], t['color'], t['angle'])
-            if t.get('typecraft'):
-                e['name'] = f'{t["word"]} [TYPECRAFT: {t["typecraft"]}]'
             elements.append(e)
             sv.append(svg_text(e))
 

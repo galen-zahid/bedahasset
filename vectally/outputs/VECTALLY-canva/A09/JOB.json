@@ -1,0 +1,146 @@
+{
+  "code": "A09",
+  "packageFile": "D:\\Codex\\cusbe-remote-mcp\\uploads\\vectally-recipes\\A09_NATIVE_PACKAGE.json",
+  "packageSha256": "c549e7476985992702a60db08cd38bd305ef52f49be8c642120d8fa18e765417",
+  "expected": {
+    "native_shape": 74,
+    "native_text": 1
+  },
+  "warps": [
+    {
+      "text": "SIGNS",
+      "color": "#fdfdfd",
+      "quad": [
+        [
+          478.0,
+          470.0
+        ],
+        [
+          1041.0,
+          304.0
+        ],
+        [
+          1004.0,
+          574.0
+        ],
+        [
+          478.0,
+          761.0
+        ]
+      ],
+      "box": {
+        "Lebar": 563.0,
+        "X": 478.0,
+        "Y": 304.0
+      },
+      "targetBBox": [
+        478.0,
+        304.0,
+        1041.0,
+        761.0
+      ]
+    },
+    {
+      "text": "YOUR BOOKS",
+      "color": "#1ef7b2",
+      "quad": [
+        [
+          492.0,
+          807.0
+        ],
+        [
+          793.0,
+          697.0
+        ],
+        [
+          784.0,
+          773.0
+        ],
+        [
+          496.0,
+          882.0
+        ]
+      ],
+      "box": {
+        "Lebar": 301.0,
+        "X": 492.0,
+        "Y": 697.0
+      },
+      "targetBBox": [
+        492.0,
+        697.0,
+        793.0,
+        882.0
+      ]
+    },
+    {
+      "text": "NEED",
+      "color": "#011423",
+      "quad": [
+        [
+          118.0,
+          915.0
+        ],
+        [
+          565.0,
+          915.0
+        ],
+        [
+          565.0,
+          1126.0
+        ],
+        [
+          118.0,
+          1126.0
+        ]
+      ],
+      "box": {
+        "Lebar": 447.0,
+        "X": 118.0,
+        "Y": 915.0
+      },
+      "targetBBox": [
+        118.0,
+        915.0,
+        565.0,
+        1126.0
+      ]
+    },
+    {
+      "text": "ATTENTION.",
+      "color": "#fdfdfd",
+      "quad": [
+        [
+          105.0,
+          1129.0
+        ],
+        [
+          1067.0,
+          1129.0
+        ],
+        [
+          1067.0,
+          1354.0
+        ],
+        [
+          105.0,
+          1354.0
+        ]
+      ],
+      "box": {
+        "Lebar": 962.0,
+        "X": 105.0,
+        "Y": 1129.0
+      },
+      "targetBBox": [
+        105.0,
+        1129.0,
+        1067.0,
+        1354.0
+      ]
+    }
+  ],
+  "createUrl": "https://www.canva.com/design/editor/shell?create&width=1122&height=1402&units=px&ui=e30",
+  "downloadDirectory": "D:/download",
+  "fidelity": "NOT_TESTED"
+}

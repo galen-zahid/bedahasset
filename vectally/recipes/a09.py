@@ -147,8 +147,8 @@ def a09_texts(s):
     return [
         txt('SIGNS', sg[:4], 'League Gothic', WH, sg[4], typecraft='italic miring'),
         txt('YOUR BOOKS', bk[:4], 'League Gothic', GR, bk[4], typecraft='italic miring'),
-        txt('NEED', nd[:4], 'League Gothic', DK, 0),
-        txt('ATTENTION.', at[:4], 'League Gothic', WH, 0),
+        txt('NEED', nd[:4], 'League Gothic', DK, 0, typecraft='lurus, diregangkan ke kotak sumber'),
+        txt('ATTENTION.', at[:4], 'League Gothic', WH, 0, typecraft='lurus, diregangkan ke kotak sumber'),
         txt('VECTALLY', lg[:4], 'Archivo Black', DK, 0, parent='HEADER'),
     ]
 

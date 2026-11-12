@@ -1,0 +1,134 @@
+"""Bangun canva_robot.mjs dari robot Codex: fungsi dasar disalin apa adanya, sisanya dibuat umum."""
+from pathlib import Path
+
+HERE = Path(__file__).resolve().parent
+src = (HERE / '_codex_a07_fresh_gateway.mjs').read_text(encoding='utf-8').splitlines()
+keep = "\n".join(src[20:145])  # tool .. exportPng (verbatim Codex), berhenti sebelum blok try utama
+
+header = r'''// Robot Canva VECTALLY umum, DIKEMBANGKAN dari robot Codex a07_fresh_gateway.mjs
+// (C:/Users/HP/Documents/Codex/2026-11-07/files-mentioned-by-the-user-training/work).
+// Fungsi tool/evaluate/wait/openImporter/inspect/typecraft/exportPng disalin apa adanya.
+// Perubahan: job dari argumen (bukan A07 tetap), banyak TypeCraft per desain (warps[]),
+// teks/warna/quad/kotak dari job. Tidak memanggil AI saat berjalan.
+// Pemakaian: node canva_robot.mjs <JOB.json> --full
+import fs from 'node:fs/promises';
+import path from 'node:path';
+import {createRequire} from 'node:module';
+import crypto from 'node:crypto';
+import {setMesh} from './typecraft_ui_geometry.mjs';
+const gateway=process.env.CUSBE_GATEWAY_ROOT||'D:/Codex/cusbe-remote-mcp';
+const require=createRequire(path.join(gateway,'package.json'));
+const {Client}=require('@modelcontextprotocol/client');
+const {StdioClientTransport,getDefaultEnvironment}=require('@modelcontextprotocol/client/stdio');
+const jobFile=path.resolve(process.argv[2]);
+const job=JSON.parse(await fs.readFile(jobFile,'utf8'));
+const dir=path.join(path.dirname(jobFile),'runs',new Date().toISOString().replace(/[:.]/g,'-'));
+await fs.mkdir(dir,{recursive:true});
+const client=new Client({name:'vectally-canva-robot',version:'0.2.0'});
+const transport=new StdioClientTransport({command:process.execPath,args:[path.join(gateway,'dist/gateway.js')],cwd:gateway,env:getDefaultEnvironment(),stderr:'pipe'});
+transport.stderr?.on('data',()=>{});
+const events=[];
+const full=process.argv.includes('--full');
+let info;
+'''
+
+warp = r'''
+async function buildWarpOne(w,idx){
+ await typecraft();
+ // pastikan TypeCraft membuat objek BARU, bukan memperbarui objek yang sedang terpilih
+ for(let i=0;i<3;i++){
+  let mode='';
+  try{mode=await evaluate("e => Array.from(e.querySelectorAll('button')).map(b=>b.textContent).find(t=>t==='Tambahkan ke desain'||t==='Perbarui elemen')||''",'TypeCraft');}catch{}
+  if(mode!=='Perbarui elemen')break;
+  await tool('browser__browser_press_key',{key:'Escape'});await new Promise(r=>setTimeout(r,800));await typecraft();
+ }
+ await wait("e => !!e.querySelector('textarea#multi-line-text-input')",'TypeCraft');
+ const hasFont=await evaluate("e => Array.from(e.querySelectorAll('button')).some(b=>b.textContent==='League Gothic Condensed Regular')",'TypeCraft');
+ if(!hasFont){
+  await evaluate("e => {const b=Array.from(e.querySelectorAll('button')).find(b=>b.textContent==='New Amsterdam'||b.textContent.includes('League Gothic'));if(!b)throw new Error('Font picker not ready');b.click();return true}",'TypeCraft');
+  await wait("e => !!e.querySelector('img[alt=\"League Gothic Condensed Regular\"]')",'TypeCraft');
+  await evaluate("e => {e.querySelector('img[alt=\"League Gothic Condensed Regular\"]').click();return true}",'TypeCraft');
+ }
+ await tool('browser__browser_type',{target:'iframe[title="TypeCraft"] >> internal:control=enter-frame >> textarea#multi-line-text-input',text:w.text,slowly:false});
+ await wait(`e => e.querySelector('textarea#multi-line-text-input')?.value===${JSON.stringify(w.text)}`,'TypeCraft');
+ const sel=`button[aria-label="${w.color}"]`;
+ if(!await evaluate(`e => !!e.querySelector(${JSON.stringify(sel)})`,'TypeCraft')){
+  await evaluate("e => {const b=Array.from(e.querySelectorAll('button')).find(b=>/^#[0-9a-fA-F]{6}$/.test(b.getAttribute('aria-label')||''));if(!b)throw new Error('Fill control absent');b.click();return true}",'TypeCraft');
+  await wait(`() => !!document.querySelector(${JSON.stringify(sel)})`);
+  await evaluate(`() => {document.querySelector(${JSON.stringify(sel)}).click();return true}`);
+  await tool('browser__browser_press_key',{key:'Escape'});
+ }
+ await wait(`e => !!e.querySelector(${JSON.stringify(sel)})`,'TypeCraft');
+ await evaluate("e => {e.querySelector('button[aria-label=\"Distorsi kustom\"]').click();return true}",'TypeCraft');
+ await wait("e => Array.from(e.querySelectorAll('button')).some(b=>b.textContent==='Atur ulang bentuk')",'TypeCraft');
+ await evaluate("e => {Array.from(e.querySelectorAll('button')).find(b=>b.textContent==='Atur ulang bentuk').click();return true}",'TypeCraft');
+ await new Promise(r=>setTimeout(r,1500));
+ const mesh=await evaluate(`async e => (${setMesh.toString()})(e,${JSON.stringify(w.quad)})`,'TypeCraft');
+ await fs.writeFile(path.join(dir,`TYPECRAFT_${idx}_MESH.json`),JSON.stringify(mesh,null,2));
+ if(mesh.maxError>3)throw new Error('Warp handles do not match job for '+w.text);
+ await evaluate("e => {const b=Array.from(e.querySelectorAll('button')).find(b=>b.textContent==='Tambahkan ke desain');if(!b||b.disabled)throw new Error('Not a new TypeCraft object');b.click();return true}",'TypeCraft');
+ await wait(`() => document.querySelectorAll('main img[alt="Type Craft element"]').length>${idx}`);
+ await wait("() => Array.from(document.querySelectorAll('main button')).some(b=>b.textContent==='Posisi')");
+ await evaluate("() => {const b=Array.from(document.querySelectorAll('main button')).find(b=>b.textContent==='Posisi');if(b.getAttribute('aria-label')!=='Panel posisi terbuka')b.click();return true}");
+ await wait("() => Array.from(document.querySelectorAll('[role=\"tab\"]')).some(t=>t.textContent==='AturAtur')");
+ await evaluate("() => {const t=Array.from(document.querySelectorAll('[role=\"tab\"]')).find(t=>t.textContent==='AturAtur');if(t.getAttribute('aria-selected')!=='true')t.click();return true}");
+ for(const [label,value] of Object.entries(w.box)){
+  const id=await wait(`() => Array.from(document.querySelectorAll('label[for]')).find(l=>l.textContent===${JSON.stringify(label)})?.htmlFor||false`);
+  let filled=false;
+  for(let attempt=0;attempt<2;attempt++){
+   await evaluate(`() => {const i=document.getElementById(${JSON.stringify(id)});i.focus();i.select();return true}`);
+   await new Promise(r=>setTimeout(r,300));
+   await tool('browser__browser_type',{target:`input[id="${id}"]`,text:String(value),slowly:false});
+   filled=await evaluate(`() => document.getElementById(${JSON.stringify(id)}).value===${JSON.stringify(String(value))}`);
+   if(filled)break;
+  }
+  if(!filled)throw new Error('Position field did not replace old value: '+label);
+  await tool('browser__browser_press_key',{key:'Enter'});
+  await wait(`() => Math.abs(parseFloat(document.getElementById(${JSON.stringify(id)}).value)-${value})<0.1`);
+ }
+ await wait("() => !!document.querySelector('[aria-label=\"Semua perubahan disimpan\"]')");
+ await tool('browser__browser_press_key',{key:'Escape'});
+ console.log('TYPECRAFT_CREATED',w.text);
+}
+'''
+
+main = r'''
+try{
+ await client.connect(transport);
+ const names=(await client.listTools()).tools.map(t=>t.name);
+ if(!names.includes('browser__browser_drop'))throw new Error('Gateway does not expose the official file-drop action');
+ await tool('browser__browser_navigate',{url:job.createUrl});
+ await wait("() => document.querySelectorAll('[role=\"tab\"]').length>5");
+ info=await evaluate("() => ({url:location.href,title:document.title,pages:Array.from(document.querySelectorAll('[role=\"button\"][aria-label^=\"Halaman \"]')).map(e=>e.getAttribute('aria-label'))})");
+ const id=info.url.match(/\/design\/([^/]+)\//)?.[1];
+ if(!id)throw new Error('Creation did not produce a new design');
+ job.url=info.url;job.designId=id;job.designTitle=`VECTALLY ${job.code} RESEP AUTO `+new Date().toISOString().replace(/[^0-9]/g,'').slice(0,14);
+ await tool('browser__browser_type',{target:'input[aria-label="Judul desain"]',text:job.designTitle,slowly:false,submit:true});
+ if(info.pages.length!==1)throw new Error('Unexpected page collection');
+ const before=await inspect('BEFORE_EMPTY');
+ if(before.elements.length!==0)throw new Error('Refuse to assemble onto a nonempty page');
+ const bytes=await fs.readFile(job.packageFile);
+ if(crypto.createHash('sha256').update(bytes).digest('hex')!==job.packageSha256)throw new Error('Package changed since preparation');
+ await tool('browser__browser_drop',{target:'iframe[title="cusbe-importer"] >> internal:control=enter-frame >> [role="region"][aria-label="Unggah paket desain"]',paths:[job.packageFile]});
+ await wait("e => Array.from(e.querySelectorAll('button')).some(b=>b.textContent==='Susun di halaman yang sedang dibuka'&&!b.disabled)",'cusbe-importer');
+ await evaluate("e => {Array.from(e.querySelectorAll('button')).find(b=>b.textContent==='Susun di halaman yang sedang dibuka').click();return true}",'cusbe-importer');
+ const log=await wait("e => {const p=Array.from(e.querySelectorAll('p')).map(p=>p.textContent);return p.some(t=>t.startsWith('Selesai:'))?p:false}",'cusbe-importer',120000);
+ await fs.writeFile(path.join(dir,'IMPORT_LOG.json'),JSON.stringify(log,null,2));
+ if(log.some(t=>t.includes('GAGAL')||t.includes('Impor dihentikan')||t.includes('Error:')))throw new Error('Importer reported a rejected element or font');
+ const after=await inspect('AFTER_NATIVE_BASE');
+ console.log('NATIVE_BASE',JSON.stringify(after.breakdown));
+ if(full){
+  for(const [i,w] of job.warps.entries())await buildWarpOne(w,i);
+  const final=await inspect('FINAL_INSPECTION');
+  const apps=final.elements.filter(e=>e.classification==='manual_review_required').map(e=>e.bboxInParent);
+  const png=await exportPng();
+  const output={job,completedAt:new Date().toISOString(),stage:'FULL_CONSTRUCTION_EXPORTED_NOT_YET_FIDELITY_PASSED',base:after.breakdown,final:final.breakdown,typecraftBoxes:apps,export:png,runtimeUsesAI:false};
+  await fs.writeFile(path.join(dir,'FULL_RESULT.json'),JSON.stringify(output,null,2));
+  console.log('FULL_CONSTRUCTION_PASS_FIDELITY_PENDING',job.url);
+ }
+}catch(e){await fs.writeFile(path.join(dir,'FAILED.json'),JSON.stringify({error:e.message},null,2));console.error('STAGE_FAILED',e.message);process.exitCode=1;}
+finally{console.log('EVIDENCE',dir);await client.close().catch(()=>{});}
+'''
+
+(HERE / 'canva_robot.mjs').write_text(header + keep + "\n" + warp + main, encoding='utf-8')
+print('ok')
