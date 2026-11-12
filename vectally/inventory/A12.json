@@ -226,31 +226,195 @@
    "details": false
   },
   {
-   "id": "cincin_luar",
-   "name": "Cincin tipis luar",
+   "id": "grid_kiri",
+   "name": "Grid tipis kiri",
+   "lines": [
+    [
+     135,
+     540,
+     135,
+     690
+    ],
+    [
+     179,
+     540,
+     179,
+     690
+    ],
+    [
+     40,
+     584,
+     230,
+     584
+    ],
+    [
+     40,
+     630,
+     230,
+     630
+    ],
+    [
+     40,
+     677,
+     230,
+     677
+    ]
+   ],
+   "width": 2,
    "roi": [
-    200,
-    340,
-    940,
-    900
+    30,
+    530,
+    240,
+    700
    ],
    "seeds": [
     [
-     225,
-     550
+     135,
+     600
     ]
    ],
-   "details": false,
-   "fill_holes": false,
-   "ring": [
+   "color": "#c4b0fa",
+   "details": false
+  },
+  {
+   "id": "grid_kanan",
+   "name": "Grid tipis kanan",
+   "lines": [
+    [
+     931,
+     617,
+     931,
+     830
+    ],
+    [
+     975,
+     617,
+     975,
+     830
+    ],
+    [
+     900,
+     660,
+     1017,
+     660
+    ],
+    [
+     900,
+     705,
+     1017,
+     705
+    ],
+    [
+     900,
+     752,
+     1017,
+     752
+    ],
+    [
+     900,
+     797,
+     1017,
+     797
+    ]
+   ],
+   "width": 2,
+   "roi": [
+    890,
+    610,
+    1025,
+    835
+   ],
+   "seeds": [
+    [
+     1000,
+     660
+    ]
+   ],
+   "color": "#5f6472",
+   "details": false
+  },
+  {
+   "id": "bayangan_jam",
+   "name": "Jam - bayangan ungu",
+   "ellipse": [
+    530,
+    770,
+    345,
+    330
+   ],
+   "roi": [
+    150,
+    340,
+    920,
+    1070
+   ],
+   "seeds": [
+    [
+     893,
+     700
+    ]
+   ],
+   "color": "#6a50c4",
+   "front_of_text": true,
+   "details": false
+  },
+  {
+   "id": "cincin_luar",
+   "name": "Cincin tipis luar",
+   "arc": [
     561,
     712,
-    369,
-    353,
     365,
-    349
+    351,
+    360,
+    346,
+    -157,
+    40
    ],
-   "front_of_text": true
+   "roi": [
+    150,
+    340,
+    940,
+    960
+   ],
+   "seeds": [
+    [
+     930,
+     700
+    ]
+   ],
+   "color": "#f8f5fe",
+   "front_of_text": true,
+   "details": false
+  },
+  {
+   "id": "pita_ungu_kanan",
+   "name": "Jam - pita ungu kanan",
+   "arc": [
+    561,
+    712,
+    343,
+    329,
+    326,
+    312,
+    -25,
+    48
+   ],
+   "roi": [
+    820,
+    560,
+    920,
+    980
+   ],
+   "seeds": [
+    [
+     893,
+     700
+    ]
+   ],
+   "color": "#3c2c8c",
+   "front_of_text": true,
+   "details": false
   },
   {
    "id": "jam_badan",
@@ -375,6 +539,34 @@
     ]
    ],
    "color": "#04ea95",
+   "front_of_text": true,
+   "details": false
+  },
+  {
+   "id": "penanda_12",
+   "name": "Jam - penanda 12",
+   "fit": "roi",
+   "roi": [
+    [
+     553,
+     394
+    ],
+    [
+     567,
+     394
+    ],
+    [
+     560,
+     380
+    ]
+   ],
+   "seeds": [
+    [
+     560,
+     390
+    ]
+   ],
+   "color": "#f8f8fb",
    "front_of_text": true,
    "details": false
   },

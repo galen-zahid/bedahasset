@@ -207,7 +207,17 @@ def build(inv_path, out_dir):
         m = keep_seeded(m & r, o["seeds"])
         vis = m.copy()                      # bagian yang terlihat (sebelum lubang ditutup) -> warna badan
         m = fill_holes(m) & r if o.get("fill_holes", True) else m
-        if o.get("ring"):  # cincin: [cx, cy, r_luar, r_dalam] atau [cx, cy, rx_l, ry_l, rx_d, ry_d]
+        if o.get("lines"):  # garis lurus tipis: [[x0,y0,x1,y1],...] + "width"
+            wd = o.get("width", 2) / 2
+            ds = []
+            for x0, y0, x1, y1 in o["lines"]:
+                L_ = math.hypot(x1 - x0, y1 - y0) or 1
+                nx, ny = -(y1 - y0) / L_ * wd, (x1 - x0) / L_ * wd
+                ds.append(poly_d([(x0 + nx, y0 + ny), (x1 + nx, y1 + ny), (x1 - nx, y1 - ny), (x0 - nx, y0 - ny)]))
+            fm = np.zeros((H, W), bool)
+            for d in ds:
+                fm |= raster(d, H, W)
+        elif o.get("ring"):  # cincin: [cx, cy, r_luar, r_dalam] atau [cx, cy, rx_l, ry_l, rx_d, ry_d]
             g = o["ring"]
             cx, cy, ax, ay, bx, by = (g[0], g[1], g[2], g[2], g[3], g[3]) if len(g) == 4 else g
             ds = [ellipse_d(cx, cy, ax, ay, 0.0) + " " + ellipse_d(cx, cy, bx, -by, 0.0)]  # dalam dibalik -> lubang
