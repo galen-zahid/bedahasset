@@ -94,8 +94,8 @@ async function buildWarpOne(w,idx){
 
 main = r'''
 try{
- await client.connect(transport);
- const names=(await client.listTools()).tools.map(t=>t.name);
+ await client.connect(transport,{timeout:240000}); // gateway butuh ~65 dtk untuk menyala
+ const names=(await client.listTools(undefined,{timeout:240000})).tools.map(t=>t.name);
  if(!names.includes('browser__browser_drop'))throw new Error('Gateway does not expose the official file-drop action');
  await tool('browser__browser_navigate',{url:job.createUrl});
  await wait("() => document.querySelectorAll('[role=\"tab\"]').length>5");
