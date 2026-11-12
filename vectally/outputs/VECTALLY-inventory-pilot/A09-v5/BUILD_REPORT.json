@@ -1,0 +1,227 @@
+[
+ {
+  "id": "garis_atas",
+  "fit": "auto",
+  "visible_px": 420,
+  "body_px": 1320,
+  "paths": 1,
+  "color": "#0b2a2a"
+ },
+ {
+  "id": "dekor_ungu",
+  "fit": "polyauto",
+  "visible_px": 63471,
+  "body_px": 59949,
+  "paths": 14,
+  "color": "#9e67fa"
+ },
+ {
+  "id": "dekor_gelap",
+  "fit": "polyauto",
+  "visible_px": 389012,
+  "body_px": 385151,
+  "paths": 14,
+  "color": "#011323"
+ },
+ {
+  "id": "angka3",
+  "fit": "auto",
+  "visible_px": 220348,
+  "body_px": 218456,
+  "paths": 1,
+  "color": "#fcfcfc",
+  "details": 14
+ },
+ {
+  "id": "angka3_sisi_hijau",
+  "fit": "poly:4",
+  "visible_px": 8795,
+  "body_px": 7950,
+  "paths": 1,
+  "color": "#01d47c"
+ },
+ {
+  "id": "garis_penghubung",
+  "fit": "auto",
+  "visible_px": 80555,
+  "body_px": 1195,
+  "paths": 1,
+  "color": "#0a1a1f"
+ },
+ {
+  "id": "kartu1",
+  "fit": "auto",
+  "visible_px": 12324,
+  "body_px": 12240,
+  "paths": 1,
+  "color": "#001423"
+ },
+ {
+  "id": "kartu2",
+  "fit": "auto",
+  "visible_px": 12396,
+  "body_px": 12132,
+  "paths": 1,
+  "color": "#001523"
+ },
+ {
+  "id": "kartu3",
+  "fit": "auto",
+  "visible_px": 12391,
+  "body_px": 12177,
+  "paths": 1,
+  "color": "#001423"
+ },
+ {
+  "id": "k1_batang1",
+  "fit": "roi",
+  "visible_px": 294,
+  "body_px": 397,
+  "paths": 1,
+  "color": "#9a6cf6"
+ },
+ {
+  "id": "k1_batang2",
+  "fit": "roi",
+  "visible_px": 543,
+  "body_px": 714,
+  "paths": 1,
+  "color": "#1ef7b2"
+ },
+ {
+  "id": "k1_batang3",
+  "fit": "roi",
+  "visible_px": 10,
+  "body_px": 961,
+  "paths": 1,
+  "color": "#1ef7b2"
+ },
+ {
+  "id": "k1_lingkar_tepi",
+  "fit": "auto",
+  "visible_px": 122,
+  "body_px": 1665,
+  "paths": 1,
+  "color": "#010d18"
+ },
+ {
+  "id": "k1_lingkar",
+  "fit": "auto",
+  "visible_px": 122,
+  "body_px": 1256,
+  "paths": 1,
+  "color": "#9a6cf6"
+ },
+ {
+  "id": "k1_silang",
+  "fit": "auto",
+  "visible_px": 729,
+  "body_px": 213,
+  "paths": 2,
+  "color": "#010d18"
+ },
+ {
+  "id": "k2_papan",
+  "fit": "auto",
+  "visible_px": 5004,
+  "body_px": 794,
+  "paths": 4,
+  "color": "#1ef7b2"
+ },
+ {
+  "id": "k2_klip",
+  "fit": "roi",
+  "visible_px": 47,
+  "body_px": 77,
+  "paths": 1,
+  "color": "#1ef7b2"
+ },
+ {
+  "id": "k2_baris",
+  "fit": "auto",
+  "visible_px": 98,
+  "body_px": 326,
+  "paths": 3,
+  "color": "#1ef7b2"
+ },
+ {
+  "id": "k2_lingkar_tepi",
+  "fit": "auto",
+  "visible_px": 1087,
+  "body_px": 1394,
+  "paths": 1,
+  "color": "#010d18"
+ },
+ {
+  "id": "k2_lingkar",
+  "fit": "auto",
+  "visible_px": 1087,
+  "body_px": 1044,
+  "paths": 1,
+  "color": "#9a6cf6"
+ },
+ {
+  "id": "k2_jarum",
+  "fit": "auto",
+  "visible_px": 62,
+  "body_px": 74,
+  "paths": 2,
+  "color": "#010d18"
+ },
+ {
+  "id": "k3_batang1",
+  "fit": "roi",
+  "visible_px": 277,
+  "body_px": 429,
+  "paths": 1,
+  "color": "#9a6cf6"
+ },
+ {
+  "id": "k3_batang2",
+  "fit": "roi",
+  "visible_px": 551,
+  "body_px": 827,
+  "paths": 1,
+  "color": "#1ef7b2"
+ },
+ {
+  "id": "k3_batang3",
+  "fit": "roi",
+  "visible_px": 513,
+  "body_px": 927,
+  "paths": 1,
+  "color": "#1ef7b2"
+ },
+ {
+  "id": "k3_lingkar_tepi",
+  "fit": "auto",
+  "visible_px": 56,
+  "body_px": 1524,
+  "paths": 1,
+  "color": "#010d18"
+ },
+ {
+  "id": "k3_lingkar",
+  "fit": "auto",
+  "visible_px": 56,
+  "body_px": 1171,
+  "paths": 1,
+  "color": "#9a6cf6"
+ },
+ {
+  "id": "k3_jarum",
+  "fit": "auto",
+  "visible_px": 111,
+  "body_px": 96,
+  "paths": 2,
+  "color": "#010d18"
+ },
+ {
+  "id": "titik_putih",
+  "fit": "auto",
+  "visible_px": 343,
+  "body_px": 316,
+  "paths": 1,
+  "color": "#fcfefd"
+ }
+]

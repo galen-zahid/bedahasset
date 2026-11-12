@@ -127,9 +127,9 @@ def fit_shape(mask, how, H, W):
         ds = [ellipse_d(cx, cy, a / 2, b / 2, math.radians(ang))]
     elif how == "rect":
         ds = [poly_d(cv2.boxPoints(cv2.minAreaRect(allp)))]
-    elif how == "hull" or how.startswith("poly"):
+    elif how == "hull" or how.startswith("poly:"):
         hull = cv2.convexHull(allp)
-        if how.startswith("poly"):
+        if how.startswith("poly:"):
             n = int(how.split(":")[1])
             eps = 1.0
             q = cv2.approxPolyDP(hull, eps, True)
@@ -138,6 +138,11 @@ def fit_shape(mask, how, H, W):
                 q = cv2.approxPolyDP(hull, eps, True)
             hull = q
         ds = [poly_d(hull.reshape(-1, 2))]
+    elif how == "polyauto":  # bidang bersisi lurus (pecahan/pita): sudut tegas, sedikit titik
+        for c in cnts:
+            d = contour_d(c, 2.5)
+            if d:
+                ds.append(d)
     else:  # auto: siluet yang terlihat, tepi dirapikan
         for c in cnts:
             d = contour_d(c, 1.4)
@@ -185,11 +190,15 @@ def build(inv_path, out_dir):
 
     # tinta teks: dikecualikan dari badan dan detail
     textpix = np.zeros((H, W), bool)
-    for t in inv.get("text", []):
+    textmasks = {}
+    for k, t in enumerate(inv.get("text", [])):
         r = roi_mask(t["roi"], H, W)
         c = L[t["seed"][1], t["seed"][0]]
-        textpix |= r & (np.linalg.norm(L - c, axis=2) < t.get("tol", 20))
-    textpix = cv2.dilate(textpix.astype(np.uint8), np.ones((3, 3), np.uint8)) > 0
+        tm = r & (np.linalg.norm(L - c, axis=2) < t.get("tol", 20))
+        tm = cv2.dilate(tm.astype(np.uint8), np.ones((3, 3), np.uint8)) > 0
+        textmasks[t.get("id", f"t{k}")] = tm
+        textpix |= tm
+    rois = {o["id"]: o["roi"] for o in inv["objects"]}
 
     bx, by = inv["background"]
     bg_col = np.median(flat[np.linalg.norm(L - L[by, bx], axis=2) < 6], 0)
@@ -197,14 +206,22 @@ def build(inv_path, out_dir):
     fits, cols, report = [], [], []
     for o in objs:
         r = roi_mask(o["roi"], H, W)
+        for ex in o.get("exclude", []):        # ROI benda lain dikeluarkan (kepemilikan tegas)
+            r &= ~roi_mask(rois[ex], H, W)
         tol = o.get("tol", 14)
+        o["seeds"] = [[int(round(x)), int(round(y))] for x, y in o["seeds"]]
         seedL = [L[y, x] for x, y in o["seeds"]]
         match = np.zeros((H, W), bool)
         for c in seedL:
             match |= np.linalg.norm(L - c, axis=2) < tol
-        m = r & (match | textpix)
+        absorb = textpix
+        if "absorb_text" in o:                 # teks mana yang ditutup badan ini (default: semua)
+            absorb = np.zeros((H, W), bool)
+            for tid in o["absorb_text"]:
+                absorb |= textmasks[tid]
+        m = r & (match | absorb) & ~(textpix & ~absorb)   # huruf yang tidak diserap tidak boleh jadi badan
         m = cv2.morphologyEx(m.astype(np.uint8), cv2.MORPH_CLOSE, np.ones((5, 5), np.uint8)) > 0
-        m = keep_seeded(m & r, o["seeds"])
+        m = (m & r) if o.get("all_components") else keep_seeded(m & r, o["seeds"])
         vis = m.copy()                      # bagian yang terlihat (sebelum lubang ditutup) -> warna badan
         m = fill_holes(m) & r if o.get("fill_holes", True) else m
         if o.get("lines"):  # garis lurus tipis: [[x0,y0,x1,y1],...] + "width"
@@ -273,7 +290,8 @@ def build(inv_path, out_dir):
                                3, cv2.KMEANS_PP_CENTERS)
     dist = np.stack([np.linalg.norm(L - c, axis=2) for c in centers], 0)
     qlab = np.argmin(dist, 0)
-    qlab = cv2.medianBlur(qlab.astype(np.uint8), 5)
+    qraw = qlab.astype(np.uint8)
+    qlab = cv2.medianBlur(qraw, 5)
 
     elements = [shape_el("Latar", poly_d([(0, 0), (W, 0), (W, H), (0, H)]), hexc(bg_col))]
     for i, o in enumerate(objs):
@@ -288,8 +306,9 @@ def build(inv_path, out_dir):
             diff = np.linalg.norm(L - lab(np.array([[col]], np.uint8))[0, 0], axis=2) > o.get("detail_tol", 16)
             dm = own & diff & ~textpix
             parts = []
-            for q in np.unique(qlab[dm]):
-                mq = (dm & (qlab == q)).astype(np.uint8)
+            ql = cv2.medianBlur(qraw, 3) if o.get("fine_details") else qlab   # ikon kecil: jangan dihaluskan berlebihan
+            for q in np.unique(ql[dm]):
+                mq = (dm & (ql == q)).astype(np.uint8)
                 mq = cv2.morphologyEx(mq, cv2.MORPH_OPEN, np.ones((2, 2), np.uint8))
                 cnts, _ = cv2.findContours(mq, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
                 for c in cnts:

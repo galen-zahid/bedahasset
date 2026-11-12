@@ -1,0 +1,987 @@
+{
+ "code": "A09",
+ "source": "sources/VECTALLY/Feed/VECTALLY_A09_Three_Signs_Your_Books_Need_Attention.png",
+ "background": [
+  1100,
+  1380
+ ],
+ "objects": [
+  {
+   "id": "garis_atas",
+   "name": "Garis atas",
+   "lines": [
+    [
+     310,
+     56,
+     970,
+     56
+    ]
+   ],
+   "width": 2,
+   "roi": [
+    300,
+    50,
+    980,
+    62
+   ],
+   "seeds": [
+    [
+     600,
+     56
+    ]
+   ],
+   "color": "#0b2a2a",
+   "details": false
+  },
+  {
+   "id": "dekor_ungu",
+   "name": "Pecahan ungu",
+   "roi": [
+    0,
+    0,
+    1122,
+    1402
+   ],
+   "seeds": [
+    [
+     10,
+     214
+    ],
+    [
+     818,
+     78
+    ],
+    [
+     964,
+     289
+    ]
+   ],
+   "tol": 22,
+   "all_components": true,
+   "fit": "polyauto",
+   "fill_holes": false,
+   "details": false,
+   "exclude": [
+    "angka3"
+   ],
+   "absorb_text": []
+  },
+  {
+   "id": "dekor_gelap",
+   "name": "Pecahan gelap & plat",
+   "roi": [
+    0,
+    0,
+    1122,
+    1402
+   ],
+   "seeds": [
+    [
+     58,
+     305
+    ],
+    [
+     1037,
+     484
+    ],
+    [
+     604,
+     847
+    ]
+   ],
+   "tol": 16,
+   "all_components": true,
+   "fit": "polyauto",
+   "fill_holes": false,
+   "details": false,
+   "exclude": [
+    "kartu1",
+    "kartu2",
+    "kartu3"
+   ],
+   "absorb_text": [
+    "signs",
+    "books"
+   ]
+  },
+  {
+   "id": "angka3",
+   "name": "Angka 3 (3D)",
+   "roi": [
+    [
+     50,
+     700
+    ],
+    [
+     130,
+     330
+    ],
+    [
+     160,
+     200
+    ],
+    [
+     460,
+     95
+    ],
+    [
+     565,
+     105
+    ],
+    [
+     705,
+     235
+    ],
+    [
+     705,
+     305
+    ],
+    [
+     565,
+     455
+    ],
+    [
+     525,
+     470
+    ],
+    [
+     478,
+     620
+    ],
+    [
+     460,
+     840
+    ],
+    [
+     260,
+     915
+    ],
+    [
+     55,
+     890
+    ]
+   ],
+   "seeds": [
+    [
+     395,
+     158
+    ],
+    [
+     150,
+     780
+    ],
+    [
+     609,
+     179
+    ],
+    [
+     300,
+     830
+    ],
+    [
+     600,
+     250
+    ]
+   ],
+   "tol": 18,
+   "fit": "auto",
+   "color": "#fcfcfc",
+   "absorb_text": [
+    "signs"
+   ]
+  },
+  {
+   "id": "angka3_sisi_hijau",
+   "name": "Angka 3 - sisi dalam hijau",
+   "roi": [
+    270,
+    235,
+    450,
+    360
+   ],
+   "seeds": [
+    [
+     369,
+     303
+    ]
+   ],
+   "tol": 8,
+   "fit": "poly:4",
+   "details": false,
+   "absorb_text": []
+  },
+  {
+   "id": "garis_penghubung",
+   "name": "Garis penghubung ikon",
+   "arc": [
+    955,
+    875,
+    106,
+    231,
+    104,
+    229,
+    -95,
+    110
+   ],
+   "roi": [
+    880,
+    630,
+    1070,
+    1120
+   ],
+   "seeds": [
+    [
+     1060,
+     875
+    ]
+   ],
+   "color": "#0a1a1f",
+   "details": false,
+   "absorb_text": []
+  },
+  {
+   "id": "kartu1",
+   "name": "Kartu ikon grafik",
+   "roi": [
+    930,
+    722,
+    1070,
+    860
+   ],
+   "seeds": [
+    [
+     950,
+     830
+    ]
+   ],
+   "fit": "auto",
+   "absorb_text": [],
+   "fine_details": true,
+   "detail_tol": 20,
+   "details": false
+  },
+  {
+   "id": "kartu2",
+   "name": "Kartu ikon dokumen",
+   "roi": [
+    876,
+    856,
+    1018,
+    995
+   ],
+   "seeds": [
+    [
+     900,
+     960
+    ]
+   ],
+   "fit": "auto",
+   "absorb_text": [],
+   "fine_details": true,
+   "detail_tol": 20,
+   "details": false
+  },
+  {
+   "id": "kartu3",
+   "name": "Kartu ikon jam",
+   "roi": [
+    796,
+    986,
+    935,
+    1125
+   ],
+   "seeds": [
+    [
+     820,
+     1100
+    ]
+   ],
+   "fit": "auto",
+   "absorb_text": [],
+   "fine_details": true,
+   "detail_tol": 20,
+   "details": false
+  },
+  {
+   "id": "k1_batang1",
+   "name": "Kartu1 batang 1",
+   "fit": "roi",
+   "roi": [
+    [
+     957,
+     791
+    ],
+    [
+     971,
+     790
+    ],
+    [
+     972,
+     818
+    ],
+    [
+     958,
+     819
+    ]
+   ],
+   "seeds": [
+    [
+     964,
+     804
+    ]
+   ],
+   "color": "#9a6cf6",
+   "details": false,
+   "absorb_text": []
+  },
+  {
+   "id": "k1_batang2",
+   "name": "Kartu1 batang 2",
+   "fit": "roi",
+   "roi": [
+    [
+     974,
+     778
+    ],
+    [
+     990,
+     776
+    ],
+    [
+     992,
+     820
+    ],
+    [
+     976,
+     822
+    ]
+   ],
+   "seeds": [
+    [
+     983,
+     799
+    ]
+   ],
+   "color": "#1ef7b2",
+   "details": false,
+   "absorb_text": []
+  },
+  {
+   "id": "k1_batang3",
+   "name": "Kartu1 batang 3",
+   "fit": "roi",
+   "roi": [
+    [
+     995,
+     760
+    ],
+    [
+     1010,
+     758
+    ],
+    [
+     1011,
+     824
+    ],
+    [
+     997,
+     825
+    ]
+   ],
+   "seeds": [
+    [
+     1003,
+     791
+    ]
+   ],
+   "color": "#1ef7b2",
+   "details": false,
+   "absorb_text": []
+  },
+  {
+   "id": "k1_lingkar_tepi",
+   "name": "Kartu1 tepi lingkaran",
+   "ellipse": [
+    1026.7,
+    788.7,
+    23,
+    23
+   ],
+   "roi": [
+    1000.7,
+    762.7,
+    1052.7,
+    814.7
+   ],
+   "seeds": [
+    [
+     1026,
+     788
+    ]
+   ],
+   "color": "#010d18",
+   "details": false,
+   "absorb_text": []
+  },
+  {
+   "id": "k1_lingkar",
+   "name": "Kartu1 lingkaran",
+   "ellipse": [
+    1026.7,
+    788.7,
+    20,
+    20
+   ],
+   "roi": [
+    1003.7,
+    765.7,
+    1049.7,
+    811.7
+   ],
+   "seeds": [
+    [
+     1026,
+     788
+    ]
+   ],
+   "color": "#9a6cf6",
+   "details": false,
+   "absorb_text": []
+  },
+  {
+   "id": "k1_silang",
+   "name": "Kartu1 tanda silang",
+   "lines": [
+    [
+     1018,
+     780,
+     1035,
+     797
+    ],
+    [
+     1035,
+     780,
+     1018,
+     797
+    ]
+   ],
+   "width": 5,
+   "roi": [
+    1013,
+    775,
+    1040,
+    802
+   ],
+   "seeds": [
+    [
+     1018,
+     780
+    ]
+   ],
+   "color": "#010d18",
+   "details": false,
+   "absorb_text": []
+  },
+  {
+   "id": "k2_papan",
+   "name": "Kartu2 papan klip",
+   "lines": [
+    [
+     913,
+     893,
+     976,
+     901
+    ],
+    [
+     912,
+     893,
+     910,
+     957
+    ],
+    [
+     910,
+     957,
+     946,
+     961
+    ],
+    [
+     976,
+     901,
+     975,
+     932
+    ]
+   ],
+   "width": 4,
+   "roi": [
+    905,
+    888,
+    981,
+    966
+   ],
+   "seeds": [
+    [
+     913,
+     893
+    ]
+   ],
+   "color": "#1ef7b2",
+   "details": false,
+   "absorb_text": []
+  },
+  {
+   "id": "k2_klip",
+   "name": "Kartu2 klip",
+   "fit": "roi",
+   "roi": [
+    [
+     947,
+     889
+    ],
+    [
+     954,
+     889
+    ],
+    [
+     954,
+     900
+    ],
+    [
+     947,
+     900
+    ]
+   ],
+   "seeds": [
+    [
+     950,
+     894
+    ]
+   ],
+   "color": "#1ef7b2",
+   "details": false,
+   "absorb_text": []
+  },
+  {
+   "id": "k2_baris",
+   "name": "Kartu2 baris teks",
+   "lines": [
+    [
+     931,
+     911,
+     961,
+     917
+    ],
+    [
+     931,
+     924,
+     958,
+     928
+    ],
+    [
+     926,
+     938,
+     948,
+     941
+    ]
+   ],
+   "width": 4,
+   "roi": [
+    921,
+    906,
+    966,
+    946
+   ],
+   "seeds": [
+    [
+     931,
+     911
+    ]
+   ],
+   "color": "#1ef7b2",
+   "details": false,
+   "absorb_text": []
+  },
+  {
+   "id": "k2_lingkar_tepi",
+   "name": "Kartu2 tepi lingkaran",
+   "ellipse": [
+    971,
+    951,
+    21,
+    21
+   ],
+   "roi": [
+    947,
+    927,
+    995,
+    975
+   ],
+   "seeds": [
+    [
+     971,
+     951
+    ]
+   ],
+   "color": "#010d18",
+   "details": false,
+   "absorb_text": []
+  },
+  {
+   "id": "k2_lingkar",
+   "name": "Kartu2 lingkaran",
+   "ellipse": [
+    971,
+    951,
+    18.3,
+    18.3
+   ],
+   "roi": [
+    949.7,
+    929.7,
+    992.3,
+    972.3
+   ],
+   "seeds": [
+    [
+     971,
+     951
+    ]
+   ],
+   "color": "#9a6cf6",
+   "details": false,
+   "absorb_text": []
+  },
+  {
+   "id": "k2_jarum",
+   "name": "Kartu2 jarum jam",
+   "lines": [
+    [
+     969.5,
+     941,
+     971,
+     953
+    ],
+    [
+     971,
+     953,
+     977.7,
+     954
+    ]
+   ],
+   "width": 4,
+   "roi": [
+    964.5,
+    936,
+    982.7,
+    959
+   ],
+   "seeds": [
+    [
+     969.5,
+     941
+    ]
+   ],
+   "color": "#010d18",
+   "details": false,
+   "absorb_text": []
+  },
+  {
+   "id": "k3_batang1",
+   "name": "Kartu3 batang 1",
+   "fit": "roi",
+   "roi": [
+    [
+     823,
+     1054
+    ],
+    [
+     836,
+     1053
+    ],
+    [
+     836,
+     1086
+    ],
+    [
+     823,
+     1087
+    ]
+   ],
+   "seeds": [
+    [
+     829,
+     1070
+    ]
+   ],
+   "color": "#9a6cf6",
+   "details": false,
+   "absorb_text": []
+  },
+  {
+   "id": "k3_batang2",
+   "name": "Kartu3 batang 2",
+   "fit": "roi",
+   "roi": [
+    [
+     837,
+     1042
+    ],
+    [
+     855,
+     1040
+    ],
+    [
+     856,
+     1086
+    ],
+    [
+     838,
+     1087
+    ]
+   ],
+   "seeds": [
+    [
+     846,
+     1063
+    ]
+   ],
+   "color": "#1ef7b2",
+   "details": false,
+   "absorb_text": []
+  },
+  {
+   "id": "k3_batang3",
+   "name": "Kartu3 batang 3",
+   "fit": "roi",
+   "roi": [
+    [
+     857,
+     1024
+    ],
+    [
+     871,
+     1022
+    ],
+    [
+     872,
+     1088
+    ],
+    [
+     858,
+     1089
+    ]
+   ],
+   "seeds": [
+    [
+     864,
+     1055
+    ]
+   ],
+   "color": "#1ef7b2",
+   "details": false,
+   "absorb_text": []
+  },
+  {
+   "id": "k3_lingkar_tepi",
+   "name": "Kartu3 tepi lingkaran",
+   "ellipse": [
+    890.7,
+    1062.7,
+    22,
+    22
+   ],
+   "roi": [
+    865.7,
+    1037.7,
+    915.7,
+    1087.7
+   ],
+   "seeds": [
+    [
+     890,
+     1062
+    ]
+   ],
+   "color": "#010d18",
+   "details": false,
+   "absorb_text": []
+  },
+  {
+   "id": "k3_lingkar",
+   "name": "Kartu3 lingkaran",
+   "ellipse": [
+    890.7,
+    1062.7,
+    19.3,
+    19.3
+   ],
+   "roi": [
+    868.4000000000001,
+    1040.4,
+    913.0,
+    1085.0
+   ],
+   "seeds": [
+    [
+     890,
+     1062
+    ]
+   ],
+   "color": "#9a6cf6",
+   "details": false,
+   "absorb_text": []
+  },
+  {
+   "id": "k3_jarum",
+   "name": "Kartu3 jarum jam",
+   "lines": [
+    [
+     890.7,
+     1051,
+     892,
+     1066
+    ],
+    [
+     892,
+     1066,
+     900.7,
+     1067.7
+    ]
+   ],
+   "width": 4,
+   "roi": [
+    885.7,
+    1046,
+    905.7,
+    1072.7
+   ],
+   "seeds": [
+    [
+     890.7,
+     1051
+    ]
+   ],
+   "color": "#010d18",
+   "details": false,
+   "absorb_text": []
+  },
+  {
+   "id": "titik_putih",
+   "name": "Titik putih",
+   "ellipse": [
+    1047,
+    982,
+    10,
+    10
+   ],
+   "roi": [
+    1030,
+    965,
+    1065,
+    1000
+   ],
+   "seeds": [
+    [
+     1047,
+     982
+    ]
+   ],
+   "details": false
+  }
+ ],
+ "text": [
+  {
+   "id": "logo",
+   "roi": [
+    70,
+    38,
+    290,
+    78
+   ],
+   "seed": [
+    80,
+    57
+   ],
+   "tol": 20
+  },
+  {
+   "id": "signs",
+   "roi": [
+    [
+     470,
+     470
+    ],
+    [
+     1055,
+     275
+    ],
+    [
+     1055,
+     600
+    ],
+    [
+     470,
+     790
+    ]
+   ],
+   "seed": [
+    560,
+    600
+   ],
+   "tol": 18
+  },
+  {
+   "id": "books",
+   "roi": [
+    [
+     480,
+     720
+    ],
+    [
+     800,
+     680
+    ],
+    [
+     810,
+     790
+    ],
+    [
+     480,
+     900
+    ]
+   ],
+   "seed": [
+    612,
+    812
+   ],
+   "tol": 18
+  },
+  {
+   "id": "need",
+   "roi": [
+    110,
+    912,
+    562,
+    1130
+   ],
+   "seed": [
+    150,
+    1000
+   ],
+   "tol": 14
+  },
+  {
+   "id": "attention",
+   "roi": [
+    100,
+    1125,
+    1075,
+    1402
+   ],
+   "seed": [
+    160,
+    1300
+   ],
+   "tol": 16
+  }
+ ]
+}
