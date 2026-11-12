@@ -361,11 +361,20 @@ def smooth(e, override=None):
         x, y = int((p[0] + pad) * SS), int((p[1] + pad) * SS)
         return 0 <= y < inner.shape[0] and 0 <= x < inner.shape[1] and bool(inner[y, x])
 
+    kern = np.ones((4 * SS + 1, 4 * SS + 1), np.uint8)
+    outer_band = cv2.dilate(source.astype(np.uint8), kern) > 0
+    core = cv2.erode(source.astype(np.uint8), kern) > 0
+
     def build(d):
         node = dict(e)
         node["viewBox"] = dict(left=0, top=0, width=e["width"], height=e["height"])
         node["paths"] = [dict(e["paths"][0], d=d)]
         got = rasterize(node)[0] >= 128
+        # pengaman duri/sayatan: IoU tetap tinggi walau ada garis tipis panjang yang keluar dari
+        # bentuk (> 2 px di luar) atau menyayat ke dalam (> 2 px di dalam) -> tolak
+        stray = int((got & ~outer_band).sum()) + int((core & ~got).sum())
+        if stray > 12 * SS * SS:
+            return node, 0.0, False
         return node, (got & source).sum() / max(1, (got | source).sum()), topology(got) == topo
 
     if topo[1] == 0 and len(big) >= 5:

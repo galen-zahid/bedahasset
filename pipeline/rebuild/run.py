@@ -92,10 +92,23 @@ def _run(path, out, models, cfg, c):
             # "No", "Hi" are words; "2", "7s", "$" read off icons are not
             return n >= c.text_min_chars or (n == 2 and t.isalpha() and b["confidence"] >= 0.9)
 
-        keep = [b for b in blocks if _is_text(b)]
+        big_frac = float(c.get("text_max_remove_frac", 0) or 0)
+        big = [b for b in blocks if big_frac and b["h"] > big_frac * H]
+        keep = [b for b in blocks if _is_text(b) and b not in big]
         for b in blocks:
-            if b not in keep:
+            if b in big:
+                log.info("  huruf besar tetap vektor (tidak dihapus): %r ~%dpx", b["text"], b["h"])
+            elif b not in keep:
                 log.info("  bukan teks (terlalu pendek, kemungkinan ikon): %r", b["text"])
+        if big:  # disimpan untuk tahap teks nanti (headline native di atas huruf vektor)
+            try:
+                Path(out).mkdir(parents=True, exist_ok=True)
+                (Path(out) / "HEADLINE_OCR.json").write_text(json.dumps(
+                    [{"text": str(b["text"]), "x": int(b["x"]), "y": int(b["y"]), "w": int(b["w"]), "h": int(b["h"]),
+                      "color": str(b.get("color_hex", "")), "conf": float(b.get("confidence", 0))} for b in big],
+                    ensure_ascii=False), encoding="utf-8")
+            except Exception as e:  # noqa: BLE001
+                log.warning("  HEADLINE_OCR.json gagal: %s", e)
         text_mask = blob_mask
         if c.text_mask_mode == "glyph":
             # only the letters themselves are removed: what shows between them (a stripe, a
