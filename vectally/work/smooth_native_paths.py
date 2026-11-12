@@ -385,7 +385,9 @@ def smooth(e, override=None):
         filled = 0
         for q in corners4:
             p = q + (mid - q) / np.linalg.norm(mid - q) * 0.2 * t4
-            filled += bool(source[int(p[1]), int(p[0])])
+            yy = min(max(int(p[1]), 0), source.shape[0] - 1)
+            xx = min(max(int(p[0]), 0), source.shape[1] - 1)
+            filled += bool(source[yy, xx])
         box = corners4 / SS - pad
         if is_bar and filled <= 1 and os.environ.get("SMOOTH_ROUND", "1") == "1":
             # Ujung membulat di sumber: pertahankan sebagai radius, bukan sudut.
