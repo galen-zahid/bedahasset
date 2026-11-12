@@ -369,7 +369,7 @@ rebuild:
                          # (yang ada di DEPAN pita dipotong jadi layer photo_front di atas pita)
   stripe_min_width: 50   # ...minimal selebar 50px (kilau/cahaya tipis di lantai bukan pita)
   stripe_min_hidden: 0.0 # pita boleh tertutup apa saja (orang, rak); kilau lantai tersaring oleh lebar minimal
-  bands: true            # pita/strip yang terpotong huruf disambung jadi 1 pita utuh di belakang teks
+  bands: false           # VECTALLY: mati (tombol pil dikira pita lurus, ikon di dalamnya tertelan) | pita/strip yang terpotong huruf disambung jadi 1 pita utuh di belakang teks
   rules: true            # garis tipis lurus (pemisah di samping teks kecil) -> 1 garis vektor utuh
   rule_contrast: 30
   rule_min_len: 40
@@ -401,7 +401,7 @@ rebuild:
   flat_grad: 3.0        # perubahan warna (Lab/px) di bawah ini = "datar" (bagian dalam bidang)
   min_seed_px: 12       # bidang lebih kecil dari ini tidak jadi bidang sendiri
   min_region_px: 40     # bidang < ini digabung ke tetangga yang warnanya paling mirip
-  merge_tol: 0.002       # bidang bertetangga yang bisa dijelaskan 1 gradien digabung (tekstur/banding hilang)
+  merge_tol: 0.0         # VECTALLY: 0 (0.002 meleburkan isi ikon kecil ke kartunya) | bidang bertetangga yang bisa dijelaskan 1 gradien digabung (tekstur/banding hilang)
   color_join: 0.15       # ...kecuali rata-rata warnanya beda jauh
   merge_max_both: 0.01   # ...dan tidak bila keduanya bidang besar (> 1% kanvas)
   photos: true           # area yang butuh banyak bidang kecil tak beraturan = foto -> tetap foto (PNG)

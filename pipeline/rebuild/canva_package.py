@@ -247,7 +247,7 @@ def _never_image_elements(L, regs, W, H, c, warnings):
 
 def vector_layer_elements(L, W, H, c, out, warnings):
     """Native shape element(s) for one vector layer, or an image fallback."""
-    regs = sorted(L["regions"], key=lambda r: r["z"])
+    regs = sorted([r for r in L["regions"] if not r.get("_drop")], key=lambda r: r["z"])
     never = bool(c.get("canva_never_image", False))
     if never:
         return _never_image_elements(L, regs, W, H, c, warnings)
@@ -296,6 +296,14 @@ def _cover_glyphs(layers, blocks, text_mask, W, H):
     menguasai kotak teks itu, supaya tidak ada lubang/bekas bentuk huruf lama di bawah teks Canva."""
     regs = [(li, r) for li, L in enumerate(layers) if L["type"] == "vector"
             for r in L["regions"] if r["shape"][0] != "canvas"]
+    # bercak sisa hapusan huruf: bidang kecil yang >= 60% berada di atas piksel huruf dibuang
+    # (tempatnya ditutup bidang latar di bawah, yang menerima piksel huruf di bawah ini)
+    for _, r in regs:
+        sl, m = r["sl"], r["filled"]
+        tm = text_mask[sl[0].start:sl[0].start + m.shape[0], sl[1].start:sl[1].start + m.shape[1]]
+        if tm.shape == m.shape and m.any() and m.sum() < 0.02 * W * H and (tm & m).sum() >= 0.6 * m.sum():
+            r["_drop"] = True
+    regs = [(li, r) for li, r in regs if not r.get("_drop")]
     for b in blocks:
         x, y, w, h = [int(v) for v in b.get("ocr_bbox", (b["x"], b["y"], b["w"], b["h"]))]
         p = max(4, int(0.15 * h))
