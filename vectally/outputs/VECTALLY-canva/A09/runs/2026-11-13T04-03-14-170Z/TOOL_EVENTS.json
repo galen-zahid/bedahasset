@@ -1,0 +1,32 @@
+[
+  {
+    "name": "browser__browser_navigate",
+    "ms": 1761,
+    "error": false
+  },
+  {
+    "name": "browser__browser_evaluate",
+    "ms": 531,
+    "error": false
+  },
+  {
+    "name": "browser__browser_evaluate",
+    "ms": 1890,
+    "error": false
+  },
+  {
+    "name": "browser__browser_evaluate",
+    "ms": 1163,
+    "error": false
+  },
+  {
+    "name": "browser__browser_evaluate",
+    "ms": 522,
+    "error": false
+  },
+  {
+    "name": "browser__browser_type",
+    "ms": 19,
+    "error": true
+  }
+]

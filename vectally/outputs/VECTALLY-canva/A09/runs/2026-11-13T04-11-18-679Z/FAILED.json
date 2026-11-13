@@ -1,0 +1,3 @@
+{
+  "error": "Warp handles never stable for YOUR BOOKS: ### Error\nbrowserBackend.callTool: Error: Expected ten visible warp handles, got 9\n    at points (eval at <anonymous> (eval at evaluate (:370:30)), <anonymous>:9:29)\n    at setMesh (eval at <anonymous"
+}

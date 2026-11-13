@@ -1,0 +1,167 @@
+[
+  {
+    "name": "browser__browser_navigate",
+    "ms": 4426,
+    "error": false
+  },
+  {
+    "name": "browser__browser_evaluate",
+    "ms": 1987,
+    "error": false
+  },
+  {
+    "name": "browser__browser_evaluate",
+    "ms": 1641,
+    "error": false
+  },
+  {
+    "name": "browser__browser_evaluate",
+    "ms": 1956,
+    "error": false
+  },
+  {
+    "name": "browser__browser_type",
+    "ms": 1155,
+    "error": false
+  },
+  {
+    "name": "browser__browser_evaluate",
+    "ms": 1483,
+    "error": false
+  },
+  {
+    "name": "browser__browser_evaluate",
+    "ms": 1171,
+    "error": false
+  },
+  {
+    "name": "browser__browser_evaluate",
+    "ms": 1433,
+    "error": false
+  },
+  {
+    "name": "browser__browser_evaluate",
+    "ms": 25,
+    "error": true
+  },
+  {
+    "name": "browser__browser_evaluate",
+    "ms": 19,
+    "error": true
+  },
+  {
+    "name": "browser__browser_evaluate",
+    "ms": 18,
+    "error": true
+  },
+  {
+    "name": "browser__browser_evaluate",
+    "ms": 20,
+    "error": true
+  },
+  {
+    "name": "browser__browser_evaluate",
+    "ms": 27,
+    "error": true
+  },
+  {
+    "name": "browser__browser_evaluate",
+    "ms": 200,
+    "error": true
+  },
+  {
+    "name": "browser__browser_evaluate",
+    "ms": 25,
+    "error": true
+  },
+  {
+    "name": "browser__browser_evaluate",
+    "ms": 58,
+    "error": true
+  },
+  {
+    "name": "browser__browser_evaluate",
+    "ms": 29,
+    "error": true
+  },
+  {
+    "name": "browser__browser_evaluate",
+    "ms": 23,
+    "error": true
+  },
+  {
+    "name": "browser__browser_evaluate",
+    "ms": 19,
+    "error": true
+  },
+  {
+    "name": "browser__browser_evaluate",
+    "ms": 1674,
+    "error": false
+  },
+  {
+    "name": "browser__browser_evaluate",
+    "ms": 588,
+    "error": false
+  },
+  {
+    "name": "browser__browser_evaluate",
+    "ms": 601,
+    "error": false
+  },
+  {
+    "name": "browser__browser_evaluate",
+    "ms": 656,
+    "error": false
+  },
+  {
+    "name": "browser__browser_evaluate",
+    "ms": 592,
+    "error": false
+  },
+  {
+    "name": "browser__browser_evaluate",
+    "ms": 1105,
+    "error": false
+  },
+  {
+    "name": "browser__browser_evaluate",
+    "ms": 592,
+    "error": false
+  },
+  {
+    "name": "browser__browser_drop",
+    "ms": 5048,
+    "error": true
+  },
+  {
+    "name": "browser__browser_evaluate",
+    "ms": 585,
+    "error": false
+  },
+  {
+    "name": "browser__browser_drop",
+    "ms": 5051,
+    "error": true
+  },
+  {
+    "name": "browser__browser_evaluate",
+    "ms": 604,
+    "error": false
+  },
+  {
+    "name": "browser__browser_drop",
+    "ms": 5043,
+    "error": true
+  },
+  {
+    "name": "browser__browser_evaluate",
+    "ms": 580,
+    "error": false
+  },
+  {
+    "name": "browser__browser_drop",
+    "ms": 5054,
+    "error": true
+  }
+]

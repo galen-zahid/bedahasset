@@ -1,0 +1,372 @@
+[
+  {
+    "name": "browser__browser_navigate",
+    "ms": 5467,
+    "error": false
+  },
+  {
+    "name": "browser__browser_evaluate",
+    "ms": 4,
+    "error": true
+  },
+  {
+    "name": "browser__browser_evaluate",
+    "ms": 4,
+    "error": true
+  },
+  {
+    "name": "browser__browser_evaluate",
+    "ms": 33,
+    "error": true
+  },
+  {
+    "name": "browser__browser_evaluate",
+    "ms": 4,
+    "error": true
+  },
+  {
+    "name": "browser__browser_evaluate",
+    "ms": 2,
+    "error": true
+  },
+  {
+    "name": "browser__browser_evaluate",
+    "ms": 3,
+    "error": true
+  },
+  {
+    "name": "browser__browser_evaluate",
+    "ms": 3,
+    "error": true
+  },
+  {
+    "name": "browser__browser_evaluate",
+    "ms": 5,
+    "error": true
+  },
+  {
+    "name": "browser__browser_evaluate",
+    "ms": 3,
+    "error": true
+  },
+  {
+    "name": "browser__browser_evaluate",
+    "ms": 3,
+    "error": true
+  },
+  {
+    "name": "browser__browser_evaluate",
+    "ms": 2,
+    "error": true
+  },
+  {
+    "name": "browser__browser_evaluate",
+    "ms": 3,
+    "error": true
+  },
+  {
+    "name": "browser__browser_evaluate",
+    "ms": 2,
+    "error": true
+  },
+  {
+    "name": "browser__browser_evaluate",
+    "ms": 2,
+    "error": true
+  },
+  {
+    "name": "browser__browser_evaluate",
+    "ms": 3,
+    "error": true
+  },
+  {
+    "name": "browser__browser_evaluate",
+    "ms": 2,
+    "error": true
+  },
+  {
+    "name": "browser__browser_evaluate",
+    "ms": 2,
+    "error": true
+  },
+  {
+    "name": "browser__browser_evaluate",
+    "ms": 2,
+    "error": true
+  },
+  {
+    "name": "browser__browser_evaluate",
+    "ms": 2,
+    "error": true
+  },
+  {
+    "name": "browser__browser_evaluate",
+    "ms": 2,
+    "error": true
+  },
+  {
+    "name": "browser__browser_evaluate",
+    "ms": 1,
+    "error": true
+  },
+  {
+    "name": "browser__browser_evaluate",
+    "ms": 73,
+    "error": true
+  },
+  {
+    "name": "browser__browser_evaluate",
+    "ms": 3,
+    "error": true
+  },
+  {
+    "name": "browser__browser_evaluate",
+    "ms": 4,
+    "error": true
+  },
+  {
+    "name": "browser__browser_evaluate",
+    "ms": 3,
+    "error": true
+  },
+  {
+    "name": "browser__browser_evaluate",
+    "ms": 6,
+    "error": true
+  },
+  {
+    "name": "browser__browser_evaluate",
+    "ms": 31,
+    "error": true
+  },
+  {
+    "name": "browser__browser_evaluate",
+    "ms": 3,
+    "error": true
+  },
+  {
+    "name": "browser__browser_evaluate",
+    "ms": 4,
+    "error": true
+  },
+  {
+    "name": "browser__browser_evaluate",
+    "ms": 3,
+    "error": true
+  },
+  {
+    "name": "browser__browser_evaluate",
+    "ms": 2,
+    "error": true
+  },
+  {
+    "name": "browser__browser_evaluate",
+    "ms": 4,
+    "error": true
+  },
+  {
+    "name": "browser__browser_evaluate",
+    "ms": 3,
+    "error": true
+  },
+  {
+    "name": "browser__browser_evaluate",
+    "ms": 6,
+    "error": true
+  },
+  {
+    "name": "browser__browser_evaluate",
+    "ms": 2,
+    "error": true
+  },
+  {
+    "name": "browser__browser_evaluate",
+    "ms": 2,
+    "error": true
+  },
+  {
+    "name": "browser__browser_evaluate",
+    "ms": 3,
+    "error": true
+  },
+  {
+    "name": "browser__browser_evaluate",
+    "ms": 2,
+    "error": true
+  },
+  {
+    "name": "browser__browser_evaluate",
+    "ms": 2,
+    "error": true
+  },
+  {
+    "name": "browser__browser_evaluate",
+    "ms": 4,
+    "error": true
+  },
+  {
+    "name": "browser__browser_evaluate",
+    "ms": 2,
+    "error": true
+  },
+  {
+    "name": "browser__browser_evaluate",
+    "ms": 2,
+    "error": true
+  },
+  {
+    "name": "browser__browser_evaluate",
+    "ms": 16,
+    "error": true
+  },
+  {
+    "name": "browser__browser_evaluate",
+    "ms": 2,
+    "error": true
+  },
+  {
+    "name": "browser__browser_evaluate",
+    "ms": 2,
+    "error": true
+  },
+  {
+    "name": "browser__browser_evaluate",
+    "ms": 2,
+    "error": true
+  },
+  {
+    "name": "browser__browser_evaluate",
+    "ms": 2,
+    "error": true
+  },
+  {
+    "name": "browser__browser_evaluate",
+    "ms": 2,
+    "error": true
+  },
+  {
+    "name": "browser__browser_evaluate",
+    "ms": 2,
+    "error": true
+  },
+  {
+    "name": "browser__browser_evaluate",
+    "ms": 1,
+    "error": true
+  },
+  {
+    "name": "browser__browser_evaluate",
+    "ms": 2,
+    "error": true
+  },
+  {
+    "name": "browser__browser_evaluate",
+    "ms": 2,
+    "error": true
+  },
+  {
+    "name": "browser__browser_evaluate",
+    "ms": 2,
+    "error": true
+  },
+  {
+    "name": "browser__browser_evaluate",
+    "ms": 2,
+    "error": true
+  },
+  {
+    "name": "browser__browser_evaluate",
+    "ms": 2,
+    "error": true
+  },
+  {
+    "name": "browser__browser_evaluate",
+    "ms": 4,
+    "error": true
+  },
+  {
+    "name": "browser__browser_evaluate",
+    "ms": 3,
+    "error": true
+  },
+  {
+    "name": "browser__browser_evaluate",
+    "ms": 3,
+    "error": true
+  },
+  {
+    "name": "browser__browser_evaluate",
+    "ms": 9,
+    "error": true
+  },
+  {
+    "name": "browser__browser_evaluate",
+    "ms": 12,
+    "error": true
+  },
+  {
+    "name": "browser__browser_evaluate",
+    "ms": 3,
+    "error": true
+  },
+  {
+    "name": "browser__browser_evaluate",
+    "ms": 3,
+    "error": true
+  },
+  {
+    "name": "browser__browser_evaluate",
+    "ms": 3,
+    "error": true
+  },
+  {
+    "name": "browser__browser_evaluate",
+    "ms": 3,
+    "error": true
+  },
+  {
+    "name": "browser__browser_evaluate",
+    "ms": 2,
+    "error": true
+  },
+  {
+    "name": "browser__browser_evaluate",
+    "ms": 7,
+    "error": true
+  },
+  {
+    "name": "browser__browser_evaluate",
+    "ms": 5,
+    "error": true
+  },
+  {
+    "name": "browser__browser_evaluate",
+    "ms": 10,
+    "error": true
+  },
+  {
+    "name": "browser__browser_evaluate",
+    "ms": 7,
+    "error": true
+  },
+  {
+    "name": "browser__browser_evaluate",
+    "ms": 4,
+    "error": true
+  },
+  {
+    "name": "browser__browser_evaluate",
+    "ms": 7,
+    "error": true
+  },
+  {
+    "name": "browser__browser_evaluate",
+    "ms": 4,
+    "error": true
+  },
+  {
+    "name": "browser__browser_evaluate",
+    "ms": 3,
+    "error": true
+  }
+]

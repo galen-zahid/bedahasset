@@ -15,7 +15,7 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import {createRequire} from 'node:module';
 import crypto from 'node:crypto';
-import {setMesh} from './typecraft_ui_geometry.mjs';
+import {setMesh2} from './typecraft_mesh.mjs';
 const gateway=process.env.CUSBE_GATEWAY_ROOT||'D:/Codex/cusbe-remote-mcp';
 const require=createRequire(path.join(gateway,'package.json'));
 const {Client}=require('@modelcontextprotocol/client');
@@ -33,14 +33,28 @@ let info;
 '''
 
 warp = r'''
+async function deselect(){
+ // klik tombol halaman (cara robot Codex di activatePage): halaman terpilih = elemen tidak terpilih
+ await evaluate("() => {const b=Array.from(document.querySelectorAll('[role=\"button\"][aria-label^=\"Halaman \"]'))[0];if(b)b.click();return !!b}");
+ await new Promise(r=>setTimeout(r,1000));
+ for(let i=0;i<2;i++){await tool('browser__browser_press_key',{key:'Escape'});await new Promise(r=>setTimeout(r,400));}
+ let mode='';
+ try{await typecraft();mode=await evaluate("e => Array.from(e.querySelectorAll('button')).map(b=>b.textContent).find(t=>t==='Tambahkan ke desain'||t==='Perbarui elemen')||''",'TypeCraft');}catch{}
+ if(mode==='Perbarui elemen'){
+  const btns=await evaluate("e => Array.from(e.querySelectorAll('button')).map(b=>b.textContent||b.getAttribute('aria-label')).filter(Boolean).slice(0,60)",'TypeCraft').catch(()=>[]);
+  await fs.writeFile(path.join(dir,'DESELECT_FAILED_BUTTONS.json'),JSON.stringify(btns,null,1));
+ }
+ return mode;
+}
 async function buildWarpOne(w,idx){
+ if(idx>0)await deselect();
  await typecraft();
  // pastikan TypeCraft membuat objek BARU, bukan memperbarui objek yang sedang terpilih
  for(let i=0;i<3;i++){
   let mode='';
   try{mode=await evaluate("e => Array.from(e.querySelectorAll('button')).map(b=>b.textContent).find(t=>t==='Tambahkan ke desain'||t==='Perbarui elemen')||''",'TypeCraft');}catch{}
   if(mode!=='Perbarui elemen')break;
-  await tool('browser__browser_press_key',{key:'Escape'});await new Promise(r=>setTimeout(r,800));await typecraft();
+  await deselect();await typecraft();
  }
  await wait("e => !!e.querySelector('textarea#multi-line-text-input')",'TypeCraft');
  const hasFont=await evaluate("e => Array.from(e.querySelectorAll('button')).some(b=>b.textContent==='League Gothic Condensed Regular')",'TypeCraft');
@@ -51,23 +65,46 @@ async function buildWarpOne(w,idx){
  }
  await tool('browser__browser_type',{target:'iframe[title="TypeCraft"] >> internal:control=enter-frame >> textarea#multi-line-text-input',text:w.text,slowly:false});
  await wait(`e => e.querySelector('textarea#multi-line-text-input')?.value===${JSON.stringify(w.text)}`,'TypeCraft');
- const sel=`button[aria-label="${w.color}"]`;
- if(!await evaluate(`e => !!e.querySelector(${JSON.stringify(sel)})`,'TypeCraft')){
-  await evaluate("e => {const b=Array.from(e.querySelectorAll('button')).find(b=>/^#[0-9a-fA-F]{6}$/.test(b.getAttribute('aria-label')||''));if(!b)throw new Error('Fill control absent');b.click();return true}",'TypeCraft');
-  await wait(`() => !!document.querySelector(${JSON.stringify(sel)})`);
-  await evaluate(`() => {document.querySelector(${JSON.stringify(sel)}).click();return true}`);
-  await tool('browser__browser_press_key',{key:'Escape'});
+ // warna dipilih lewat swatch warna dokumen; teks terang diwarnai gelap dulu supaya titik pegangan
+ // distorsi (putih) tidak tertukar dengan huruf putih saat mengukur, lalu diganti warna asli
+ async function pickColor(c){
+  const sel=`button[aria-label="${c}"]`;
+  if(!await evaluate(`e => !!e.querySelector(${JSON.stringify(sel)})`,'TypeCraft')){
+   await evaluate("e => {const b=Array.from(e.querySelectorAll('button')).find(b=>/^#[0-9a-fA-F]{6}$/.test(b.getAttribute('aria-label')||''));if(!b)throw new Error('Fill control absent');b.click();return true}",'TypeCraft');
+   await wait(`() => !!document.querySelector(${JSON.stringify(sel)})`);
+   await evaluate(`() => {document.querySelector(${JSON.stringify(sel)}).click();return true}`);
+   await tool('browser__browser_press_key',{key:'Escape'});
+  }
+  await wait(`e => !!e.querySelector(${JSON.stringify(sel)})`,'TypeCraft');
  }
- await wait(`e => !!e.querySelector(${JSON.stringify(sel)})`,'TypeCraft');
+ const rgb=[1,3,5].map(i=>parseInt(w.color.slice(i,i+2),16));
+ const light=rgb.every(v=>v>200);
+ await pickColor(light?(job.meshColor||'#011423'):w.color);
  await evaluate("e => {e.querySelector('button[aria-label=\"Distorsi kustom\"]').click();return true}",'TypeCraft');
  await wait("e => Array.from(e.querySelectorAll('button')).some(b=>b.textContent==='Atur ulang bentuk')",'TypeCraft');
- await evaluate("e => {Array.from(e.querySelectorAll('button')).find(b=>b.textContent==='Atur ulang bentuk').click();return true}",'TypeCraft');
- await new Promise(r=>setTimeout(r,1500));
- const mesh=await evaluate(`async e => (${setMesh.toString()})(e,${JSON.stringify(w.quad)})`,'TypeCraft');
+ // titik pegangan bisa belum selesai di-reset saat dihitung: reset ulang dan coba lagi
+ let mesh=null,meshErr='';
+ for(let attempt=0;attempt<4&&!mesh;attempt++){
+  await evaluate("e => {Array.from(e.querySelectorAll('button')).find(b=>b.textContent==='Atur ulang bentuk').click();return true}",'TypeCraft');
+  await new Promise(r=>setTimeout(r,2000+attempt*1500));
+  const r=await evaluate(`async e => (${setMesh2.toString()})(e,${JSON.stringify(w.quad)})`,'TypeCraft');
+  if(r.error){meshErr=r.error;console.log('ulang distorsi',w.text,r.error);
+   if(r.canvas)await fs.writeFile(path.join(dir,`TYPECRAFT_${idx}_CANVAS_${attempt}.png`),Buffer.from(r.canvas.split(',')[1],'base64'));
+   await fs.writeFile(path.join(dir,`TYPECRAFT_${idx}_BLOBS_${attempt}.json`),JSON.stringify(r.blobs||[],null,1));}
+  else mesh=r;
+ }
+ if(!mesh)throw new Error('Warp handles never stable for '+w.text+': '+meshErr.slice(0,200));
  await fs.writeFile(path.join(dir,`TYPECRAFT_${idx}_MESH.json`),JSON.stringify(mesh,null,2));
  if(mesh.maxError>3)throw new Error('Warp handles do not match job for '+w.text);
  await evaluate("e => {const b=Array.from(e.querySelectorAll('button')).find(b=>b.textContent==='Tambahkan ke desain');if(!b||b.disabled)throw new Error('Not a new TypeCraft object');b.click();return true}",'TypeCraft');
  await wait(`() => document.querySelectorAll('main img[alt="Type Craft element"]').length>${idx}`);
+ if(light){ // warna terang diterapkan setelah elemen dibuat (tombol warna tersembunyi selama mode distorsi)
+  await typecraft();
+  await wait("e => Array.from(e.querySelectorAll('button')).some(b=>b.textContent==='Perbarui elemen')",'TypeCraft',45000);
+  await pickColor(w.color);
+  await evaluate("e => {const b=Array.from(e.querySelectorAll('button')).find(b=>b.textContent==='Perbarui elemen');if(!b||b.disabled)throw new Error('Update not available');b.click();return true}",'TypeCraft');
+  await new Promise(r=>setTimeout(r,2500));
+ }
  await wait("() => Array.from(document.querySelectorAll('main button')).some(b=>b.textContent==='Posisi')");
  await evaluate("() => {const b=Array.from(document.querySelectorAll('main button')).find(b=>b.textContent==='Posisi');if(b.getAttribute('aria-label')!=='Panel posisi terbuka')b.click();return true}");
  await wait("() => Array.from(document.querySelectorAll('[role=\"tab\"]')).some(t=>t.textContent==='AturAtur')");
@@ -87,7 +124,7 @@ async function buildWarpOne(w,idx){
   await wait(`() => Math.abs(parseFloat(document.getElementById(${JSON.stringify(id)}).value)-${value})<0.1`);
  }
  await wait("() => !!document.querySelector('[aria-label=\"Semua perubahan disimpan\"]')");
- await tool('browser__browser_press_key',{key:'Escape'});
+ await deselect();
  console.log('TYPECRAFT_CREATED',w.text);
 }
 '''
@@ -97,19 +134,38 @@ try{
  await client.connect(transport,{timeout:240000}); // gateway butuh ~65 dtk untuk menyala
  const names=(await client.listTools(undefined,{timeout:240000})).tools.map(t=>t.name);
  if(!names.includes('browser__browser_drop'))throw new Error('Gateway does not expose the official file-drop action');
+ await tool('browser__browser_resize',{width:1500,height:1000}); // sama seperti robot Codex: header Canva lengkap
  await tool('browser__browser_navigate',{url:job.createUrl});
  await wait("() => document.querySelectorAll('[role=\"tab\"]').length>5");
  info=await evaluate("() => ({url:location.href,title:document.title,pages:Array.from(document.querySelectorAll('[role=\"button\"][aria-label^=\"Halaman \"]')).map(e=>e.getAttribute('aria-label'))})");
  const id=info.url.match(/\/design\/([^/]+)\//)?.[1];
  if(!id)throw new Error('Creation did not produce a new design');
  job.url=info.url;job.designId=id;job.designTitle=`VECTALLY ${job.code} RESEP AUTO `+new Date().toISOString().replace(/[^0-9]/g,'').slice(0,14);
- await tool('browser__browser_type',{target:'input[aria-label="Judul desain"]',text:job.designTitle,slowly:false,submit:true});
+ // judul hanya untuk mengenali file unduhan; kalau kotak judul tidak muncul, lanjut tanpa judul
+ let titled=false;
+ try{await wait("() => !!document.querySelector('input[aria-label=\"Judul desain\"]')",undefined,45000);
+  await tool('browser__browser_type',{target:'input[aria-label="Judul desain"]',text:job.designTitle,slowly:false,submit:true});titled=true;}
+ catch(e){console.log('Judul dilewati:',e.message.slice(0,120));}
+ if(!titled)job.designTitle='';
  if(info.pages.length!==1)throw new Error('Unexpected page collection');
  const before=await inspect('BEFORE_EMPTY');
  if(before.elements.length!==0)throw new Error('Refuse to assemble onto a nonempty page');
  const bytes=await fs.readFile(job.packageFile);
  if(crypto.createHash('sha256').update(bytes).digest('hex')!==job.packageSha256)throw new Error('Package changed since preparation');
- await tool('browser__browser_drop',{target:'iframe[title="cusbe-importer"] >> internal:control=enter-frame >> [role="region"][aria-label="Unggah paket desain"]',paths:[job.packageFile]});
+ // area unggah kadang belum stabil (panel masih bergerak): tunggu terlihat, gulir ke tampilan, coba ulang
+ // tab di latar belakang tidak dirender (tidak "stabil" untuk Playwright): bawa tab ini ke depan
+ async function front(){
+  try{const list=await tool('browser__browser_tabs',{action:'list'});const m=list.match(/- (\d+): \(current\)/);if(m)await tool('browser__browser_tabs',{action:'select',index:+m[1]});}catch(e){console.log('front skipped',e.message.slice(0,120));}
+ }
+ await front();
+ let dropped=false,lastErr='';
+ for(let attempt=0;attempt<4&&!dropped;attempt++){
+  await wait("e => {const z=e.querySelector('[role=\"region\"][aria-label=\"Unggah paket desain\"]');if(!z)return false;z.scrollIntoView({block:'center'});const r=z.getBoundingClientRect();return r.width>20&&r.height>20}",'cusbe-importer');
+  await new Promise(r=>setTimeout(r,1500+attempt*1500));
+  try{await tool('browser__browser_drop',{target:'iframe[title="cusbe-importer"] >> internal:control=enter-frame >> [role="region"][aria-label="Unggah paket desain"]',paths:[job.packageFile]});dropped=true;}
+  catch(e){lastErr=e.message;await front();}
+ }
+ if(!dropped)throw new Error('Drop failed after retries: '+lastErr.slice(0,300));
  await wait("e => Array.from(e.querySelectorAll('button')).some(b=>b.textContent==='Susun di halaman yang sedang dibuka'&&!b.disabled)",'cusbe-importer');
  await evaluate("e => {Array.from(e.querySelectorAll('button')).find(b=>b.textContent==='Susun di halaman yang sedang dibuka').click();return true}",'cusbe-importer');
  const log=await wait("e => {const p=Array.from(e.querySelectorAll('p')).map(p=>p.textContent);return p.some(t=>t.startsWith('Selesai:'))?p:false}",'cusbe-importer',120000);

@@ -1,0 +1,2436 @@
+{
+  "version": 1,
+  "stage": "magic_layers_candidate",
+  "observedAt": "2026-11-13T04:19:24.073Z",
+  "scope": "current_page",
+  "addressing": "sibling order; group bounds relative to parent; IDs are snapshot-local",
+  "elements": [
+    {
+      "address": "0",
+      "type": "shape",
+      "locked": false,
+      "bboxInParent": [
+        0,
+        0,
+        1122,
+        1402
+      ],
+      "rotation": 0,
+      "transparency": 0,
+      "classification": "native_shape",
+      "paths": [
+        {
+          "d": "M0 0 L1122 0 L1122 1402 L0 1402 Z",
+          "color": {
+            "type": "solid",
+            "color": "#02f598"
+          },
+          "isMediaEditable": false
+        }
+      ],
+      "viewBox": {
+        "top": 0,
+        "left": 0,
+        "width": 1122,
+        "height": 1402
+      }
+    },
+    {
+      "address": "1",
+      "type": "group",
+      "locked": false,
+      "bboxInParent": [
+        0,
+        0,
+        1121,
+        1125
+      ],
+      "rotation": 0,
+      "transparency": 0,
+      "classification": "group",
+      "children": [
+        {
+          "address": "1/0",
+          "type": "shape",
+          "locked": false,
+          "bboxInParent": [
+            0,
+            138,
+            157,
+            211
+          ],
+          "rotation": 0,
+          "transparency": 0,
+          "classification": "native_shape",
+          "paths": [
+            {
+              "d": "M0 138 L0 225 L155 349 L157 310 Z",
+              "color": {
+                "type": "solid",
+                "color": "#9e67fa"
+              },
+              "isMediaEditable": false
+            }
+          ],
+          "viewBox": {
+            "top": 138,
+            "left": 0,
+            "width": 157,
+            "height": 211
+          }
+        },
+        {
+          "address": "1/1",
+          "type": "shape",
+          "locked": false,
+          "bboxInParent": [
+            551,
+            0,
+            388,
+            339
+          ],
+          "rotation": 0,
+          "transparency": 0,
+          "classification": "native_shape",
+          "paths": [
+            {
+              "d": "M939 0 L846 2 L700 242 L684 214 L551 124 L573 153 L587 191 L590 227 L582 277 L670 339 L706 261 Z",
+              "color": {
+                "type": "solid",
+                "color": "#9e67fa"
+              },
+              "isMediaEditable": false
+            }
+          ],
+          "viewBox": {
+            "top": 0,
+            "left": 551,
+            "width": 388,
+            "height": 339
+          }
+        },
+        {
+          "address": "1/2",
+          "type": "shape",
+          "locked": false,
+          "bboxInParent": [
+            629,
+            247,
+            410,
+            183
+          ],
+          "rotation": 0,
+          "transparency": 0,
+          "classification": "native_shape",
+          "paths": [
+            {
+              "d": "M1039 247 L629 430 L993 287 L999 288 L991 308 L1018 300 Z",
+              "color": {
+                "type": "solid",
+                "color": "#9e67fa"
+              },
+              "isMediaEditable": false
+            }
+          ],
+          "viewBox": {
+            "top": 247,
+            "left": 629,
+            "width": 410,
+            "height": 183
+          }
+        },
+        {
+          "address": "1/3",
+          "type": "shape",
+          "locked": false,
+          "bboxInParent": [
+            1056,
+            308,
+            65,
+            142
+          ],
+          "rotation": 0,
+          "transparency": 0,
+          "classification": "native_shape",
+          "paths": [
+            {
+              "d": "M1121 308 L1068 337 L1056 450 L1121 426 Z",
+              "color": {
+                "type": "solid",
+                "color": "#9e67fa"
+              },
+              "isMediaEditable": false
+            }
+          ],
+          "viewBox": {
+            "top": 308,
+            "left": 1056,
+            "width": 65,
+            "height": 142
+          }
+        },
+        {
+          "address": "1/4",
+          "type": "shape",
+          "locked": false,
+          "bboxInParent": [
+            0,
+            647,
+            99,
+            115
+          ],
+          "rotation": 0,
+          "transparency": 0,
+          "classification": "native_shape",
+          "paths": [
+            {
+              "d": "M99 647 L0 713 L0 762 Z",
+              "color": {
+                "type": "solid",
+                "color": "#9e67fa"
+              },
+              "isMediaEditable": false
+            }
+          ],
+          "viewBox": {
+            "top": 647,
+            "left": 0,
+            "width": 99,
+            "height": 115
+          }
+        },
+        {
+          "address": "1/5",
+          "type": "shape",
+          "locked": false,
+          "bboxInParent": [
+            650,
+            690,
+            103,
+            42
+          ],
+          "rotation": 0,
+          "transparency": 0,
+          "classification": "native_shape",
+          "paths": [
+            {
+              "d": "M753 690 L650 732 L744 699 Z",
+              "color": {
+                "type": "solid",
+                "color": "#9e67fa"
+              },
+              "isMediaEditable": false
+            }
+          ],
+          "viewBox": {
+            "top": 690,
+            "left": 650,
+            "width": 103,
+            "height": 42
+          }
+        },
+        {
+          "address": "1/6",
+          "type": "shape",
+          "locked": false,
+          "bboxInParent": [
+            439,
+            619,
+            527,
+            311
+          ],
+          "rotation": 0,
+          "transparency": 0,
+          "classification": "native_shape",
+          "paths": [
+            {
+              "d": "M966 621 L938 631 L936 619 L835 658 L810 673 L909 641 L862 759 L439 924 L439 930 L909 762 Z",
+              "color": {
+                "type": "solid",
+                "color": "#9e67fa"
+              },
+              "isMediaEditable": false
+            }
+          ],
+          "viewBox": {
+            "top": 619,
+            "left": 439,
+            "width": 527,
+            "height": 311
+          }
+        },
+        {
+          "address": "1/7",
+          "type": "shape",
+          "locked": false,
+          "bboxInParent": [
+            554,
+            909,
+            227,
+            216
+          ],
+          "rotation": 0,
+          "transparency": 0,
+          "classification": "native_shape",
+          "paths": [
+            {
+              "d": "M781 909 L574 1060 L568 1099 L554 1118 L577 1125 Z",
+              "color": {
+                "type": "solid",
+                "color": "#9e67fa"
+              },
+              "isMediaEditable": false
+            }
+          ],
+          "viewBox": {
+            "top": 909,
+            "left": 554,
+            "width": 227,
+            "height": 216
+          }
+        }
+      ]
+    },
+    {
+      "address": "2",
+      "type": "group",
+      "locked": false,
+      "bboxInParent": [
+        0,
+        0,
+        1121,
+        1401
+      ],
+      "rotation": 0,
+      "transparency": 0,
+      "classification": "group",
+      "children": [
+        {
+          "address": "2/0",
+          "type": "shape",
+          "locked": false,
+          "bboxInParent": [
+            730,
+            0,
+            115,
+            54
+          ],
+          "rotation": 0,
+          "transparency": 0,
+          "classification": "native_shape",
+          "paths": [
+            {
+              "d": "M730 54 L814 54 L845 0 L752 0 Z",
+              "color": {
+                "type": "solid",
+                "color": "#011423"
+              },
+              "isMediaEditable": false
+            }
+          ],
+          "viewBox": {
+            "top": 0,
+            "left": 730,
+            "width": 115,
+            "height": 54
+          }
+        },
+        {
+          "address": "2/1",
+          "type": "shape",
+          "locked": false,
+          "bboxInParent": [
+            666,
+            58,
+            144,
+            179
+          ],
+          "rotation": 0,
+          "transparency": 0,
+          "classification": "native_shape",
+          "paths": [
+            {
+              "d": "M810 58 L727 58 L666 201 L690 218 L700 237 Z",
+              "color": {
+                "type": "solid",
+                "color": "#011423"
+              },
+              "isMediaEditable": false
+            }
+          ],
+          "viewBox": {
+            "top": 58,
+            "left": 666,
+            "width": 144,
+            "height": 179
+          }
+        },
+        {
+          "address": "2/2",
+          "type": "shape",
+          "locked": false,
+          "bboxInParent": [
+            956,
+            123,
+            165,
+            155
+          ],
+          "rotation": 0,
+          "transparency": 0,
+          "classification": "native_shape",
+          "paths": [
+            {
+              "d": "M1121 123 L956 247 L965 278 L1121 210 Z",
+              "color": {
+                "type": "solid",
+                "color": "#011423"
+              },
+              "isMediaEditable": false
+            }
+          ],
+          "viewBox": {
+            "top": 123,
+            "left": 956,
+            "width": 165,
+            "height": 155
+          }
+        },
+        {
+          "address": "2/3",
+          "type": "shape",
+          "locked": false,
+          "bboxInParent": [
+            689,
+            187,
+            152,
+            213
+          ],
+          "rotation": 0,
+          "transparency": 0,
+          "classification": "native_shape",
+          "paths": [
+            {
+              "d": "M841 187 L706 266 L713 290 L713 328 L707 356 L689 400 L734 381 L819 226 L810 225 L824 218 Z",
+              "color": {
+                "type": "solid",
+                "color": "#011423"
+              },
+              "isMediaEditable": false
+            }
+          ],
+          "viewBox": {
+            "top": 187,
+            "left": 689,
+            "width": 152,
+            "height": 213
+          }
+        },
+        {
+          "address": "2/4",
+          "type": "shape",
+          "locked": false,
+          "bboxInParent": [
+            850,
+            251,
+            108,
+            77
+          ],
+          "rotation": 0,
+          "transparency": 0,
+          "classification": "native_shape",
+          "paths": [
+            {
+              "d": "M953 251 L850 328 L958 281 Z",
+              "color": {
+                "type": "solid",
+                "color": "#011423"
+              },
+              "isMediaEditable": false
+            }
+          ],
+          "viewBox": {
+            "top": 251,
+            "left": 850,
+            "width": 108,
+            "height": 77
+          }
+        },
+        {
+          "address": "2/5",
+          "type": "shape",
+          "locked": false,
+          "bboxInParent": [
+            0,
+            227,
+            153,
+            159
+          ],
+          "rotation": 0,
+          "transparency": 0,
+          "classification": "native_shape",
+          "paths": [
+            {
+              "d": "M0 227 L0 302 L144 386 L153 350 Z",
+              "color": {
+                "type": "solid",
+                "color": "#011423"
+              },
+              "isMediaEditable": false
+            }
+          ],
+          "viewBox": {
+            "top": 227,
+            "left": 0,
+            "width": 153,
+            "height": 159
+          }
+        },
+        {
+          "address": "2/6",
+          "type": "shape",
+          "locked": false,
+          "bboxInParent": [
+            137,
+            316,
+            282,
+            172
+          ],
+          "rotation": 0,
+          "transparency": 0,
+          "classification": "native_shape",
+          "paths": [
+            {
+              "d": "M419 316 L137 428 L251 488 L259 439 L357 400 L379 387 L403 357 Z",
+              "color": {
+                "type": "solid",
+                "color": "#011423"
+              },
+              "isMediaEditable": false
+            }
+          ],
+          "viewBox": {
+            "top": 316,
+            "left": 137,
+            "width": 282,
+            "height": 172
+          }
+        },
+        {
+          "address": "2/7",
+          "type": "shape",
+          "locked": false,
+          "bboxInParent": [
+            0,
+            519,
+            183,
+            129
+          ],
+          "rotation": 0,
+          "transparency": 0,
+          "classification": "native_shape",
+          "paths": [
+            {
+              "d": "M183 519 L1 574 L0 648 Z",
+              "color": {
+                "type": "solid",
+                "color": "#011423"
+              },
+              "isMediaEditable": false
+            }
+          ],
+          "viewBox": {
+            "top": 519,
+            "left": 0,
+            "width": 183,
+            "height": 129
+          }
+        },
+        {
+          "address": "2/8",
+          "type": "shape",
+          "locked": false,
+          "bboxInParent": [
+            135,
+            556,
+            249,
+            116
+          ],
+          "rotation": 0,
+          "transparency": 0,
+          "classification": "native_shape",
+          "paths": [
+            {
+              "d": "M384 567 L374 557 L356 556 L285 582 L245 562 L135 609 L192 629 L207 625 L340 672 L360 655 L372 633 Z",
+              "color": {
+                "type": "solid",
+                "color": "#011423"
+              },
+              "isMediaEditable": false
+            }
+          ],
+          "viewBox": {
+            "top": 556,
+            "left": 135,
+            "width": 249,
+            "height": 116
+          }
+        },
+        {
+          "address": "2/9",
+          "type": "shape",
+          "locked": false,
+          "bboxInParent": [
+            248,
+            644,
+            658,
+            272
+          ],
+          "rotation": 0,
+          "transparency": 0,
+          "classification": "native_shape",
+          "paths": [
+            {
+              "d": "M906 644 L765 691 L806 671 L743 701 L620 742 L480 796 L473 820 L446 812 L248 890 L316 909 L465 855 L453 916 L861 758 Z",
+              "color": {
+                "type": "solid",
+                "color": "#011423"
+              },
+              "isMediaEditable": false
+            }
+          ],
+          "viewBox": {
+            "top": 644,
+            "left": 248,
+            "width": 658,
+            "height": 272
+          }
+        },
+        {
+          "address": "2/10",
+          "type": "shape",
+          "locked": false,
+          "bboxInParent": [
+            0,
+            811,
+            157,
+            128
+          ],
+          "rotation": 0,
+          "transparency": 0,
+          "classification": "native_shape",
+          "paths": [
+            {
+              "d": "M157 865 L116 849 L77 811 L0 904 L0 939 Z",
+              "color": {
+                "type": "solid",
+                "color": "#011423"
+              },
+              "isMediaEditable": false
+            }
+          ],
+          "viewBox": {
+            "top": 811,
+            "left": 0,
+            "width": 157,
+            "height": 128
+          }
+        },
+        {
+          "address": "2/11",
+          "type": "shape",
+          "locked": false,
+          "bboxInParent": [
+            625,
+            812,
+            191,
+            184
+          ],
+          "rotation": 0,
+          "transparency": 0,
+          "classification": "native_shape",
+          "paths": [
+            {
+              "d": "M816 818 L774 812 L685 844 L625 996 Z",
+              "color": {
+                "type": "solid",
+                "color": "#011423"
+              },
+              "isMediaEditable": false
+            }
+          ],
+          "viewBox": {
+            "top": 812,
+            "left": 625,
+            "width": 191,
+            "height": 184
+          }
+        },
+        {
+          "address": "2/12",
+          "type": "shape",
+          "locked": false,
+          "bboxInParent": [
+            0,
+            1135,
+            131,
+            266
+          ],
+          "rotation": 0,
+          "transparency": 0,
+          "classification": "native_shape",
+          "paths": [
+            {
+              "d": "M131 1135 L0 1245 L0 1401 L52 1401 L104 1347 Z",
+              "color": {
+                "type": "solid",
+                "color": "#011423"
+              },
+              "isMediaEditable": false
+            }
+          ],
+          "viewBox": {
+            "top": 1135,
+            "left": 0,
+            "width": 131,
+            "height": 266
+          }
+        }
+      ]
+    },
+    {
+      "address": "3",
+      "type": "shape",
+      "locked": false,
+      "bboxInParent": [
+        441,
+        245,
+        680,
+        560
+      ],
+      "rotation": 0,
+      "transparency": 0,
+      "classification": "native_shape",
+      "paths": [
+        {
+          "d": "M576 453 L996 289 L1041 245 L1121 306 L1066 339 L1040 578 L441 805 L503 498 L530 488 L530 472 Z",
+          "color": {
+            "type": "solid",
+            "color": "#011423"
+          },
+          "isMediaEditable": false
+        }
+      ],
+      "viewBox": {
+        "top": 245,
+        "left": 441,
+        "width": 680,
+        "height": 560
+      }
+    },
+    {
+      "address": "4",
+      "type": "group",
+      "locked": false,
+      "bboxInParent": [
+        50,
+        100,
+        655,
+        787
+      ],
+      "rotation": 0,
+      "transparency": 0,
+      "classification": "group",
+      "children": [
+        {
+          "address": "4/0",
+          "type": "shape",
+          "locked": false,
+          "bboxInParent": [
+            429,
+            178,
+            189,
+            177
+          ],
+          "rotation": 0,
+          "transparency": 0,
+          "classification": "native_shape",
+          "paths": [
+            {
+              "d": "M668 345 L666 339 L580 278 L566 308 L540 344 L506 379 L479 399 L571 455 L613 424 Z",
+              "color": {
+                "type": "solid",
+                "color": "#011423"
+              },
+              "isMediaEditable": false
+            }
+          ],
+          "viewBox": {
+            "top": 278,
+            "left": 479,
+            "width": 189,
+            "height": 177
+          }
+        },
+        {
+          "address": "4/1",
+          "type": "shape",
+          "locked": false,
+          "bboxInParent": [
+            65,
+            619,
+            350,
+            168
+          ],
+          "rotation": 0,
+          "transparency": 0,
+          "classification": "native_shape",
+          "paths": [
+            {
+              "d": "M456 719 L453 723 L452 726 L450 728 L449 731 L447 733 L443 740 L436 748 L436 749 L418 767 L417 767 L413 771 L412 771 L401 779 L398 780 L396 782 L392 783 L382 788 L377 789 L374 791 L366 793 L363 795 L361 795 L360 796 L355 797 L352 799 L344 801 L341 803 L330 806 L327 808 L325 808 L319 811 L311 813 L308 815 L300 817 L297 819 L295 819 L294 820 L286 822 L283 824 L275 826 L272 828 L267 829 L264 831 L250 835 L247 837 L239 839 L236 841 L228 843 L225 845 L223 845 L222 846 L214 848 L211 850 L203 852 L200 854 L197 854 L196 855 L193 855 L192 856 L181 857 L180 858 L168 858 L167 859 L164 859 L163 858 L151 858 L150 857 L144 857 L143 856 L136 855 L135 854 L127 852 L115 846 L119 849 L129 854 L134 855 L137 857 L139 857 L140 858 L142 858 L143 859 L145 859 L146 860 L148 860 L149 861 L151 861 L158 864 L166 865 L167 866 L169 866 L176 869 L179 869 L186 872 L189 872 L190 873 L196 874 L203 877 L206 877 L210 879 L213 879 L220 882 L223 882 L227 884 L230 884 L237 887 L246 887 L247 886 L254 885 L257 883 L262 882 L265 880 L267 880 L270 878 L272 878 L278 875 L283 874 L286 872 L294 870 L297 868 L299 868 L305 865 L313 863 L316 861 L318 861 L321 859 L326 858 L329 856 L337 854 L340 852 L348 850 L351 848 L356 847 L359 845 L364 844 L367 842 L372 841 L375 839 L383 837 L386 835 L391 834 L394 832 L399 831 L402 829 L407 828 L410 826 L412 826 L413 825 L418 824 L421 822 L426 821 L433 817 L435 817 L443 813 L447 810 L449 810 L450 811 L464 815 L464 806 L465 805 L465 799 L461 800 L458 802 L456 802 L453 804 L442 807 L440 809 L438 808 L439 807 L439 802 L440 801 L440 797 L441 796 L441 791 L442 790 L442 786 L443 785 L443 781 L444 780 L444 776 L445 775 L445 771 L446 770 L446 766 L447 765 L447 761 L448 760 L448 756 L449 755 L449 751 L450 750 L450 747 L451 746 L451 742 L452 741 L452 737 L453 736 L453 731 L454 730 L454 726 L455 725 Z",
+              "color": {
+                "type": "solid",
+                "color": "#7845ec"
+              },
+              "isMediaEditable": false
+            }
+          ],
+          "viewBox": {
+            "top": 719,
+            "left": 115,
+            "width": 350,
+            "height": 168
+          }
+        },
+        {
+          "address": "4/2",
+          "type": "shape",
+          "locked": false,
+          "bboxInParent": [
+            0,
+            542,
+            55,
+            63
+          ],
+          "rotation": 0,
+          "transparency": 0,
+          "classification": "native_shape",
+          "paths": [
+            {
+              "d": "M105 642 L101 645 L100 645 L98 647 L97 647 L95 649 L94 649 L92 651 L91 651 L89 653 L88 653 L86 655 L85 655 L81 658 L80 658 L74 663 L73 663 L69 666 L66 667 L63 670 L62 670 L56 675 L55 675 L55 679 L54 680 L54 683 L53 684 L53 688 L52 689 L52 693 L51 694 L51 697 L50 698 L50 705 L52 703 L52 702 L57 697 L57 696 L64 689 L64 688 L74 678 L74 677 L80 671 L80 670 L86 664 L86 663 L105 643 Z",
+              "color": {
+                "type": "solid",
+                "color": "#7845ec"
+              },
+              "isMediaEditable": false
+            }
+          ],
+          "viewBox": {
+            "top": 642,
+            "left": 50,
+            "width": 55,
+            "height": 63
+          }
+        },
+        {
+          "address": "4/3",
+          "type": "shape",
+          "locked": false,
+          "bboxInParent": [
+            142,
+            526,
+            146,
+            106
+          ],
+          "rotation": 0,
+          "transparency": 0,
+          "classification": "native_shape",
+          "paths": [
+            {
+              "d": "M192 732 L193 731 L195 731 L198 729 L200 729 L205 726 L207 726 L210 724 L215 723 L218 721 L220 721 L221 720 L223 720 L226 718 L231 717 L234 715 L239 714 L242 712 L244 712 L245 711 L246 711 L247 710 L249 710 L252 708 L257 707 L260 705 L262 705 L265 703 L267 703 L268 702 L269 702 L270 701 L272 701 L275 699 L280 698 L283 696 L285 696 L288 694 L290 694 L291 693 L292 693 L293 692 L295 692 L298 690 L303 689 L306 687 L308 687 L311 685 L313 685 L314 684 L315 684 L316 683 L318 683 L321 681 L326 680 L327 679 L328 679 L329 678 L330 678 L331 677 L338 674 L337 674 L336 673 L334 673 L331 671 L329 671 L328 670 L326 670 L325 669 L320 668 L317 666 L315 666 L314 665 L312 665 L311 664 L309 664 L308 663 L303 662 L300 660 L298 660 L297 659 L292 658 L289 656 L287 656 L286 655 L284 655 L283 654 L278 653 L275 651 L273 651 L272 650 L270 650 L269 649 L264 648 L261 646 L259 646 L258 645 L253 644 L250 642 L248 642 L247 641 L242 640 L239 638 L237 638 L236 637 L234 637 L233 636 L228 635 L225 633 L223 633 L222 632 L220 632 L219 631 L217 631 L216 630 L211 629 L210 628 L209 628 L208 627 L206 627 L205 626 L205 632 L204 633 L204 639 L203 640 L203 649 L202 650 L202 657 L201 658 L201 665 L200 666 L200 672 L199 673 L199 680 L198 681 L198 686 L197 687 L197 693 L196 694 L196 701 L195 702 L195 708 L194 709 L194 716 L193 717 L193 723 L192 724 Z",
+              "color": {
+                "type": "solid",
+                "color": "#7845ec"
+              },
+              "isMediaEditable": false
+            }
+          ],
+          "viewBox": {
+            "top": 626,
+            "left": 192,
+            "width": 146,
+            "height": 106
+          }
+        },
+        {
+          "address": "4/4",
+          "type": "shape",
+          "locked": false,
+          "bboxInParent": [
+            451,
+            314,
+            65,
+            55
+          ],
+          "rotation": 0,
+          "transparency": 0,
+          "classification": "native_shape",
+          "paths": [
+            {
+              "d": "M501 414 L512 426 L512 427 L514 429 L514 430 L516 432 L517 435 L520 439 L520 441 L523 446 L523 448 L524 449 L524 451 L525 452 L525 454 L526 455 L526 459 L527 460 L527 464 L528 465 L528 469 L529 469 L532 467 L537 466 L540 464 L545 463 L548 461 L553 460 L556 458 L561 457 L566 454 L566 453 L565 453 L560 449 L559 449 L555 446 L550 444 L545 440 L540 438 L538 436 L535 435 L533 433 L530 432 L528 430 L525 429 L523 427 L520 426 L518 424 L515 423 L513 421 L510 420 L508 418 L503 416 Z",
+              "color": {
+                "type": "solid",
+                "color": "#7845ec"
+              },
+              "isMediaEditable": false
+            }
+          ],
+          "viewBox": {
+            "top": 414,
+            "left": 501,
+            "width": 65,
+            "height": 55
+          }
+        },
+        {
+          "address": "4/5",
+          "type": "shape",
+          "locked": false,
+          "bboxInParent": [
+            84,
+            200,
+            162,
+            125
+          ],
+          "rotation": 0,
+          "transparency": 0,
+          "classification": "native_shape",
+          "paths": [
+            {
+              "d": "M296 300 L295 301 L290 302 L287 304 L282 305 L279 307 L274 308 L271 310 L269 310 L266 312 L264 312 L261 314 L259 314 L256 316 L254 316 L253 317 L252 317 L251 318 L249 318 L246 320 L241 321 L238 323 L236 323 L233 325 L231 325 L230 326 L229 326 L228 327 L226 327 L223 329 L218 330 L215 332 L213 332 L210 334 L208 334 L207 335 L206 335 L205 336 L203 336 L200 338 L198 338 L197 339 L195 339 L192 341 L190 341 L187 343 L182 344 L179 346 L177 346 L174 348 L172 348 L171 349 L170 349 L169 350 L167 350 L164 352 L162 352 L161 353 L159 353 L158 354 L156 354 L155 355 L154 355 L154 356 L153 357 L153 360 L152 361 L152 363 L151 364 L151 367 L150 368 L150 371 L149 372 L149 374 L148 375 L148 378 L147 379 L147 381 L146 382 L146 384 L145 385 L145 387 L144 388 L144 392 L143 393 L143 395 L142 396 L142 398 L141 399 L141 402 L140 403 L140 405 L139 406 L139 409 L138 410 L138 413 L137 414 L137 417 L136 418 L136 420 L135 421 L135 423 L134 424 L134 425 L137 425 L140 423 L143 423 L144 422 L146 422 L147 421 L152 420 L155 418 L158 418 L163 415 L165 415 L168 413 L170 413 L173 411 L175 411 L178 409 L180 409 L181 408 L182 408 L183 407 L185 407 L188 405 L193 404 L196 402 L201 401 L206 398 L208 398 L209 397 L211 397 L214 395 L219 394 L222 392 L224 392 L225 391 L230 390 L233 388 L235 388 L236 387 L238 387 L241 385 L246 384 L247 383 L248 383 L249 382 L251 382 L254 380 L256 380 L257 379 L262 378 L267 375 L269 375 L270 374 L273 374 L275 371 L275 368 L276 367 L276 366 L277 365 L277 363 L278 362 L278 359 L279 358 L279 356 L280 355 L280 353 L281 352 L281 349 L282 348 L282 346 L283 345 L283 343 L284 342 L284 340 L285 339 L285 336 L286 335 L286 333 L287 332 L287 330 L288 329 L288 327 L289 326 L289 323 L291 320 L291 317 L292 316 L292 314 L293 313 L293 310 L294 309 L294 307 L295 306 L295 304 L296 303 Z",
+              "color": {
+                "type": "solid",
+                "color": "#7845ec"
+              },
+              "isMediaEditable": false
+            }
+          ],
+          "viewBox": {
+            "top": 300,
+            "left": 134,
+            "width": 162,
+            "height": 125
+          }
+        },
+        {
+          "address": "4/6",
+          "type": "shape",
+          "locked": false,
+          "bboxInParent": [
+            80,
+            191,
+            28,
+            60
+          ],
+          "rotation": 0,
+          "transparency": 0,
+          "classification": "native_shape",
+          "paths": [
+            {
+              "d": "M139 291 L139 293 L138 294 L138 297 L137 298 L137 301 L136 302 L136 306 L135 307 L135 310 L134 311 L134 314 L133 315 L133 319 L132 320 L132 323 L131 324 L131 327 L130 328 L130 331 L131 331 L135 335 L136 335 L145 343 L146 343 L149 346 L150 346 L153 349 L154 349 L155 350 L155 351 L155 349 L156 348 L156 346 L157 345 L157 343 L158 342 L158 312 L157 311 L157 310 L154 308 L154 307 L145 298 L145 297 Z",
+              "color": {
+                "type": "solid",
+                "color": "#7845ec"
+              },
+              "isMediaEditable": false
+            }
+          ],
+          "viewBox": {
+            "top": 291,
+            "left": 130,
+            "width": 28,
+            "height": 60
+          }
+        },
+        {
+          "address": "4/7",
+          "type": "shape",
+          "locked": false,
+          "bboxInParent": [
+            481,
+            12,
+            174,
+            228
+          ],
+          "rotation": 0,
+          "transparency": 0,
+          "classification": "native_shape",
+          "paths": [
+            {
+              "d": "M531 112 L536 114 L542 119 L543 119 L547 123 L548 123 L562 137 L562 138 L566 142 L566 143 L570 148 L571 151 L573 153 L573 154 L579 165 L579 167 L581 170 L581 173 L582 174 L582 175 L583 176 L583 178 L584 179 L584 182 L585 183 L585 186 L586 187 L586 190 L587 191 L587 196 L588 197 L588 204 L589 205 L589 214 L590 215 L590 227 L589 228 L589 239 L588 240 L588 246 L587 247 L587 252 L586 253 L586 257 L585 258 L585 261 L584 262 L584 265 L583 266 L583 268 L582 269 L582 271 L581 272 L582 277 L583 277 L589 282 L590 282 L592 284 L593 284 L595 286 L596 286 L599 289 L600 289 L602 291 L603 291 L606 294 L607 294 L610 297 L611 297 L614 300 L615 300 L618 303 L619 303 L626 309 L627 309 L629 311 L630 311 L638 318 L639 318 L641 320 L642 320 L645 323 L646 323 L648 325 L649 325 L652 328 L653 328 L655 330 L656 330 L658 332 L659 332 L661 334 L662 334 L669 340 L670 340 L670 339 L674 334 L674 333 L675 332 L675 331 L676 330 L676 329 L677 328 L677 327 L678 326 L681 319 L683 317 L683 315 L685 312 L685 310 L687 308 L687 307 L691 300 L691 298 L693 295 L693 293 L697 286 L697 284 L699 281 L700 276 L702 273 L702 271 L703 270 L703 266 L705 263 L705 235 L704 235 L702 240 L700 242 L699 241 L698 236 L696 233 L696 231 L695 230 L693 225 L691 223 L691 222 L678 210 L677 210 L675 208 L674 208 L666 202 L663 201 L661 199 L660 199 L658 197 L657 197 L655 195 L654 195 L652 193 L651 193 L648 190 L647 190 L645 188 L644 188 L642 186 L641 186 L638 183 L637 183 L635 181 L634 181 L632 179 L631 179 L628 176 L627 176 L625 174 L624 174 L621 171 L620 171 L618 169 L617 169 L614 166 L611 165 L605 160 L604 160 L602 158 L601 158 L598 155 L597 155 L595 153 L594 153 L591 150 L588 149 L582 144 L581 144 L579 142 L578 142 L576 140 L575 140 L573 138 L572 138 L565 132 L562 131 L556 126 L555 126 L550 122 L549 122 L545 119 L544 119 L541 116 L540 116 L539 115 L537 115 L536 114 Z",
+              "color": {
+                "type": "solid",
+                "color": "#7845ec"
+              },
+              "isMediaEditable": false
+            }
+          ],
+          "viewBox": {
+            "top": 112,
+            "left": 531,
+            "width": 174,
+            "height": 228
+          }
+        },
+        {
+          "address": "4/8",
+          "type": "shape",
+          "locked": false,
+          "bboxInParent": [
+            229,
+            145,
+            160,
+            119
+          ],
+          "rotation": 0,
+          "transparency": 0,
+          "classification": "native_shape",
+          "paths": [
+            {
+              "d": "M439 245 L299 299 L296 305 L298 313 L293 316 L279 364 L295 363 L420 313 L436 266 Z",
+              "color": {
+                "type": "solid",
+                "color": "#01d47c"
+              },
+              "isMediaEditable": false
+            }
+          ],
+          "viewBox": {
+            "top": 245,
+            "left": 279,
+            "width": 160,
+            "height": 119
+          }
+        },
+        {
+          "address": "4/9",
+          "type": "shape",
+          "locked": false,
+          "bboxInParent": [
+            449,
+            408,
+            14,
+            46
+          ],
+          "rotation": 0,
+          "transparency": 0,
+          "classification": "native_shape",
+          "paths": [
+            {
+              "d": "M513 508 L512 509 L511 512 L509 514 L509 515 L507 518 L507 520 L505 523 L505 525 L504 526 L504 529 L503 530 L503 533 L502 534 L502 538 L501 539 L501 544 L500 545 L500 551 L499 552 L499 554 L499 552 L500 551 L500 549 L501 548 L501 545 L502 544 L502 542 L503 541 L503 539 L504 538 L504 536 L505 535 L505 533 L506 532 L506 530 L507 529 L507 526 L508 525 L508 523 L509 522 L509 520 L510 519 L510 517 L511 516 L511 514 L512 513 L512 510 L513 509 Z",
+              "color": {
+                "type": "solid",
+                "color": "#fdfdfd"
+              },
+              "isMediaEditable": false
+            }
+          ],
+          "viewBox": {
+            "top": 508,
+            "left": 499,
+            "width": 14,
+            "height": 46
+          }
+        },
+        {
+          "address": "4/10",
+          "type": "shape",
+          "locked": false,
+          "bboxInParent": [
+            3,
+            0,
+            536,
+            758
+          ],
+          "rotation": 0,
+          "transparency": 0,
+          "classification": "native_shape",
+          "paths": [
+            {
+              "d": "M543 120 L521 107 L501 101 L478 100 L458 104 L203 210 L198 228 L196 231 L180 281 L178 284 L178 287 L176 290 L176 293 L161 332 L160 331 L160 312 L159 311 L159 321 L158 322 L159 341 L155 354 L208 333 L221 329 L226 326 L231 325 L272 308 L277 307 L315 291 L395 261 L439 243 L440 244 L440 257 L422 312 L422 315 L410 346 L403 360 L392 376 L380 388 L363 399 L260 440 L254 485 L252 491 L248 523 L242 555 L346 515 L362 515 L370 518 L380 528 L384 536 L386 544 L386 567 L377 623 L372 637 L364 652 L349 668 L340 674 L323 682 L318 683 L194 732 L191 731 L191 726 L200 667 L204 627 L86 671 L69 763 L69 776 L74 800 L53 827 L54 836 L78 808 L89 824 L102 837 L112 844 L127 851 L144 856 L160 857 L161 858 L181 857 L197 854 L390 784 L403 777 L417 767 L427 758 L445 736 L457 716 L463 682 L465 677 L483 586 L494 538 L494 533 L501 498 L519 490 L524 472 L527 469 L526 459 L521 443 L508 422 L493 409 L475 401 L497 385 L516 368 L535 348 L551 328 L562 312 L575 288 L581 272 L587 247 L588 230 L589 229 L589 212 L585 186 L579 167 L571 151 L562 138 Z",
+              "color": {
+                "type": "solid",
+                "color": "#fdfdfd"
+              },
+              "isMediaEditable": false
+            }
+          ],
+          "viewBox": {
+            "top": 100,
+            "left": 53,
+            "width": 536,
+            "height": 758
+          }
+        }
+      ]
+    },
+    {
+      "address": "5",
+      "type": "group",
+      "locked": false,
+      "bboxInParent": [
+        938.4,
+        730.6,
+        121.2,
+        118.8
+      ],
+      "rotation": 0,
+      "transparency": 0,
+      "classification": "group",
+      "children": [
+        {
+          "address": "5/0",
+          "type": "shape",
+          "locked": false,
+          "bboxInParent": [
+            0,
+            0,
+            121.2,
+            118.8
+          ],
+          "rotation": 0,
+          "transparency": 0,
+          "classification": "native_shape",
+          "paths": [
+            {
+              "d": "M965.8 731.6 L1049.6 745.8 C1055.6 746.8 1059.6 752.5 1058.6 758.5 L1044.9 839.3 C1043.9 845.3 1038.2 849.4 1032.2 848.4 L948.4 834.2 C942.4 833.2 938.4 827.5 939.4 821.5 L953.1 740.7 C954.1 734.7 959.8 730.6 965.8 731.6 Z",
+              "color": {
+                "type": "solid",
+                "color": "#011423"
+              },
+              "isMediaEditable": false
+            }
+          ],
+          "viewBox": {
+            "top": 730.6,
+            "left": 938.4,
+            "width": 121.19999999999993,
+            "height": 118.79999999999995
+          }
+        },
+        {
+          "address": "5/1",
+          "type": "shape",
+          "locked": false,
+          "bboxInParent": [
+            18.6,
+            59.400000000000006,
+            15,
+            29
+          ],
+          "rotation": 0,
+          "transparency": 0,
+          "classification": "native_shape",
+          "paths": [
+            {
+              "d": "M957 791 L971 790 L972 818 L958 819 Z",
+              "color": {
+                "type": "solid",
+                "color": "#9a6cf6"
+              },
+              "isMediaEditable": false
+            }
+          ],
+          "viewBox": {
+            "top": 790,
+            "left": 957,
+            "width": 15,
+            "height": 29
+          }
+        },
+        {
+          "address": "5/2",
+          "type": "shape",
+          "locked": false,
+          "bboxInParent": [
+            35.6,
+            45.400000000000006,
+            18,
+            46
+          ],
+          "rotation": 0,
+          "transparency": 0,
+          "classification": "native_shape",
+          "paths": [
+            {
+              "d": "M974 778 L990 776 L992 820 L976 822 Z",
+              "color": {
+                "type": "solid",
+                "color": "#1ef7b2"
+              },
+              "isMediaEditable": false
+            }
+          ],
+          "viewBox": {
+            "top": 776,
+            "left": 974,
+            "width": 18,
+            "height": 46
+          }
+        },
+        {
+          "address": "5/3",
+          "type": "shape",
+          "locked": false,
+          "bboxInParent": [
+            56.599999999999994,
+            27.4,
+            16,
+            67
+          ],
+          "rotation": 0,
+          "transparency": 0,
+          "classification": "native_shape",
+          "paths": [
+            {
+              "d": "M995 760 L1010 758 L1011 824 L997 825 Z",
+              "color": {
+                "type": "solid",
+                "color": "#1ef7b2"
+              },
+              "isMediaEditable": false
+            }
+          ],
+          "viewBox": {
+            "top": 758,
+            "left": 995,
+            "width": 16,
+            "height": 67
+          }
+        },
+        {
+          "address": "5/4",
+          "type": "shape",
+          "locked": false,
+          "bboxInParent": [
+            65.3,
+            35.1,
+            46,
+            46
+          ],
+          "rotation": 0,
+          "transparency": 0,
+          "classification": "native_shape",
+          "paths": [
+            {
+              "d": "M1049.7 788.7 L1049.59 790.954 L1049.26 793.187 L1048.71 795.377 L1047.95 797.502 L1046.98 799.542 L1045.82 801.478 L1044.48 803.291 L1042.96 804.963 L1041.29 806.479 L1039.48 807.824 L1037.54 808.984 L1035.5 809.949 L1033.38 810.71 L1031.19 811.258 L1028.95 811.589 L1026.7 811.7 L1024.45 811.589 L1022.21 811.258 L1020.02 810.71 L1017.9 809.949 L1015.86 808.984 L1013.92 807.824 L1012.11 806.479 L1010.44 804.963 L1008.92 803.291 L1007.58 801.478 L1006.42 799.542 L1005.45 797.502 L1004.69 795.377 L1004.14 793.187 L1003.81 790.954 L1003.7 788.7 L1003.81 786.446 L1004.14 784.213 L1004.69 782.023 L1005.45 779.898 L1006.42 777.858 L1007.58 775.922 L1008.92 774.109 L1010.44 772.437 L1012.11 770.921 L1013.92 769.576 L1015.86 768.416 L1017.9 767.451 L1020.02 766.69 L1022.21 766.142 L1024.45 765.811 L1026.7 765.7 L1028.95 765.811 L1031.19 766.142 L1033.38 766.69 L1035.5 767.451 L1037.54 768.416 L1039.48 769.576 L1041.29 770.921 L1042.96 772.437 L1044.48 774.109 L1045.82 775.922 L1046.98 777.858 L1047.95 779.898 L1048.71 782.023 L1049.26 784.213 L1049.59 786.446 Z",
+              "color": {
+                "type": "solid",
+                "color": "#011423"
+              },
+              "isMediaEditable": false
+            }
+          ],
+          "viewBox": {
+            "top": 765.7,
+            "left": 1003.7,
+            "width": 46,
+            "height": 46
+          }
+        },
+        {
+          "address": "5/5",
+          "type": "shape",
+          "locked": false,
+          "bboxInParent": [
+            68.3,
+            38.1,
+            40,
+            40
+          ],
+          "rotation": 0,
+          "transparency": 0,
+          "classification": "native_shape",
+          "paths": [
+            {
+              "d": "M1046.7 788.7 L1046.6 790.66 L1046.32 792.602 L1045.84 794.506 L1045.18 796.354 L1044.34 798.128 L1043.33 799.811 L1042.16 801.388 L1040.84 802.842 L1039.39 804.16 L1037.81 805.329 L1036.13 806.338 L1034.35 807.178 L1032.51 807.839 L1030.6 808.316 L1028.66 808.604 L1026.7 808.7 L1024.74 808.604 L1022.8 808.316 L1020.89 807.839 L1019.05 807.178 L1017.27 806.338 L1015.59 805.329 L1014.01 804.16 L1012.56 802.842 L1011.24 801.388 L1010.07 799.811 L1009.06 798.128 L1008.22 796.354 L1007.56 794.506 L1007.08 792.602 L1006.8 790.66 L1006.7 788.7 L1006.8 786.74 L1007.08 784.798 L1007.56 782.894 L1008.22 781.046 L1009.06 779.272 L1010.07 777.589 L1011.24 776.012 L1012.56 774.558 L1014.01 773.24 L1015.59 772.071 L1017.27 771.062 L1019.05 770.222 L1020.89 769.561 L1022.8 769.084 L1024.74 768.796 L1026.7 768.7 L1028.66 768.796 L1030.6 769.084 L1032.51 769.561 L1034.35 770.222 L1036.13 771.062 L1037.81 772.071 L1039.39 773.24 L1040.84 774.558 L1042.16 776.012 L1043.33 777.589 L1044.34 779.272 L1045.18 781.046 L1045.84 782.894 L1046.32 784.798 L1046.6 786.74 Z",
+              "color": {
+                "type": "solid",
+                "color": "#9a6cf6"
+              },
+              "isMediaEditable": false
+            }
+          ],
+          "viewBox": {
+            "top": 768.7,
+            "left": 1006.7,
+            "width": 40,
+            "height": 40
+          }
+        },
+        {
+          "address": "5/6",
+          "type": "shape",
+          "locked": false,
+          "bboxInParent": [
+            77.83,
+            47.632,
+            20.54,
+            20.536
+          ],
+          "rotation": 0,
+          "transparency": 0,
+          "classification": "native_shape",
+          "paths": [
+            {
+              "d": "M1016.23 781.768 L1033.23 798.768 L1036.77 795.232 L1019.77 778.232 Z",
+              "color": {
+                "type": "solid",
+                "color": "#011423"
+              },
+              "isMediaEditable": false
+            }
+          ],
+          "viewBox": {
+            "top": 778.232,
+            "left": 1016.23,
+            "width": 20.539999999999964,
+            "height": 20.536000000000058
+          }
+        },
+        {
+          "address": "5/7",
+          "type": "shape",
+          "locked": false,
+          "bboxInParent": [
+            77.83,
+            47.632,
+            20.54,
+            20.536
+          ],
+          "rotation": 0,
+          "transparency": 0,
+          "classification": "native_shape",
+          "paths": [
+            {
+              "d": "M1033.23 778.232 L1016.23 795.232 L1019.77 798.768 L1036.77 781.768 Z",
+              "color": {
+                "type": "solid",
+                "color": "#011423"
+              },
+              "isMediaEditable": false
+            }
+          ],
+          "viewBox": {
+            "top": 778.232,
+            "left": 1016.23,
+            "width": 20.539999999999964,
+            "height": 20.536000000000058
+          }
+        }
+      ]
+    },
+    {
+      "address": "6",
+      "type": "group",
+      "locked": false,
+      "bboxInParent": [
+        885,
+        866.9,
+        122,
+        116.2
+      ],
+      "rotation": 0,
+      "transparency": 0,
+      "classification": "group",
+      "children": [
+        {
+          "address": "6/0",
+          "type": "shape",
+          "locked": false,
+          "bboxInParent": [
+            0,
+            0,
+            122,
+            116.2
+          ],
+          "rotation": 0,
+          "transparency": 0,
+          "classification": "native_shape",
+          "paths": [
+            {
+              "d": "M910.9 867.9 L996.9 881.3 C1002.9 882.3 1007.0 887.9 1006.0 893.9 L993.7 973.0 C992.7 979.0 987.1 983.1 981.1 982.1 L895.1 968.7 C889.1 967.7 885.0 962.1 886.0 956.1 L898.3 877.0 C899.3 871.0 904.9 866.9 910.9 867.9 Z",
+              "color": {
+                "type": "solid",
+                "color": "#011423"
+              },
+              "isMediaEditable": false
+            }
+          ],
+          "viewBox": {
+            "top": 866.9,
+            "left": 885,
+            "width": 122,
+            "height": 116.20000000000005
+          }
+        },
+        {
+          "address": "6/1",
+          "type": "shape",
+          "locked": false,
+          "bboxInParent": [
+            27.748,
+            24.116,
+            63.504,
+            11.968
+          ],
+          "rotation": 0,
+          "transparency": 0,
+          "classification": "native_shape",
+          "paths": [
+            {
+              "d": "M912.748 894.984 L975.748 902.984 L976.252 899.016 L913.252 891.016 Z",
+              "color": {
+                "type": "solid",
+                "color": "#1ef7b2"
+              },
+              "isMediaEditable": false
+            }
+          ],
+          "viewBox": {
+            "top": 891.016,
+            "left": 912.748,
+            "width": 63.503999999999905,
+            "height": 11.968000000000075
+          }
+        },
+        {
+          "address": "6/2",
+          "type": "shape",
+          "locked": false,
+          "bboxInParent": [
+            23.001,
+            26.037999999999997,
+            5.998,
+            64.124
+          ],
+          "rotation": 0,
+          "transparency": 0,
+          "classification": "native_shape",
+          "paths": [
+            {
+              "d": "M910.001 892.938 L908.001 956.938 L911.999 957.062 L913.999 893.062 Z",
+              "color": {
+                "type": "solid",
+                "color": "#1ef7b2"
+              },
+              "isMediaEditable": false
+            }
+          ],
+          "viewBox": {
+            "top": 892.938,
+            "left": 908.001,
+            "width": 5.998000000000047,
+            "height": 64.12400000000002
+          }
+        },
+        {
+          "address": "6/3",
+          "type": "shape",
+          "locked": false,
+          "bboxInParent": [
+            24.779,
+            88.112,
+            36.442,
+            7.976
+          ],
+          "rotation": 0,
+          "transparency": 0,
+          "classification": "native_shape",
+          "paths": [
+            {
+              "d": "M909.779 958.988 L945.779 962.988 L946.221 959.012 L910.221 955.012 Z",
+              "color": {
+                "type": "solid",
+                "color": "#1ef7b2"
+              },
+              "isMediaEditable": false
+            }
+          ],
+          "viewBox": {
+            "top": 955.012,
+            "left": 909.779,
+            "width": 36.44200000000001,
+            "height": 7.976000000000113
+          }
+        },
+        {
+          "address": "6/4",
+          "type": "shape",
+          "locked": false,
+          "bboxInParent": [
+            88.001,
+            34.036,
+            4.998,
+            31.128
+          ],
+          "rotation": 0,
+          "transparency": 0,
+          "classification": "native_shape",
+          "paths": [
+            {
+              "d": "M974.001 900.936 L973.001 931.936 L976.999 932.064 L977.999 901.064 Z",
+              "color": {
+                "type": "solid",
+                "color": "#1ef7b2"
+              },
+              "isMediaEditable": false
+            }
+          ],
+          "viewBox": {
+            "top": 900.936,
+            "left": 973.001,
+            "width": 4.998000000000047,
+            "height": 31.12799999999993
+          }
+        },
+        {
+          "address": "6/5",
+          "type": "shape",
+          "locked": false,
+          "bboxInParent": [
+            62,
+            22.1,
+            7,
+            11
+          ],
+          "rotation": 0,
+          "transparency": 0,
+          "classification": "native_shape",
+          "paths": [
+            {
+              "d": "M947 889 L954 889 L954 900 L947 900 Z",
+              "color": {
+                "type": "solid",
+                "color": "#1ef7b2"
+              },
+              "isMediaEditable": false
+            }
+          ],
+          "viewBox": {
+            "top": 889,
+            "left": 947,
+            "width": 7,
+            "height": 11
+          }
+        },
+        {
+          "address": "6/6",
+          "type": "shape",
+          "locked": false,
+          "bboxInParent": [
+            45.608000000000004,
+            42.139,
+            30.784,
+            9.922
+          ],
+          "rotation": 0,
+          "transparency": 0,
+          "classification": "native_shape",
+          "paths": [
+            {
+              "d": "M930.608 912.961 L960.608 918.961 L961.392 915.039 L931.392 909.039 Z",
+              "color": {
+                "type": "solid",
+                "color": "#1ef7b2"
+              },
+              "isMediaEditable": false
+            }
+          ],
+          "viewBox": {
+            "top": 909.039,
+            "left": 930.608,
+            "width": 30.784000000000106,
+            "height": 9.922000000000025
+          }
+        },
+        {
+          "address": "6/7",
+          "type": "shape",
+          "locked": false,
+          "bboxInParent": [
+            45.707,
+            55.122,
+            27.586,
+            7.956
+          ],
+          "rotation": 0,
+          "transparency": 0,
+          "classification": "native_shape",
+          "paths": [
+            {
+              "d": "M930.707 925.978 L957.707 929.978 L958.293 926.022 L931.293 922.022 Z",
+              "color": {
+                "type": "solid",
+                "color": "#1ef7b2"
+              },
+              "isMediaEditable": false
+            }
+          ],
+          "viewBox": {
+            "top": 922.022,
+            "left": 930.707,
+            "width": 27.586000000000013,
+            "height": 7.955999999999904
+          }
+        },
+        {
+          "address": "6/8",
+          "type": "shape",
+          "locked": false,
+          "bboxInParent": [
+            40.730000000000004,
+            69.118,
+            22.54,
+            6.964
+          ],
+          "rotation": 0,
+          "transparency": 0,
+          "classification": "native_shape",
+          "paths": [
+            {
+              "d": "M925.73 939.982 L947.73 942.982 L948.27 939.018 L926.27 936.018 Z",
+              "color": {
+                "type": "solid",
+                "color": "#1ef7b2"
+              },
+              "isMediaEditable": false
+            }
+          ],
+          "viewBox": {
+            "top": 936.018,
+            "left": 925.73,
+            "width": 22.539999999999964,
+            "height": 6.963999999999942
+          }
+        },
+        {
+          "address": "6/9",
+          "type": "shape",
+          "locked": false,
+          "bboxInParent": [
+            65,
+            63.099999999999994,
+            42,
+            42
+          ],
+          "rotation": 0,
+          "transparency": 0,
+          "classification": "native_shape",
+          "paths": [
+            {
+              "d": "M992 951 L991.899 953.058 L991.596 955.097 L991.096 957.096 L990.401 959.036 L989.52 960.899 L988.461 962.667 L987.233 964.322 L985.849 965.849 L984.322 967.233 L982.667 968.461 L980.899 969.52 L979.036 970.401 L977.096 971.096 L975.097 971.596 L973.058 971.899 L971 972 L968.942 971.899 L966.903 971.596 L964.904 971.096 L962.964 970.401 L961.101 969.52 L959.333 968.461 L957.678 967.233 L956.151 965.849 L954.767 964.322 L953.539 962.667 L952.48 960.899 L951.599 959.036 L950.904 957.096 L950.404 955.097 L950.101 953.058 L950 951 L950.101 948.942 L950.404 946.903 L950.904 944.904 L951.599 942.964 L952.48 941.101 L953.539 939.333 L954.767 937.678 L956.151 936.151 L957.678 934.767 L959.333 933.539 L961.101 932.48 L962.964 931.599 L964.904 930.904 L966.903 930.404 L968.942 930.101 L971 930 L973.058 930.101 L975.097 930.404 L977.096 930.904 L979.036 931.599 L980.899 932.48 L982.667 933.539 L984.322 934.767 L985.849 936.151 L987.233 937.678 L988.461 939.333 L989.52 941.101 L990.401 942.964 L991.096 944.904 L991.596 946.903 L991.899 948.942 Z",
+              "color": {
+                "type": "solid",
+                "color": "#011423"
+              },
+              "isMediaEditable": false
+            }
+          ],
+          "viewBox": {
+            "top": 930,
+            "left": 950,
+            "width": 42,
+            "height": 42
+          }
+        },
+        {
+          "address": "6/10",
+          "type": "shape",
+          "locked": false,
+          "bboxInParent": [
+            67.7,
+            65.8,
+            36.6,
+            36.6
+          ],
+          "rotation": 0,
+          "transparency": 0,
+          "classification": "native_shape",
+          "paths": [
+            {
+              "d": "M989.3 951 L989.212 952.794 L988.948 954.57 L988.512 956.312 L987.907 958.003 L987.139 959.627 L986.216 961.167 L985.146 962.609 L983.94 963.94 L982.609 965.146 L981.167 966.216 L979.627 967.139 L978.003 967.907 L976.312 968.512 L974.57 968.948 L972.794 969.212 L971 969.3 L969.206 969.212 L967.43 968.948 L965.688 968.512 L963.997 967.907 L962.373 967.139 L960.833 966.216 L959.391 965.146 L958.06 963.94 L956.854 962.609 L955.784 961.167 L954.861 959.627 L954.093 958.003 L953.488 956.312 L953.052 954.57 L952.788 952.794 L952.7 951 L952.788 949.206 L953.052 947.43 L953.488 945.688 L954.093 943.997 L954.861 942.373 L955.784 940.833 L956.854 939.391 L958.06 938.06 L959.391 936.854 L960.833 935.784 L962.373 934.861 L963.997 934.093 L965.688 933.488 L967.43 933.052 L969.206 932.788 L971 932.7 L972.794 932.788 L974.57 933.052 L976.312 933.488 L978.003 934.093 L979.627 934.861 L981.167 935.784 L982.609 936.854 L983.94 938.06 L985.146 939.391 L986.216 940.833 L987.139 942.373 L987.907 943.997 L988.512 945.688 L988.948 947.43 L989.212 949.206 Z",
+              "color": {
+                "type": "solid",
+                "color": "#9a6cf6"
+              },
+              "isMediaEditable": false
+            }
+          ],
+          "viewBox": {
+            "top": 932.7,
+            "left": 952.7,
+            "width": 36.59999999999991,
+            "height": 36.59999999999991
+          }
+        },
+        {
+          "address": "6/11",
+          "type": "shape",
+          "locked": false,
+          "bboxInParent": [
+            82.515,
+            73.852,
+            5.47,
+            12.496
+          ],
+          "rotation": 0,
+          "transparency": 0,
+          "classification": "native_shape",
+          "paths": [
+            {
+              "d": "M967.515 941.248 L969.015 953.248 L972.985 952.752 L971.485 940.752 Z",
+              "color": {
+                "type": "solid",
+                "color": "#011423"
+              },
+              "isMediaEditable": false
+            }
+          ],
+          "viewBox": {
+            "top": 940.752,
+            "left": 967.515,
+            "width": 5.470000000000027,
+            "height": 12.496000000000095
+          }
+        },
+        {
+          "address": "6/12",
+          "type": "shape",
+          "locked": false,
+          "bboxInParent": [
+            85.705,
+            84.122,
+            7.29,
+            4.956
+          ],
+          "rotation": 0,
+          "transparency": 0,
+          "classification": "native_shape",
+          "paths": [
+            {
+              "d": "M970.705 954.978 L977.405 955.978 L977.995 952.022 L971.295 951.022 Z",
+              "color": {
+                "type": "solid",
+                "color": "#011423"
+              },
+              "isMediaEditable": false
+            }
+          ],
+          "viewBox": {
+            "top": 951.022,
+            "left": 970.705,
+            "width": 7.289999999999964,
+            "height": 4.955999999999904
+          }
+        }
+      ]
+    },
+    {
+      "address": "7",
+      "type": "group",
+      "locked": false,
+      "bboxInParent": [
+        803.6,
+        995,
+        121.8,
+        115
+      ],
+      "rotation": 0,
+      "transparency": 0,
+      "classification": "group",
+      "children": [
+        {
+          "address": "7/0",
+          "type": "shape",
+          "locked": false,
+          "bboxInParent": [
+            0,
+            0,
+            121.8,
+            115
+          ],
+          "rotation": 0,
+          "transparency": 0,
+          "classification": "native_shape",
+          "paths": [
+            {
+              "d": "M830.1 996.0 L915.4 1010.3 C921.4 1011.3 925.4 1017.0 924.4 1023.0 L911.6 1099.9 C910.6 1105.9 904.9 1110.0 898.9 1109.0 L813.6 1094.7 C807.6 1093.7 803.6 1088.0 804.6 1082.0 L817.4 1005.1 C818.4 999.1 824.1 995.0 830.1 996.0 Z",
+              "color": {
+                "type": "solid",
+                "color": "#011423"
+              },
+              "isMediaEditable": false
+            }
+          ],
+          "viewBox": {
+            "top": 995,
+            "left": 803.6,
+            "width": 121.79999999999995,
+            "height": 115
+          }
+        },
+        {
+          "address": "7/1",
+          "type": "shape",
+          "locked": false,
+          "bboxInParent": [
+            19.4,
+            58,
+            13,
+            34
+          ],
+          "rotation": 0,
+          "transparency": 0,
+          "classification": "native_shape",
+          "paths": [
+            {
+              "d": "M823 1054 L836 1053 L836 1086 L823 1087 Z",
+              "color": {
+                "type": "solid",
+                "color": "#9a6cf6"
+              },
+              "isMediaEditable": false
+            }
+          ],
+          "viewBox": {
+            "top": 1053,
+            "left": 823,
+            "width": 13,
+            "height": 34
+          }
+        },
+        {
+          "address": "7/2",
+          "type": "shape",
+          "locked": false,
+          "bboxInParent": [
+            33.4,
+            45,
+            19,
+            47
+          ],
+          "rotation": 0,
+          "transparency": 0,
+          "classification": "native_shape",
+          "paths": [
+            {
+              "d": "M837 1042 L855 1040 L856 1086 L838 1087 Z",
+              "color": {
+                "type": "solid",
+                "color": "#1ef7b2"
+              },
+              "isMediaEditable": false
+            }
+          ],
+          "viewBox": {
+            "top": 1040,
+            "left": 837,
+            "width": 19,
+            "height": 47
+          }
+        },
+        {
+          "address": "7/3",
+          "type": "shape",
+          "locked": false,
+          "bboxInParent": [
+            53.4,
+            27,
+            15,
+            67
+          ],
+          "rotation": 0,
+          "transparency": 0,
+          "classification": "native_shape",
+          "paths": [
+            {
+              "d": "M857 1024 L871 1022 L872 1088 L858 1089 Z",
+              "color": {
+                "type": "solid",
+                "color": "#1ef7b2"
+              },
+              "isMediaEditable": false
+            }
+          ],
+          "viewBox": {
+            "top": 1022,
+            "left": 857,
+            "width": 15,
+            "height": 67
+          }
+        },
+        {
+          "address": "7/4",
+          "type": "shape",
+          "locked": false,
+          "bboxInParent": [
+            65.1,
+            45.7,
+            44,
+            44
+          ],
+          "rotation": 0,
+          "transparency": 0,
+          "classification": "native_shape",
+          "paths": [
+            {
+              "d": "M912.7 1062.7 L912.594 1064.86 L912.277 1066.99 L911.753 1069.09 L911.025 1071.12 L910.102 1073.07 L908.992 1074.92 L907.706 1076.66 L906.256 1078.26 L904.657 1079.71 L902.923 1080.99 L901.071 1082.1 L899.119 1083.03 L897.086 1083.75 L894.992 1084.28 L892.856 1084.59 L890.7 1084.7 L888.544 1084.59 L886.408 1084.28 L884.314 1083.75 L882.281 1083.03 L880.329 1082.1 L878.477 1080.99 L876.743 1079.71 L875.144 1078.26 L873.694 1076.66 L872.408 1074.92 L871.298 1073.07 L870.375 1071.12 L869.647 1069.09 L869.123 1066.99 L868.806 1064.86 L868.7 1062.7 L868.806 1060.54 L869.123 1058.41 L869.647 1056.31 L870.375 1054.28 L871.298 1052.33 L872.408 1050.48 L873.694 1048.74 L875.144 1047.14 L876.743 1045.69 L878.477 1044.41 L880.329 1043.3 L882.281 1042.37 L884.314 1041.65 L886.408 1041.12 L888.544 1040.81 L890.7 1040.7 L892.856 1040.81 L894.992 1041.12 L897.086 1041.65 L899.119 1042.37 L901.071 1043.3 L902.923 1044.41 L904.657 1045.69 L906.256 1047.14 L907.706 1048.74 L908.992 1050.48 L910.102 1052.33 L911.025 1054.28 L911.753 1056.31 L912.277 1058.41 L912.594 1060.54 Z",
+              "color": {
+                "type": "solid",
+                "color": "#011423"
+              },
+              "isMediaEditable": false
+            }
+          ],
+          "viewBox": {
+            "top": 1040.7,
+            "left": 868.7,
+            "width": 44,
+            "height": 44
+          }
+        },
+        {
+          "address": "7/5",
+          "type": "shape",
+          "locked": false,
+          "bboxInParent": [
+            67.8,
+            48.400000000000006,
+            38.6,
+            38.6
+          ],
+          "rotation": 0,
+          "transparency": 0,
+          "classification": "native_shape",
+          "paths": [
+            {
+              "d": "M910 1062.7 L909.907 1064.59 L909.629 1066.47 L909.169 1068.3 L908.531 1070.09 L907.721 1071.8 L906.747 1073.42 L905.619 1074.94 L904.347 1076.35 L902.944 1077.62 L901.423 1078.75 L899.798 1079.72 L898.086 1080.53 L896.302 1081.17 L894.465 1081.63 L892.592 1081.91 L890.7 1082 L888.808 1081.91 L886.935 1081.63 L885.098 1081.17 L883.314 1080.53 L881.602 1079.72 L879.977 1078.75 L878.456 1077.62 L877.053 1076.35 L875.781 1074.94 L874.653 1073.42 L873.679 1071.8 L872.869 1070.09 L872.231 1068.3 L871.771 1066.47 L871.493 1064.59 L871.4 1062.7 L871.493 1060.81 L871.771 1058.93 L872.231 1057.1 L872.869 1055.31 L873.679 1053.6 L874.653 1051.98 L875.781 1050.46 L877.053 1049.05 L878.456 1047.78 L879.977 1046.65 L881.602 1045.68 L883.314 1044.87 L885.098 1044.23 L886.935 1043.77 L888.808 1043.49 L890.7 1043.4 L892.592 1043.49 L894.465 1043.77 L896.302 1044.23 L898.086 1044.87 L899.798 1045.68 L901.423 1046.65 L902.944 1047.78 L904.347 1049.05 L905.619 1050.46 L906.747 1051.98 L907.721 1053.6 L908.531 1055.31 L909.169 1057.1 L909.629 1058.93 L909.907 1060.81 Z",
+              "color": {
+                "type": "solid",
+                "color": "#9a6cf6"
+              },
+              "isMediaEditable": false
+            }
+          ],
+          "viewBox": {
+            "top": 1043.4,
+            "left": 871.4,
+            "width": 38.60000000000002,
+            "height": 38.59999999999991
+          }
+        },
+        {
+          "address": "7/6",
+          "type": "shape",
+          "locked": false,
+          "bboxInParent": [
+            85.107,
+            55.83,
+            5.286,
+            15.34
+          ],
+          "rotation": 0,
+          "transparency": 0,
+          "classification": "native_shape",
+          "paths": [
+            {
+              "d": "M888.707 1051.17 L890.007 1066.17 L893.993 1065.83 L892.693 1050.83 Z",
+              "color": {
+                "type": "solid",
+                "color": "#011423"
+              },
+              "isMediaEditable": false
+            }
+          ],
+          "viewBox": {
+            "top": 1050.83,
+            "left": 888.707,
+            "width": 5.286000000000058,
+            "height": 15.340000000000146
+          }
+        },
+        {
+          "address": "7/7",
+          "type": "shape",
+          "locked": false,
+          "bboxInParent": [
+            88.016,
+            69.04,
+            9.468,
+            5.62
+          ],
+          "rotation": 0,
+          "transparency": 0,
+          "classification": "native_shape",
+          "paths": [
+            {
+              "d": "M891.616 1067.96 L900.316 1069.66 L901.084 1065.74 L892.384 1064.04 Z",
+              "color": {
+                "type": "solid",
+                "color": "#011423"
+              },
+              "isMediaEditable": false
+            }
+          ],
+          "viewBox": {
+            "top": 1064.04,
+            "left": 891.616,
+            "width": 9.467999999999961,
+            "height": 5.620000000000118
+          }
+        }
+      ]
+    },
+    {
+      "address": "8",
+      "type": "group",
+      "locked": false,
+      "bboxInParent": [
+        799.8420000000001,
+        197.99999999999994,
+        261.158,
+        908.1
+      ],
+      "rotation": 0,
+      "transparency": 0,
+      "classification": "group",
+      "children": [
+        {
+          "address": "8/0",
+          "type": "shape",
+          "locked": false,
+          "bboxInParent": [
+            118.858,
+            445.9,
+            142.3,
+            462.2
+          ],
+          "rotation": 0,
+          "transparency": 0,
+          "classification": "native_shape",
+          "paths": [
+            {
+              "d": "M945.8 644.8 L955.2 643.9 L964.7 644.9 L974.1 647.7 L983.4 652.3 L992.4 658.7 L1001.1 666.8 L1009.4 676.6 L1017.4 688 L1024.8 700.9 L1031.6 715.2 L1037.9 730.7 L1043.5 747.4 L1048.4 765.2 L1052.5 783.8 L1055.8 803.1 L1058.4 823 L1060.1 843.3 L1061 863.9 L1061 884.6 L1060.2 905.2 L1058.5 925.5 L1056 945.5 L1052.8 964.8 L1048.7 983.5 L1043.9 1001.3 L1038.3 1018.1 L1032.1 1033.7 L1025.3 1048.1 L1017.9 1061.1 L1010 1072.6 L1001.7 1082.5 L993 1090.8 L984 1097.3 L974.8 1102 L965.4 1105 L955.9 1106.1 L946.4 1105.3 L937 1102.8 L927.8 1098.4 L918.7 1092.2 L919.5 1090.1 L928.3 1096.2 L937.4 1100.6 L946.6 1103.2 L955.9 1103.9 L965.2 1102.8 L974.4 1099.9 L983.4 1095.2 L992.2 1088.7 L1000.8 1080.5 L1008.9 1070.7 L1016.6 1059.3 L1023.8 1046.4 L1030.5 1032.2 L1036.6 1016.7 L1042 1000.1 L1046.7 982.5 L1050.7 964 L1054 944.8 L1056.4 925 L1058 904.9 L1058.8 884.5 L1058.8 864 L1057.9 843.6 L1056.2 823.5 L1053.7 803.8 L1050.5 784.6 L1046.4 766.2 L1041.6 748.7 L1036.2 732.1 L1030.1 716.7 L1023.3 702.6 L1016.1 689.8 L1008.3 678.5 L1000.1 668.8 L991.6 660.8 L982.8 654.4 L973.7 649.8 L964.5 647.1 L955.2 646.1 L945.9 647 Z",
+              "color": {
+                "type": "solid",
+                "color": "#011423"
+              },
+              "isMediaEditable": false
+            }
+          ],
+          "viewBox": {
+            "top": 643.9,
+            "left": 918.7,
+            "width": 142.29999999999995,
+            "height": 462.19999999999993
+          }
+        },
+        {
+          "address": "8/1",
+          "type": "shape",
+          "locked": false,
+          "bboxInParent": [
+            237.158,
+            774,
+            20,
+            20
+          ],
+          "rotation": 0,
+          "transparency": 0,
+          "classification": "native_shape",
+          "paths": [
+            {
+              "d": "M1057 982 L1056.95 982.98 L1056.81 983.951 L1056.57 984.903 L1056.24 985.827 L1055.82 986.714 L1055.31 987.556 L1054.73 988.344 L1054.07 989.071 L1053.34 989.73 L1052.56 990.315 L1051.71 990.819 L1050.83 991.239 L1049.9 991.569 L1048.95 991.808 L1047.98 991.952 L1047 992 L1046.02 991.952 L1045.05 991.808 L1044.1 991.569 L1043.17 991.239 L1042.29 990.819 L1041.44 990.315 L1040.66 989.73 L1039.93 989.071 L1039.27 988.344 L1038.69 987.556 L1038.18 986.714 L1037.76 985.827 L1037.43 984.903 L1037.19 983.951 L1037.05 982.98 L1037 982 L1037.05 981.02 L1037.19 980.049 L1037.43 979.097 L1037.76 978.173 L1038.18 977.286 L1038.69 976.444 L1039.27 975.656 L1039.93 974.929 L1040.66 974.27 L1041.44 973.685 L1042.29 973.181 L1043.17 972.761 L1044.1 972.431 L1045.05 972.192 L1046.02 972.048 L1047 972 L1047.98 972.048 L1048.95 972.192 L1049.9 972.431 L1050.83 972.761 L1051.71 973.181 L1052.56 973.685 L1053.34 974.27 L1054.07 974.929 L1054.73 975.656 L1055.31 976.444 L1055.82 977.286 L1056.24 978.173 L1056.57 979.097 L1056.81 980.049 L1056.95 981.02 Z",
+              "color": {
+                "type": "solid",
+                "color": "#fdfdfd"
+              },
+              "isMediaEditable": false
+            }
+          ],
+          "viewBox": {
+            "top": 972,
+            "left": 1037,
+            "width": 20,
+            "height": 20
+          }
+        },
+        {
+          "address": "8/2",
+          "type": "shape",
+          "locked": false,
+          "bboxInParent": [
+            73.358,
+            6,
+            89.9,
+            96
+          ],
+          "rotation": 0,
+          "transparency": 0,
+          "classification": "native_shape",
+          "paths": [
+            {
+              "d": "M873.2 204 L876.8 204.2 L880.4 204.5 L883.9 205 L887.4 205.6 L890.9 206.4 L894.4 207.3 L897.8 208.3 L901.2 209.5 L904.6 210.8 L907.9 212.2 L911.1 213.8 L914.3 215.5 L917.4 217.3 L920.4 219.2 L923.4 221.3 L926.3 223.5 L929.1 225.7 L931.8 228.1 L934.4 230.6 L937 233.2 L939.4 235.9 L941.7 238.7 L944 241.6 L946.1 244.6 L948.1 247.7 L950 250.8 L951.7 254 L953.4 257.3 L954.9 260.6 L956.3 264 L957.6 267.4 L958.7 270.9 L959.8 274.5 L960.6 278.1 L961.4 281.7 L962 285.3 L962.5 289 L962.8 292.6 L963 296.3 L963.1 300 L960.9 300 L960.8 296.4 L960.6 292.8 L960.3 289.2 L959.8 285.6 L959.2 282.1 L958.5 278.6 L957.6 275.1 L956.6 271.6 L955.5 268.2 L954.3 264.8 L952.9 261.5 L951.4 258.2 L949.8 255.1 L948.1 251.9 L946.2 248.9 L944.3 245.9 L942.2 243 L940 240.1 L937.8 237.4 L935.4 234.8 L932.9 232.2 L930.4 229.8 L927.7 227.4 L925 225.2 L922.1 223.1 L919.2 221.1 L916.3 219.2 L913.2 217.4 L910.1 215.7 L907 214.2 L903.8 212.8 L900.5 211.5 L897.2 210.4 L893.8 209.4 L890.4 208.5 L887 207.8 L883.6 207.2 L880.1 206.7 L876.7 206.4 L873.2 206.2 Z",
+              "color": {
+                "type": "solid",
+                "color": "#011423"
+              },
+              "isMediaEditable": false
+            }
+          ],
+          "viewBox": {
+            "top": 204,
+            "left": 873.2,
+            "width": 89.89999999999998,
+            "height": 96
+          }
+        },
+        {
+          "address": "8/3",
+          "type": "shape",
+          "locked": false,
+          "bboxInParent": [
+            0,
+            7.911,
+            62.316,
+            11.178
+          ],
+          "rotation": 0,
+          "transparency": 0,
+          "classification": "native_shape",
+          "paths": [
+            {
+              "d": "M800.158 217.089 L862.158 208.089 L861.842 205.911 L799.842 214.911 Z",
+              "color": {
+                "type": "solid",
+                "color": "#011423"
+              },
+              "isMediaEditable": false
+            }
+          ],
+          "viewBox": {
+            "top": 205.911,
+            "left": 799.842,
+            "width": 62.31600000000003,
+            "height": 11.177999999999997
+          }
+        },
+        {
+          "address": "8/4",
+          "type": "shape",
+          "locked": false,
+          "bboxInParent": [
+            58.158,
+            0,
+            23,
+            15
+          ],
+          "rotation": 0,
+          "transparency": 0,
+          "classification": "native_shape",
+          "paths": [
+            {
+              "d": "M858 198 L881 205 L858 213 Z",
+              "color": {
+                "type": "solid",
+                "color": "#fdfdfd"
+              },
+              "isMediaEditable": false
+            }
+          ],
+          "viewBox": {
+            "top": 198,
+            "left": 858,
+            "width": 23,
+            "height": 15
+          }
+        }
+      ]
+    },
+    {
+      "address": "9",
+      "type": "shape",
+      "locked": false,
+      "bboxInParent": [
+        -1.0987300000000033,
+        805.979,
+        81.1974,
+        87.042
+      ],
+      "rotation": 0,
+      "transparency": 0,
+      "classification": "native_shape",
+      "paths": [
+        {
+          "d": "M1.09873 893.021 L80.0987 808.021 L77.9013 805.979 L-1.09873 890.979 Z",
+          "color": {
+            "type": "solid",
+            "color": "#fdfdfd"
+          },
+          "isMediaEditable": false
+        }
+      ],
+      "viewBox": {
+        "top": 805.979,
+        "left": -1.09873,
+        "width": 81.19743,
+        "height": 87.04199999999992
+      }
+    },
+    {
+      "address": "10",
+      "type": "group",
+      "locked": false,
+      "bboxInParent": [
+        72,
+        39.1691,
+        981,
+        38.5212
+      ],
+      "rotation": 0,
+      "transparency": 0,
+      "classification": "group",
+      "children": [
+        {
+          "address": "10/0",
+          "type": "shape",
+          "locked": false,
+          "bboxInParent": [
+            201.5,
+            21.7309,
+            7,
+            7
+          ],
+          "rotation": 0,
+          "transparency": 0,
+          "classification": "native_shape",
+          "paths": [
+            {
+              "d": "M280.5 64.4 L280.483 64.7431 L280.433 65.0828 L280.349 65.416 L280.234 65.7394 L280.087 66.0499 L279.91 66.3445 L279.706 66.6204 L279.475 66.8749 L279.22 67.1055 L278.944 67.3101 L278.65 67.4867 L278.339 67.6336 L278.016 67.7493 L277.683 67.8327 L277.343 67.8831 L277 67.9 L276.657 67.8831 L276.317 67.8327 L275.984 67.7493 L275.661 67.6336 L275.35 67.4867 L275.056 67.3101 L274.78 67.1055 L274.525 66.8749 L274.294 66.6204 L274.09 66.3445 L273.913 66.0499 L273.766 65.7394 L273.651 65.416 L273.567 65.0828 L273.517 64.7431 L273.5 64.4 L273.517 64.0569 L273.567 63.7172 L273.651 63.384 L273.766 63.0606 L273.913 62.7501 L274.09 62.4555 L274.294 62.1796 L274.525 61.9251 L274.78 61.6945 L275.056 61.4899 L275.35 61.3133 L275.661 61.1664 L275.984 61.0507 L276.317 60.9673 L276.657 60.9169 L277 60.9 L277.343 60.9169 L277.683 60.9673 L278.016 61.0507 L278.339 61.1664 L278.65 61.3133 L278.944 61.4899 L279.22 61.6945 L279.475 61.9251 L279.706 62.1796 L279.91 62.4555 L280.087 62.7501 L280.234 63.0606 L280.349 63.384 L280.433 63.7172 L280.483 64.0569 Z",
+              "color": {
+                "type": "solid",
+                "color": "#7a55f0"
+              },
+              "isMediaEditable": false
+            }
+          ],
+          "viewBox": {
+            "top": 60.9,
+            "left": 273.5,
+            "width": 7,
+            "height": 7.000000000000007
+          }
+        },
+        {
+          "address": "10/1",
+          "type": "shape",
+          "locked": false,
+          "bboxInParent": [
+            238,
+            15.8309,
+            660,
+            2
+          ],
+          "rotation": 0,
+          "transparency": 0,
+          "classification": "native_shape",
+          "paths": [
+            {
+              "d": "M310 55 L970 55 L970 57 L310 57 Z",
+              "color": {
+                "type": "solid",
+                "color": "#0b2a2a"
+              },
+              "isMediaEditable": false
+            }
+          ],
+          "viewBox": {
+            "top": 55,
+            "left": 310,
+            "width": 660,
+            "height": 2
+          }
+        },
+        {
+          "address": "10/2",
+          "type": "shape",
+          "locked": false,
+          "bboxInParent": [
+            961,
+            2.8308999999999997,
+            20,
+            26
+          ],
+          "rotation": 0,
+          "transparency": 0,
+          "classification": "native_shape",
+          "paths": [
+            {
+              "d": "M1052 42 L1051 43 L1048 43 L1047 42 L1045 42 L1042 44 L1042 45 L1041 46 L1041 48 L1039 51 L1038 56 L1035 61 L1035 63 L1034 64 L1034 66 L1033 67 L1033 68 L1044 68 L1045 63 L1047 60 L1048 55 L1050 52 L1051 47 L1053 44 L1053 43 Z",
+              "color": {
+                "type": "solid",
+                "color": "#011423"
+              },
+              "isMediaEditable": false
+            }
+          ],
+          "viewBox": {
+            "top": 42,
+            "left": 1033,
+            "width": 20,
+            "height": 26
+          }
+        },
+        {
+          "address": "10/3",
+          "type": "shape",
+          "locked": false,
+          "bboxInParent": [
+            942,
+            2.8308999999999997,
+            21,
+            26
+          ],
+          "rotation": 0,
+          "transparency": 0,
+          "classification": "native_shape",
+          "paths": [
+            {
+              "d": "M1034 42 L1033 43 L1032 43 L1031 42 L1025 42 L1023 44 L1023 45 L1022 46 L1022 48 L1021 49 L1021 50 L1019 53 L1019 55 L1017 58 L1017 60 L1015 63 L1014 68 L1025 68 L1025 66 L1027 63 L1027 61 L1029 58 L1029 56 L1031 53 L1031 51 L1032 50 L1032 49 L1033 48 L1033 46 L1035 43 Z",
+              "color": {
+                "type": "solid",
+                "color": "#011423"
+              },
+              "isMediaEditable": false
+            }
+          ],
+          "viewBox": {
+            "top": 42,
+            "left": 1014,
+            "width": 21,
+            "height": 26
+          }
+        },
+        {
+          "address": "10/4",
+          "type": "shape",
+          "locked": false,
+          "bboxInParent": [
+            922,
+            2.8308999999999997,
+            21,
+            26
+          ],
+          "rotation": 0,
+          "transparency": 0,
+          "classification": "native_shape",
+          "paths": [
+            {
+              "d": "M1015 43 L1011 43 L1010 42 L1004 42 L1004 43 L1002 46 L1001 51 L999 54 L998 59 L996 62 L996 64 L995 65 L994 68 L1005 68 L1006 67 L1006 66 L1007 65 L1007 63 L1009 60 L1010 55 L1012 52 L1012 50 L1014 47 L1014 45 L1015 44 Z",
+              "color": {
+                "type": "solid",
+                "color": "#011423"
+              },
+              "isMediaEditable": false
+            }
+          ],
+          "viewBox": {
+            "top": 42,
+            "left": 994,
+            "width": 21,
+            "height": 26
+          }
+        },
+        {
+          "address": "10/5",
+          "type": "text",
+          "locked": false,
+          "bboxInParent": [
+            0,
+            0,
+            194,
+            38.5212
+          ],
+          "rotation": 0,
+          "transparency": 0,
+          "classification": "native_text",
+          "text": "VECTALLY",
+          "textRegions": [
+            {
+              "text": "VECTALLY",
+              "formatting": {
+                "fontRef": "YACgEZulLoA:0",
+                "fontSize": 32.394,
+                "textAlign": "start",
+                "color": "#011423",
+                "fontWeight": "normal",
+                "fontStyle": "normal",
+                "decoration": "none",
+                "strikethrough": "none",
+                "link": "",
+                "listLevel": 0,
+                "listMarker": "none",
+                "lineHeightEm": 1.4,
+                "letterSpacingEm": 0
+              }
+            }
+          ],
+          "sourceTextVerification": "NOT_TESTED"
+        }
+      ]
+    }
+  ],
+  "breakdown": {
+    "native_shape": 74,
+    "group": 8,
+    "native_text": 1
+  },
+  "fonts": [
+    {
+      "ref": "YACgEZulLoA:0",
+      "name": "Archivo Black",
+      "weights": [
+        {
+          "weight": "normal",
+          "styles": [
+            "normal"
+          ]
+        }
+      ]
+    }
+  ],
+  "background": {
+    "color": {
+      "type": "solid",
+      "color": "#ffffff"
+    }
+  },
+  "qa": {
+    "structure": {
+      "verdict": "NOT_TESTED"
+    },
+    "fidelity": {
+      "verdict": "NOT_TESTED"
+    },
+    "buyer": {
+      "verdict": "NOT_TESTED"
+    }
+  },
+  "manualGates": [
+    "Match elements to source pixels and semantic manifest",
+    "Verify source wording and fonts",
+    "Review unsupported elements, gradients, occlusions and stacking",
+    "Compare aligned actual Canva export",
+    "Test promised buyer edits in a separate buyer-test copy"
+  ]
+}
