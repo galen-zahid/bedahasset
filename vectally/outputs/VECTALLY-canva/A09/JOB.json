@@ -38,7 +38,8 @@
         304.0,
         1041.0,
         761.0
-      ]
+      ],
+      "outline": 6
     },
     {
       "text": "YOUR BOOKS",
@@ -71,7 +72,8 @@
         697.0,
         793.0,
         882.0
-      ]
+      ],
+      "outline": 6
     },
     {
       "text": "NEED",
@@ -104,7 +106,8 @@
         915.0,
         565.0,
         1126.0
-      ]
+      ],
+      "outline": 6
     },
     {
       "text": "ATTENTION.",
@@ -137,7 +140,8 @@
         1129.0,
         1067.0,
         1354.0
-      ]
+      ],
+      "outline": 6
     }
   ],
   "createUrl": "https://www.canva.com/design/editor/shell?create&width=1122&height=1402&units=px&ui=e30",

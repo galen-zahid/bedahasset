@@ -1,0 +1,201 @@
+{
+  "job": {
+    "code": "A09",
+    "packageFile": "D:\\Codex\\cusbe-remote-mcp\\uploads\\vectally-recipes\\A09_NATIVE_PACKAGE.json",
+    "packageSha256": "c549e7476985992702a60db08cd38bd305ef52f49be8c642120d8fa18e765417",
+    "expected": {
+      "native_shape": 74,
+      "native_text": 1
+    },
+    "warps": [
+      {
+        "text": "SIGNS",
+        "color": "#fdfdfd",
+        "quad": [
+          [
+            478,
+            470
+          ],
+          [
+            1041,
+            304
+          ],
+          [
+            1004,
+            574
+          ],
+          [
+            478,
+            761
+          ]
+        ],
+        "box": {
+          "Lebar": 563,
+          "X": 478,
+          "Y": 304
+        },
+        "targetBBox": [
+          478,
+          304,
+          1041,
+          761
+        ],
+        "outline": 6
+      },
+      {
+        "text": "YOUR BOOKS",
+        "color": "#1ef7b2",
+        "quad": [
+          [
+            492,
+            807
+          ],
+          [
+            793,
+            697
+          ],
+          [
+            784,
+            773
+          ],
+          [
+            496,
+            882
+          ]
+        ],
+        "box": {
+          "Lebar": 301,
+          "X": 492,
+          "Y": 697
+        },
+        "targetBBox": [
+          492,
+          697,
+          793,
+          882
+        ],
+        "outline": 6
+      },
+      {
+        "text": "NEED",
+        "color": "#011423",
+        "quad": [
+          [
+            118,
+            915
+          ],
+          [
+            565,
+            915
+          ],
+          [
+            565,
+            1126
+          ],
+          [
+            118,
+            1126
+          ]
+        ],
+        "box": {
+          "Lebar": 447,
+          "X": 118,
+          "Y": 915
+        },
+        "targetBBox": [
+          118,
+          915,
+          565,
+          1126
+        ],
+        "outline": 6
+      },
+      {
+        "text": "ATTENTION.",
+        "color": "#fdfdfd",
+        "quad": [
+          [
+            105,
+            1129
+          ],
+          [
+            1067,
+            1129
+          ],
+          [
+            1067,
+            1354
+          ],
+          [
+            105,
+            1354
+          ]
+        ],
+        "box": {
+          "Lebar": 962,
+          "X": 105,
+          "Y": 1129
+        },
+        "targetBBox": [
+          105,
+          1129,
+          1067,
+          1354
+        ],
+        "outline": 6
+      }
+    ],
+    "createUrl": "https://www.canva.com/design/editor/shell?create&width=1122&height=1402&units=px&ui=e30",
+    "downloadDirectory": "D:/download",
+    "fidelity": "NOT_TESTED",
+    "url": "https://www.canva.com/design/DAHayXlnVCM/oIdbD-pyz4s1H4eN1x7TMA/edit?ui=e30",
+    "designId": "DAHayXlnVCM",
+    "designTitle": "VECTALLY A09 RESEP AUTO 20261113090820"
+  },
+  "completedAt": "2026-11-13T09:14:27.486Z",
+  "stage": "FULL_CONSTRUCTION_EXPORTED_NOT_YET_FIDELITY_PASSED",
+  "base": {
+    "native_shape": 74,
+    "group": 8,
+    "native_text": 1
+  },
+  "final": {
+    "native_shape": 74,
+    "group": 8,
+    "native_text": 1,
+    "manual_review_required": 4
+  },
+  "typecraftBoxes": [
+    [
+      478,
+      304,
+      563,
+      425.411376953125
+    ],
+    [
+      492,
+      697,
+      301,
+      177.02856445312503
+    ],
+    [
+      118,
+      915,
+      447,
+      211.386474609375
+    ],
+    [
+      105,
+      1129,
+      961.9999999999999,
+      225.23388671874997
+    ]
+  ],
+  "export": {
+    "file": "CANVA_EXPORT.png",
+    "width": 1122,
+    "height": 1402,
+    "sha256": "7b5fe1544aa7aa879ac89de8794c871975fd0a68e6a03fd2698a7cc8c2ece29c"
+  },
+  "runtimeUsesAI": false
+}

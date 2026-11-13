@@ -21,7 +21,7 @@ def walk(es):
             yield e
 
 
-def main(code, box_json=None):
+def main(code, box_json=None, outline=None):
     nat = ROOT / 'outputs' / 'VECTALLY-resep' / f'{code}-NATIVE'
     pkg = json.loads((nat / 'CANVA_PACKAGE.json').read_text(encoding='utf-8'))
     for e in walk(pkg['elements']):
@@ -40,7 +40,8 @@ def main(code, box_json=None):
     for w in tc['warps']:
         x0, y0, x1, y1 = w['bbox']
         box = corr.get(w['text']) or {'Lebar': round(x1 - x0, 1), 'X': round(x0, 1), 'Y': round(y0, 1)}
-        warps.append(dict(text=w['text'], color=w['color'], quad=w['quad'], box=box, targetBBox=w['bbox']))
+        ow = (outline or {}).get(w['text'], (outline or {}).get('*', 0))
+        warps.append(dict(text=w['text'], color=w['color'], quad=w['quad'], box=box, targetBBox=w['bbox'], outline=ow))
     s = pkg['summary']
     job = dict(code=code, packageFile=str(stage), packageSha256=hashlib.sha256(stage.read_bytes()).hexdigest(),
                expected=dict(native_shape=s['shape'], native_text=s['text']), warps=warps,
@@ -52,4 +53,5 @@ def main(code, box_json=None):
 
 if __name__ == '__main__':
     a = sys.argv[1:]
-    main(a[0], a[a.index('--box-json') + 1] if '--box-json' in a else None)
+    ol = json.loads(a[a.index('--outline') + 1]) if '--outline' in a else None  # contoh: '{"*": 6}' atau '{"NEED": 9}'
+    main(a[0], a[a.index('--box-json') + 1] if '--box-json' in a else None, ol)

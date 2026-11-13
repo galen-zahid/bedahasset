@@ -183,19 +183,31 @@ async function buildWarpOne(w,idx){
  await wait(`e => e.querySelector('textarea#multi-line-text-input')?.value===${JSON.stringify(w.text)}`,'TypeCraft');
  // warna dipilih lewat swatch warna dokumen; teks terang diwarnai gelap dulu supaya titik pegangan
  // distorsi (putih) tidak tertukar dengan huruf putih saat mengukur, lalu diganti warna asli
- async function pickColor(c){
+ // tombol warna di panel: [0]=isi huruf, [1]=garis tepi (kalau efek garis tepi aktif)
+ async function pickColorAt(k,c){
+  const hex=`e => Array.from(e.querySelectorAll('button')).map(b=>b.getAttribute('aria-label')||'').filter(l=>/^#[0-9a-fA-F]{6}$/.test(l))`;
+  let labels=await evaluate(hex,'TypeCraft');
+  if(labels[k]===c)return;
+  await evaluate(`e => {const bs=Array.from(e.querySelectorAll('button')).filter(b=>/^#[0-9a-fA-F]{6}$/.test(b.getAttribute('aria-label')||''));if(!bs[${k}])throw new Error('Color control ${k} absent');bs[${k}].click();return true}`,'TypeCraft');
   const sel=`button[aria-label="${c}"]`;
-  if(!await evaluate(`e => !!e.querySelector(${JSON.stringify(sel)})`,'TypeCraft')){
-   await evaluate("e => {const b=Array.from(e.querySelectorAll('button')).find(b=>/^#[0-9a-fA-F]{6}$/.test(b.getAttribute('aria-label')||''));if(!b)throw new Error('Fill control absent');b.click();return true}",'TypeCraft');
-   await wait(`() => !!document.querySelector(${JSON.stringify(sel)})`);
-   await evaluate(`() => {document.querySelector(${JSON.stringify(sel)}).click();return true}`);
-   await tool('browser__browser_press_key',{key:'Escape'});
-  }
-  await wait(`e => !!e.querySelector(${JSON.stringify(sel)})`,'TypeCraft');
+  await wait(`() => !!document.querySelector(${JSON.stringify(sel)})`);
+  await evaluate(`() => {document.querySelector(${JSON.stringify(sel)}).click();return true}`);
+  await tool('browser__browser_press_key',{key:'Escape'});
+  await wait(`e => (${hex})(e)[${k}]===${JSON.stringify(c)}`,'TypeCraft');
+ }
+ const pickColor=c=>pickColorAt(0,c);
+ // efek garis tepi (warna sama dengan huruf) untuk menebalkan; ketebalan 1..20
+ async function setOutline(width){
+  const sect="const el=Array.from(e.querySelectorAll('*')).find(x=>x.textContent==='Efek garis tepi'&&x.children.length===0);let n=el;for(let i=0;i<3;i++)n=n.parentElement;";
+  await evaluate(`e => {${sect}const bs=n.querySelectorAll('button[data-selected]');bs[1].click();return true}`,'TypeCraft');
+  await wait("e => Array.from(e.querySelectorAll('p,label,span')).some(x=>x.textContent==='Ketebalan')",'TypeCraft');
+  await evaluate(`e => {const r=Array.from(e.querySelectorAll('input[type=range]')).find(i=>i.max==='20');const set=Object.getOwnPropertyDescriptor(HTMLInputElement.prototype,'value').set;set.call(r,'${width}');r.dispatchEvent(new Event('input',{bubbles:true}));r.dispatchEvent(new Event('change',{bubbles:true}));return true}`,'TypeCraft');
+  await wait(`e => Array.from(e.querySelectorAll('input[type=range]')).find(i=>i.max==='20')?.value==='${width}'`,'TypeCraft');
  }
  const rgb=[1,3,5].map(i=>parseInt(w.color.slice(i,i+2),16));
  const light=rgb.every(v=>v>200);
  await pickColor(light?(job.meshColor||'#011423'):w.color);
+ if(w.outline>0){await setOutline(w.outline);await pickColorAt(1,light?(job.meshColor||'#011423'):w.color);}
  await evaluate("e => {e.querySelector('button[aria-label=\"Distorsi kustom\"]').click();return true}",'TypeCraft');
  await wait("e => Array.from(e.querySelectorAll('button')).some(b=>b.textContent==='Atur ulang bentuk')",'TypeCraft');
  // titik pegangan bisa belum selesai di-reset saat dihitung: reset ulang dan coba lagi
@@ -218,6 +230,7 @@ async function buildWarpOne(w,idx){
   await typecraft();
   await wait("e => Array.from(e.querySelectorAll('button')).some(b=>b.textContent==='Perbarui elemen')",'TypeCraft',45000);
   await pickColor(w.color);
+  if(w.outline>0)await pickColorAt(1,w.color);
   await evaluate("e => {const b=Array.from(e.querySelectorAll('button')).find(b=>b.textContent==='Perbarui elemen');if(!b||b.disabled)throw new Error('Update not available');b.click();return true}",'TypeCraft');
   await new Promise(r=>setTimeout(r,2500));
  }
